@@ -75,27 +75,11 @@
       <span>Reports</span> <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="sidebar-submenu">
-        <li>
+        <!-- <li>
             <a href="<?php echo base_url('month-report');?>" class="waves-effect">
               <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Date wise Invoice</span> 
             </a>
-        </li>
-        <li>
-            <a href="<?php echo base_url('name-month-report');?>" class="waves-effect">
-              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Name and Date wise Invoice</span> 
-            </a>
-        </li>
-        <li>
-            <a href="<?php echo base_url('stock-report');?>" class="waves-effect">
-              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Product Stock Report</span> 
-            </a>
-        </li>
-        <li>
-            <a href="<?php echo base_url('product-out-by-customer');?>" class="waves-effect">
-              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Product out by customer</span> 
-            </a>
-        </li>
-        
+        </li> -->
         
         <li>
             <a href="<?php echo base_url('all-report-section');?>" class="waves-effect">
