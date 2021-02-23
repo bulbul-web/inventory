@@ -1,0 +1,206 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Reports extends CI_Controller {
+    public function __construct() {
+        parent::__construct();
+        //$this->session->sess_destroy();
+        $this->loged_out();
+    }
+    
+    private function loged_out(){
+        if(!$this->session->userdata('authenticated'))
+        {
+            redirect('login');
+        }
+    }
+    
+    public function month_report()
+    {
+        
+        
+        if(isset($_POST['status'])){
+            $status = $this->input->post('status', true);
+            $from_date = date("Y-m-d", strtotime($this->input->post('from_date', true)));
+            $to_date = date("Y-m-d", strtotime($this->input->post('to_date', true)));
+        }else{
+            $status = 1;
+            $from_date = date("Y-m-d");
+            $to_date = date("Y-m-d");
+        }
+        $result = $this->db->query
+                (
+                "SELECT c.customer_name, i.voucher_id, sum(i.quantity * i.sale_price) as grandTotal, i.paid_amount, i.discount, i.invoice_date, i.status, i.note"
+                    . " FROM tbl_customer c, tbl_invoice i"
+                    . " WHERE i.customer_id = c.customer_id and i.invoice_date BETWEEN '$from_date' AND '$to_date' AND i.status = $status"
+                    . " GROUP BY i.voucher_id"
+                    . " ORDER BY i.id DESC"
+                )->result();
+        $data = array();
+        
+        
+        $data['status'] = $status;
+        $data['from_date'] = $from_date;
+        $data['to_date'] = $to_date;
+        $data['result'] = $result;
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        
+        
+        
+        
+        $data['title'] = 'Month Wise Report';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/month_report', $data, true);
+        $this->load->view('index', $data);
+    }
+    
+    public function stock_report(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['title'] = 'Stock Report';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/stock_report', $data, true);
+        $this->load->view('index', $data);
+    }
+
+    public function all_products_stock_report(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['title'] = 'Stock Report';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/all_products_stock_report', $data, true);
+        $this->load->view('index', $data);
+    }
+
+    public function product_out_by_customer(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['allCustomer'] = $this->users_model->allCustomer();
+        if(isset($_POST['customer_id'])):
+            $customer_id = $this->input->post('customer_id', true);
+            $data['singleCustomer'] = $this->users_model->singleCustomer($customer_id);
+            $from_date = $this->input->post('from_date', true);
+            $to_date = $this->input->post('to_date', true);
+            $data['customerWiseProductInfo'] = $this->users_model->product_out_by_customer($customer_id, $from_date, $to_date);
+        endif;
+        $data['title'] = 'Customer Product Report';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/product_out_by_customer', $data, true);
+        $this->load->view('index', $data);
+    }
+
+    public function name_and_month_report(){
+        $customer_id = 1;
+        if(isset($_POST['status'])){
+            $status = $this->input->post('status', true);
+            $customer_id = $this->input->post('customer_id', true);
+            $from_date = date("Y-m-d", strtotime($this->input->post('from_date', true)));
+            $to_date = date("Y-m-d", strtotime($this->input->post('to_date', true)));
+            $data['singleCustomer'] = $this->users_model->singleCustomer($customer_id);
+        }else{
+            $status = 1;
+            $from_date = date("Y-m-d");
+            $to_date = date("Y-m-d");
+        }
+        $result = $this->db->query
+                (
+                "SELECT c.customer_name, i.customer_id, i.voucher_id, i.product_id, pi.product_name, i.quantity, i.sale_price, sum(i.quantity * i.sale_price) as grandTotal, i.paid_amount, i.discount, i.invoice_date, i.status, i.note
+                FROM tbl_customer c, tbl_invoice i, tbl_product_info pi
+                WHERE i.customer_id = c.customer_id AND i.invoice_date BETWEEN '$from_date' AND '$to_date' AND i.customer_id = '$customer_id' AND pi.product_id = i.product_id and i.status = $status
+                GROUP BY i.voucher_id
+               ORDER BY i.id DESC"
+                )->result();
+        $data = array();
+        
+        $data['allCustomer'] = $this->users_model->allCustomer();
+        $data['singleCustomer'] = $this->users_model->singleCustomer($customer_id);
+        $data['status'] = $status;
+        $data['from_date'] = $from_date;
+        $data['to_date'] = $to_date;
+        $data['result'] = $result;
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        
+        
+        
+        
+        $data['title'] = 'Month Wise Report';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/name_and_month_report', $data, true);
+        $this->load->view('index', $data);
+    }
+
+    public function all_report_section(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['title'] = 'Reports';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/reports_section', $data, true);
+        $this->load->view('index', $data);
+    }
+
+    
+    public function customer_wise_report_payment(){
+
+        // if(isset($_POST['from_date'])){
+        //     $from_date = date("Y-m-d", strtotime($this->input->post('from_date', true)));
+        //     $to_date = date("Y-m-d", strtotime($this->input->post('to_date', true)));
+        // }else{
+        //     $from_date = date("Y-m-d");
+        //     $to_date = date("Y-m-d");
+        // }
+        $result = $this->db->query
+                (
+                // "SELECT c.customer_name, sum(i.quantity * i.sale_price) as grandTotal, i.paid_amount, i.discount, i.invoice_date, i.status, i.note FROM tbl_customer c, tbl_invoice i WHERE i.customer_id = c.customer_id AND i.invoice_date BETWEEN '$from_date' AND '$to_date' GROUP BY c.customer_name ORDER BY i.id DESC"
+                "SELECT a.customer_name, a.grandTotal, sum(b.discount) as discount, SUM(b.paid_amount) AS paid_amount FROM (SELECT i.customer_id, c.customer_name, sum(i.quantity * i.sale_price) as grandTotal FROM tbl_invoice i, tbl_customer c WHERE c.customer_id = i.customer_id GROUP BY c.customer_name) a LEFT JOIN (SELECT i.paid_amount, i.voucher_id, i.customer_id, c.customer_name, i.discount FROM tbl_invoice i, tbl_customer c WHERE i.customer_id = c.customer_id GROUP BY i.voucher_id) b ON a.customer_id = b.customer_id GROUP BY a.customer_id"
+                )->result();
+
+               
+
+
+        $data = array();
+        $data['result'] = $result;
+
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['title'] = 'Customer Payment';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/customer_wise_report_payment', $data, true);
+        $this->load->view('index', $data);
+    }
+    
+    
+}

@@ -1,0 +1,37 @@
+.navbar-expand .navbar-nav .nav-link i{
+    color: black;
+    font-size: 20px;
+}
+.user-img{
+    width: 100px;
+}
+.top-button-area{
+    float: right;
+}
+.product-img-own{
+    width: 50px;
+}
+table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td{
+    padding: 0px;
+    margin: 0px;
+    vertical-align: middle;
+}
+
+.card .table td, .card .table th{
+    padding: 5px;
+}
+.tbl-own thead th{text-align: center;}
+.timesSpan{
+    font-size: 23px;
+    padding: 0px 14px;
+    margin: 0;
+    color: white;
+}
+a.timesSpan{
+    color: white!important;
+}
+
+.footer{
+    position: relative;
+    left: 0px;
+}
