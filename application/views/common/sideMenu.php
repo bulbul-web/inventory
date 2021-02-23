@@ -72,8 +72,8 @@
         </li>
 
         <li>
-            <a href="<?php echo base_url('costs-add');?>" class="waves-effect">
-              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Costs Add</span> 
+            <a href="<?php echo base_url('costs-list');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Costs List</span> 
             </a>
         </li>
         

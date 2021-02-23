@@ -394,6 +394,16 @@ class Query_model extends CI_Model {
         return $result;
     }
 
+    public function viewAllTransHeadMatch($trans_head){
+        $result = $this->db->query
+                (
+                "SELECT * FROM tbl_costs_head WHERE tbl_costs_head.trnsaction_head LIKE '%".$trans_head."%' AND tbl_costs_head.status = 1 "
+                )->result();
+        return $result;
+
+          
+    }
+
     public function save_transaction_head($data){
         $this->db->insert('tbl_costs_head', $data);
     }
@@ -407,6 +417,22 @@ class Query_model extends CI_Model {
     {
         $this->db->where('id', $id);
         $this->db->delete('tbl_costs_head');
+    }
+
+
+    public function viewAllCosts(){
+        $result = $this->db->query("SELECT c.*, SUM(c.amount) as total_expense FROM tbl_costs c GROUP BY c.trnsction_id ORDER BY c.id DESC")->result();
+        return $result;
+    }
+
+    public function expense_details($trnsction_id){
+        $result = $this->db->query("SELECT c.*, ch.trnsaction_head FROM tbl_costs c, tbl_costs_head ch WHERE ch.id = c.costs_head_id AND c.trnsction_id = '$trnsction_id' ORDER BY c.id DESC")->row();
+        return $result;
+    }
+
+    public function expense_details_all($trnsction_id){
+        $result = $this->db->query("SELECT c.*, ch.trnsaction_head FROM tbl_costs c, tbl_costs_head ch WHERE ch.id = c.costs_head_id AND c.trnsction_id = '$trnsction_id' ORDER BY c.id DESC")->result();
+        return $result;
     }
 
 

@@ -87,7 +87,12 @@
                                 $i++;
                         ?>
                             <tr>
-                                <td><?php echo $value->bill_date;?></td>
+                                <td>
+                                    <?php
+                                        $date = date_create("$value->bill_date");
+                                        echo date_format($date,"d/m/Y");
+                                    ?>
+                                </td>
                                 <td><?php echo $value->total_quantity;?></td>
                             </tr>
                         <?php endforeach;?>

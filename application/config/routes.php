@@ -144,12 +144,17 @@ $route['all-report-section'] = 'reports/all_report_section';
 $route['customer-wise-report-payment'] = 'reports/customer_wise_report_payment';
 
 $route['costs-head'] = 'costs/costs_head';
-$route['costs-add'] = 'costs/costs_add_form';
 $route['transaction-head-add'] = 'costs/transaction_head_add_form';
 $route['save-transaction-head'] = 'costs/save_transaction_head';
 $route['edit-transaction-head/(.+)'] = 'costs/edit_transaction_head_form/$1';
 $route['update-transaction-head'] = 'costs/update_transaction_head';
 $route['delete-transaction-head/(.+)'] = 'costs/delete_transaction_head/$1';
+
+$route['costs-list'] = 'costs/costs_list';
+$route['transaction-add'] = 'costs/transaction_add_form';
+$route['save-expense'] = 'costs/save_expense';
+$route['get-transaction-head/(:any)'] = 'costs/get_all_transaction_head_match/$1';
+$route['costs-details/(.+)'] = 'costs/costs_details/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
