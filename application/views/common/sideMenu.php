@@ -57,6 +57,30 @@
         </li>
     </ul>
   </li>
+
+
+  <li>
+    <a href="javaScript:void();" class="waves-effect">
+      <i class="fa fa-money" aria-hidden="true"></i>
+      <span>Costs Management</span> <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="sidebar-submenu">
+        <li>
+            <a href="<?php echo base_url('costs-head');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Costs Head</span> 
+            </a>
+        </li>
+
+        <li>
+            <a href="<?php echo base_url('costs-add');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Costs Add</span> 
+            </a>
+        </li>
+        
+    </ul>
+  </li>
+
+
   <li>
    <a href="<?php echo base_url('invoice');?>" class="waves-effect">
      <i class="fa fa-file"></i> <span>Invoice</span> 

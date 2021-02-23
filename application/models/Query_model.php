@@ -383,6 +383,33 @@ class Query_model extends CI_Model {
                 )->result();
         return $result;
     }
+
+    public function viewAllCostsHead(){
+        $result = $this->db->query("select * from tbl_costs_head ORDER BY id DESC")->result();
+        return $result;
+    }
+
+    public function viewSingleCostsHead($trans_id){
+        $result = $this->db->query("select * from tbl_costs_head where id = $trans_id")->row();
+        return $result;
+    }
+
+    public function save_transaction_head($data){
+        $this->db->insert('tbl_costs_head', $data);
+    }
+
+    public function update_transaction_head($data){
+        $this->db->where('id', $data['id']);
+        $this->db->update('tbl_costs_head', $data);
+    }
+
+    public function delete_transaction_head($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('tbl_costs_head');
+    }
+
+
     public function voucher_info_customer($voucher_id){
         $result = $this->db->query
                 (
