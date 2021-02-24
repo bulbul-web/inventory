@@ -115,8 +115,8 @@
                     </td>
                     <td>
                         <div class="btn-group m-1">
-                            <a href="<?php echo base_url();?>edit-transaction/<?php echo $value->id?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
-                            <a href="<?php echo base_url();?>delete-transaction/<?php echo $value->id?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a>
+                            <a href="<?php echo base_url();?>edit-transaction/<?php echo $value->trnsction_id?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
+                            <a href="<?php echo base_url();?>delete-transaction/<?php echo $value->trnsction_id?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a>
                             
                          </div>
                     </td>
@@ -127,9 +127,10 @@
         <tfoot>
             <tr>
                 <th>SL.</th>
-                <th>Transaction</th>
+                <th>Transaction ID</th>
                 <th>Note</th>
                 <th>Date</th>
+                <th>Total Costs</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>

@@ -426,13 +426,18 @@ class Query_model extends CI_Model {
     }
 
     public function expense_details($trnsction_id){
-        $result = $this->db->query("SELECT c.*, ch.trnsaction_head FROM tbl_costs c, tbl_costs_head ch WHERE ch.id = c.costs_head_id AND c.trnsction_id = '$trnsction_id' ORDER BY c.id DESC")->row();
+        $result = $this->db->query("SELECT c.*, sum(c.amount) as totalAmount, ch.trnsaction_head FROM tbl_costs c, tbl_costs_head ch WHERE ch.id = c.costs_head_id AND c.trnsction_id = '$trnsction_id' ORDER BY c.id DESC")->row();
         return $result;
     }
 
     public function expense_details_all($trnsction_id){
         $result = $this->db->query("SELECT c.*, ch.trnsaction_head FROM tbl_costs c, tbl_costs_head ch WHERE ch.id = c.costs_head_id AND c.trnsction_id = '$trnsction_id' ORDER BY c.id DESC")->result();
         return $result;
+    }
+
+    public function delete_expense_single($id){
+        $this->db->where('id', $id);
+        $this->db->delete('tbl_costs');
     }
 
 

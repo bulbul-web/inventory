@@ -22,7 +22,7 @@
 <div class="row">
    <div class="col-lg-12">
      <div class="card">
-        <div class="card-header text-uppercase">Update Invoice Form</div>
+        <div class="card-header text-uppercase">Update Invoice ID: <span style="color: red;"><?php echo $voucher_info_customer->voucher_id;?></span></div>
         <div class="card-body">
             <center> 
                 <font color="#FF0000" style="font-size: 20px;">
@@ -129,7 +129,7 @@
                                     <td>
                                         <input type="text" name="product_name" onchange="productPress(this)" id="product_name_<?=$i;?>" value="<?php echo $value->product_name;?>" placeholder="type product name" class="form-control autocomplete_txt" required="">
                                         <?php echo form_error('product_name', '<div class="error">', '</div>'); ?>
-                                        <input type="hidden" name="product_id[]" value="<?php echo $value->product_id;?>" id="product_id<?=$i;?>">
+                                        <input type="hidden" name="product_id[]" value="<?php echo $value->product_id;?>" id="product_id<?=$i;?>"><!---id"product_id<?= $i;?>" it's ok--->
                                         <input type="hidden" name="id[]" value="<?php echo $value->id;?>">
                                     </td>
                                     <td><input type="number" step=any name="quantity[]" onkeyup="qntyPress(this)" id="quantity_<?=$i;?>" value="<?php echo $value->quantity;?>" class="form-control"></td>

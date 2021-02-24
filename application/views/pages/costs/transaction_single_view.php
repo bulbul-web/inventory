@@ -1,6 +1,6 @@
 <!-- Breadcrumb-->
 <div class="row pt-2 pb-2">
-   <div class="col-sm-9">
+   <div class="col-sm-6">
     <h4 class="page-title">
         <?php
             if(isset($title)){
@@ -19,12 +19,13 @@
        </li>
     </ol>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-6">
+        
         <div class="top-button-area">
-            <a class="btn btn-primary m-1" href="<?php echo base_url('invoice-form');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Create Invoice</a>
+            <a class="btn btn-primary m-1" href="<?php echo base_url('transaction-add');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> New Transaction</a>
         </div>
 
-     </div>
+    </div>
 </div>
 <div class="printarea" style="height:200px;width:300px;padding:10px;margin:3px;  display:none;">
 

@@ -257,4 +257,87 @@ class Costs extends CI_Controller {
         $this->load->view('index', $data);
     }
 
+    public function edit_transaction_form($trnsction_id){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['expense_details'] = $this->query_model->expense_details($trnsction_id);
+        $data['expense_details_all'] = $this->query_model->expense_details_all($trnsction_id);
+        
+        $data['title'] = 'Expense Update';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('pages/costs/edit_transaction_form', $data, true);
+        $this->load->view('index', $data);
+    }
+
+
+    public function update_expense(){
+        $this->form_validation->set_rules('trnsction_date', 'Trnsction Date', 'required');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        $trnsction_id = $this->input->post('trnsction_id', true); 
+        
+        if($this->form_validation->run()){
+            
+            $trns_prmr_id = $this->input->post('trns_prmr_id', true);
+            $trnsction_id = $this->input->post('trnsction_id', true); 
+            $trnsction_date = $this->input->post('trnsction_date', true);
+            $note = $this->input->post('note', true);
+            $amount = $this->input->post('amount', true);
+            $costs_head_id = $this->input->post('id', true);
+            
+            for($i=0; $i<count($costs_head_id); $i++){
+                $data[] = [
+                    'id' => $trns_prmr_id[$i],
+                    'costs_head_id' => $costs_head_id[$i],
+                    'amount' => $amount[$i],
+                    'trnsction_date' => $trnsction_date,
+                    'note' => $note,
+                    'trnsction_id' => $trnsction_id,
+                    'entry_by' => $this->session->userdata('user_name'),
+                    // 'entry_date' => date("Y-m-d"),
+                    'status' => 1
+                ];
+                $data1[] = [
+                    'costs_head_id' => $costs_head_id[$i]
+                ];
+            }
+
+            
+
+            for($x=0;$x<count($data1);$x++){
+                $costs_head_id = $data1[$x]['costs_head_id'];
+                $result = $this->db->query("SELECT * FROM tbl_costs WHERE trnsction_id = '$trnsction_id' AND costs_head_id = $costs_head_id")->num_rows();
+                if( $result > 0){
+                   $this->db->where('id', $data[$x]['id']);
+                   $this->db->update('tbl_costs', $data[$x]);
+                }else{
+                   $this->db->insert('tbl_costs', $data[$x]);
+                }
+            }
+
+            $sdata = array();
+            $sdata['message'] = 'Expense Updated successfully';
+            $this->session->set_userdata($sdata);
+            redirect(base_url()."edit-transaction/".$trnsction_id);
+
+          
+        }else{
+            $sdata = array();
+            $sdata['message'] = 'Validation Error';
+            $this->session->set_userdata($sdata);
+            redirect(base_url()."edit-transaction/".$trnsction_id);
+        }
+    }
+
+    public function delete_expense($id, $trnsction_id){
+        $this->query_model->delete_expense_single($id);
+        redirect(base_url()."edit-transaction/".$trnsction_id);
+    }
+
+
+
 }
