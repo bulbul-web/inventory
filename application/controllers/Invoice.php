@@ -211,7 +211,7 @@ public function invoice()
                 'voucherId_manual' => $voucherId_manual,
                 'voucher_id' => $voucher_id,
                 'entry_by' => $this->session->userdata('user_name'),
-                'entry_date' => date("Y-m-d"),
+                // 'entry_date' => date("Y-m-d"),
                 'status' => $status
             ];
            $data1[] = [

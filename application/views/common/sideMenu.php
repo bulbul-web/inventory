@@ -76,6 +76,12 @@
               <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Expense List</span> 
             </a>
         </li>
+
+        <li>
+            <a href="<?php echo base_url('expense-report-section');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-line-chart" aria-hidden="true"></i> <span>Expense Reports</span> 
+            </a>
+        </li>
         
     </ul>
   </li>

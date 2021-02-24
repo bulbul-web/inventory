@@ -201,6 +201,56 @@ class Reports extends CI_Controller {
         $data['content'] = $this->load->view('reports/customer_wise_report_payment', $data, true);
         $this->load->view('index', $data);
     }
+
+    public function expense_report_section(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['title'] = 'Expense Reports';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/expense_report_section', $data, true);
+        $this->load->view('index', $data);
+    }
+
+    public function datewise_expense(){
+        if(isset($_POST['status'])){
+            $status = $this->input->post('status', true);
+            $from_date = date("Y-m-d", strtotime($this->input->post('from_date', true)));
+            $to_date = date("Y-m-d", strtotime($this->input->post('to_date', true)));
+        }else{
+            $status = 1;
+            $from_date = date("Y-m-d");
+            $to_date = date("Y-m-d");
+        }
+        $result = $this->db->query
+                (
+                "SELECT *, sum(amount) as totalAmount FROM tbl_costs WHERE trnsction_date BETWEEN '$from_date' AND '$to_date' AND status = $status GROUP BY trnsction_id"
+                )->result();
+        $data = array();
+
+        $data['totalPaidDateWise'] = $this->db->query("SELECT *, SUM(paid_amount) AS totalPaid FROM tbl_invoice WHERE invoice_date BETWEEN '$from_date' AND '$to_date' AND status = $status")->row();
+        $data['totalCostsDateWise'] = $this->db->query("SELECT *, sum(amount) as totalCostsAmount FROM tbl_costs WHERE trnsction_date BETWEEN '$from_date' AND '$to_date' AND status = $status")->row();
+        
+        $data['status'] = $status;
+        $data['from_date'] = $from_date;
+        $data['to_date'] = $to_date;
+        $data['result'] = $result;
+        
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['title'] = 'Expense Reports';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/datewise_expense', $data, true);
+        $this->load->view('index', $data);
+    }
     
     
 }

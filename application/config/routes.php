@@ -143,6 +143,9 @@ $route['name-month-report'] = 'reports/name_and_month_report';
 $route['all-report-section'] = 'reports/all_report_section';
 $route['customer-wise-report-payment'] = 'reports/customer_wise_report_payment';
 
+$route['expense-report-section'] = 'reports/expense_report_section';
+$route['datewise-expense'] = 'reports/datewise_expense';
+
 $route['costs-head'] = 'costs/costs_head';
 $route['transaction-head-add'] = 'costs/transaction_head_add_form';
 $route['save-transaction-head'] = 'costs/save_transaction_head';
