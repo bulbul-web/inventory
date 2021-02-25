@@ -88,6 +88,52 @@
 
 
   <li>
+    <a href="javaScript:void();" class="waves-effect">
+      <i class="fa fa-cogs" aria-hidden="true"></i>
+      <span>Account Setub </span> <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="sidebar-submenu">
+        <li>
+            <a href="<?php echo base_url('account-sub-head');?>" class="waves-effect">
+              <i class="fa fa-cog" aria-hidden="true"></i> <span>Sub Head</span> 
+            </a>
+        </li>
+
+        <li>
+            <a href="<?php echo base_url('');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-cog"></i> <span>Sub Sub Head</span> 
+            </a>
+        </li>
+
+        <li>
+            <a href="<?php echo base_url('');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-cog" aria-hidden="true"></i> <span>Transaction Head</span> 
+            </a>
+        </li>
+
+        <li>
+            <a href="<?php echo base_url('');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-cog" aria-hidden="true"></i> <span>Opening Balance</span> 
+            </a>
+        </li>
+
+        <li>
+            <a href="<?php echo base_url('');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-cog" aria-hidden="true"></i> <span>Fiscal Year</span> 
+            </a>
+        </li>
+
+        <li>
+            <a href="<?php echo base_url('');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-line-chart" aria-hidden="true"></i> <span>Accounts Report</span> 
+            </a>
+        </li>
+        
+    </ul>
+  </li>
+
+
+  <li>
    <a href="<?php echo base_url('invoice');?>" class="waves-effect">
      <i class="fa fa-file"></i> <span>Invoice</span> 
    </a>
