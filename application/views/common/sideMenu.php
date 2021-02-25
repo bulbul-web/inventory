@@ -100,13 +100,13 @@
         </li>
 
         <li>
-            <a href="<?php echo base_url('');?>" class="waves-effect">
+            <a href="<?php echo base_url('account-sub-sub-head');?>" class="waves-effect">
               <i aria-hidden="true" class="fa fa-cog"></i> <span>Sub Sub Head</span> 
             </a>
         </li>
 
         <li>
-            <a href="<?php echo base_url('');?>" class="waves-effect">
+            <a href="<?php echo base_url('acnt-tansaction-head-list');?>" class="waves-effect">
               <i aria-hidden="true" class="fa fa-cog" aria-hidden="true"></i> <span>Transaction Head</span> 
             </a>
         </li>
@@ -118,7 +118,7 @@
         </li>
 
         <li>
-            <a href="<?php echo base_url('');?>" class="waves-effect">
+            <a href="<?php echo base_url('fiscal-year');?>" class="waves-effect">
               <i aria-hidden="true" class="fa fa-cog" aria-hidden="true"></i> <span>Fiscal Year</span> 
             </a>
         </li>

@@ -166,5 +166,19 @@ $route['account-sub-head'] = 'account/account_sub_head_list';
 $route['account-sub-head-add'] = 'account/account_sub_head_add';
 $route['save-acnt-sub-head'] = 'account/save_acnt_sub_head';
 
+$route['account-sub-sub-head'] = 'account/account_sub_sub_head_list';
+$route['account-sub-sub-head-add'] = 'account/account_sub_sub_head_add';
+$route['get-sub-head-by-contrl-id/(.+)'] = 'account/get_sub_head_by_contrl_id/$1';
+$route['save-acnt-sub-sub-head'] = 'account/save_acnt_sub_sub_head';
+
+$route['acnt-tansaction-head-list'] = 'account/acnt_tansaction_head_list';
+$route['account-tansaction-head-add'] = 'account/account_tansaction_head_add';
+$route['save-acnt-tansaction-head'] = 'account/save_acnt_tansaction_head';
+$route['get-sub-sub-head-by-subId/(.+)'] = 'account/get_sub_sub_head_by_subId/$1';
+
+$route['fiscal-year'] = 'account/fiscal_year';
+$route['fiscal-year-add'] = 'account/fiscal_year_add';
+$route['save-fiscal-year'] = 'account/save_fiscal_year';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
