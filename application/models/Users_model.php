@@ -66,6 +66,11 @@ class Users_model extends CI_Model {
         $result = $this->db->query("SELECT i.*, c.customer_name, pi.product_name, sum(i.quantity) as totalQuantity FROM tbl_invoice i, tbl_customer c, tbl_product_info pi WHERE i.customer_id = '$customer_id' AND c.customer_id = i.customer_id AND pi.product_id = i.product_id AND i.invoice_date BETWEEN '$from_date' AND '$to_date' GROUP BY i.product_id")->result();
         return $result;
     } 
+
+    public function select_fiscal_year(){
+        $result = $this->db->query("SELECT * FROM tbl_fiscalyear WHERE status = 'Active' ")->row();
+        return $result;
+    }
     
     
 }

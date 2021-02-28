@@ -93,6 +93,13 @@
       <span>Account Setub </span> <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="sidebar-submenu">
+
+        <li>
+            <a href="<?php echo base_url('fiscal-year');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-cog" aria-hidden="true"></i> <span>Fiscal Year</span> 
+            </a>
+        </li>
+
         <li>
             <a href="<?php echo base_url('account-sub-head');?>" class="waves-effect">
               <i class="fa fa-cog" aria-hidden="true"></i> <span>Sub Head</span> 
@@ -112,14 +119,14 @@
         </li>
 
         <li>
-            <a href="<?php echo base_url('');?>" class="waves-effect">
+            <a href="<?php echo base_url('opening-balance');?>" class="waves-effect">
               <i aria-hidden="true" class="fa fa-cog" aria-hidden="true"></i> <span>Opening Balance</span> 
             </a>
         </li>
 
         <li>
-            <a href="<?php echo base_url('fiscal-year');?>" class="waves-effect">
-              <i aria-hidden="true" class="fa fa-cog" aria-hidden="true"></i> <span>Fiscal Year</span> 
+            <a href="<?php echo base_url('transaction-list');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-cog" aria-hidden="true"></i> <span>Transaction</span> 
             </a>
         </li>
 

@@ -33,6 +33,8 @@ class Users extends CI_Controller {
             $user_pass = $this->security->xss_clean($this->input->post('user_pass'));
             
             $user = $this->users_model->login($user_email, $user_pass);
+
+            $fiscal_year = $this->users_model->select_fiscal_year();
             
             if($user)
             {
@@ -41,7 +43,11 @@ class Users extends CI_Controller {
                     'user_name' => $user->user_name,
                     'user_email' => $user->user_email,
                     'user_role' => $user->user_role,
-                    'authenticated' => TRUE
+                    'authenticated' => TRUE,
+                    'fiscalYearID' => $fiscal_year->fiscalYearID,
+                    'fiscal_startDate' => $fiscal_year->startDate,
+                    'fiscal_endDate' => $fiscal_year->endDate
+
                 );
                 
                 $this->session->set_userdata($userdata);

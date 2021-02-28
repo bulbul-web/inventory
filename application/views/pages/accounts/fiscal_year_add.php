@@ -17,7 +17,12 @@
 <div class="row">
    <div class="col-lg-12">
      <div class="card">
-        <div class="card-header text-uppercase">Add Fiscal Year Form</div>
+        <div class="card-header text-uppercase">Add Fiscal Year Form
+          <?php
+            $runningFiscalYear = $this->db->query("select * from tbl_fiscalyear where status = 'active' ")->row();
+            echo '<span style="color: green;">Running Year: '.$runningFiscalYear->startDate.' To '.$runningFiscalYear->endDate.'</span>';
+          ?>
+        </div>
         <div class="card-body">
             <center> 
                 <font color="#FF0000" style="font-size: 20px;">

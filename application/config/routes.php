@@ -180,5 +180,17 @@ $route['fiscal-year'] = 'account/fiscal_year';
 $route['fiscal-year-add'] = 'account/fiscal_year_add';
 $route['save-fiscal-year'] = 'account/save_fiscal_year';
 
+$route['opening-balance'] = 'account/opening_balance';
+$route['account-opening-blnce-add'] = 'account/account_opening_blnce_add';
+$route['save-opening-balance'] = 'account/save_opening_balance';
+$route['get-transaction-head-by-sub-sub-Id/(.+)'] = 'account/get_transaction_head_by_sub_sub_Id/$1';
+$route['get-transaction-by-contrl-head-id/(.+)'] = 'account/get_transaction_by_contrl_head_id/$1';
+
+$route['transaction-list'] = 'account/transaction_list';
+$route['account-transaction-add'] = 'account/account_transaction_add';
+$route['save-acnt-tansaction'] = 'account/save_acnt_tansaction';
+$route['get-transaction-by-v-type/(:any)'] = 'account/get_transaction_by_v_type/$1';
+$route['get-control-head-by-v-type/(:any)'] = 'account/get_control_head_by_v_type/$1';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
