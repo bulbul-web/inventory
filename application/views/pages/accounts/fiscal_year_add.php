@@ -20,7 +20,9 @@
         <div class="card-header text-uppercase">Add Fiscal Year Form
           <?php
             $runningFiscalYear = $this->db->query("select * from tbl_fiscalyear where status = 'active' ")->row();
-            echo '<span style="color: green;">Running Year: '.$runningFiscalYear->startDate.' To '.$runningFiscalYear->endDate.'</span>';
+            if(isset($runningFiscalYear)):
+                echo '<span style="color: green;">Running Year: '.$runningFiscalYear->startDate.' To '.$runningFiscalYear->endDate.'</span>';
+            endif;
           ?>
         </div>
         <div class="card-body">
