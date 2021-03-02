@@ -160,6 +160,7 @@ $route['save-expense'] = 'costs/save_expense';
 $route['get-transaction-head/(:any)'] = 'costs/get_all_transaction_head_match/$1';
 $route['costs-details/(.+)'] = 'costs/costs_details/$1';
 $route['delete-expense/(:num)/(:num)'] = 'costs/delete_expense/$1/$2';
+$route['delete-expense-status/(:num)/(:num)'] = 'costs/delete_expense_status/$1/$2';
 $route['update-expense'] = 'costs/update_expense';
 
 $route['account-sub-head'] = 'account/account_sub_head_list';

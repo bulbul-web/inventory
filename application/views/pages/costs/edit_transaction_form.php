@@ -83,12 +83,13 @@
                             ?>
                                 <tr id="row_<?=$i;?>">
                                     <td>
-                                        <input type="text" name="trnsaction_head" id="trnsaction_head_<?=$i;?>" value="<?= $value->trnsaction_head?>" placeholder="type expense name" class="form-control autocomplete_txt" required="">
+                                        <input type="text" name="trnsaction_head" id="trnsaction_head_<?=$i;?>" value="<?= $value->trnsaction_head?>" placeholder="type expense name" class="form-control autocomplete_txt" required="" disabled="">
                                         <input type="hidden" name="id[]" id="id_<?=$i;?>" value="<?php echo $value->costs_head_id;?>" required="">
                                         <input type="hidden" name="trns_prmr_id[]"  value="<?php echo $value->id;?>">
                                     </td>
                                     <td><input type="number" step=any name="amount[]" onkeyup="amountPress(this)" id="amount_<?=$i;?>" value="<?= $value->amount?>" class="form-control" required=""></td>
-                                    <td class="text-center" colspan="2"><a type="button" href="<?php echo base_url();?>delete-expense/<?php echo $value->id;?>/<?=$value->trnsction_id;?>" onclick="return confirm('Are you sure to remove?')" name="remove" data-row="row" scope="row" class="btn btn-danger btn-sm timesSpan">×</a></td>
+                                    <!-- <td class="text-center" colspan="2"><a type="button" href="<?php echo base_url();?>delete-expense/<?php echo $value->id;?>/<?=$value->trnsction_id;?>" onclick="return confirm('Are you sure to remove?')" name="remove" data-row="row" scope="row" class="btn btn-danger btn-sm timesSpan">×</a></td> -->
+                                    <td class="text-center" colspan="2"><a type="button" href="<?php echo base_url();?>delete-expense-status/<?php echo $value->id;?>/<?=$value->trnsction_id;?>" onclick="return confirm('Are you sure to remove?')" name="remove" data-row="row" scope="row" class="btn btn-danger btn-sm timesSpan">×</a></td>
                                 </tr>
                             <?php endforeach;?>
                                 

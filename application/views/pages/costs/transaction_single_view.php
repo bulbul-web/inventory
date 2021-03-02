@@ -126,7 +126,7 @@
                             $trnsction_id = $expense_details->trnsction_id;
                             $result = $this->db->query
                                     (
-                                    "SELECT c.*, SUM(c.amount) as total_expense FROM tbl_costs c WHERE trnsction_id = '$trnsction_id' GROUP BY c.trnsction_id  "
+                                    "SELECT c.*, SUM(c.amount) as total_expense FROM tbl_costs c WHERE trnsction_id = '$trnsction_id' AND NOT (c.delete_status <=> 'deleted') GROUP BY c.trnsction_id  "
                                     )->row();
 
                         ?>

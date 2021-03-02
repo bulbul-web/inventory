@@ -127,7 +127,7 @@
                                 ?>
                                 <tr id="row_<?=$i;?>">
                                     <td>
-                                        <input type="text" name="product_name" onchange="productPress(this)" id="product_name_<?=$i;?>" value="<?php echo $value->product_name;?>" placeholder="type product name" class="form-control autocomplete_txt" required="">
+                                        <input type="text" name="product_name" onchange="productPress(this)" id="product_name_<?=$i;?>" value="<?php echo $value->product_name;?>" placeholder="type product name" class="form-control autocomplete_txt" required="" disabled>
                                         <?php echo form_error('product_name', '<div class="error">', '</div>'); ?>
                                         <input type="hidden" name="product_id[]" value="<?php echo $value->product_id;?>" id="product_id<?=$i;?>"><!---id"product_id<?= $i;?>" it's ok--->
                                         <input type="hidden" name="id[]" value="<?php echo $value->id;?>">
@@ -157,7 +157,7 @@
                                                 "select"
                                                 . " tbl_invoice.*, sum(tbl_invoice.quantity * tbl_invoice.sale_price) as grandTotal"
                                                 . " FROM tbl_invoice"
-                                                . " WHERE tbl_invoice.voucher_id = '$voucher_id'"
+                                                . " WHERE tbl_invoice.voucher_id = '$voucher_id' AND NOT (tbl_invoice.delete_status <=> 'deleted')"
                                                 )->row();
                                         
                                     ?>

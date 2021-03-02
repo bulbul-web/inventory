@@ -32,7 +32,7 @@ class Reports extends CI_Controller {
                 (
                 "SELECT c.customer_name, i.voucher_id, sum(i.quantity * i.sale_price) as grandTotal, i.paid_amount, i.discount, i.invoice_date, i.status, i.note"
                     . " FROM tbl_customer c, tbl_invoice i"
-                    . " WHERE i.customer_id = c.customer_id and i.invoice_date BETWEEN '$from_date' AND '$to_date' AND i.status = $status"
+                    . " WHERE i.customer_id = c.customer_id and i.invoice_date BETWEEN '$from_date' AND '$to_date' AND i.status = $status AND NOT (i.delete_status <=> 'deleted')"
                     . " GROUP BY i.voucher_id"
                     . " ORDER BY i.id DESC"
                 )->result();
@@ -126,7 +126,7 @@ class Reports extends CI_Controller {
                 (
                 "SELECT c.customer_name, i.customer_id, i.voucher_id, i.product_id, pi.product_name, i.quantity, i.sale_price, sum(i.quantity * i.sale_price) as grandTotal, i.paid_amount, i.discount, i.invoice_date, i.status, i.note
                 FROM tbl_customer c, tbl_invoice i, tbl_product_info pi
-                WHERE i.customer_id = c.customer_id AND i.invoice_date BETWEEN '$from_date' AND '$to_date' AND i.customer_id = '$customer_id' AND pi.product_id = i.product_id and i.status = $status
+                WHERE i.customer_id = c.customer_id AND i.invoice_date BETWEEN '$from_date' AND '$to_date' AND i.customer_id = '$customer_id' AND pi.product_id = i.product_id and i.status = $status AND NOT (i.delete_status <=> 'deleted')
                 GROUP BY i.voucher_id
                ORDER BY i.id DESC"
                 )->result();
@@ -181,7 +181,7 @@ class Reports extends CI_Controller {
         $result = $this->db->query
                 (
                 // "SELECT c.customer_name, sum(i.quantity * i.sale_price) as grandTotal, i.paid_amount, i.discount, i.invoice_date, i.status, i.note FROM tbl_customer c, tbl_invoice i WHERE i.customer_id = c.customer_id AND i.invoice_date BETWEEN '$from_date' AND '$to_date' GROUP BY c.customer_name ORDER BY i.id DESC"
-                "SELECT a.customer_name, a.grandTotal, sum(b.discount) as discount, SUM(b.paid_amount) AS paid_amount FROM (SELECT i.customer_id, c.customer_name, sum(i.quantity * i.sale_price) as grandTotal FROM tbl_invoice i, tbl_customer c WHERE c.customer_id = i.customer_id GROUP BY c.customer_name) a LEFT JOIN (SELECT i.paid_amount, i.voucher_id, i.customer_id, c.customer_name, i.discount FROM tbl_invoice i, tbl_customer c WHERE i.customer_id = c.customer_id GROUP BY i.voucher_id) b ON a.customer_id = b.customer_id GROUP BY a.customer_id"
+                "SELECT a.customer_name, a.grandTotal, sum(b.discount) as discount, SUM(b.paid_amount) AS paid_amount FROM (SELECT i.customer_id, c.customer_name, sum(i.quantity * i.sale_price) as grandTotal FROM tbl_invoice i, tbl_customer c WHERE c.customer_id = i.customer_id AND NOT (i.delete_status <=> 'deleted') GROUP BY c.customer_name) a LEFT JOIN (SELECT i.paid_amount, i.voucher_id, i.customer_id, c.customer_name, i.discount FROM tbl_invoice i, tbl_customer c WHERE i.customer_id = c.customer_id GROUP BY i.voucher_id) b ON a.customer_id = b.customer_id GROUP BY a.customer_id"
                 )->result();
 
                

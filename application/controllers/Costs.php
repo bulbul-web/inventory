@@ -338,6 +338,11 @@ class Costs extends CI_Controller {
         redirect(base_url()."edit-transaction/".$trnsction_id);
     }
 
+    public function delete_expense_status($id, $trnsction_id){
+        $this->query_model->delete_expense_status($id);
+        redirect(base_url()."edit-transaction/".$trnsction_id);
+    }
+
 
 
 }

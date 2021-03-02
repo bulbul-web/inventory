@@ -55,7 +55,7 @@
                         $stock_out_result = $this->db->query
                                 (
                                      //"SELECT SUM(i.quantity) as stock_out, si.quantity_in, pi.product_name, si.challan_date, ps.pack_size FROM tbl_invoice i, tbl_stock_in si, tbl_product_info pi, tbl_pack_size ps WHERE i.product_id = si.product_id AND pi.product_id = si.product_id AND ps.id = pi.pack_size GROUP BY i.product_id"
-                                     "SELECT i.product_id, sum(i.quantity) as stock_out, pi.pack_size, ps.pack_size, pi.product_name FROM tbl_invoice i LEFT JOIN tbl_product_info pi ON pi.product_id = i.product_id LEFT JOIN tbl_pack_size ps ON pi.pack_size = ps.id WHERE i.product_id = $product_name"
+                                     "SELECT i.product_id, sum(i.quantity) as stock_out, pi.pack_size, ps.pack_size, pi.product_name FROM tbl_invoice i LEFT JOIN tbl_product_info pi ON pi.product_id = i.product_id LEFT JOIN tbl_pack_size ps ON pi.pack_size = ps.id WHERE i.product_id = $product_name AND NOT (i.delete_status <=> 'deleted')"
                                 )->row();
 
                         $stock_in_result = $this->db->query

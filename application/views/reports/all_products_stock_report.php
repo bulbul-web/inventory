@@ -55,7 +55,7 @@
                                         ." ) a"
                                     ." LEFT JOIN "
                                         ." ("
-                                            ." SELECT sum(i.quantity) as stockOut, i.product_id FROM tbl_invoice i GROUP BY i.product_id"
+                                            ." SELECT sum(i.quantity) as stockOut, i.product_id FROM tbl_invoice i WHERE NOT (i.delete_status <=> 'deleted') GROUP BY i.product_id"
                                         ." ) b"
                                     ." ON a.product_id = b.product_id)c"
                                 )->result();

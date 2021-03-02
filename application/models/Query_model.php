@@ -368,7 +368,7 @@ class Query_model extends CI_Model {
                     
                     "SELECT c.customer_name, i.voucher_id, sum(i.quantity * i.sale_price) as grandTotal, i.paid_amount, i.discount, i.invoice_date, i.status, i.note"
                     . " FROM tbl_customer c, tbl_invoice i"
-                    . " WHERE i.customer_id = c.customer_id"
+                    . " WHERE i.customer_id = c.customer_id AND NOT (i.delete_status <=> 'deleted')"
                     . " GROUP BY i.voucher_id"
                     . " ORDER BY i.id DESC"
 //                    "SELECT"
@@ -421,17 +421,17 @@ class Query_model extends CI_Model {
 
 
     public function viewAllCosts(){
-        $result = $this->db->query("SELECT c.*, SUM(c.amount) as total_expense FROM tbl_costs c GROUP BY c.trnsction_id ORDER BY c.id DESC")->result();
+        $result = $this->db->query("SELECT c.*, SUM(c.amount) as total_expense FROM tbl_costs c WHERE NOT (c.delete_status <=> 'deleted') GROUP BY c.trnsction_id ORDER BY c.id DESC")->result();
         return $result;
     }
 
     public function expense_details($trnsction_id){
-        $result = $this->db->query("SELECT c.*, sum(c.amount) as totalAmount, ch.trnsaction_head FROM tbl_costs c, tbl_costs_head ch WHERE ch.id = c.costs_head_id AND c.trnsction_id = '$trnsction_id' ORDER BY c.id DESC")->row();
+        $result = $this->db->query("SELECT c.*, sum(c.amount) as totalAmount, ch.trnsaction_head FROM tbl_costs c, tbl_costs_head ch WHERE ch.id = c.costs_head_id AND c.trnsction_id = '$trnsction_id' AND NOT (c.delete_status <=> 'deleted') ORDER BY c.id DESC")->row();
         return $result;
     }
 
     public function expense_details_all($trnsction_id){
-        $result = $this->db->query("SELECT c.*, ch.trnsaction_head FROM tbl_costs c, tbl_costs_head ch WHERE ch.id = c.costs_head_id AND c.trnsction_id = '$trnsction_id' ORDER BY c.id DESC")->result();
+        $result = $this->db->query("SELECT c.*, ch.trnsaction_head FROM tbl_costs c, tbl_costs_head ch WHERE ch.id = c.costs_head_id AND c.trnsction_id = '$trnsction_id' AND NOT (c.delete_status <=> 'deleted') ORDER BY c.id DESC")->result();
         return $result;
     }
 
@@ -440,13 +440,20 @@ class Query_model extends CI_Model {
         $this->db->delete('tbl_costs');
     }
 
+    public function delete_expense_status($id){
+        $this->db->set('status', '0');
+        $this->db->set('delete_status', 'deleted');
+        $this->db->where('id', $id);
+        $this->db->update('tbl_costs');
+    }
+
 
     public function voucher_info_customer($voucher_id){
         $result = $this->db->query
                 (
                 "SELECT c.*, i.*"
                 . " FROM tbl_customer c, tbl_invoice i"
-                . " WHERE i.customer_id = c.customer_id AND i.voucher_id = '$voucher_id'"
+                . " WHERE i.customer_id = c.customer_id AND i.voucher_id = '$voucher_id' AND NOT (i.delete_status <=> 'deleted')"
                 . " GROUP BY i.voucher_id"
 //                    "SELECT"
 //                    . " tbl_customer.*,"
@@ -473,7 +480,7 @@ class Query_model extends CI_Model {
                 . " tbl_product_info pi,"
                 . " tbl_invoice i"
                 . " WHERE"
-                . " i.customer_id = c.customer_id AND i.product_id = pi.product_id AND i.voucher_id = '$voucher_id'"
+                . " i.customer_id = c.customer_id AND i.product_id = pi.product_id AND i.voucher_id = '$voucher_id' AND NOT (i.delete_status <=> 'deleted')"
 //                    "SELECT"
 //                    . " tbl_customer.*,"
 //                    . " tbl_product_info.*,"
@@ -503,8 +510,10 @@ class Query_model extends CI_Model {
         $this->db->delete('tbl_invoice');
     }
     public function delete_invoice_product($id){
+        $this->db->set('status', '0');
+        $this->db->set('delete_status', 'deleted');
         $this->db->where('id', $id);
-        $this->db->delete('tbl_invoice');
+        $this->db->update('tbl_invoice');
     }
 
 }

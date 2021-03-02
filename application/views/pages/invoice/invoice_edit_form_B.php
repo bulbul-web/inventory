@@ -146,7 +146,7 @@
                                                 "select"
                                                 . " tbl_invoice.*, sum(tbl_invoice.quantity * tbl_invoice.sale_price) as grandTotal"
                                                 . " FROM tbl_invoice"
-                                                . " WHERE tbl_invoice.voucher_id = '$voucher_id'"
+                                                . " WHERE tbl_invoice.voucher_id = '$voucher_id' AND NOT (tbl_invoice.delete_status <=> 'deleted')"
                                                 )->row();
                                         
                                     ?>
