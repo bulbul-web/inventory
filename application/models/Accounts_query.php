@@ -33,7 +33,7 @@ class Accounts_query extends CI_Model {
     }
     
     public function transaction_list(){
-        $result = $this->db->query("SELECT * FROM tbl_transactions")
+        $result = $this->db->query("SELECT a.*, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID  ORDER BY a.TransactionID DESC ")
                         ->result();
         return $result;
     }
