@@ -197,7 +197,8 @@ class Account extends CI_Controller {
         $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
-        $data['content'] = $this->load->view('pages/accounts/account_transaction_add', $data, true);
+        // $data['content'] = $this->load->view('pages/accounts/account_transaction_add', $data, true);
+        $data['content'] = $this->load->view('pages/accounts/account_transaction_add_mltiple', $data, true);
         $this->load->view('index', $data);
     }//account_transaction_add
 
@@ -465,6 +466,10 @@ class Account extends CI_Controller {
             $this->account_transaction_add();
         }
     }//save_acnt_tansaction
+
+    public function save_acnt_tansaction_mltple(){
+        print 'save_acnt_tansaction_mltple';
+    }
     
     public function save_opening_balance(){
 

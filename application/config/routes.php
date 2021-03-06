@@ -189,6 +189,7 @@ $route['get-transaction-by-contrl-head-id/(.+)'] = 'account/get_transaction_by_c
 
 $route['transaction-list'] = 'account/transaction_list';
 $route['account-transaction-add'] = 'account/account_transaction_add';
+$route['save-acnt-tansaction-mltple'] = 'account/save_acnt_tansaction_mltple';
 $route['save-acnt-tansaction'] = 'account/save_acnt_tansaction';
 $route['get-transaction-by-v-type/(:any)'] = 'account/get_transaction_by_v_type/$1';
 $route['get-control-head-by-v-type/(:any)'] = 'account/get_control_head_by_v_type/$1';
