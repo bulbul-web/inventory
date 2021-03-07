@@ -198,7 +198,8 @@ class Account extends CI_Controller {
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         // $data['content'] = $this->load->view('pages/accounts/account_transaction_add', $data, true);
-        $data['content'] = $this->load->view('pages/accounts/account_transaction_add_mltiple', $data, true);
+        // $data['content'] = $this->load->view('pages/accounts/account_transaction_add_mltiple', $data, true);
+        $data['content'] = $this->load->view('pages/accounts/account_transaction_add_mltiple_trns_all', $data, true);
         $this->load->view('index', $data);
     }//account_transaction_add
 
@@ -213,6 +214,20 @@ class Account extends CI_Controller {
         }
         echo $output;
     }//get_sub_head_by_contrl_id
+
+
+    //for ajax field match and auto fill filds
+    public function get_transaction_head_match($trns_head_name){
+
+        if(empty($trns_head_name)){
+            echo json_encode([]);
+            exit;
+        }
+        
+        $transactionHead = $this->accounts_query->viewAllTransactionHeadMatch($trns_head_name);
+        echo json_encode($transactionHead);exit;
+    }
+    //for ajax field match and auto fill filds
     
     public function get_sub_sub_head_by_subId($SubHeadID){
         $getSubSubHeadByContrlId = $this->accounts_query->get_sub_sub_head_by_subId($SubHeadID);
@@ -468,7 +483,213 @@ class Account extends CI_Controller {
     }//save_acnt_tansaction
 
     public function save_acnt_tansaction_mltple(){
-        print 'save_acnt_tansaction_mltple';
+        print 'save_acnt_tansaction_mltple uncomplete';
+        exit();
+
+
+        $this->form_validation->set_rules('TrnDate', 'Transaction Date', 'required');
+        $this->form_validation->set_rules('project_id', 'Project Name', 'required');
+        $this->form_validation->set_rules('TransactionHeadID', 'Transaction Name', 'required');
+        $this->form_validation->set_rules('V_Type', 'Voucher Type', 'required');
+        $this->form_validation->set_rules('ControlHead_id', 'Control Head', 'required');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+
+        if($this->form_validation->run()){
+            $TrasactionHeadID = $this->input->post('TransactionHeadID', true);
+            $amount = $this->input->post('amount', true);
+
+            if($data['CR'] == ''){
+                $data['CR'] = 0;
+                $data['DR'] = $this->input->post('DR', true);
+            }elseif($data['DR'] == ''){
+                $data['DR'] = 0;
+                $data['CR'] = $this->input->post('CR', true);
+            }
+            $project_id = $this->input->post('project_id', true);
+            $TrnDate = $this->input->post('TrnDate', true);
+            $entry_date = date("Y-m-d");
+
+            $lastid = $this->db->query('SELECT VoucherNo FROM tbl_transactions GROUP by VoucherNo ORDER BY CAST(VoucherNo AS int) DESC LIMIT 1')->row();
+    
+            if(!empty($lastid)){
+                $lastid = $lastid->VoucherNo;
+                
+            }else{
+                $lastid = 0;
+            }
+            $cc = intval($lastid)+1;//last_voucher_id increment
+            $VoucherNo = $cc; //$coo
+            /*generate voucher*/
+            $VoucherNo = $VoucherNo;
+            $Note = $this->input->post('Note', true);
+            $VoucherID = $VoucherNo;
+            $userid = $this->session->userdata('user_id');
+            $V_Type = $this->input->post('V_Type', true);
+            $month = date("M");
+            $year = date("Y");
+
+            $monthvoucher = $data['month'].'-'.$VoucherNo;
+            $yearend = NULL;
+            $MR_NO = NULL;
+            $Member_ID = NULL;
+            $fiscalYearID = $this->session->userdata('fiscalYearID');
+            $status = 1;
+
+
+            for($i=0; $i<count($product_id); $i++){
+                $data[] = [
+                    'product_id' => $product_id[$i],
+                    'quantity' => $quantity[$i],
+                    'sale_price' => $sale_price[$i],
+                    'customer_id' => $customer_id,
+                    'invoice_date' => $invoice_date,
+                    'note' => $note,
+                    'discount' => $discount,
+                    'paid_amount' => $paid_amount,
+                    'voucherId_manual' => $voucherId_manual,
+                    'voucher_id' => $voucher_id,
+                    'entry_by' => $this->session->userdata('user_name'),
+                    'entry_date' => date("Y-m-d"),
+                    'status' => 1
+                ];
+            }
+        //    echo '<pre>';
+        //    print_r($data);
+        //    exit();
+    
+            //insert batch
+            $insert_batch = $this->db->insert_batch('tbl_invoice', $data);
+
+            if($insert_batch){
+                $sdata = array();
+                $sdata['message'] = 'Tansaction successfully added';
+                $this->session->set_userdata($sdata);
+                $this->account_transaction_add();
+                // redirect(current_url());
+            }else{
+                $sdata = array();
+                $sdata['message'] = 'Error!';
+                $this->session->set_userdata($sdata);
+                $this->account_transaction_add();
+                // redirect(current_url());
+            }
+        } else {
+            $sdata = array();
+            $sdata['message'] = 'Tray again!';
+            $this->session->set_userdata($sdata);
+            $this->account_transaction_add();
+        }
+        
+
+    }
+    
+    
+    public function save_acnt_tansaction_mltple_trns_all(){
+
+        $this->form_validation->set_rules('TrnDate', 'Transaction Date', 'required');
+        $this->form_validation->set_rules('project_id', 'Project Name', 'required');
+        $this->form_validation->set_rules('TrasactionHeadID', 'Transaction Name', 'required');
+        $this->form_validation->set_rules('V_Type', 'Voucher Type', 'required');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+
+        if($this->form_validation->run()){
+            $TrasactionHeadID = $this->input->post('TrasactionHeadID', true);
+            $TransactionHeadIDAcnt = $this->input->post('TransactionHeadIDAcnt', true);
+            $project_id = $this->input->post('project_id', true);
+            $TrnDate = $this->input->post('TrnDate', true);
+            $entry_date = date("Y-m-d");
+
+            $lastid = $this->db->query('SELECT VoucherNo FROM tbl_transactions GROUP by VoucherNo ORDER BY CAST(VoucherNo AS int) DESC LIMIT 1')->row();
+    
+            if(!empty($lastid)){
+                $lastid = $lastid->VoucherNo;
+                
+            }else{
+                $lastid = 0;
+            }
+            $cc = intval($lastid)+1;//last_voucher_id increment
+            $VoucherNo = $cc; //$coo
+            /*generate voucher*/
+            $Note = $this->input->post('Note', true);
+            $VoucherID = $VoucherNo;
+            $userid = $this->session->userdata('user_id');
+            $V_Type = $this->input->post('V_Type', true);
+            $amount = $this->input->post('amount', true);
+
+            $CR = 0;
+            $DR = 0;
+            if($V_Type == 'DR'){
+                $CR = $amount;
+            }elseif($V_Type == 'CR') {
+                $DR = $amount;
+            }
+
+            $month = date("M");
+            $year = date("Y");
+
+            $monthvoucher = $month.'-'.$VoucherNo;
+            $yearend = NULL;
+            $MR_NO = NULL;
+            $Member_ID = NULL;
+            $update_date = NULL;
+            $fiscalYearID = $this->session->userdata('fiscalYearID');
+            $status = 1;
+
+
+            for($i=0; $i<count($TransactionHeadIDAcnt); $i++){
+                $data[] = [
+                    'TrasactionHeadID' => $TrasactionHeadID,
+                    'TransactionHeadIDAcnt' => $TransactionHeadIDAcnt[$i],
+                    'project_id' => $project_id,
+                    'CR' => $CR[$i],
+                    'DR' => $DR[$i],
+                    'TrnDate' => $TrnDate,
+                    'entry_date' => $entry_date,
+                    'VoucherNo' => $VoucherNo,
+                    'Note' => $Note[$i],
+                    'VoucherID' => $VoucherID,
+                    'userid' => $userid,
+                    'V_Type' => $V_Type,
+                    'month' => $month,
+                    'year' => $year,
+                    'monthvoucher' => $monthvoucher,
+                    'yearend' => $yearend,
+                    'MR_NO' => $MR_NO,
+                    'Member_ID' => $Member_ID,
+                    'update_date' => $update_date,
+                    'status' => $status,
+                    'fiscalYearID' => $fiscalYearID
+                ];
+            }
+
+            // echo '<pre>';
+            // print_r($data);
+            // exit();
+    
+            //insert batch
+            $insert_batch = $this->db->insert_batch('tbl_transactions', $data);
+
+            if($insert_batch){
+                $sdata = array();
+                $sdata['message'] = 'Tansaction successfully saved';
+                $this->session->set_userdata($sdata);
+                $this->account_transaction_add();
+                // redirect(current_url());
+            }else{
+                $sdata = array();
+                $sdata['message'] = 'Error!';
+                $this->session->set_userdata($sdata);
+                $this->account_transaction_add();
+                // redirect(current_url());
+            }
+        } else {
+            $sdata = array();
+            $sdata['message'] = 'Tray again!';
+            $this->session->set_userdata($sdata);
+            $this->account_transaction_add();
+        }
+        
+
     }
     
     public function save_opening_balance(){

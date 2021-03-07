@@ -447,7 +447,7 @@ class Products extends CI_Controller {
     {
         $this->form_validation->set_rules(
                 'product_name', 'Product Name',
-                'required|min_length[2]|max_length[20]|is_unique[tbl_product_info.product_name]',
+                'required|min_length[2]|max_length[50]|is_unique[tbl_product_info.product_name]',
                 array(
                         'required'      => 'You have not provided %s.',
                         'is_unique'     => 'This %s already exists.'

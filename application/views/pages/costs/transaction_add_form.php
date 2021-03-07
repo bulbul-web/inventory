@@ -151,15 +151,15 @@ $(document).ready(function() {
 	});
 	
 	$(wrapper).on("click",".delete_row", function(e){ 
-            e.preventDefault(); $("#row_"+rowCount).remove(); rowCount--;
-            var grandTotal = 0;
-            var countTotal =  $('input[name="amount[]"]').length;
-            for (i = 1; i <= countTotal; i++) {
-                grandTotal = parseFloat(grandTotal) + parseFloat($("#amount_"+i).val());
-            }
+        e.preventDefault(); $("#row_"+rowCount).remove(); rowCount--;
+        var grandTotal = 0;
+        var countTotal =  $('input[name="amount[]"]').length;
+        for (i = 1; i <= countTotal; i++) {
+            grandTotal = parseFloat(grandTotal) + parseFloat($("#amount_"+i).val());
+        }
 
-            $("#grandTotal").attr("value",grandTotal);
-        });
+        $("#grandTotal").attr("value",grandTotal);
+    });
         
         
 });

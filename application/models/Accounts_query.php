@@ -82,6 +82,15 @@ class Accounts_query extends CI_Model {
         $result = $this->db->query("SELECT * FROM tbl_transactionhead WHERE SSubHeadID = '$SSubHeadID' and active = '1' ")->result();
         return $result;
     }
+
+    public function viewAllTransactionHeadMatch($trns_head_name){
+        $result = $this->db->query
+                (
+                
+                "SELECT * FROM tbl_transactionhead WHERE TransHeadDescription LIKE '%".$trns_head_name."%' AND active = 1 GROUP BY tbl_transactionhead.TransactionHeadID "
+                )->result();
+        return $result;
+    }
     
     public function get_transaction_by_contrl_head_id($ControlHead_id){
         $result = $this->db->query("SELECT t.*, ssh.SSubHeadDescription, ssh.SubHeadID, sh.SubHeadDescription, sh.ControlHead_id, c.HeadDescription FROM tbl_transactionhead t, tbl_subsubheads ssh, tbl_subhead sh, tbl_controlhead c WHERE t.SSubHeadID = ssh.SSubHeadID AND ssh.SubHeadID = sh.SubHeadID AND c.ControlHead_id = sh.ControlHead_id AND c.ControlHead_id = '$ControlHead_id'")->result();

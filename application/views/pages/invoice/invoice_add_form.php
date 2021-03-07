@@ -385,6 +385,7 @@ function setDiscount(discount){
     }
 
 </script>
+
 <script>
     function getId(element){
             var id, idArr;

@@ -86,7 +86,7 @@ public function invoice()
     }
     //for ajax field match and auto fill filds
     
-//for ajax field match and auto fill filds
+    //for ajax field match and auto fill filds
     public function get_all_products_match($product_name){
 
         if(empty($product_name)){

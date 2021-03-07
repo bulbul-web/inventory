@@ -170,6 +170,7 @@ $route['save-acnt-sub-head'] = 'account/save_acnt_sub_head';
 $route['account-sub-sub-head'] = 'account/account_sub_sub_head_list';
 $route['account-sub-sub-head-add'] = 'account/account_sub_sub_head_add';
 $route['get-sub-head-by-contrl-id/(.+)'] = 'account/get_sub_head_by_contrl_id/$1';
+$route['get-transaction-head-account/(:any)'] = 'account/get_transaction_head_match/$1';
 $route['save-acnt-sub-sub-head'] = 'account/save_acnt_sub_sub_head';
 
 $route['acnt-tansaction-head-list'] = 'account/acnt_tansaction_head_list';
@@ -190,6 +191,7 @@ $route['get-transaction-by-contrl-head-id/(.+)'] = 'account/get_transaction_by_c
 $route['transaction-list'] = 'account/transaction_list';
 $route['account-transaction-add'] = 'account/account_transaction_add';
 $route['save-acnt-tansaction-mltple'] = 'account/save_acnt_tansaction_mltple';
+$route['save-acnt-tansaction-mltple-trns-all'] = 'account/save_acnt_tansaction_mltple_trns_all';
 $route['save-acnt-tansaction'] = 'account/save_acnt_tansaction';
 $route['get-transaction-by-v-type/(:any)'] = 'account/get_transaction_by_v_type/$1';
 $route['get-control-head-by-v-type/(:any)'] = 'account/get_control_head_by_v_type/$1';

@@ -75,10 +75,27 @@
 
             </div>
 
+                        
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Select Control Head</label>
+                <div class="col-sm-9">
+                    <select name="TransactionHeadID" id="TransactionHeadID" class="form-control" required="">
+                            <option value="" disabled selected>----Select----</option>
+                        <?php
+                            $result = $this->db->query("SELECT t.*, ssh.SSubHeadDescription, ssh.SubHeadID, sh.SubHeadDescription, sh.ControlHead_id, c.HeadDescription FROM tbl_transactionhead t, tbl_subsubheads ssh, tbl_subhead sh, tbl_controlhead c WHERE t.SSubHeadID = ssh.SSubHeadID AND ssh.SubHeadID = sh.SubHeadID AND c.ControlHead_id = sh.ControlHead_id AND sh.SubHeadID = '1' AND ssh.SSubHeadID = '14' AND c.ControlHead_id = '1'")->result();
+                            foreach($result as $value):
+                        ?>
+                            <option value="<?= $value->TransactionHeadID;?>"><?= $value->TransHeadDescription;?></option>
+                            
+                        <?php endforeach;?>
+                    </select>
+                    <?php echo form_error('TransactionHeadID', '<div class="error">', '</div>');?>
+                </div>
+            </div>
+
+
 
             <div class="row">
-
-
                 <div class="col-md-6">
                     <div class="form-group row">
                         <div class="col-sm-12">
@@ -113,7 +130,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <table name="save-invoice" id="autocomplete_table" class="table table-bordered table-sm table-hover tbl-own" style="width: 100%;">
+                    <table name="save-transaction" id="autocomplete_table" class="table table-bordered table-sm table-hover tbl-own" style="width: 100%;">
                         <thead>
                             <tr>
                                 <th>Select Transaction Head</th>
@@ -125,14 +142,15 @@
                             <tr id="row_1">
 
                                 <td width="60%">
-                                    <select name="TransactionHeadID[]" id="TransactionHeaID" class="form-control" required="">
+                                    <select name="TransactionHeadID[]" id="TransactionHeaID" class="form-control TransactionHeaID" required="">
 
                                     </select>
 
                                     <div class="form-group row">
-                                    <div class="col-sm-12">
-                                        <label class="col-form-label">Note</label>
-                                        <input type="text" name="note[]" class="form-control form-control-rounded" required="">
+                                        <div class="col-sm-12">
+                                            <label class="col-form-label">Note</label>
+                                            <input type="text" name="note[]" class="form-control" required="">
+                                        </div>
                                     </div>
                                 </td>
 
@@ -198,21 +216,19 @@
                 }
             });
 
-            
-
-            $("#ControlHead_id").change(function(){
-                ControlHead_id = $("#ControlHead_id").val();
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo base_url();?>get-transaction-by-contrl-head-id/"+ControlHead_id,
-                    success:function(data){
-                        $("#TransactionHeaID").html(data);
-                    }
-                });
-            });
-
         });
         //get sub head by ControlHead_id
+
+        $("#ControlHead_id").change(function(){
+            ControlHead_id = $("#ControlHead_id").val();
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url();?>get-transaction-by-contrl-head-id/"+ControlHead_id,
+                success:function(data){
+                    $(".TransactionHeaID").html(data);
+                }
+            });
+        });
 
 
 
@@ -229,14 +245,15 @@
                 rowCount++; 
                 html = '<tr id="row_'+rowCount+'">';
                 html += '<td>\n\
-                        <select name="TransactionHeadID[]" id="TransactionHeaID" class="form-control">\n\
+                        <select name="TransactionHeadID[]" id="TransactionHeaID" class="form-control TransactionHeaID">\n\
                         \n\
                         </select>\n\
                         \n\
                         <div class="form-group row">\n\
-                        <div class="col-sm-12">\n\
-                            <label class="col-form-label">Note</label>\n\
-                            <input type="text" name="note[]" class="form-control form-control-rounded" required="">\n\
+                            <div class="col-sm-12">\n\
+                                <label class="col-form-label">Note</label>\n\
+                                <input type="text" name="note[]" class="form-control" required="">\n\
+                            </div>\n\
                         </div>\n\
                         </td>';
                 html += '<td><input type="number" step=any name="amount[]"  class="form-control" required=""></td>';
@@ -263,4 +280,11 @@
 
         
     });
+</script>
+
+<script>
+
+    
+
+    $(document).on("focus", '.TransactionHeaID', handleAutocomplete);
 </script>
