@@ -33,7 +33,19 @@ class Accounts_query extends CI_Model {
     }
     
     public function transaction_list(){
-        $result = $this->db->query("SELECT a.*, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID  ORDER BY a.TransactionID DESC ")
+        $result = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")
+                        ->result();
+        return $result;
+    }
+
+    public function transaction_Acnt_Row($VoucherNo){
+        $result = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID AND a.VoucherNo = '$VoucherNo' GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")
+                        ->row();
+        return $result;
+    }
+    
+    public function transaction_Acnt_Result($VoucherNo){
+        $result = $this->db->query("SELECT a.*, b.TransHeadDescription as TransHeadDescriptionAcnt FROM tbl_transactions a, tbl_transactionhead b WHERE a.TransactionHeadIDAcnt = b.TransactionHeadID AND a.VoucherNo = '$VoucherNo' ")
                         ->result();
         return $result;
     }

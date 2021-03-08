@@ -40,6 +40,7 @@
         <thead>
             <tr>
                 <th>SL.</th>
+                <th>Voucher No</th>
                 <th>Date</th>
                 <th>Transaction Name</th>
                 <th>CR</th>
@@ -58,6 +59,7 @@
             ?>
                 <tr>
                     <td><?php echo $i;?></td>
+                    <td><?php echo $value->VoucherID;?></td>
                     <td>
                         <?php
                             $date = date_create("$value->TrnDate");
@@ -69,20 +71,20 @@
                     </td>
                     <td>
                         <?php
-                            echo $value->CR;
+                            echo $value->totalCR;
                         ?>
                     </td>
                     <td>
                         
                         <?php
-                            echo $value->DR;
+                            echo $value->totalDR;
                         ?>
                     
                     </td>
                     <td>
                         <div class="btn-group m-1">
-                            <a href="<?php echo base_url();?>edit-transaction/<?php echo $value->TransactionID?>" class="btn btn-primary waves-effect waves-light" style="display: none;"> <i class="fa fa-edit"></i> </a>
-                            <a href="<?php echo base_url();?>delete-transaction/<?php echo $value->TransactionID?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a>
+                            <a href="<?php echo base_url();?>edit-transaction-account/<?php echo $value->VoucherNo?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
+                            <a href="<?php echo base_url();?>delete-transaction-account/<?php echo $value->VoucherNo?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a>
                             
                          </div>
                     </td>
@@ -93,6 +95,7 @@
         <tfoot>
             <tr>
                 <th>SL.</th>
+                <th>Voucher No</th>
                 <th>Date</th>
                 <th>Transaction Name</th>
                 <th>CR</th>

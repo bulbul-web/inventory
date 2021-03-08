@@ -401,6 +401,9 @@ class Account extends CI_Controller {
     }//save_acnt_tansaction_head
     
     public function save_acnt_tansaction(){
+
+        print 'close';
+        exit();
         
         $this->form_validation->set_rules('project_id', 'Project', 'required');
         $this->form_validation->set_rules('TrnDate', 'Transaction Date', 'required');
@@ -611,17 +614,20 @@ class Account extends CI_Controller {
             $VoucherNo = $cc; //$coo
             /*generate voucher*/
             $Note = $this->input->post('Note', true);
+            $NoteAcnt = $this->input->post('NoteAcnt', true);
             $VoucherID = $VoucherNo;
             $userid = $this->session->userdata('user_id');
             $V_Type = $this->input->post('V_Type', true);
             $amount = $this->input->post('amount', true);
 
-            $CR = 0;
-            $DR = 0;
+            $amountDefault = $this->input->post('amountDefault', true);
+
             if($V_Type == 'DR'){
-                $CR = $amount;
-            }elseif($V_Type == 'CR') {
+                $CR = $amountDefault;
                 $DR = $amount;
+            }elseif($V_Type == 'CR') {
+                $DR = $amountDefault;
+                $CR = $amount;
             }
 
             $month = date("M");
@@ -638,15 +644,14 @@ class Account extends CI_Controller {
 
             for($i=0; $i<count($TransactionHeadIDAcnt); $i++){
                 $data[] = [
-                    'TrasactionHeadID' => $TrasactionHeadID,
-                    'TransactionHeadIDAcnt' => $TransactionHeadIDAcnt[$i],
+                    'TrasactionHeadID' => $TransactionHeadIDAcnt[$i],
                     'project_id' => $project_id,
                     'CR' => $CR[$i],
                     'DR' => $DR[$i],
                     'TrnDate' => $TrnDate,
                     'entry_date' => $entry_date,
                     'VoucherNo' => $VoucherNo,
-                    'Note' => $Note[$i],
+                    'Note' => $NoteAcnt[$i],
                     'VoucherID' => $VoucherID,
                     'userid' => $userid,
                     'V_Type' => $V_Type,
@@ -668,6 +673,40 @@ class Account extends CI_Controller {
     
             //insert batch
             $insert_batch = $this->db->insert_batch('tbl_transactions', $data);
+
+
+            $DRorCR = 0;
+            for($i = 0; $i < count($amount); $i++){
+                $DRorCR += $amount[$i];
+            }
+            
+            if($V_Type == 'DR'){
+                $hdata['DR'] = 0;
+                $hdata['CR'] = $DRorCR;
+            }elseif ($V_Type == 'CR') {
+                $hdata['DR'] = $DRorCR;
+                $hdata['CR'] = 0;
+            }
+            $hdata['project_id'] = $project_id;
+            $hdata['TrnDate'] = $TrnDate;
+            $hdata['entry_date'] = $entry_date;
+            $hdata['VoucherNo'] = $VoucherNo;
+            $hdata['Note'] = $Note;
+            $hdata['VoucherID'] = $VoucherID;
+            $hdata['userid'] = $userid;
+            $hdata['V_Type'] = $V_Type;
+            $hdata['month'] = $month;
+            $hdata['year'] = $year;
+            $hdata['monthvoucher'] = $monthvoucher;
+            $hdata['yearend'] = $yearend;
+            $hdata['MR_NO'] = $MR_NO;
+            $hdata['Member_ID'] = $Member_ID;
+            $hdata['update_date'] = $update_date;
+            $hdata['status'] = $status;
+            $hdata['fiscalYearID'] = $fiscalYearID;
+
+            $hdata['TrasactionHeadID'] = $TrasactionHeadID;
+            $this->db->insert('tbl_transactions', $hdata);
 
             if($insert_batch){
                 $sdata = array();
@@ -773,5 +812,129 @@ class Account extends CI_Controller {
             $this->fiscal_year_add();
         }
     }//save_fiscal_year
+
+
+    public function edit_transaction_account_form($VoucherNo){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['transactionAcntRow'] = $this->accounts_query->transaction_Acnt_Row($VoucherNo);
+        $data['transactionAcntResult'] = $this->accounts_query->transaction_Acnt_Result($VoucherNo);
+        
+        $data['title'] = 'Transaction Update';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('pages/accounts/account_transaction_add_mltiple_trns_all_edit_form', $data, true);
+        $this->load->view('index', $data);
+    }//edit_transaction_account_form
+
+
+    public function update_acnt_tansaction_mltple_trns_all(){
+
+        $this->form_validation->set_rules('TrnDate', 'Transaction Date', 'required');
+        $this->form_validation->set_rules('project_id', 'Project Name', 'required');
+        $this->form_validation->set_rules('TrasactionHeadID', 'Transaction Name', 'required');
+        $this->form_validation->set_rules('V_Type', 'Voucher Type', 'required');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+
+        if($this->form_validation->run()){
+            $TrasactionHeadID = $this->input->post('TrasactionHeadID', true);
+            $TransactionHeadIDAcnt = $this->input->post('TransactionHeadIDAcnt', true);
+            $project_id = $this->input->post('project_id', true);
+            $TrnDate = $this->input->post('TrnDate', true);
+            $entry_date = date("Y-m-d");
+
+            $VoucherNo = $this->input->post('VoucherNo', true); 
+
+            $Note = $this->input->post('Note', true);
+            $VoucherID = $VoucherNo;
+            $userid = $this->session->userdata('user_id');
+            $V_Type = $this->input->post('V_Type', true);
+            $amount = $this->input->post('amount', true);
+
+            $CR = 0;
+            $DR = 0;
+            if($V_Type == 'DR'){
+                $CR = $amount;
+            }elseif($V_Type == 'CR') {
+                $DR = $amount;
+            }
+
+            $month = $this->input->post('month', true);
+            $year = $this->input->post('year', true);
+
+            $monthvoucher = $this->input->post('monthvoucher', true);
+            $yearend = $this->input->post('yearend', true);
+            $MR_NO = $this->input->post('MR_NO', true);
+            $Member_ID = $this->input->post('Member_ID', true);
+            $update_date = date("Y-m-d");
+            $fiscalYearID = $this->input->post('fiscalYearID', true);
+            $status = $this->input->post('status', true);
+            $TransactionID = $this->input->post('TransactionID', true);
+
+
+            for($i=0; $i<count($TransactionHeadIDAcnt); $i++){
+                $data[] = [
+                    'TransactionID' => $TransactionID[$i],
+                    'TrasactionHeadID' => $TrasactionHeadID,
+                    'TransactionHeadIDAcnt' => $TransactionHeadIDAcnt[$i],
+                    'project_id' => $project_id,
+                    'CR' => $CR[$i],
+                    'DR' => $DR[$i],
+                    'TrnDate' => $TrnDate,
+                    // 'entry_date' => $entry_date,
+                    'VoucherNo' => $VoucherNo,
+                    'Note' => $Note[$i],
+                    'VoucherID' => $VoucherID,
+                    'userid' => $userid,
+                    'V_Type' => $V_Type,
+                    'month' => $month,
+                    'year' => $year,
+                    'monthvoucher' => $monthvoucher,
+                    'yearend' => $yearend,
+                    'MR_NO' => $MR_NO,
+                    'Member_ID' => $Member_ID,
+                    'update_date' => $update_date,
+                    'status' => $status,
+                    'fiscalYearID' => $fiscalYearID
+                ];
+                $data1[] = [
+                    'TransactionHeadIDAcnt' => $TransactionHeadIDAcnt[$i],
+                ];
+            }
+
+            // echo '<pre>';
+            // print_r($data);
+            // exit();
+    
+            for($x=0;$x<count($data1);$x++){
+        
+                $TransactionHeadIDAcnt = $data1[$x]['TransactionHeadIDAcnt'];
+                $result = $this->db->query("SELECT * FROM tbl_transactions WHERE VoucherNo = '$VoucherNo' AND TransactionHeadIDAcnt = $TransactionHeadIDAcnt")->num_rows();
+                if( $result > 0){
+                //    $this->db->where('TransactionID', $data[$x]['TransactionID']);
+                //    $this->db->update('tbl_transactions', $data[$x]);
+                print 'true';
+                }else{
+                //    $this->db->insert('tbl_transactions', $data[$x]);
+                print 'false';
+                }
+            }
+            exit();
+           $sdata = array();
+           $sdata['message'] = 'Transaction Updated successfully';
+           $this->session->set_userdata($sdata);
+           redirect(base_url()."edit-transaction-account/".$VoucherNo);
+        } else {
+            $sdata = array();
+            $sdata['message'] = 'Tray again!';
+            $this->session->set_userdata($sdata);
+            redirect(base_url()."edit-transaction-account/".$VoucherNo);
+        }
+
+    }//update_acnt_tansaction_mltple_trns_all
 
 }//controller_end
