@@ -198,5 +198,7 @@ $route['get-control-head-by-v-type/(:any)'] = 'account/get_control_head_by_v_typ
 $route['edit-transaction-account/(:any)'] = 'account/edit_transaction_account_form/$1';
 $route['update-acnt-tansaction-mltple-trns-all'] = 'account/update_acnt_tansaction_mltple_trns_all';
 
+$route['DrCr-Voucher-Details/(.+)'] = 'account/DrCr_Voucher_Details/$1';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

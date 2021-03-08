@@ -42,7 +42,7 @@
                 <th>SL.</th>
                 <th>Voucher No</th>
                 <th>Date</th>
-                <th>Transaction Name</th>
+                <th>Control Head Name</th>
                 <th>CR</th>
                 <th>DR</th>
                 <th>Action</th>
@@ -55,11 +55,17 @@
                 $i = 0;
                 foreach ($AllTransaction as $value){
                     $i++;
+
+                    
                 
             ?>
                 <tr>
                     <td><?php echo $i;?></td>
-                    <td><?php echo $value->VoucherID;?></td>
+                    <td>
+                        <?php 
+                            echo '<a href="'.base_url().'DrCr-Voucher-Details/'.$value->VoucherNo.'">'.$value->VoucherID.'</a>';
+                        ?>
+                    </td>
                     <td>
                         <?php
                             $date = date_create("$value->TrnDate");
@@ -67,7 +73,12 @@
                         ?>
                     </td>
                     <td>
-                        <?php echo $value->TransHeadDescription;?>
+
+                        <?php
+                            $voucherNo = $value->VoucherNo; 
+                            $transactionControlHead = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID and VoucherNo = '$voucherNo' AND checkControlHead = '1' GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")->row();
+                            echo $transactionControlHead->TransHeadDescription;
+                        ?>
                     </td>
                     <td>
                         <?php
@@ -89,7 +100,7 @@
                          </div>
                     </td>
                 </tr>
-            <?php } ?>
+            <?php } //foreach end ?>
             
         </tbody>
         <tfoot>
@@ -97,7 +108,7 @@
                 <th>SL.</th>
                 <th>Voucher No</th>
                 <th>Date</th>
-                <th>Transaction Name</th>
+                <th>Control Head Name</th>
                 <th>CR</th>
                 <th>DR</th>
                 <th>Action</th>

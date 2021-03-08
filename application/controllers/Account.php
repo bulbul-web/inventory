@@ -704,6 +704,7 @@ class Account extends CI_Controller {
             $hdata['update_date'] = $update_date;
             $hdata['status'] = $status;
             $hdata['fiscalYearID'] = $fiscalYearID;
+            $hdata['checkControlHead'] = 1;
 
             $hdata['TrasactionHeadID'] = $TrasactionHeadID;
             $this->db->insert('tbl_transactions', $hdata);
@@ -937,4 +938,22 @@ class Account extends CI_Controller {
 
     }//update_acnt_tansaction_mltple_trns_all
 
-}//controller_end
+
+    public function DrCr_Voucher_Details($VoucherNo){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['transactionAcntRow'] = $this->accounts_query->transaction_Acnt_Row($VoucherNo);
+        $data['transactionAcntResult'] = $this->accounts_query->transaction_Acnt_Result($VoucherNo);
+        
+        $data['title'] = 'Voucher Details';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('pages/accounts/DrCr_Voucher_Details', $data, true);
+        $this->load->view('index', $data);
+    }
+
+}//DrCr_Voucher_Details
