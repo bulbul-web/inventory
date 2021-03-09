@@ -846,22 +846,28 @@ class Account extends CI_Controller {
             $TransactionHeadIDAcnt = $this->input->post('TransactionHeadIDAcnt', true);
             $project_id = $this->input->post('project_id', true);
             $TrnDate = $this->input->post('TrnDate', true);
-            $entry_date = date("Y-m-d");
+            $entry_date = $this->input->post('entry_date', true);
 
             $VoucherNo = $this->input->post('VoucherNo', true); 
 
             $Note = $this->input->post('Note', true);
+            $NoteAcnt = $this->input->post('NoteAcnt', true);
             $VoucherID = $VoucherNo;
             $userid = $this->session->userdata('user_id');
             $V_Type = $this->input->post('V_Type', true);
             $amount = $this->input->post('amount', true);
 
-            $CR = 0;
-            $DR = 0;
+            $amountDefault = $this->input->post('amountDefault', true);
+
+            // echo '<pre>';
+            // print_r($amountDefault);
+            // exit();
             if($V_Type == 'DR'){
-                $CR = $amount;
-            }elseif($V_Type == 'CR') {
+                $CR = $amountDefault;
                 $DR = $amount;
+            }elseif($V_Type == 'CR') {
+                $DR = $amountDefault;
+                $CR = $amount;
             }
 
             $month = $this->input->post('month', true);
@@ -880,15 +886,14 @@ class Account extends CI_Controller {
             for($i=0; $i<count($TransactionHeadIDAcnt); $i++){
                 $data[] = [
                     'TransactionID' => $TransactionID[$i],
-                    'TrasactionHeadID' => $TrasactionHeadID,
-                    'TransactionHeadIDAcnt' => $TransactionHeadIDAcnt[$i],
+                    'TrasactionHeadID' => $TransactionHeadIDAcnt[$i],
                     'project_id' => $project_id,
                     'CR' => $CR[$i],
                     'DR' => $DR[$i],
                     'TrnDate' => $TrnDate,
-                    // 'entry_date' => $entry_date,
+                    'entry_date' => $entry_date,
                     'VoucherNo' => $VoucherNo,
-                    'Note' => $Note[$i],
+                    'Note' => $NoteAcnt[$i],
                     'VoucherID' => $VoucherID,
                     'userid' => $userid,
                     'V_Type' => $V_Type,
@@ -903,28 +908,69 @@ class Account extends CI_Controller {
                     'fiscalYearID' => $fiscalYearID
                 ];
                 $data1[] = [
-                    'TransactionHeadIDAcnt' => $TransactionHeadIDAcnt[$i],
+                    'TrasactionHeadID' => $TransactionHeadIDAcnt[$i],
                 ];
             }
 
             // echo '<pre>';
             // print_r($data);
+            // echo $data1[0]['TrasactionHeadID'];
             // exit();
     
             for($x=0;$x<count($data1);$x++){
         
-                $TransactionHeadIDAcnt = $data1[$x]['TransactionHeadIDAcnt'];
-                $result = $this->db->query("SELECT * FROM tbl_transactions WHERE VoucherNo = '$VoucherNo' AND TransactionHeadIDAcnt = $TransactionHeadIDAcnt")->num_rows();
+                $TransactionHeadIDAcnt = $data1[$x]['TrasactionHeadID'];
+                $result = $this->db->query("SELECT * FROM tbl_transactions WHERE VoucherNo = '$VoucherNo' AND TrasactionHeadID = $TransactionHeadIDAcnt")->num_rows();
                 if( $result > 0){
-                //    $this->db->where('TransactionID', $data[$x]['TransactionID']);
-                //    $this->db->update('tbl_transactions', $data[$x]);
-                print 'true';
+                   $this->db->where('TransactionID', $data[$x]['TransactionID']);
+                   $this->db->update('tbl_transactions', $data[$x]);
                 }else{
-                //    $this->db->insert('tbl_transactions', $data[$x]);
-                print 'false';
+                   $this->db->insert('tbl_transactions', $data[$x]);
                 }
             }
-            exit();
+
+
+
+            //control head update start
+            $TransactionIDControHead = $this->input->post('transactionControlHead', true);
+            $DRorCR = 0;
+            for($i = 0; $i < count($amount); $i++){
+                $DRorCR += $amount[$i];
+            }
+            
+            if($V_Type == 'DR'){
+                $hdata['DR'] = 0;
+                $hdata['CR'] = $DRorCR;
+            }elseif ($V_Type == 'CR') {
+                $hdata['DR'] = $DRorCR;
+                $hdata['CR'] = 0;
+            }
+            $hdata['TransactionID'] = $TransactionIDControHead;
+            $hdata['project_id'] = $project_id;
+            $hdata['TrnDate'] = $TrnDate;
+            $hdata['entry_date'] = $entry_date;
+            $hdata['VoucherNo'] = $VoucherNo;
+            $hdata['Note'] = $Note;
+            $hdata['VoucherID'] = $VoucherID;
+            $hdata['userid'] = $userid;
+            $hdata['V_Type'] = $V_Type;
+            $hdata['month'] = $month;
+            $hdata['year'] = $year;
+            $hdata['monthvoucher'] = $monthvoucher;
+            $hdata['yearend'] = $yearend;
+            $hdata['MR_NO'] = $MR_NO;
+            $hdata['Member_ID'] = $Member_ID;
+            $hdata['update_date'] = $update_date;
+            $hdata['status'] = $status;
+            $hdata['fiscalYearID'] = $fiscalYearID;
+
+            $hdata['TrasactionHeadID'] = $TrasactionHeadID;
+
+            $this->db->where('TransactionID', $hdata['TransactionID']);
+            $this->db->update('tbl_transactions', $hdata);
+            //control head update end
+
+        
            $sdata = array();
            $sdata['message'] = 'Transaction Updated successfully';
            $this->session->set_userdata($sdata);

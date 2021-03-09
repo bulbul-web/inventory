@@ -8,8 +8,9 @@
     </ol>
     </div>
     <div class="col-sm-3">
-        
-
+        <div class="top-button-area">
+            <a class="btn btn-primary m-1" href="<?php echo base_url();?>edit-transaction-account/<?php echo $transactionAcntRow->VoucherNo;?>"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+        </div>
      </div>
 </div>
 <!-- End Breadcrumb-->
@@ -35,7 +36,7 @@
             
             <?php echo form_open_multipart('update-acnt-tansaction-mltple-trns-all', 'name="update-acnt-tansaction-mltple-trns-all" id="updateAcntTansactionMltpleTrnsAll"');?>
                 
-                
+            
 
 
             <div class="row">
@@ -50,6 +51,17 @@
                     </div>
                     </div>
                 </div>
+
+                <input type="hidden" name="yearend" value="<?php echo $transactionAcntRow->yearend; ?>" />
+                <input type="hidden" name="MR_NO" value="<?php echo $transactionAcntRow->MR_NO; ?>" />
+                <input type="hidden" name="Member_ID" value="<?php echo $transactionAcntRow->Member_ID; ?>" />
+                <input type="hidden" name="fiscalYearID" value="<?php echo $transactionAcntRow->fiscalYearID; ?>" />
+                <input type="hidden" name="VoucherNo" value="<?php echo $transactionAcntRow->VoucherNo; ?>" />
+                <input type="hidden" name="month" value="<?php echo $transactionAcntRow->month; ?>" />
+                <input type="hidden" name="year" value="<?php echo $transactionAcntRow->year; ?>" />
+                <input type="hidden" name="monthvoucher" value="<?php echo $transactionAcntRow->monthvoucher; ?>" />
+                <input type="hidden" name="entry_date" value="<?php echo $transactionAcntRow->entry_date; ?>" />
+                <input type="hidden" name="status" value="<?php echo $transactionAcntRow->status; ?>" />
 
 
                 <div class="col-md-6">
@@ -81,6 +93,7 @@
                 $voucherNo = $transactionAcntRow->VoucherNo; 
                 $transactionControlHead = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID and VoucherNo = '$voucherNo' AND checkControlHead = '1' GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")->row();
             ?>
+            <input type="hidden" name="transactionControlHead" value="<?php echo $transactionControlHead->TransactionID?>" />
 
 
 
@@ -166,7 +179,7 @@
                                 
                             
                                 <td width="60%">
-                                    <input type="text" name="TransHeadDescription" id="TransHeadDescription_1" value="<?php echo $value->TransHeadDescription;?>" placeholder="Type Transaction Head" class="form-control autocomplete_txt" required="">
+                                    <input type="text" name="TransHeadDescription" id="TransHeadDescription_1" value="<?php echo $value->TransHeadDescription;?>" placeholder="Type Transaction Head" class="form-control autocomplete_txt" required="" disabled="">
                                     <input type="hidden" name="TransactionHeadIDAcnt[]" id="TransactionHeadIDAcnt_1" value="<?php echo $value->TrasactionHeadID?>">
                                     <input type="hidden" name="TransactionID[]" value="<?php echo $value->TransactionID; ?>">
                                     <div class="form-group row">
@@ -188,6 +201,8 @@
                                             echo $value->DR;
                                         }
                                      ?>">
+
+                                    <input type="hidden" step=any name="amountDefault[]" value="0">
                                 </td>
                                 
                                 
@@ -273,7 +288,10 @@
                                     </div>\n\
                                 </div>\n\
                             </td>';
-                    html += '<td><input type="number" step=any name="amount[]" id="amount_'+rowCount+'" onkeyup="amountPress(this)"  class="form-control" required=""></td>';
+                    html += '<td>\n\
+                        <input type="number" step=any name="amount[]" id="amount_'+rowCount+'" onkeyup="amountPress(this)"  class="form-control" required="">\n\
+                        <input type="hidden" step=any name="amountDefault[]" value="0">\n\
+                    </td>';
                     html += '<td class="text-center"><button type="button" id="remove_'+rowCount+'" name="remove" data-row="row" scope="row" class="btn btn-danger btn-sm timesSpan delete_row">×</button></td>';
                     html += '</tr>';
 
