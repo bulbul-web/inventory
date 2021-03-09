@@ -116,7 +116,7 @@
                             <td><?php echo $i;?></td>
                             <td>
                                 <?php echo $value->TransHeadDescription;?>
-                                <p>&nbsp; &nbsp;[Note:<?php echo $value->Note;?>]</p>
+                                <p>&nbsp; &nbsp;<?php if($value->Note != ''){ echo '[Note:'.$value->Note.']';}else{echo '';}?></p>
                             </td>
                             <td style="text-align:center">
                                 <?php if($value->DR != 0){echo $value->DR;}else{echo '-';}?>
@@ -259,6 +259,7 @@ function toWordsconver(s) {
     return str_val.replace(/\s+/g, ' ');
 }
 </script>
+
 <script>  
 $(document).ready(function() {
     var number = document.getElementById("AmountValue").innerText;  

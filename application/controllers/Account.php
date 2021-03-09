@@ -820,7 +820,7 @@ class Account extends CI_Controller {
         $id = $this->session->userdata('user_id');
         $data['userInfo'] = $this->users_model->user_info($id);
         $data['transactionAcntRow'] = $this->accounts_query->transaction_Acnt_Row($VoucherNo);
-        $data['transactionAcntResult'] = $this->accounts_query->transaction_Acnt_Result($VoucherNo);
+        $data['transactionAcntResultWthOtCntrHd'] = $this->accounts_query->transaction_Acnt_Result_wth_ot_cntr_hd($VoucherNo);
         
         $data['title'] = 'Transaction Update';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);

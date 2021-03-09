@@ -49,6 +49,12 @@ class Accounts_query extends CI_Model {
                         ->result();
         return $result;
     }
+    
+    public function transaction_Acnt_Result_wth_ot_cntr_hd($VoucherNo){
+        $result = $this->db->query("SELECT a.*, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE a.TrasactionHeadID = b.TransactionHeadID AND a.VoucherNo = '$VoucherNo' AND NOT (a.checkControlHead <=> '1') ")
+                        ->result();
+        return $result;
+    }
 
     public function save_acnt_sub_head($data){
         $this->db->insert('tbl_subhead', $data);

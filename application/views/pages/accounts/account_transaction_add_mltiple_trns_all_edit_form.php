@@ -77,6 +77,13 @@
 
               
 
+            <?php
+                $voucherNo = $transactionAcntRow->VoucherNo; 
+                $transactionControlHead = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID and VoucherNo = '$voucherNo' AND checkControlHead = '1' GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")->row();
+            ?>
+
+
+
 
             <div class="row">
 
@@ -116,16 +123,18 @@
 
             </div>
 
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label class="col-form-label">Note</label>
+                            <input type="text" name="Note" class="form-control" value="<?php echo $transactionControlHead->Note;?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <input type="hidden" name="yearend" value="<?php echo $transactionAcntRow->yearend; ?>" />
-            <input type="hidden" name="MR_NO" value="<?php echo $transactionAcntRow->MR_NO; ?>" />
-            <input type="hidden" name="Member_ID" value="<?php echo $transactionAcntRow->Member_ID; ?>" />
-            <input type="hidden" name="fiscalYearID" value="<?php echo $transactionAcntRow->fiscalYearID; ?>" />
-            <input type="hidden" name="VoucherNo" value="<?php echo $transactionAcntRow->VoucherNo; ?>" />
-            <input type="hidden" name="month" value="<?php echo $transactionAcntRow->month; ?>" />
-            <input type="hidden" name="year" value="<?php echo $transactionAcntRow->year; ?>" />
-            <input type="hidden" name="monthvoucher" value="<?php echo $transactionAcntRow->monthvoucher; ?>" />
-            <input type="hidden" name="status" value="<?php echo $transactionAcntRow->status; ?>" />
+
 
 
             <div class="row">
@@ -142,8 +151,13 @@
 
                             <?php 
                                 $i = 0;
-                                foreach ($transactionAcntResult as  $value) {
+                                $totalDR = 0;
+                                $totalCR = 0;
+                                
+                                foreach ($transactionAcntResultWthOtCntrHd as  $value) {
                                     $i++;
+                                    $totalDR += $value->DR;
+                                    $totalCR += $value->CR; 
                                 
                             ?>
 
@@ -152,13 +166,13 @@
                                 
                             
                                 <td width="60%">
-                                    <input type="text" name="TransHeadDescription" id="TransHeadDescription_<?php echo $i; ?>" placeholder="Type Transaction Head" value="<?php echo $value->TransHeadDescriptionAcnt; ?>" class="form-control autocomplete_txt" required="">
-                                    <input type="hidden" name="TransactionHeadIDAcnt[]" id="TransactionHeadIDAcnt_<?php echo $i; ?>" value="<?php echo $value->TransactionHeadIDAcnt;?>">
+                                    <input type="text" name="TransHeadDescription" id="TransHeadDescription_1" value="<?php echo $value->TransHeadDescription;?>" placeholder="Type Transaction Head" class="form-control autocomplete_txt" required="">
+                                    <input type="hidden" name="TransactionHeadIDAcnt[]" id="TransactionHeadIDAcnt_1" value="<?php echo $value->TrasactionHeadID?>">
                                     <input type="hidden" name="TransactionID[]" value="<?php echo $value->TransactionID; ?>">
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <label class="col-form-label"></label>
-                                            <input type="text" name="Note[]" class="form-control" placeholder="Note" required="" value="<?php echo $value->Note;?>">
+                                            <input type="text" name="NoteAcnt[]" class="form-control" value="<?php echo $value->Note;?>" placeholder="Note">
                                         </div>
                                     </div>
                                 </td>
@@ -198,10 +212,10 @@
                                 <td class="text-center">
                                     <input type="number" step=any id="grandTotal" disabled="disabled" class="form-control w-100 text-center" 
                                     value="<?php 
-                                            if($transactionAcntRow->totalCR == 0){
-                                                echo $transactionAcntRow->totalDR;
-                                            }elseif ($transactionAcntRow->totalDR == 0) {
-                                                echo $transactionAcntRow->totalCR;
+                                            if($totalDR == 0){
+                                                echo $totalCR;
+                                            }elseif ($totalCR == 0) {
+                                                echo $totalDR;
                                             }
                                         ?>" >
                                 </td>
@@ -230,7 +244,7 @@
 
 <script>
     document.forms['update-acnt-tansaction-mltple-trns-all'].elements['project_id'].value=<?php echo $transactionAcntRow->project_id; ?>;
-    document.forms['update-acnt-tansaction-mltple-trns-all'].elements['TrasactionHeadID'].value=<?php echo $transactionAcntRow->TrasactionHeadID; ?>;
+    document.forms['update-acnt-tansaction-mltple-trns-all'].elements['TrasactionHeadID'].value=<?php echo $transactionControlHead->TrasactionHeadID; ?>;
 </script>
 <script>
     $(document).ready(function(){
@@ -255,7 +269,7 @@
                                 <div class="form-group row">\n\
                                     <div class="col-sm-12">\n\
                                         <label class="col-form-label"></label>\n\
-                                        <input type="text" name="Note[]" class="form-control" placeholder="Note" required="">\n\
+                                        <input type="text" name="NoteAcnt[]" class="form-control" placeholder="Note">\n\
                                     </div>\n\
                                 </div>\n\
                             </td>';
