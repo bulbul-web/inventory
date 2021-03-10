@@ -197,6 +197,7 @@ $route['get-transaction-by-v-type/(:any)'] = 'account/get_transaction_by_v_type/
 $route['get-control-head-by-v-type/(:any)'] = 'account/get_control_head_by_v_type/$1';
 $route['edit-transaction-account/(:any)'] = 'account/edit_transaction_account_form/$1';
 $route['update-acnt-tansaction-mltple-trns-all'] = 'account/update_acnt_tansaction_mltple_trns_all';
+$route['delete-tansaction-status/(:num)/(:num)'] = 'account/delete_tansaction_status/$1/$2';
 
 $route['DrCr-Voucher-Details/(.+)'] = 'account/DrCr_Voucher_Details/$1';
 

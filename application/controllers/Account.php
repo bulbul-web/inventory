@@ -920,7 +920,7 @@ class Account extends CI_Controller {
             for($x=0;$x<count($data1);$x++){
         
                 $TransactionHeadIDAcnt = $data1[$x]['TrasactionHeadID'];
-                $result = $this->db->query("SELECT * FROM tbl_transactions WHERE VoucherNo = '$VoucherNo' AND TrasactionHeadID = $TransactionHeadIDAcnt")->num_rows();
+                $result = $this->db->query("SELECT * FROM tbl_transactions WHERE VoucherNo = '$VoucherNo' AND TrasactionHeadID = $TransactionHeadIDAcnt AND NOT (delete_status <=> 'deleted')")->num_rows();
                 if( $result > 0){
                    $this->db->where('TransactionID', $data[$x]['TransactionID']);
                    $this->db->update('tbl_transactions', $data[$x]);
@@ -1000,6 +1000,36 @@ class Account extends CI_Controller {
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/DrCr_Voucher_Details', $data, true);
         $this->load->view('index', $data);
-    }
+    }//DrCr_Voucher_Details
+    
+    public function delete_tansaction_status($TransactionID, $VoucherNo){
+        $this->accounts_query->delete_tansaction_status($TransactionID);
 
-}//DrCr_Voucher_Details
+        $totalCrDR = $this->db->query("SELECT *, sum(CR) as totalCR, sum(DR) as TotalDR FROM `tbl_transactions` WHERE VoucherNo = '$VoucherNo' AND NOT(checkControlHead <=> '1') AND NOT (delete_status <=> 'deleted') GROUP BY VoucherNo")->row();
+        $totalCR = $totalCrDR->totalCR;
+        $totalDR = $totalCrDR->TotalDR;
+        $V_Type = $totalCrDR->V_Type;
+        // print $totalCR.'-'.$totalDR.'-'.$V_Type;
+        // exit();
+        
+
+        $controlHeadID = $this->db->query("SELECT * FROM `tbl_transactions` WHERE VoucherNo = '$VoucherNo' AND checkControlHead = '1' GROUP BY VoucherNo")->row();
+        $controlHeadTrnsID = $controlHeadID->TransactionID;
+
+        if($V_Type == 'DR'){
+            $hdata['DR'] = 0;
+            $hdata['CR'] = $totalDR;
+        }elseif ($V_Type == 'CR') {
+            $hdata['DR'] = $totalCR;
+            $hdata['CR'] = 0;
+        }
+        // print_r($hdata);
+        // exit();
+        $hdata['TransactionID'] = $controlHeadTrnsID;
+        $this->db->where('TransactionID', $hdata['TransactionID']);
+        $this->db->update('tbl_transactions', $hdata);
+
+        redirect(base_url()."edit-transaction-account/".$VoucherNo);
+    }//delete_tansaction_status
+
+}

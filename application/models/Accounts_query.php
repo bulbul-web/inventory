@@ -33,25 +33,25 @@ class Accounts_query extends CI_Model {
     }
     
     public function transaction_list(){
-        $result = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")
+        $result = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID AND NOT (a.delete_status <=> 'deleted') GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")
                         ->result();
         return $result;
     }
 
     public function transaction_Acnt_Row($VoucherNo){
-        $result = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID AND a.VoucherNo = '$VoucherNo' GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")
+        $result = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID AND a.VoucherNo = '$VoucherNo' AND NOT (a.delete_status <=> 'deleted') GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")
                         ->row();
         return $result;
     }
     
     public function transaction_Acnt_Result($VoucherNo){
-        $result = $this->db->query("SELECT a.*, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE a.TrasactionHeadID = b.TransactionHeadID AND a.VoucherNo = '$VoucherNo' ")
+        $result = $this->db->query("SELECT a.*, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE a.TrasactionHeadID = b.TransactionHeadID AND a.VoucherNo = '$VoucherNo' AND NOT (a.delete_status <=> 'deleted') ")
                         ->result();
         return $result;
     }
     
     public function transaction_Acnt_Result_wth_ot_cntr_hd($VoucherNo){
-        $result = $this->db->query("SELECT a.*, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE a.TrasactionHeadID = b.TransactionHeadID AND a.VoucherNo = '$VoucherNo' AND NOT (a.checkControlHead <=> '1') ")
+        $result = $this->db->query("SELECT a.*, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE a.TrasactionHeadID = b.TransactionHeadID AND a.VoucherNo = '$VoucherNo' AND NOT (a.checkControlHead <=> '1') AND NOT (a.delete_status <=> 'deleted') ")
                         ->result();
         return $result;
     }
@@ -133,6 +133,14 @@ class Accounts_query extends CI_Model {
     public function get_control_head_by_v_type_DR(){
         $result = $this->db->query("SELECT * FROM tbl_controlhead WHERE ControlHead_id IN (1, 2)")->result();
         return $result;
+    }
+
+
+    public function delete_tansaction_status($TransactionID){
+        $this->db->set('status', '0');
+        $this->db->set('delete_status', 'deleted');
+        $this->db->where('TransactionID', $TransactionID);
+        $this->db->update('tbl_transactions');
     }
 
 

@@ -18,7 +18,7 @@
 <div class="row">
    <div class="col-lg-12">
      <div class="card">
-        <div class="card-header text-uppercase">Update Tansaction Form</div>
+        <div class="card-header text-uppercase">Update Tansaction Form <span style="color: red;"><?php echo $transactionAcntRow->VoucherNo;?></span></div>
         <div class="card-body">
             <center> 
                 <font color="#FF0000" style="font-size: 20px;">
@@ -91,7 +91,7 @@
 
             <?php
                 $voucherNo = $transactionAcntRow->VoucherNo; 
-                $transactionControlHead = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID and VoucherNo = '$voucherNo' AND checkControlHead = '1' GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")->row();
+                $transactionControlHead = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID and VoucherNo = '$voucherNo' AND checkControlHead = '1' AND NOT (a.delete_status <=> 'deleted') GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")->row();
             ?>
             <input type="hidden" name="transactionControlHead" value="<?php echo $transactionControlHead->TransactionID?>" />
 
@@ -206,7 +206,7 @@
                                 </td>
                                 
                                 
-                                <td class="text-center"><a type="button" href="<?php echo base_url();?>delete-transaction-account/<?php echo $value->TransactionID;?>/<?=$value->VoucherNo;?>" onclick="return confirm('Are you sure to remove?')" name="remove" data-row="row" scope="row" class="btn btn-danger btn-sm timesSpan">×</a></td>
+                                <td class="text-center"><a type="button" href="<?php echo base_url();?>delete-tansaction-status/<?php echo $value->TransactionID;?>/<?=$value->VoucherNo;?>" onclick="return confirm('Are you sure to remove?')" name="remove" data-row="row" scope="row" class="btn btn-danger btn-sm timesSpan">×</a></td>
 
                             </tr>
 
