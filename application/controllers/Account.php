@@ -671,57 +671,76 @@ class Account extends CI_Controller {
             // print_r($data);
             // exit();
     
-            //insert batch
-            $insert_batch = $this->db->insert_batch('tbl_transactions', $data);
+            //inser area start
+            $fiscal_startDate = $this->session->userdata('fiscal_startDate');
+            $fiscal_endDate = $this->session->userdata('fiscal_endDate');
 
 
-            $DRorCR = 0;
-            for($i = 0; $i < count($amount); $i++){
-                $DRorCR += $amount[$i];
-            }
+            $currentDate = $TrnDate;
+            $currentDate = date('Y-m-d', strtotime($currentDate));
             
-            if($V_Type == 'DR'){
-                $hdata['DR'] = 0;
-                $hdata['CR'] = $DRorCR;
-            }elseif ($V_Type == 'CR') {
-                $hdata['DR'] = $DRorCR;
-                $hdata['CR'] = 0;
-            }
-            $hdata['project_id'] = $project_id;
-            $hdata['TrnDate'] = $TrnDate;
-            $hdata['entry_date'] = $entry_date;
-            $hdata['VoucherNo'] = $VoucherNo;
-            $hdata['Note'] = $Note;
-            $hdata['VoucherID'] = $VoucherID;
-            $hdata['userid'] = $userid;
-            $hdata['V_Type'] = $V_Type;
-            $hdata['month'] = $month;
-            $hdata['year'] = $year;
-            $hdata['monthvoucher'] = $monthvoucher;
-            $hdata['yearend'] = $yearend;
-            $hdata['MR_NO'] = $MR_NO;
-            $hdata['Member_ID'] = $Member_ID;
-            $hdata['update_date'] = $update_date;
-            $hdata['status'] = $status;
-            $hdata['fiscalYearID'] = $fiscalYearID;
-            $hdata['checkControlHead'] = 1;
+            $startDate = date('Y-m-d', strtotime($fiscal_startDate));
+            $endDate = date('Y-m-d', strtotime($fiscal_endDate));
+            
+            if(($currentDate >= $startDate) && ($currentDate <= $endDate)):
+                //insert batch
+                $insert_batch = $this->db->insert_batch('tbl_transactions', $data);
 
-            $hdata['TrasactionHeadID'] = $TrasactionHeadID;
-            $this->db->insert('tbl_transactions', $hdata);
 
-            if($insert_batch){
+                $DRorCR = 0;
+                for($i = 0; $i < count($amount); $i++){
+                    $DRorCR += $amount[$i];
+                }
+                
+                if($V_Type == 'DR'){
+                    $hdata['DR'] = 0;
+                    $hdata['CR'] = $DRorCR;
+                }elseif ($V_Type == 'CR') {
+                    $hdata['DR'] = $DRorCR;
+                    $hdata['CR'] = 0;
+                }
+                $hdata['project_id'] = $project_id;
+                $hdata['TrnDate'] = $TrnDate;
+                $hdata['entry_date'] = $entry_date;
+                $hdata['VoucherNo'] = $VoucherNo;
+                $hdata['Note'] = $Note;
+                $hdata['VoucherID'] = $VoucherID;
+                $hdata['userid'] = $userid;
+                $hdata['V_Type'] = $V_Type;
+                $hdata['month'] = $month;
+                $hdata['year'] = $year;
+                $hdata['monthvoucher'] = $monthvoucher;
+                $hdata['yearend'] = $yearend;
+                $hdata['MR_NO'] = $MR_NO;
+                $hdata['Member_ID'] = $Member_ID;
+                $hdata['update_date'] = $update_date;
+                $hdata['status'] = $status;
+                $hdata['fiscalYearID'] = $fiscalYearID;
+                $hdata['checkControlHead'] = 1;
+
+                $hdata['TrasactionHeadID'] = $TrasactionHeadID;
+                $this->db->insert('tbl_transactions', $hdata);
+
+                if($insert_batch){
+                    $sdata = array();
+                    $sdata['message'] = 'Tansaction successfully saved';
+                    $this->session->set_userdata($sdata);
+                    $this->account_transaction_add();
+                    // redirect(current_url());
+                }else{
+                    $sdata = array();
+                    $sdata['message'] = 'Error!';
+                    $this->session->set_userdata($sdata);
+                    $this->account_transaction_add();
+                    // redirect(current_url());
+                }
+            else:
                 $sdata = array();
-                $sdata['message'] = 'Tansaction successfully saved';
+                $sdata['message'] = 'Transaction date is not between fiscal dates!';
                 $this->session->set_userdata($sdata);
                 $this->account_transaction_add();
-                // redirect(current_url());
-            }else{
-                $sdata = array();
-                $sdata['message'] = 'Error!';
-                $this->session->set_userdata($sdata);
-                $this->account_transaction_add();
-                // redirect(current_url());
-            }
+            endif;
+            //inser area end
         } else {
             $sdata = array();
             $sdata['message'] = 'Tray again!';
@@ -916,65 +935,83 @@ class Account extends CI_Controller {
             // print_r($data);
             // echo $data1[0]['TrasactionHeadID'];
             // exit();
-    
-            for($x=0;$x<count($data1);$x++){
-        
-                $TransactionHeadIDAcnt = $data1[$x]['TrasactionHeadID'];
-                $result = $this->db->query("SELECT * FROM tbl_transactions WHERE VoucherNo = '$VoucherNo' AND TrasactionHeadID = $TransactionHeadIDAcnt AND NOT (delete_status <=> 'deleted')")->num_rows();
-                if( $result > 0){
-                   $this->db->where('TransactionID', $data[$x]['TransactionID']);
-                   $this->db->update('tbl_transactions', $data[$x]);
-                }else{
-                   $this->db->insert('tbl_transactions', $data[$x]);
-                }
-            }
+            //inser area start
+            $fiscal_startDate = $this->session->userdata('fiscal_startDate');
+            $fiscal_endDate = $this->session->userdata('fiscal_endDate');
 
 
-
-            //control head update start
-            $TransactionIDControHead = $this->input->post('transactionControlHead', true);
-            $DRorCR = 0;
-            for($i = 0; $i < count($amount); $i++){
-                $DRorCR += $amount[$i];
-            }
+            $currentDate = $TrnDate;
+            $currentDate = date('Y-m-d', strtotime($currentDate));
             
-            if($V_Type == 'DR'){
-                $hdata['DR'] = 0;
-                $hdata['CR'] = $DRorCR;
-            }elseif ($V_Type == 'CR') {
-                $hdata['DR'] = $DRorCR;
-                $hdata['CR'] = 0;
-            }
-            $hdata['TransactionID'] = $TransactionIDControHead;
-            $hdata['project_id'] = $project_id;
-            $hdata['TrnDate'] = $TrnDate;
-            $hdata['entry_date'] = $entry_date;
-            $hdata['VoucherNo'] = $VoucherNo;
-            $hdata['Note'] = $Note;
-            $hdata['VoucherID'] = $VoucherID;
-            $hdata['userid'] = $userid;
-            $hdata['V_Type'] = $V_Type;
-            $hdata['month'] = $month;
-            $hdata['year'] = $year;
-            $hdata['monthvoucher'] = $monthvoucher;
-            $hdata['yearend'] = $yearend;
-            $hdata['MR_NO'] = $MR_NO;
-            $hdata['Member_ID'] = $Member_ID;
-            $hdata['update_date'] = $update_date;
-            $hdata['status'] = $status;
-            $hdata['fiscalYearID'] = $fiscalYearID;
+            $startDate = date('Y-m-d', strtotime($fiscal_startDate));
+            $endDate = date('Y-m-d', strtotime($fiscal_endDate));
+            
+            if(($currentDate >= $startDate) && ($currentDate <= $endDate)):
+                for($x=0;$x<count($data1);$x++){
+            
+                    $TransactionHeadIDAcnt = $data1[$x]['TrasactionHeadID'];
+                    $result = $this->db->query("SELECT * FROM tbl_transactions WHERE VoucherNo = '$VoucherNo' AND TrasactionHeadID = $TransactionHeadIDAcnt AND NOT (delete_status <=> 'deleted')")->num_rows();
+                    if( $result > 0){
+                    $this->db->where('TransactionID', $data[$x]['TransactionID']);
+                    $this->db->update('tbl_transactions', $data[$x]);
+                    }else{
+                    $this->db->insert('tbl_transactions', $data[$x]);
+                    }
+                }
 
-            $hdata['TrasactionHeadID'] = $TrasactionHeadID;
 
-            $this->db->where('TransactionID', $hdata['TransactionID']);
-            $this->db->update('tbl_transactions', $hdata);
-            //control head update end
 
-        
-           $sdata = array();
-           $sdata['message'] = 'Transaction Updated successfully';
-           $this->session->set_userdata($sdata);
-           redirect(base_url()."edit-transaction-account/".$VoucherNo);
+                //control head update start
+                $TransactionIDControHead = $this->input->post('transactionControlHead', true);
+                $DRorCR = 0;
+                for($i = 0; $i < count($amount); $i++){
+                    $DRorCR += $amount[$i];
+                }
+                
+                if($V_Type == 'DR'){
+                    $hdata['DR'] = 0;
+                    $hdata['CR'] = $DRorCR;
+                }elseif ($V_Type == 'CR') {
+                    $hdata['DR'] = $DRorCR;
+                    $hdata['CR'] = 0;
+                }
+                $hdata['TransactionID'] = $TransactionIDControHead;
+                $hdata['project_id'] = $project_id;
+                $hdata['TrnDate'] = $TrnDate;
+                $hdata['entry_date'] = $entry_date;
+                $hdata['VoucherNo'] = $VoucherNo;
+                $hdata['Note'] = $Note;
+                $hdata['VoucherID'] = $VoucherID;
+                $hdata['userid'] = $userid;
+                $hdata['V_Type'] = $V_Type;
+                $hdata['month'] = $month;
+                $hdata['year'] = $year;
+                $hdata['monthvoucher'] = $monthvoucher;
+                $hdata['yearend'] = $yearend;
+                $hdata['MR_NO'] = $MR_NO;
+                $hdata['Member_ID'] = $Member_ID;
+                $hdata['update_date'] = $update_date;
+                $hdata['status'] = $status;
+                $hdata['fiscalYearID'] = $fiscalYearID;
+
+                $hdata['TrasactionHeadID'] = $TrasactionHeadID;
+
+                $this->db->where('TransactionID', $hdata['TransactionID']);
+                $this->db->update('tbl_transactions', $hdata);
+                //control head update end
+
+            
+                $sdata = array();
+                $sdata['message'] = 'Transaction Updated successfully';
+                $this->session->set_userdata($sdata);
+                redirect(base_url()."edit-transaction-account/".$VoucherNo);
+            else:
+                $sdata = array();
+                $sdata['message'] = 'Transaction date is not between fiscal dates!';
+                $this->session->set_userdata($sdata);
+                redirect(base_url()."edit-transaction-account/".$VoucherNo);
+            endif;
+            //inser area end
         } else {
             $sdata = array();
             $sdata['message'] = 'Tray again!';
