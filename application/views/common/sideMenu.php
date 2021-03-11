@@ -131,7 +131,7 @@
         </li>
 
         <li>
-            <a href="<?php echo base_url('');?>" class="waves-effect">
+            <a href="<?php echo base_url('account-reports-section');?>" class="waves-effect">
               <i aria-hidden="true" class="fa fa-line-chart" aria-hidden="true"></i> <span>Accounts Report</span> 
             </a>
         </li>

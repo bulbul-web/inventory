@@ -167,6 +167,20 @@ class Reports extends CI_Controller {
         $data['content'] = $this->load->view('reports/reports_section', $data, true);
         $this->load->view('index', $data);
     }
+   
+    public function account_reports_section(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['title'] = 'Account Reports';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/account_reports_section', $data, true);
+        $this->load->view('index', $data);
+    }
 
     
     public function customer_wise_report_payment(){
@@ -249,6 +263,39 @@ class Reports extends CI_Controller {
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('reports/datewise_expense', $data, true);
+        $this->load->view('index', $data);
+    }
+    
+    public function date_wise_transaction_report(){
+        if(isset($_POST['status'])){
+            $status = $this->input->post('status', true);
+            $from_date = date("Y-m-d", strtotime($this->input->post('from_date', true)));
+            $to_date = date("Y-m-d", strtotime($this->input->post('to_date', true)));
+        }else{
+            $status = 1;
+            $from_date = date("Y-m-d");
+            $to_date = date("Y-m-d");
+        }
+        $result = $this->db->query
+                (
+                "SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID AND NOT (a.delete_status <=> 'deleted') AND a.TrnDate BETWEEN '$from_date' AND '$to_date' GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC"
+                )->result();
+        $data = array();
+        
+        $data['status'] = $status;
+        $data['from_date'] = $from_date;
+        $data['to_date'] = $to_date;
+        $data['result'] = $result;
+        
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['title'] = 'Datewise Transaction Reports';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/date_wise_transaction_report', $data, true);
         $this->load->view('index', $data);
     }
     

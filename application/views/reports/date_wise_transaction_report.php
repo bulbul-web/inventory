@@ -21,7 +21,7 @@
     </div>
     <div class="col-sm-3">
         <div class="top-button-area">
-            <a class="btn btn-primary m-1" href="<?php echo base_url();?>datewise-expense"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+            <a class="btn btn-primary m-1" href="<?php echo base_url();?>date-wise-transaction-report"><i class="fa fa-retweet" aria-hidden="true"></i></a>
         </div>
      </div>
 </div>
@@ -32,7 +32,8 @@
   <div class="card">
       <div class="card-header">Datewise Report</div>
     <div class="card-body">
-        <?php echo form_open_multipart('datewise-expense', 'name="datewise-expense" id="datewiseExpense" autocomplete="off"');?>
+        <?php echo form_open_multipart('date-wise-transaction-report', 'name="datewise-expense" id="datewiseExpense" autocomplete="off"');?>
+
         <div class="row"> 
             <div class="col-md-2">
                 <div class="form-group row">
@@ -45,6 +46,7 @@
                     </div>
                   </div>
             </div>
+
             <div class="col-md-4">
                 <div class="form-group row">
                     <label class="col-sm-12 col-form-label">From Date</label>
@@ -53,6 +55,7 @@
                     </div>
                   </div>
             </div>
+
             <div class="col-md-4">
                 <div class="form-group row">
                     <label class="col-sm-12 col-form-label">To Date</label>
@@ -61,6 +64,7 @@
                     </div>
                   </div>
             </div>
+
             <div class="col-md-2">
                 <div class="form-group row">
                     <label class="col-sm-12 col-form-label">&nbsp;</label>
@@ -91,9 +95,9 @@
                     echo "<br>";
 					 
                         if($status==1){
-                            echo "--Active--";
+                            echo "";
                         }else{
-                            echo "--Inactive--";
+                            echo "";
                         };
                     ?>
                 </center>
@@ -104,52 +108,68 @@
                         <tr>
                             <th>#</th>
                             <th>Transaction Date</th>
-                            <th>Transaction No.</th>
-                            <th>Note</th>
-                            <th>Costs</th>
-                            <th>Action</th>
+                            <th>Voucher No</th>
+                            <th>Control Head Name</th>
+                            <th>Total CR</th>
+                            <th>Total DR</th>
+                            <th>View</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
                             $sl=0;
-                            $total = 0;
+                            $totalCR = 0;
+                            $totalDR = 0;
                             foreach ($result as $value):
-                            $total += $value->totalAmount;
-                            $sl++
+                                $totalCR += $value->totalCR;
+                                $totalDR += $value->totalDR;
+                                $sl++
                         ?>
                         <tr>
                             <td><?= $sl;?></td>
                             <td>
                                 <?php
-                                    $date = date_create("$value->trnsction_date");
+                                    $date = date_create("$value->TrnDate");
                                     echo date_format($date,"d/m/Y");
                                 ?>
                             </td>
-                            <td><?= $value->trnsction_id;?></td>
-                            <td><?= $value->note;?></td>
-                            <td><?= $value->totalAmount;?></td>
                             <td>
-                                <a href="<?php echo base_url();?>costs-details/<?php echo $value->trnsction_id;?>" target="__BLANK"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <?php echo $value->VoucherID;?>
+                            </td>
+                            <td>
+                                <?php
+                                    $voucherNo = $value->VoucherNo; 
+                                    $transactionControlHead = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID and VoucherNo = '$voucherNo' AND checkControlHead = '1' AND NOT (a.delete_status <=> 'deleted') GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")->row();
+                                    echo $transactionControlHead->TransHeadDescription;
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                    echo $value->totalCR;
+                                ?>
+                            </td>
+                            <td>
+                                
+                                <?php
+                                    echo $value->totalDR;
+                                ?>
+                            
+                            </td>
+                            <td>
+                                <?php 
+                                    echo '<a href="'.base_url().'DrCr-Voucher-Details/'.$value->VoucherNo.'" target="_BLANK">View & Print</a>';
+                                ?>
                             </td>
                         </tr>
                         <?php endforeach;?>
                         <tr>
                             <td colspan="4" style="text-align: right;">Total:</td>
-                            <td style="text-align: center;"><b><?= $total;?></b></td>
+                            <td style="text-align: center;"><b><?php echo $totalCR;?></b></td>
+                            <td style="text-align: center;"><b><?php echo $totalDR;?></b></td>
                             <td style="text-align: center;"><b>--</b></td>
                         </tr>
                     </tbody>
                 </table>
-                <div>
-                    
-                    <?php 
-                        print '<h6> Total Paid Amount:'.$totalPaidDateWise->totalPaid.'</h6>';
-                        print '<h6> Total Expense:'.$totalCostsDateWise->totalCostsAmount.'</h6>';
-
-                        echo '<h6> Cash in hand: (&nbsp;'.($totalPaidDateWise->totalPaid - $totalCostsDateWise->totalCostsAmount).')</h6>';
-                    ?>
-                </div>
                 <?php endif;?>
                 
             </div>
@@ -160,7 +180,7 @@
   </div>
 </div>
 </div><!-- End Row-->
-<a href="<?php echo base_url('expense-report-section');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Report Section</a><br>
+<a href="<?php echo base_url('account-reports-section');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Report</a><br>
 <button id="btnPrint" class="btn btn-primary" style="float: right;"> <i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</button>
 <script>
     $("#btnPrint").on("click", function() {

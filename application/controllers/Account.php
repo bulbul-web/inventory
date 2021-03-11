@@ -726,7 +726,7 @@ class Account extends CI_Controller {
                     $sdata['message'] = 'Tansaction successfully saved';
                     $this->session->set_userdata($sdata);
                     $this->account_transaction_add();
-                    // redirect(current_url());
+                    redirect(base_url()."DrCr-Voucher-Details/".$VoucherNo);
                 }else{
                     $sdata = array();
                     $sdata['message'] = 'Error!';

@@ -63,7 +63,7 @@
                 $i++;
             ?>
             <tr>
-                <td><?php echo $i;?></td>
+                <td><a href="<?php echo base_url();?>edit-invoice/<?php echo $value->voucher_id;?>"> <i class="fa fa-edit"></i> <?php echo $i;?> </a></td>
                 <td><?php echo '<a href="'. base_url().'invoice-details/'.$value->voucher_id.'">'.$value->voucher_id.'</a>';?></td>
                 <td><?php echo $value->customer_name;?></td>
                 <td>
