@@ -4,24 +4,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Accounts_query extends CI_Model {
     
     public function account_sub_head_list(){
-        $result = $this->db->query("SELECT * FROM tbl_subhead")
+        $result = $this->db->query("SELECT a.*, b.HeadDescription FROM tbl_subhead a, tbl_controlhead b WHERE a.ControlHead_id = b.ControlHead_id ORDER BY b.HeadDescription ASC")
                         ->result();
         return $result;
     }
     public function account_sub_sub_head_list(){
-        $result = $this->db->query("SELECT * FROM tbl_subsubheads")
+        $result = $this->db->query("SELECT a.*, b.SubHeadDescription, b.ControlHead_id, c.HeadDescription, c.ControlHead_id FROM tbl_subsubheads a, tbl_subhead b, tbl_controlhead c WHERE a.SubHeadID = b.SubHeadID AND c.ControlHead_id = b.ControlHead_id ORDER BY c.HeadDescription ASC")
                         ->result();
         return $result;
     }
     
     public function account_tansaction_head_list(){
-        $result = $this->db->query("SELECT * FROM tbl_transactionhead")
+        $result = $this->db->query("SELECT a.*, b.SSubHeadDescription, c.SubHeadDescription, d.HeadDescription FROM tbl_transactionhead a, tbl_subsubheads b, tbl_subhead c, tbl_controlhead d WHERE a.SSubHeadID = b.SSubHeadID AND a.SubHeadID = c.SubHeadID AND c.ControlHead_id = d.ControlHead_id ORDER BY d.HeadDescription ASC")
                         ->result();
         return $result;
     }
     
     public function opening_balance_list(){
-        $result = $this->db->query("SELECT * FROM tbl_opening_balance")
+        $result = $this->db->query("SELECT a.*, b.TransactionHeadID, b.TransHeadDescription, b.SSubHeadID, c.SSubHeadDescription, c.SubHeadID, d.SubHeadDescription, d.ControlHead_id, e.HeadDescription FROM tbl_opening_balance a, tbl_transactionhead b, tbl_subsubheads c, tbl_subhead d, tbl_controlhead e WHERE b.TransactionHeadID = a.TransactionHeadID AND b.SSubHeadID = c.SSubHeadID AND c.SubHeadID = d.SubHeadID AND e.ControlHead_id = d.ControlHead_id ORDER BY e.HeadDescription ASC")
                         ->result();
         return $result;
     }

@@ -36,13 +36,12 @@
     </div>
     <div class="card-body">
       <div class="table-responsive">
-      <!-- <table id="example" class="table table-bordered">
+      <table id="example" class="table table-bordered">
         <thead>
             <tr>
                 <th>SL.</th>
-                <th>Sub Head Name</th>
                 <th>Control Head</th>
-                <th>Status</th>
+                <th>Sub Head Name</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -58,42 +57,22 @@
                 <tr>
                     <td><?php echo $i;?></td>
                     <td>
-                        <?php echo $value->SubHeadDescription;?>
-                    </td>
-                    <td>
                         <?php
-                            if($value->ControlHead_id == ""){
+                            if($value->HeadDescription == ""){
                                 echo '-';
                             }else{
-                                echo $value->ControlHead_id;
+                                echo $value->HeadDescription;
                             }
                         ?>
                     </td>
                     <td>
-                        
-                        <?php 
-                            if($value->status == 1){
-                        ?>
-                            
-                            <span class="badge badge-primary m-1">Active</span>
-                        <?php
-                            }
-                        ?>
-                        
-                        <?php 
-                            if($value->status == 0){
-                        ?>
-                            <span class="badge badge-danger m-1">Inactive</span>
-                        <?php
-                            }
-                        ?>
-                    
+                        <?php echo $value->SubHeadDescription;?>
                     </td>
+                    
                     <td>
                         <div class="btn-group m-1">
-                            <a href="<?php echo base_url();?>edit-transaction-head/<?php echo $value->id?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
-                            <a href="<?php echo base_url();?>delete-transaction-head/<?php echo $value->id?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a>
-                            
+                            <a href="<?php echo base_url();?>route-name/<?php echo $value->SubHeadID?>" class="btn btn-primary waves-effect waves-light" style="display: none;"> <i class="fa fa-edit"></i> </a>
+                            <a href="<?php echo base_url();?>delete-route-name/<?php echo $value->SubHeadID?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a>
                          </div>
                     </td>
                 </tr>
@@ -103,13 +82,12 @@
         <tfoot>
             <tr>
                 <th>SL.</th>
-                <th>Transaction Head Name</th>
-                <th>Description</th>
-                <th>Status</th>
+                <th>Control Head</th>
+                <th>Sub Head Name</th>
                 <th>Action</th>
             </tr>
         </tfoot>
-    </table> -->
+    </table>
     </div>
     </div>
   </div>

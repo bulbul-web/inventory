@@ -36,13 +36,17 @@
     </div>
     <div class="card-body">
       <div class="table-responsive">
-      <!-- <table id="example" class="table table-bordered">
+      <table id="example" class="table table-bordered">
         <thead>
             <tr>
                 <th>SL.</th>
-                <th>Sub Head Name</th>
+                <th>Date</th>
                 <th>Control Head</th>
-                <th>Status</th>
+                <th>Sub Head</th>
+                <th>Sub-Sub Head</th>
+                <th>Transaction Head</th>
+                <th>CR</th>
+                <th>DR</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -57,42 +61,70 @@
             ?>
                 <tr>
                     <td><?php echo $i;?></td>
+
                     <td>
-                        <?php echo $value->SubHeadDescription;?>
+                        <?php
+                            $date = date_create("$value->opening_balance_date");
+                            echo date_format($date,"d/m/Y");
+                        ?>
+                    </td>
+
+                    <td>
+                        <?php echo $value->HeadDescription;?>
                     </td>
                     <td>
                         <?php
-                            if($value->ControlHead_id == ""){
+                            if($value->SubHeadDescription == ""){
                                 echo '-';
                             }else{
-                                echo $value->ControlHead_id;
+                                echo $value->SubHeadDescription;
                             }
                         ?>
                     </td>
                     <td>
-                        
-                        <?php 
-                            if($value->status == 1){
-                        ?>
-                            
-                            <span class="badge badge-primary m-1">Active</span>
                         <?php
+                            if($value->SSubHeadDescription == ""){
+                                echo '-';
+                            }else{
+                                echo $value->SSubHeadDescription;
                             }
                         ?>
-                        
-                        <?php 
-                            if($value->status == 0){
-                        ?>
-                            <span class="badge badge-danger m-1">Inactive</span>
-                        <?php
-                            }
-                        ?>
-                    
                     </td>
+                    <td>
+                        <?php
+                            if($value->TransHeadDescription == ""){
+                                echo '-';
+                            }else{
+                                echo $value->TransHeadDescription;
+                            }
+                        ?>
+                    </td>
+                    
+                    <td>
+                        <?php
+                            if($value->CR == ""){
+                                echo '-';
+                            }else{
+                                echo $value->CR;
+                            }
+                        ?>
+                    </td>
+
+                    <td>
+                        <?php
+                            if($value->DR == ""){
+                                echo '-';
+                            }else{
+                                echo $value->DR;
+                            }
+                        ?>
+                    </td>
+                    
+                    
                     <td>
                         <div class="btn-group m-1">
-                            <a href="<?php echo base_url();?>edit-transaction-head/<?php echo $value->id?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
-                            <a href="<?php echo base_url();?>delete-transaction-head/<?php echo $value->id?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a>
+                            <a href="<?php echo base_url();?>edit-transaction-head/<?php echo $value->opening_balance_id?>" class="btn btn-primary waves-effect waves-light" style="display: none;"> <i class="fa fa-edit"></i> </a>
+                            <a href="<?php echo base_url();?>delete-transaction-head/<?php echo $value->opening_balance_id?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a>
                             
                          </div>
                     </td>
@@ -103,13 +135,17 @@
         <tfoot>
             <tr>
                 <th>SL.</th>
-                <th>Transaction Head Name</th>
-                <th>Description</th>
-                <th>Status</th>
+                <th>Date</th>
+                <th>Control Head</th>
+                <th>Sub Head</th>
+                <th>Sub-Sub Head</th>
+                <th>Transaction Head</th>
+                <th>CR</th>
+                <th>DR</th>
                 <th>Action</th>
             </tr>
         </tfoot>
-    </table> -->
+    </table>
     </div>
     </div>
   </div>
