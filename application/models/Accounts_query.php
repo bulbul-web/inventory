@@ -71,6 +71,16 @@ class Accounts_query extends CI_Model {
     public function save_acnt_sub_head($data){
         $this->db->insert('tbl_subhead', $data);
     }
+
+    public function sub_head_single($SubHeadID){
+        $result = $this->db->query("SELECT * FROM tbl_subhead WHERE SubHeadID = '$SubHeadID' ")->row();
+        return $result;
+    }
+
+    public function update_acnt_sub_head($data){
+        $this->db->where('SubHeadID', $data['SubHeadID']);
+        $this->db->update('tbl_subhead', $data);
+    }
     
     public function save_opening_balance($data){
         $this->db->insert('tbl_opening_balance', $data);

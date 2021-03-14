@@ -71,7 +71,7 @@
                     
                     <td>
                         <div class="btn-group m-1">
-                            <a href="<?php echo base_url();?>route-name/<?php echo $value->SubHeadID?>" class="btn btn-primary waves-effect waves-light" style="display: none;"> <i class="fa fa-edit"></i> </a>
+                            <a href="<?php echo base_url();?>sub-head-edit/<?php echo $value->SubHeadID?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
                             <a href="<?php echo base_url();?>delete-route-name/<?php echo $value->SubHeadID?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a>
                          </div>
                     </td>

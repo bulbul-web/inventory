@@ -144,6 +144,22 @@ class Account extends CI_Controller {
         $data['content'] = $this->load->view('pages/accounts/account_sub_head_add', $data, true);
         $this->load->view('index', $data);
     }//account_sub_head_add
+    
+    public function sub_head_edit_form($SubHeadID){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['SubHeadSingle'] = $this->accounts_query->sub_head_single($SubHeadID);
+        
+        $data['title'] = 'Account Sub Head Add';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('pages/accounts/sub_head_edit_form', $data, true);
+        $this->load->view('index', $data);
+    }//account_sub_head_add
 
     public function account_sub_sub_head_add(){
         $data = array();
@@ -366,6 +382,41 @@ class Account extends CI_Controller {
             $this->account_sub_head_add();
         }
     }//save_acnt_sub_head
+
+
+    public function update_acnt_sub_head(){
+        $this->form_validation->set_rules(
+                'SubHeadDescription', 'Sub Head',
+                'required|min_length[2]|max_length[150]',
+                array(
+                        'required'      => 'You have not provided %s.'
+                )
+        );     
+        $this->form_validation->set_rules('ControlHead_id', 'Control Head', 'required');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        if($this->form_validation->run()){
+            $data['SubHeadID'] = $this->input->post('SubHeadID', true);
+            $data['SubHeadDescription'] = $this->input->post('SubHeadDescription', true);
+            $data['ControlHead_id'] = $this->input->post('ControlHead_id', true);
+            $data['note'] = $this->input->post('note', true);
+            $data['viewState'] = $this->input->post('viewState', true);
+            $data['active'] = 1;
+
+
+            // echo '<pre>';
+            // print_r($data);
+            // exit();
+            $this->accounts_query->update_acnt_sub_head($data);
+
+            $sdata = array();
+            $sdata['message'] = 'Sub Head successfully Updated';
+            $this->session->set_userdata($sdata);
+            redirect(base_url()."sub-head-edit/".$data['SubHeadID']);
+        } else {
+            redirect(base_url()."sub-head-edit/".$data['SubHeadID']);
+        }
+    }//update_acnt_sub_head
+
 
     public function save_acnt_sub_sub_head(){
         $this->form_validation->set_rules(

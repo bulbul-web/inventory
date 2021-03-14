@@ -169,6 +169,8 @@ $route['update-expense'] = 'costs/update_expense';
 $route['account-sub-head'] = 'account/account_sub_head_list';
 $route['account-sub-head-add'] = 'account/account_sub_head_add';
 $route['save-acnt-sub-head'] = 'account/save_acnt_sub_head';
+$route['sub-head-edit/(.+)'] = 'account/sub_head_edit_form/$1';
+$route['update-acnt-sub-head'] = 'account/update_acnt_sub_head';
 
 $route['account-sub-sub-head'] = 'account/account_sub_sub_head_list';
 $route['account-sub-sub-head-add'] = 'account/account_sub_sub_head_add';

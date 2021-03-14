@@ -41,9 +41,9 @@
             <tr>
                 <th>SL.</th>
                 <th>Date</th>
-                <th>Control Head</th>
+                <!-- <th>Control Head</th>
                 <th>Sub Head</th>
-                <th>Sub-Sub Head</th>
+                <th>Sub-Sub Head</th> -->
                 <th>Transaction Head</th>
                 <th>CR</th>
                 <th>DR</th>
@@ -69,9 +69,10 @@
                         ?>
                     </td>
 
-                    <td>
+                    <!-- <td>
                         <?php echo $value->HeadDescription;?>
                     </td>
+
                     <td>
                         <?php
                             if($value->SubHeadDescription == ""){
@@ -81,6 +82,7 @@
                             }
                         ?>
                     </td>
+
                     <td>
                         <?php
                             if($value->SSubHeadDescription == ""){
@@ -89,7 +91,8 @@
                                 echo $value->SSubHeadDescription;
                             }
                         ?>
-                    </td>
+                    </td> -->
+
                     <td>
                         <?php
                             if($value->TransHeadDescription == ""){
@@ -136,9 +139,9 @@
             <tr>
                 <th>SL.</th>
                 <th>Date</th>
-                <th>Control Head</th>
+                <!-- <th>Control Head</th>
                 <th>Sub Head</th>
-                <th>Sub-Sub Head</th>
+                <th>Sub-Sub Head</th> -->
                 <th>Transaction Head</th>
                 <th>CR</th>
                 <th>DR</th>
