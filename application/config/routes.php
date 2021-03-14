@@ -204,5 +204,11 @@ $route['delete-tansaction-status/(:num)/(:num)'] = 'account/delete_tansaction_st
 
 $route['DrCr-Voucher-Details/(.+)'] = 'account/DrCr_Voucher_Details/$1';
 
+$route['journal-transaction-list'] = 'account/journal_transaction_list';
+$route['account-journal-transaction-add'] = 'account/account_journal_transaction_add';
+$route['save-acnt-journal-tansaction-mltple-trns-all'] = 'account/save_acnt_journal_tansaction_mltple_trns_all';
+$route['edit-journal-transaction-account/(:any)'] = 'account/edit_journal_transaction_account_form/$1';
+$route['update-acnt-journal-tansaction-mltple-trns-all'] = 'account/update_acnt_journal_tansaction_mltple_trns_all';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

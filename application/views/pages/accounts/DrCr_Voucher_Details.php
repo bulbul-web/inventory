@@ -21,7 +21,8 @@
     </div>
     <div class="col-sm-3">
         <div class="top-button-area">
-            <a class="btn btn-primary m-1" href="<?php echo base_url('account-transaction-add');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Create Voucher</a>
+            <a class="btn btn-primary m-1" href="<?php echo base_url('account-transaction-add');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Transaction</a>
+            <a class="btn btn-primary m-1" href="<?php echo base_url('account-journal-transaction-add');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Journal</a>
         </div>
 
      </div>
@@ -67,8 +68,10 @@
                         <?php
                             if($transactionAcntRow->V_Type == 'DR'){
                                 echo 'Debit Voucher';
-                            }else{
+                            }elseif($transactionAcntRow->V_Type == 'CR'){
                                 echo 'Credit Voucher';
+                            }else{
+                                echo 'Journal Voucher';
                             }
                         ?>
                     </h2>
@@ -158,7 +161,13 @@
 </div>
 </div><!-- End Row-->
 
-<a href="<?php echo base_url('transaction-list');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Transaction List</a><br>
+<?php
+    if($transactionAcntRow->V_Type == 'JR'):
+?>
+    <a href="<?php echo base_url('journal-transaction-list');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Journal Transaction List</a><br>
+<?php else:?>
+    <a href="<?php echo base_url('transaction-list');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Transaction List</a><br>
+<?php endif;?>
 
 <button onclick="PrintMe('divid')" class="btn btn-primary" style="float: right;"> <i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</button>
 <script>

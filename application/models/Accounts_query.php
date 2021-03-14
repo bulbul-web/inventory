@@ -37,6 +37,18 @@ class Accounts_query extends CI_Model {
                         ->result();
         return $result;
     }
+   
+    public function journal_transaction_list(){
+        $result = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID AND NOT (a.delete_status <=> 'deleted') AND a.V_type = 'JR' GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")
+                        ->result();
+        return $result;
+    }
+    
+    public function transaction_list_without_journal(){
+        $result = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID AND NOT (a.delete_status <=> 'deleted') AND NOT (a.V_type <=> 'JR') GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")
+                        ->result();
+        return $result;
+    }
 
     public function transaction_Acnt_Row($VoucherNo){
         $result = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID AND a.VoucherNo = '$VoucherNo' AND NOT (a.delete_status <=> 'deleted') GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")

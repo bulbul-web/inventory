@@ -129,6 +129,14 @@
               <i aria-hidden="true" class="fa fa-cog" aria-hidden="true"></i> <span>Transaction</span> 
             </a>
         </li>
+        
+        
+        <li>
+            <a href="<?php echo base_url('journal-transaction-list');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-cog" aria-hidden="true"></i> <span>Journal Transaction</span> 
+            </a>
+        </li>
+
 
         <li>
             <a href="<?php echo base_url('account-reports-section');?>" class="waves-effect">
