@@ -481,6 +481,7 @@ class Products extends CI_Controller {
                             $img = '/assets/images/products/' . $result['upload_data']['file_name'];
                             $data['product_type_id'] = $this->input->post('product_type_id', true);
                             $data['product_name'] = $this->input->post('product_name', true);
+                            $data['product_name_bangla'] = $this->input->post('product_name_bangla', true);
                             $data['product_descrip'] = $this->input->post('product_descrip', true);
                             $data['product_code'] = $this->input->post('product_code', true);
                             $data['pack_size'] = $this->input->post('pack_size', true);
@@ -553,6 +554,7 @@ class Products extends CI_Controller {
                 $data['product_id'] = $this->input->post('product_id', true);
                 $data['product_type_id'] = $this->input->post('product_type_id', true);
                 $data['product_name'] = $this->input->post('product_name', true);
+                $data['product_name_bangla'] = $this->input->post('product_name_bangla', true);
                 $data['product_descrip'] = $this->input->post('product_descrip', true);
                 $data['product_code'] = $this->input->post('product_code', true);
                 $data['pack_size'] = $this->input->post('pack_size', true);
@@ -595,6 +597,7 @@ class Products extends CI_Controller {
                             $data['product_id'] = $this->input->post('product_id', true);
                             $data['product_type_id'] = $this->input->post('product_type_id', true);
                             $data['product_name'] = $this->input->post('product_name', true);
+                            $data['product_name_bangla'] = $this->input->post('product_name_bangla', true);
                             $data['product_descrip'] = $this->input->post('product_descrip', true);
                             $data['product_code'] = $this->input->post('product_code', true);
                             $data['pack_size'] = $this->input->post('pack_size', true);

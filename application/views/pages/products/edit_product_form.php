@@ -58,6 +58,13 @@
                       <?php echo form_error('product_name', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
+                
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Product Name Bangla</label>
+                  <div class="col-sm-9">
+                      <input type="text" name="product_name_bangla" value="<?php echo $singleProduct->product_name_bangla; ?>" class="form-control form-control-rounded">
+                  </div>
+                </div>
             
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Description</label>
