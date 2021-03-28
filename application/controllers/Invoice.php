@@ -15,7 +15,7 @@ class Invoice extends CI_Controller {
         }
     }
 
-public function invoice()
+    public function invoice()
     {
         $data = array();
         $id = $this->session->userdata('user_id');

@@ -516,4 +516,9 @@ class Query_model extends CI_Model {
         $this->db->update('tbl_invoice');
     }
 
+    public function qrcodeList(){
+        $result = $this->db->query("SELECT * FROM tbl_qrcode_info")->result();
+        return $result;
+    }
+
 }

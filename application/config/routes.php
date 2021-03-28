@@ -212,5 +212,12 @@ $route['save-acnt-journal-tansaction-mltple-trns-all'] = 'account/save_acnt_jour
 $route['edit-journal-transaction-account/(:any)'] = 'account/edit_journal_transaction_account_form/$1';
 $route['update-acnt-journal-tansaction-mltple-trns-all'] = 'account/update_acnt_journal_tansaction_mltple_trns_all';
 
+
+$route['all-users'] = 'users/all_users';
+
+$route['qrcode'] = 'QrcodeController/qrcode_generator_by_input';
+$route['qrcode-form'] = 'QrcodeController/qrcode_form';
+$route['save-qrcode'] = 'QrcodeController/save_qrcode';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

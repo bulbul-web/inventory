@@ -180,6 +180,31 @@
         
     </ul>
   </li>
+ 
+ <li>
+    <a href="javaScript:void();" class="waves-effect">
+      <i class="fa fa-line-chart" aria-hidden="true"></i>
+      <span>User</span> <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="sidebar-submenu">
+        
+        
+        <li>
+            <a href="<?php echo base_url('all-users');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-area-chart"></i> <span>All users</span> 
+            </a>
+        </li>
+        
+    </ul>
+  </li>
+
+
+  <li>
+   <a href="<?php echo base_url('qrcode');?>" class="waves-effect">
+     <i class="fa fa-file"></i> <span>QR Code</span> 
+   </a>
+
+ </li>
   
  
 </ul>

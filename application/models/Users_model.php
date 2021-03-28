@@ -71,6 +71,11 @@ class Users_model extends CI_Model {
         $result = $this->db->query("SELECT * FROM tbl_fiscalyear WHERE status = 'Active' ")->row();
         return $result;
     }
+
+    public function all_users(){
+        $result = $this->db->query("SELECT * FROM tbl_user ORDER BY user_id DESC")->result();
+        return $result;
+    }
     
     
 }

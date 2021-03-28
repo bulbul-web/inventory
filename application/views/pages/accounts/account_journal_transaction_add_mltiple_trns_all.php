@@ -79,7 +79,7 @@
               
 
 
-            <div class="row">
+            <!-- <div class="row">
 
                 <div class="col-md-6">
                     <div class="form-group row">
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
 
 
@@ -136,7 +136,8 @@
                         <thead>
                             <tr>
                                 <th>Select Transaction Head</th>
-                                <th>Amount</th>
+                                <th>Debit</th>
+                                <th>Cretid</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -155,8 +156,13 @@
                                 </td>
 
                                 <td>
-                                    <input type="number" step=any name="amount[]" id="amount_1" onkeyup="amountPress(this)"  class="form-control" required="">
-                                    <input type="hidden" step=any name="amountDefault[]" value="0">
+                                    <input type="number" step=any name="amount_dr[]" id="amount_dr_1" onkeyup="amountPressDr(this)"  class="form-control" required="">
+                                    <input type="hidden" step=any name="amountDefaultDr[]" value="0">
+                                </td>
+                                
+                                <td>
+                                    <input type="number" step=any name="amount_cr[]" id="amount_cr_1" onkeyup="amountPressCr(this)"  class="form-control" required="">
+                                    <input type="hidden" step=any name="amountDefaultCr[]" value="0">
                                 </td>
                                 
                                 
@@ -167,7 +173,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="2" class="text-right"></td> 
+                                <td colspan="3" class="text-right"></td> 
                                 
                                 <td align="center">
                                     <button id="addInvoiceItem" name="add-invoice-item" type="button" class="btn btn-primary btn-sm">Add New Item</button>
@@ -175,10 +181,12 @@
                             </tr> 
 
                             <tr>
-                                <td colspan="2" class="text-right"><b>Grand Total:</b></td>
+                                <td class="text-right"><b>Grand Total:</b></td>
+                                <td><input type="number" step=any id="grandTotal" disabled="disabled" class="form-control w-100 text-center"></td>
                                 <td class="text-center">
                                     <input type="number" step=any id="grandTotal" disabled="disabled" class="form-control w-100 text-center">
                                 </td>
+                                <td></td>
                             </tr>
                             
                             
@@ -233,8 +241,12 @@
                                 </div>\n\
                             </td>';
                     html += '<td>\n\
-                                <input type="number" step=any name="amount[]" id="amount_'+rowCount+'" onkeyup="amountPress(this)"  class="form-control" required="">\n\
-                                <input type="hidden" step=any name="amountDefault[]" value="0">\n\
+                                <input type="number" step=any name="amount_dr[]" id="amount_dr_'+rowCount+'" onkeyup="amountPressDr(this)"  class="form-control" required="">\n\
+                                <input type="hidden" step=any name="amountDefaultDr[]" value="0">\n\
+                            </td>';
+                    html += '<td>\n\
+                                <input type="number" step=any name="amount_cr[]" id="amount_cr_'+rowCount+'" onkeyup="amountPressCr(this)"  class="form-control" required="">\n\
+                                <input type="hidden" step=any name="amountDefaultCr[]" value="0">\n\
                             </td>';
                     html += '<td class="text-center"><button type="button" id="remove_'+rowCount+'" name="remove" data-row="row" scope="row" class="btn btn-danger btn-sm timesSpan delete_row">×</button></td>';
                     html += '</tr>';
@@ -261,8 +273,10 @@
         
     });
 
-    function amountPress(args){
+    function amountPressDr(args){
+        // alert(args);
         var id = args.id;
+        alert(id);
         var price = args.value;
         var res = id.split("_");
         var number = res[1];
