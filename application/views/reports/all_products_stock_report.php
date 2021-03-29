@@ -40,7 +40,8 @@
                     <button type="submit" name="submit" value="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> Report</button>
                 </form>
                 <?php
-                    if(isset($_POST['submit'])){                        
+                    if(isset($_POST['submit'])){   
+                        echo '<h5 style="text-align: center; text-decoration: underline;">Products Stock Report</h5><br/>';                     
                         $stock_out_result = $this->db->query
                                 (
                                     //"SELECT SUM(i.quantity) as stock_out, si.quantity_in, pi.product_name, si.challan_date, ps.pack_size FROM tbl_invoice i, tbl_stock_in si, tbl_product_info pi, tbl_pack_size ps WHERE i.product_id = si.product_id AND pi.product_id = si.product_id AND ps.id = pi.pack_size GROUP BY i.product_id"
@@ -61,13 +62,13 @@
                                 )->result();
                     
                 ?>
-                    <table width="100%" border="1">
+                    <table width="100%" border="1" style="text-align: center;">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Product Name</th>
                                 <th>Stock In</th>
-                                <th>Pack Size</th>
+                                <!-- <th>Pack Size</th> -->
                                 <th>Stock Out</th>
                                 <th>Available Stock</th>
                                 
@@ -82,10 +83,26 @@
                                 <tr>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $value->product_name; ?></td>
-                                    <td><?php echo $value->stockIn; ?></td>
-                                    <td><?php echo $value->packName; ?></td>
-                                    <td><?php echo $value->stockOut; ?></td>
-                                    <td><?php echo $value->available_quantity; ?></td>
+                                    <td><?php echo $value->stockIn.' ('.$value->packName.')'; ?></td>
+                                    <!-- <td><?php echo $value->packName; ?></td> -->
+                                    <td>
+                                        <?php 
+                                            if($value->stockOut == ''){
+                                                echo '0';
+                                            }else{
+                                                echo $value->stockOut; 
+                                            }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php 
+                                            if($value->available_quantity == ''){
+                                                echo $value->stockIn;
+                                            }else{
+                                                echo $value->available_quantity; 
+                                            }
+                                        ?>
+                                    </td>
                                     
                                 </tr>
                             <?php endforeach;?>
@@ -109,7 +126,7 @@
         var wt = $(window).width();
         var divContents = $("#print_content").html();
         var printWindow = window.open('', '', 'height=' + ht + 'px,width=' + wt + 'px');
-        printWindow.document.write('<html><head><title>f</title>');
+        printWindow.document.write('<html><head><title></title>');
         
         printWindow.document.write('<link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet"/>');
         

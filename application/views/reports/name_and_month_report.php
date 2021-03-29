@@ -21,7 +21,7 @@
     </div>
     <div class="col-sm-3">
         <div class="top-button-area">
-            <a class="btn btn-primary m-1" href="<?php echo base_url();?>month-report"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+            <a class="btn btn-primary m-1" href="<?php echo base_url();?>name-month-report"><i class="fa fa-retweet" aria-hidden="true"></i></a>
         </div>
      </div>
 </div>
@@ -96,6 +96,7 @@
                 <?php
                     if(isset($_POST['status'])):
                 ?>
+                <h5 style="text-align: center; text-decoration: underline;">Date and customer Wise Voucher</h5>
                 <center style="color: green; font-size: 18px; font-weight: bold;">
                     (<?php echo $singleCustomer->customer_name;?>)<br>
                     Phone no: <?php echo $singleCustomer->customer_mobile;?><br>
@@ -119,7 +120,7 @@
                 </center>
                 <br>
                 
-                <table width="100%" border="1">
+                <table width="100%" border="1" style="text-align: center;">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -183,7 +184,7 @@
         var wt = $(window).width();
         var divContents = $("#print_content").html();
         var printWindow = window.open('', '', 'height=' + ht + 'px,width=' + wt + 'px');
-        printWindow.document.write('<html><head><title>f</title>');
+        printWindow.document.write('<html><head><title></title>');
         
         printWindow.document.write('<link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet"/>');
         

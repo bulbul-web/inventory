@@ -72,6 +72,7 @@
                     // if(isset($_POST['from_date'])):
                     if(isset($_POST['submit'])):
                 ?>
+                <h5 style="text-align: center; text-decoration: underline;">Customer Wise payment details</h5>
                 <!-- <center style="color: green; font-size: 18px; font-weight: bold;">
                     
                     <?php
@@ -89,32 +90,36 @@
                 <table width="100%" border="1">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Customer Name.</th>
-                            <th>Total</th>
-                            <th>Discount</th>
-                            <th>Paid</th>
-                            <th>Due</th>
+                            <th  style="text-align: center;">#</th>
+                            <th  style="text-align: center;">Customer Name.</th>
+                            <th  style="text-align: center;">Total</th>
+                            <th  style="text-align: center;">Discount</th>
+                            <th  style="text-align: center;">Paid</th>
+                            <th  style="text-align: center;">Due</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
                             $sl = 0;
+                            $netGrandTotal = 0;
+                            $totalDiscount = 0;
                             $dueTotal = 0;
                             $total = 0;
                             foreach($result as $value):
                                 $sl++;
+                                $netGrandTotal += $value->grandTotal;
+                                $totalDiscount += $value->discount;
                                 $grandTotal = ($value->grandTotal - $value->discount);
                                 $dueTotal += $grandTotal - $value->paid_amount;
                                 $total += $value->paid_amount;
                         ?>
                             <tr>
-                                <td><?= $sl;?></td>
-                                <td><?= $value->customer_name;?></td>
-                                <td><?= $value->grandTotal;?></td>
-                                <td><?= $value->discount;?></td>
-                                <td><?= $value->paid_amount;?></td>
-                                <td>
+                                <td  style="text-align: center;"><?= $sl;?></td>
+                                <td  style="text-align: center;"><?= $value->customer_name;?></td>
+                                <td  style="text-align: center;"><?= $value->grandTotal;?></td>
+                                <td  style="text-align: center;"><?= $value->discount;?></td>
+                                <td  style="text-align: center;"><?= $value->paid_amount;?></td>
+                                <td  style="text-align: center;">
                                     <?php
                                         //after discount then grandtotal and then show the due
                                         $grandTotal = ($value->grandTotal - $value->discount);
@@ -125,7 +130,9 @@
                             </tr>
                         <?php endforeach;?>
                             <tr>
-                                <td colspan="4" style="text-align: right;">Total:</td>
+                                <td colspan="2" style="text-align: right;">Total:</td>
+                                <td style="text-align: center;"><b><?= $netGrandTotal;?></b></td>
+                                <td style="text-align: center;"><b><?= $totalDiscount;?></b></td>
                                 <td style="text-align: center;"><b><?= $total;?></b></td>
                                 <td style="text-align: center;"><b><?php echo $dueTotal;?></b>
                                 </td>
@@ -150,7 +157,7 @@
         var wt = $(window).width();
         var divContents = $("#print_content").html();
         var printWindow = window.open('', '', 'height=' + ht + 'px,width=' + wt + 'px');
-        printWindow.document.write('<html><head><title>f</title>');
+        printWindow.document.write('<html><head><title></title>');
         
         printWindow.document.write('<link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet"/>');
         

@@ -107,9 +107,9 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Product Name</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price/unit</th>
-                        <th scope="col">Total</th>
+                        <th style="text-align: center;" scope="col">Quantity</th>
+                        <th style="text-align: center;" scope="col">Price/unit</th>
+                        <th style="text-align: center;" scope="col">Total</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -117,9 +117,9 @@
                         <tr>
                             <td><?= $i;?></td>
                             <td><?= $value->product_name;?></td>
-                            <td><?= $value->quantity;?></td>
-                            <td><?= $value->sale_price;?></td>
-                            <td><?= $value->quantity * $value->sale_price;?></td>
+                            <td style="text-align: center;"><?= $value->quantity;?></td>
+                            <td style="text-align: center;"><?= $value->sale_price;?></td>
+                            <td style="text-align: center;"><?= $value->quantity * $value->sale_price;?></td>
                         </tr>
                     <?php endforeach;?>
                 </tbody>

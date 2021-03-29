@@ -50,6 +50,7 @@
                 </form>
                 <?php
                     if(isset($_POST['submit'])){
+                        echo '<h5 style="text-align: center; text-decoration: underline;">Product Wise stock report</h5>';
                         $product_name = $_POST['product_names'];
                         
                         $stock_out_result = $this->db->query

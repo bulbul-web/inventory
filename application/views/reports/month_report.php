@@ -79,6 +79,7 @@
                 <?php
                     if(isset($_POST['status'])):
                 ?>
+                <h5 style="text-align: center; text-decoration: underline;">Date Wise Voucher</h5>
                 <center style="color: green; font-size: 18px; font-weight: bold;">
                     <?php
                     if (isset($from_date)):
@@ -102,34 +103,38 @@
                 <table width="100%" border="1">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Voucher No.</th>
-                            <th>Customer Name</th>
-                            <th>Total</th>
-                            <th>Discount</th>
-                            <th>Paid</th>
-                            <th>Due</th>
+                            <th style="text-align: center;">#</th>
+                            <th style="text-align: center;">Voucher No.</th>
+                            <th style="text-align: center;">Customer Name</th>
+                            <th style="text-align: center;">Total</th>
+                            <th style="text-align: center;">Discount</th>
+                            <th style="text-align: center;">Paid</th>
+                            <th style="text-align: center;">Due</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
                             $sl=0;
+                            $netTotal = 0;
+                            $totalDiscount = 0;
                             $dueTotal = 0;
                             $total = 0;
                             foreach ($result as $value): 
-                            $grandTotal = ($value->grandTotal - $value->discount);
-                            $dueTotal += $grandTotal - $value->paid_amount;
-                            $total += $value->paid_amount;
-                            $sl++
+                                $netTotal += $value->grandTotal;
+                                $totalDiscount += $value->discount;
+                                $grandTotal = ($value->grandTotal - $value->discount);
+                                $dueTotal += $grandTotal - $value->paid_amount;
+                                $total += $value->paid_amount;
+                                $sl++
                         ?>
                         <tr>
                             <td><?= $sl;?></td>
-                            <td><?= $value->voucher_id;?></td>
+                            <td style="text-align: center;"><?= $value->voucher_id;?></td>
                             <td><?= $value->customer_name;?></td>
-                            <td><?= $value->grandTotal;?></td>
-                            <td><?= $value->discount;?></td>
-                            <td><?= $value->paid_amount;?></td>
-                            <td>
+                            <td style="text-align: center;"><?= $value->grandTotal;?></td>
+                            <td style="text-align: center;"><?= $value->discount;?></td>
+                            <td style="text-align: center;"><?= $value->paid_amount;?></td>
+                            <td style="text-align: center;">
                                 <?php
                                     //after discount then grandtotal and then show the due
                                     $grandTotal = ($value->grandTotal - $value->discount);
@@ -140,7 +145,9 @@
                         </tr>
                         <?php endforeach;?>
                         <tr>
-                            <td colspan="5" style="text-align: right;">Total:</td>
+                            <td colspan="3" style="text-align: right;">Total:</td>
+                            <td style="text-align: center;"><b><?= $netTotal;?></b></td>
+                            <td style="text-align: center;"><b><?= $totalDiscount;?></b></td>
                             <td style="text-align: center;"><b><?= $total;?></b></td>
                             <td style="text-align: center;"><b><?php echo $dueTotal;?></b>
                             </td>
