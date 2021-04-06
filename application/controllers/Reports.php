@@ -122,6 +122,28 @@ class Reports extends CI_Controller {
         $data['content'] = $this->load->view('reports/product_out_by_customer', $data, true);
         $this->load->view('index', $data);
     }
+    
+    public function datewise_collection_from_customer(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['allCustomer'] = $this->users_model->allCustomer();
+        if(isset($_POST['customer_id'])):
+            $customer_id = $this->input->post('customer_id', true);
+            $data['singleCustomer'] = $this->users_model->singleCustomer($customer_id);
+            $from_date = $this->input->post('from_date', true);
+            $to_date = $this->input->post('to_date', true);
+            $data['datewiseCollectionFromCustomer'] = $this->users_model->datewise_collection_from_customer($customer_id, $from_date, $to_date);
+        endif;
+        $data['title'] = 'Collection Report';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/datewise_collection_from_customer', $data, true);
+        $this->load->view('index', $data);
+    }
 
     public function name_and_month_report(){
         $customer_id = 1;

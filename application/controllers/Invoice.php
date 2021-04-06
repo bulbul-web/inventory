@@ -170,6 +170,7 @@ class Invoice extends CI_Controller {
             $sdata = array();
             $sdata['message'] = 'Invoice Created successfully';
             $this->session->set_userdata($sdata);
+            $this->insert_invoice_history($voucher_id);
             $this->invoice_form_view();
         }else{
             $sdata = array();
@@ -188,10 +189,13 @@ class Invoice extends CI_Controller {
         $voucherId_manual = $voucher_id;//$this->input->post('voucherId_manual', true);
         $customer_id = $this->input->post('customer_id', true);
         $invoice_date = $this->input->post('invoice_date', true);
+        $last_paid_date_manual = $this->input->post('last_paid_date_manual', true);
         $note = $this->input->post('note', true);
         
         $discount = $this->input->post('discount', true);
         $paid_amount = $this->input->post('paid_amount', true);
+        $collection_amount = $this->input->post('collection_amount', true);
+        $paid_amount = $paid_amount + $collection_amount;
         
         $product_id = $this->input->post('product_id', true);
         $quantity = $this->input->post('quantity', true);
@@ -205,13 +209,14 @@ class Invoice extends CI_Controller {
                 'sale_price' => $sale_price[$i],
                 'customer_id' => $customer_id,
                 'invoice_date' => $invoice_date,
+                'last_paid_date_manual' => $last_paid_date_manual,
                 'note' => $note,
                 'discount' => $discount,
                 'paid_amount' => $paid_amount,
                 'voucherId_manual' => $voucherId_manual,
                 'voucher_id' => $voucher_id,
                 'entry_by' => $this->session->userdata('user_name'),
-                // 'entry_date' => date("Y-m-d"),
+                'last_paid_date' => date("Y-m-d"),
                 'status' => $status
             ];
            $data1[] = [
@@ -235,9 +240,32 @@ class Invoice extends CI_Controller {
         $sdata = array();
         $sdata['message'] = 'Invoice Updated successfully';
         $this->session->set_userdata($sdata);
+
+        $this->update_invoice_history($voucher_id);
         redirect(base_url()."edit-invoice/".$voucher_id);
       
         
+    }
+
+    public function insert_invoice_history($voucher_id){
+        $data['voucher_id'] = $voucher_id;
+        $data['customer_id'] = $this->input->post('customer_id', true);
+        $data['last_paid_date'] = date("Y-m-d");
+        $data['last_paid_date_manual'] = $this->input->post('invoice_date', true);
+        $data['entry_by'] = $this->session->userdata('user_name');
+        $data['collection_amount'] = $this->input->post('paid_amount', true);
+        $this->db->insert('tbl_invoice_history', $data);
+    }
+
+    public function update_invoice_history($voucher_id){
+        $invoiceInfo = $this->db->query("SELECT * FROM tbl_invoice WHERE voucher_id = '$voucher_id' GROUP BY voucher_id")->row();
+        $data['voucher_id'] = $invoiceInfo->voucher_id;
+        $data['customer_id'] = $invoiceInfo->customer_id;
+        $data['last_paid_date'] = $invoiceInfo->last_paid_date;
+        $data['last_paid_date_manual'] = $invoiceInfo->last_paid_date_manual;
+        $data['entry_by'] = $invoiceInfo->entry_by;
+        $data['collection_amount'] = $this->input->post('collection_amount', true);
+        $this->db->insert('tbl_invoice_history', $data);
     }
     
     public function invoice_single_details($voucher_id)

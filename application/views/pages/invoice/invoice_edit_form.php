@@ -105,6 +105,16 @@
                         </div>
                       </div>
                     </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label class="col-form-label">Collection Date</label>
+                                <input type="text" id="datepicker_cltn_dt_mnl" name="last_paid_date_manual" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 
                 <div class="row">
@@ -175,7 +185,14 @@
                                 <tr>
                                     <td colspan="3" class="text-right"><b>Paid Amount:</b></td> 
                                     <td colspan="2" class="text-right">
-                                        <input id="paidAmount" onkeyup="calculteDue(this.value)" name="paid_amount" value="<?= $value->paid_amount;?>" type="number" step=any required="required" class="form-control w-100 text-center">
+                                        <input id="paidAmount" onkeyup="calculteDue(this.value)" value="<?= $value->paid_amount;?>" type="number" step=any required="required" class="form-control w-100 text-center" disabled="disabled">
+                                        <input name="paid_amount" value="<?= $value->paid_amount;?>" type="hidden" step=any required="required" class="form-control w-100 text-center">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-right"><b>Collection</b></td>
+                                    <td colspan="2" class="text-right">
+                                        <input name="collection_amount" type="number" step=any required="required" class="form-control w-100 text-center" value="0.00" />
                                     </td>
                                 </tr>
                                 <tr class="dueArea">
@@ -216,6 +233,7 @@ $(document).ready(function(){
     $(".dueArea").hide();
     $(".duePaid").hide();
     $( "#datepicker" ).datepicker({dateFormat: "yy-mm-dd"});
+    $( "#datepicker_cltn_dt_mnl" ).datepicker({dateFormat: "yy-mm-dd"});
 
     //var basePath = $("#base_path").val();
     $("#customer_name").autocomplete({

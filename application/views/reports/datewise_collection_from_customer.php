@@ -21,7 +21,7 @@
     </div>
     <div class="col-sm-3">
         <div class="top-button-area">
-            <a class="btn btn-primary m-1" href="<?php echo base_url();?>month-report"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+            <a class="btn btn-primary m-1" href="<?php echo base_url();?>datewise-collection-from-customer"><i class="fa fa-retweet" aria-hidden="true"></i></a>
         </div>
      </div>
 </div>
@@ -30,9 +30,9 @@
 <div class="row">
 <div class="col-lg-12">
   <div class="card">
-      <div class="card-header">Customer Wise Products Report</div>
+      <div class="card-header">Datewise Collection from customer</div>
     <div class="card-body">
-        <?php echo form_open_multipart('product-out-by-customer', 'name="product-out-by-customer" id="productOutByCustomer" autocomplete="off"');?>
+        <?php echo form_open_multipart('datewise-collection-from-customer', 'name="datewise-collection-from-customer" id="datewiseCollectionFromCustomer" autocomplete="off"');?>
         <div class="row"> 
             <div class="col-md-4">
                 <div class="form-group row">
@@ -82,7 +82,7 @@
                 <?php
                     if(isset($_POST['customer_id'])):
                 ?>
-                <h5 style="text-align: center; text-decoration: underline;">Product out by customer</h5>
+                <h5 style="text-align: center; text-decoration: underline;">Datewise Collection from customer</h5>
                 <center style="color: green; font-size: 18px; font-weight: bold;">
                     (<?php echo $singleCustomer->customer_name;?>)<br>
                     Phone no: <?php echo $singleCustomer->customer_mobile;?><br>
@@ -103,22 +103,28 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Product Name</th>
-                            <th>Total Quantity</th>
+                            <th>Collection Date</th>
+                            <th>Paid Amount</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
                             $sl=0;
-                            foreach ($customerWiseProductInfo as $value):
-                            $sl++
+                            $totalCollection = 0;
+                            foreach ($datewiseCollectionFromCustomer as $value):
+                                $totalCollection += $value->collection_amount;
+                                $sl++
                         ?>
                         <tr>
-                            <td><?= $sl;?></td>
-                            <td><?= $value->product_name;?></td>
-                            <td><?= $value->totalQuantity;?></td>
+                            <td><?php echo $sl;?></td>
+                            <td><?php echo $value->last_paid_date_manual;?></td>
+                            <td><?php echo $value->collection_amount;?></td>
                         </tr>
                         <?php endforeach;?>
+                        <tr>
+                            <td colspan="2" style="text-align: right"><b>Total:</b></td>
+                            <td><?php echo $totalCollection;?></td>
+                        </tr>
                     </tbody>
                 </table>
                 <?php endif;?>
