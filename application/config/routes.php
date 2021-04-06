@@ -137,6 +137,7 @@ $route['delete-loan/(.+)'] = 'loan/delete_loan/$1';
 
 $route['month-report'] = 'reports/month_report';
 $route['stock-report'] = 'reports/stock_report';
+$route['datewise-stock-report'] = 'reports/datewise_stock_report';
 $route['all-products-stock-report'] = 'reports/all_products_stock_report';
 $route['product-out-by-customer'] = 'reports/product_out_by_customer';
 $route['name-month-report'] = 'reports/name_and_month_report';

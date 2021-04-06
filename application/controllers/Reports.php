@@ -72,6 +72,20 @@ class Reports extends CI_Controller {
         $data['content'] = $this->load->view('reports/stock_report', $data, true);
         $this->load->view('index', $data);
     }
+    
+    public function datewise_stock_report(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['title'] = 'Stock Report';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/datewise_stock_report', $data, true);
+        $this->load->view('index', $data);
+    }
 
     public function all_products_stock_report(){
         $data = array();
