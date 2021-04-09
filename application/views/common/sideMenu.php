@@ -154,6 +154,38 @@
    </a>
 
  </li>
+
+
+ <li>
+    <a href="javaScript:void();" class="waves-effect">
+      <i class="fa fa-money" aria-hidden="true"></i>
+      <span>Assign & Collection</span> <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="sidebar-submenu">
+        
+        
+        <li>
+            <a href="<?php echo base_url('sell-list-from-common-customer');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-money"></i> <span>Assign Amount</span> 
+            </a>
+        </li>
+        
+        <li>
+            <a href="<?php echo base_url('amount-recieved-list-from-common-customer');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-money"></i> <span>Recived Amount</span> 
+            </a>
+        </li>
+
+        <li>
+            <a href="<?php echo base_url('assign-collection-report-section');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-line-chart" aria-hidden="true"></i> <span>Report</span> 
+            </a>
+        </li>
+        
+    </ul>
+  </li>
+
+
  <li>
    <a href="<?php echo base_url('loan');?>" class="waves-effect">
      <i class="zmdi zmdi-money-box"></i> <span>Loan</span> 
@@ -183,7 +215,7 @@
  
  <li>
     <a href="javaScript:void();" class="waves-effect">
-      <i class="fa fa-line-chart" aria-hidden="true"></i>
+      <i class="fa fa-user" aria-hidden="true"></i>
       <span>User</span> <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="sidebar-submenu">
@@ -191,13 +223,12 @@
         
         <li>
             <a href="<?php echo base_url('all-users');?>" class="waves-effect">
-              <i aria-hidden="true" class="fa fa-area-chart"></i> <span>All users</span> 
+              <i aria-hidden="true" class="fa fa-user-o"></i> <span>All users</span> 
             </a>
         </li>
         
     </ul>
   </li>
-
 
   <li>
    <a href="<?php echo base_url('qrcode');?>" class="waves-effect">

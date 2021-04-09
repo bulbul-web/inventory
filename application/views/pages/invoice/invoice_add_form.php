@@ -11,9 +11,13 @@
     </ol>
     </div>
     <div class="col-sm-3">
-        
-
-     </div>
+        <div class="top-button-area">
+            <a class="btn btn-primary m-1" href="<?php echo base_url('invoice');?>"><i aria-hidden="true" class="fa fa-arrow-left"></i> Back</a>
+        </div>
+        <div class="top-button-area">
+            <a class="btn btn-primary m-1" href="<?php echo base_url('invoice-form');?>"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+        </div>
+    </div>
 </div>
 <!-- End Breadcrumb-->
 
@@ -39,12 +43,12 @@
             
             
             
-            <!--<button type="button" class="btn btn-primary" onclick="showarea()">Customer</button>-->
-            <!--<button type="button" class="btn btn-danger" onclick="hiddenarea()">Without Customer</button>-->
+            <button type="button" class="btn btn-primary" onclick="showarea()">Customer</button>
+            <button type="button" class="btn btn-danger" onclick="hiddenarea()">Common Customer</button>
             
             
             <?php echo form_open('save-invoice', 'name="save-invoice" id="saveInvoice"');?>
-<!--            <label>Vouser ID:</label><input type="text" name="voucherId_manual" value=""/>-->
+           <!-- <label>Vouser ID:</label><input type="text" class="form-control form-control-rounded" name="voucherId_manual" value="" required="required"/> -->
             
                 <div class="row hideArea">
                     <div class="col-md-4">
@@ -157,7 +161,7 @@
                                 <tr>
                                     <td colspan="3" class="text-right"><b>Paid Amount:</b></td> 
                                     <td colspan="2" class="text-right">
-                                        <input id="paidAmount" value="" onkeyup="calculteDue(this.value)" name="paid_amount" type="number" step=any required="required" class="form-control w-100 text-center">
+                                        <input id="paidAmount" value="0" onkeyup="calculteDue(this.value)" name="paid_amount" type="number" step=any required="required" class="form-control w-100 text-center">
                                     </td>
                                 </tr>
                                 <tr class="dueArea">

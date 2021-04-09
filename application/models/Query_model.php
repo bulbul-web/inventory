@@ -191,7 +191,10 @@ class Query_model extends CI_Model {
         $this->db->update('tbl_stock_in', $data);
     }
     
-    
+    public function all_Customer_active(){
+        $result = $this->db->query("SELECT * FROM tbl_customer WHERE customer_status = 1 ")->result();
+        return $result;
+    }
     
     public function viewAllCustomers(){
         $result = $this->db->select('*')
@@ -229,6 +232,30 @@ class Query_model extends CI_Model {
         $this->db->delete('tbl_pack_size');
     }
     
+    public function update_assign_sell($data){
+        $this->db->where('id', $data['id']);
+        $this->db->update('tbl_cltn_frm_cmn_cstmr', $data);
+    }
+    
+    public function update_received_amount($data){
+        $this->db->where('id', $data['id']);
+        $this->db->update('tbl_cltn_frm_cmn_cstmr', $data);
+    }
+
+    public function delete_assign_amount($assign_id){
+        $this->db->set('status', '0');
+        $this->db->set('delete_status', 'deleted');
+        $this->db->where('id', $assign_id);
+        $this->db->update('tbl_cltn_frm_cmn_cstmr');
+    }
+    
+    public function delete_received_amount($received_id){
+        $this->db->set('status', '0');
+        $this->db->set('delete_status', 'deleted');
+        $this->db->where('id', $received_id);
+        $this->db->update('tbl_cltn_frm_cmn_cstmr');
+    }
+    
     
     
     public function viewAllCustomersMatch($customer_name){
@@ -253,11 +280,39 @@ class Query_model extends CI_Model {
 
           
     }
+
+    public function view_all_sell_assign_list(){
+        $result = $this->db->query("SELECT a.*, b.customer_name FROM tbl_cltn_frm_cmn_cstmr a, tbl_customer b WHERE a.customer_id = b.customer_id AND NOT (a.delete_status <=> 'deleted') AND a.trans_status = 'assign' ORDER BY a.id DESC")->result();
+        return $result;
+    }
+    
+    public function view_all_sell_received_list(){
+        $result = $this->db->query("SELECT a.*, b.customer_name FROM tbl_cltn_frm_cmn_cstmr a, tbl_customer b WHERE a.customer_id = b.customer_id AND NOT (a.delete_status <=> 'deleted') AND a.trans_status = 'received' ORDER BY a.id DESC")->result();
+        return $result;
+    }
+
+    public function view_sell_assign_single($assign_id){
+        $result = $this->db->query("SELECT * FROM tbl_cltn_frm_cmn_cstmr WHERE id = '$assign_id' ")->row();
+        return $result;
+    }
+    
+    public function view_sell_received_single($received_id){
+        $result = $this->db->query("SELECT * FROM tbl_cltn_frm_cmn_cstmr WHERE id = '$received_id' ")->row();
+        return $result;
+    }
     
     
     
     public function saveCustomerData($data){
         $this->db->insert('tbl_customer', $data);
+    }
+    
+    public function save_assign_sell($data){
+        $this->db->insert('tbl_cltn_frm_cmn_cstmr', $data);
+    }
+    
+    public function save_received_amount($data){
+        $this->db->insert('tbl_cltn_frm_cmn_cstmr', $data);
     }
     
     
@@ -518,6 +573,16 @@ class Query_model extends CI_Model {
 
     public function qrcodeList(){
         $result = $this->db->query("SELECT * FROM tbl_qrcode_info")->result();
+        return $result;
+    }
+
+    public function customerwise_assign_collection_report($customer_id, $from_date, $to_date){
+        $result = $this->db->query("SELECT a.trns_date, a.customer_id, a.customer_name,a.note, a.sell_amount, a.recived_amount,(a.sell_amount - a.recived_amount) AS due FROM (select b.trns_date, b.customer_id, c.customer_name, b.note, b.sell_amount, b.recived_amount from tbl_cltn_frm_cmn_cstmr b , tbl_customer c where c.customer_id = b.customer_id AND b.trns_date BETWEEN '$from_date' AND '$to_date' AND NOT (b.status <=> '0') AND NOT (b.delete_status <=> 'deleted') AND b.customer_id = '$customer_id') a")->result();
+        return $result;
+    }
+    
+    public function customerwise_assign_collection_report_before_certain_date($customer_id, $from_date){
+        $result = $this->db->query("SELECT a.trns_date, a.customer_id, a.customer_name,a.note, a.sell_amount, a.recived_amount,sum(a.sell_amount - a.recived_amount) AS Totaldue FROM (select b.trns_date, b.customer_id, c.customer_name, b.note, b.sell_amount, b.recived_amount from tbl_cltn_frm_cmn_cstmr b , tbl_customer c where c.customer_id = b.customer_id AND b.trns_date < '$from_date' AND NOT (b.status <=> '0') AND NOT (b.delete_status <=> 'deleted') AND b.customer_id = '$customer_id') a")->row();
         return $result;
     }
 

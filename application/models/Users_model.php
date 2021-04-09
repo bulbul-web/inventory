@@ -68,7 +68,7 @@ class Users_model extends CI_Model {
     } 
     
     public function datewise_collection_from_customer($customer_id, $from_date, $to_date){
-        $result = $this->db->query("SELECT a.*, b.customer_name FROM tbl_invoice_history a, tbl_customer b WHERE a.customer_id = b.customer_id AND a.last_paid_date_manual BETWEEN '$from_date' AND '$to_date' AND a.customer_id = '$customer_id' ")->result();
+        $result = $this->db->query("SELECT a.*, b.customer_name FROM tbl_invoice_history a, tbl_customer b WHERE a.customer_id = b.customer_id AND a.last_paid_date_manual BETWEEN '$from_date' AND '$to_date' AND NOT (a.collection_amount <=> 0) AND a.customer_id = '$customer_id' ")->result();
         return $result;
     } 
 

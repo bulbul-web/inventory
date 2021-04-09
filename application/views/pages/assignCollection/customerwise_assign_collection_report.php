@@ -21,7 +21,7 @@
     </div>
     <div class="col-sm-3">
         <div class="top-button-area">
-            <a class="btn btn-primary m-1" href="<?php echo base_url();?>datewise-collection-from-customer"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+            <a class="btn btn-primary m-1" href="<?php echo base_url();?>month-report"><i class="fa fa-retweet" aria-hidden="true"></i></a>
         </div>
      </div>
 </div>
@@ -30,9 +30,15 @@
 <div class="row">
 <div class="col-lg-12">
   <div class="card">
-      <div class="card-header">Datewise Collection from customer</div>
+      <div class="card-header">
+        <?php
+            if(isset($title)){
+                echo $title;
+            }
+        ?>
+      </div>
     <div class="card-body">
-        <?php echo form_open_multipart('datewise-collection-from-customer', 'name="datewise-collection-from-customer" id="datewiseCollectionFromCustomer" autocomplete="off"');?>
+        <?php echo form_open_multipart('customerwise-assign-collection-report', 'name="customerwise-assign-collection-report" id="customerwiseAssignCollectionReport" autocomplete="off"');?>
         <div class="row"> 
             <div class="col-md-4">
                 <div class="form-group row">
@@ -82,7 +88,7 @@
                 <?php
                     if(isset($_POST['customer_id'])):
                 ?>
-                <h5 style="text-align: center; text-decoration: underline;">Datewise Collection from customer</h5>
+                <h5 style="text-align: center; text-decoration: underline;">Customerwise assign collection report</h5>
                 <center style="color: green; font-size: 18px; font-weight: bold;">
                     (<?php echo $singleCustomer->customer_name;?>)<br>
                     Phone no: <?php echo $singleCustomer->customer_mobile;?><br>
@@ -98,34 +104,49 @@
                     ?>
                 </center>
                 <br>
-                
+                <p style="text-align: right; font-weight: bold; font-size: 16px;">Before Certain Date amount: <?php if(empty($customerWiseAssgnClctnBfrCrtnDate->Totaldue)){echo '0';}else{echo $customerWiseAssgnClctnBfrCrtnDate->Totaldue;}?> &nbsp; &nbsp; </p>
                 <table width="100%" border="1" style="text-align: center;">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Collection Date</th>
-                            <th>Voucher ID</th>
-                            <th>Paid Amount</th>
+                            <th>Date</th>
+                            <th>Note</th>
+                            <th>Sell Amount</th>
+                            <th>Received Amount</th>
+                            <th>Balance</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
                             $sl=0;
-                            $totalCollection = 0;
-                            foreach ($datewiseCollectionFromCustomer as $value):
-                                $totalCollection += $value->collection_amount;
-                                $sl++
+                            $balance = $customerWiseAssgnClctnBfrCrtnDate->Totaldue;
+                            $totalSell_amount = 0;
+                            $totalRecived_amount = 0;
+                            $totalDue = 0;
+                            foreach ($customerWiseAssignCollection as $value):
+                                $totalSell_amount += $value->sell_amount;
+                                $totalRecived_amount += $value->recived_amount;
+                                $totalDue += $value->due;
+                            $sl++
                         ?>
                         <tr>
-                            <td><?php echo $sl;?></td>
-                            <td><?php echo $value->last_paid_date_manual;?></td>
-                            <td><?php echo $value->voucher_id;?></td>
-                            <td><?php echo $value->collection_amount;?></td>
+                            <td><?= $sl;?></td>
+                            <td><?= $value->trns_date;?></td>
+                            <td><?= $value->note;?></td>
+                            <td><?= $value->sell_amount;?></td>
+                            <td><?= $value->recived_amount;?></td>
+                            <td>
+                                <?php
+                                    echo $balance = ($balance + $value->sell_amount) - $value->recived_amount;
+                                ?>
+                            </td>
                         </tr>
                         <?php endforeach;?>
                         <tr>
-                            <td colspan="3" style="text-align: right"><b>Total:</b></td>
-                            <td><?php echo $totalCollection;?></td>
+                            <td colspan="3" style="text-align: right;"><b>Total:</b></td>
+                            <td><b><?php echo $netTotalSell = $totalSell_amount + $customerWiseAssgnClctnBfrCrtnDate->Totaldue;?></b></td>
+                            <td><b><?php echo $totalRecived_amount;?></b></td>
+                            <td><b>--</b></td>
                         </tr>
                     </tbody>
                 </table>
@@ -138,7 +159,7 @@
   </div>
 </div>
 </div><!-- End Row-->
-<a href="<?php echo base_url('invoice');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Invoice List</a><br>
+<a href="<?php echo base_url('assign-collection-report-section');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Report Section</a><br>
 <button id="btnPrint" class="btn btn-primary" style="float: right;"> <i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</button>
 <script>
     $("#btnPrint").on("click", function() {

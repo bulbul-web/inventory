@@ -1,6 +1,6 @@
 <div class="row mt-3">
 
-  <div class="col-12 col-lg-6 col-xl-2">
+  <div class="col-12 col-lg-6 col-xl-3">
       <a href="<?php echo base_url()?>products">
         <div class="card bg-pattern-primary">
           <div class="card-body">
@@ -24,7 +24,7 @@
     </a>
   </div>
 
-<div class="col-12 col-lg-6 col-xl-2">
+<div class="col-12 col-lg-6 col-xl-3">
   <a href="<?php echo base_url()?>suppliers">
     <div class="card bg-pattern-danger">
       <div class="card-body">
@@ -48,7 +48,7 @@
   </a>
 </div>
 
-<div class="col-12 col-lg-6 col-xl-2">
+<div class="col-12 col-lg-6 col-xl-3">
   <a href="<?php echo base_url()?>product-type">
     <div class="card bg-pattern-success">
       <div class="card-body">
@@ -72,7 +72,7 @@
   </a>
 </div>
 
-<div class="col-12 col-lg-6 col-xl-2">
+<div class="col-12 col-lg-6 col-xl-3">
   <a href="<?php echo base_url()?>customers">
     <div class="card bg-pattern-warning">
       <div class="card-body">
@@ -99,17 +99,74 @@
 </div><!--End Row-->
 
 
+<div class="row">
+
+
+  <div class="col-12 col-lg-6 col-xl-4">
+    <a href="<?php echo base_url()?>invoice">
+      <div class="card bg-pattern-success">
+        <div class="card-body">
+          <div class="media">
+          <div class="media-body text-left">
+            <h4 class="text-white">
+                <?php
+                $totalInvoiceCommonCustomer = $this->db->query("SELECT c.customer_name, i.voucher_id, sum(i.quantity * i.sale_price) as grandTotal, i.paid_amount, i.discount, i.invoice_date, i.status, i.note FROM tbl_customer c, tbl_invoice i WHERE i.customer_id = c.customer_id AND NOT (i.delete_status <=> 'deleted') AND i.customer_id = '1' GROUP BY i.voucher_id ORDER BY i.id DESC")->result();
+                $netTotalAmountCommonCustomer = 0;
+                foreach ($totalInvoiceCommonCustomer as $totalAmountCommonCustomer) {
+                  $netTotalAmountCommonCustomer += $totalAmountCommonCustomer->grandTotal;
+                }
+                echo $netTotalAmountCommonCustomer;
+                ?>
+            </h4>
+            <span class="text-white">Total Sell Amount (Common)</span>
+          </div>
+          <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+            <i class="icon-pie-chart text-white"></i></div>
+        </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+
+  <div class="col-12 col-lg-6 col-xl-4">
+    <a href="<?php echo base_url()?>sell-list-from-common-customer">
+      <div class="card bg-pattern-success">
+        <div class="card-body">
+          <div class="media">
+          <div class="media-body text-left">
+            <h4 class="text-white">
+                <?php
+                $totalAssignAmount = $this->db->query("SELECT *, SUM(sell_amount) AS totalAssignAmount FROM tbl_cltn_frm_cmn_cstmr WHERE trans_status = 'assign' GROUP BY trans_status")->row();
+                echo $totalAssignAmount->totalAssignAmount;
+                ?>
+            </h4>
+            <span class="text-white">Total Assign Amount</span>
+          </div>
+          <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+            <i class="icon-pie-chart text-white"></i></div>
+        </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+    
+</div>
 
 
 <div class="row">
-  <div class="col-lg-12">
+
+  <!-- <div class="col-lg-12">
     <div class="card">
       <div class="card-header text-uppercase">Area chart</div>
       <div class="card-body">
             <canvas id="areaChart" height="110"></canvas>
         </div>
     </div>
-  </div>
+  </div> -->
+
+
   <!-- <div class="col-lg-12">
     <div class="card">
       <div class="card-header text-uppercase">Line chart</div>
@@ -118,4 +175,5 @@
         </div>
     </div>
   </div> -->
+
 </div><!--End Row-->

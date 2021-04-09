@@ -74,7 +74,24 @@ class Reports extends CI_Controller {
     }
     
     public function datewise_stock_report(){
+        if(isset($_POST['status'])){
+            $status = $this->input->post('status', true);
+            $from_date = date("Y-m-d", strtotime($this->input->post('from_date', true)));
+            $to_date = date("Y-m-d", strtotime($this->input->post('to_date', true)));
+        }else{
+            $status = 1;
+            $from_date = date("Y-m-d");
+            $to_date = date("Y-m-d");
+        }
+        $result = $this->db->query
+                (
+                "SELECT a.*, b.product_name, c.pack_size FROM tbl_stock_in a, tbl_product_info b, tbl_pack_size c WHERE a.product_id = b.product_id AND b.pack_size = c.id AND a.bill_date BETWEEN '$from_date' AND '$to_date' AND a.status = '$status'"
+                )->result();
         $data = array();
+        $data['status'] = $status;
+        $data['from_date'] = $from_date;
+        $data['to_date'] = $to_date;
+        $data['result'] = $result;
         $id = $this->session->userdata('user_id');
         $data['userInfo'] = $this->users_model->user_info($id);
         $data['title'] = 'Stock Report';

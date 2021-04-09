@@ -45,7 +45,7 @@
                 <th>Scale</th>
                 <th>Available Quantity</th>
                 <th>Sale Price</th>
-                <th>Date</th>
+                <th>Bill Date</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -108,10 +108,10 @@
                     </td>
                     <td>
                         <?php
-                            if($value->challan_date == ""){
+                            if($value->bill_date == ""){
                                 echo '-';
                             }else{
-                                $date = date_create("$value->challan_date");
+                                $date = date_create("$value->bill_date");
                                 echo date_format($date,"d/m/Y");
                             }
                         ?>

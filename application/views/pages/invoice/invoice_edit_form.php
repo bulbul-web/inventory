@@ -14,6 +14,12 @@
         <div class="top-button-area">
             <a class="btn btn-primary m-1" href="<?php echo base_url('invoice-form');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Add Invoice</a>
         </div>
+        <div class="top-button-area">
+            <a class="btn btn-primary m-1" href="<?php echo base_url('invoice');?>"><i aria-hidden="true" class="fa fa-arrow-left"></i> Back</a>
+        </div>
+        <div class="top-button-area">
+            <a class="btn btn-primary m-1" href="<?php echo base_url().'edit-invoice/'.$voucher_info_customer->voucher_id;?>"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+        </div>
 
      </div>
 </div>

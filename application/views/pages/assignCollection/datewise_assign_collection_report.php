@@ -21,7 +21,7 @@
     </div>
     <div class="col-sm-3">
         <div class="top-button-area">
-            <a class="btn btn-primary m-1" href="<?php echo base_url();?>datewise-collection-from-customer"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+            <a class="btn btn-primary m-1" href="<?php echo base_url();?>datewise-assign-collection-report"><i class="fa fa-retweet" aria-hidden="true"></i></a>
         </div>
      </div>
 </div>
@@ -30,24 +30,22 @@
 <div class="row">
 <div class="col-lg-12">
   <div class="card">
-      <div class="card-header">Datewise Collection from customer</div>
+      <div class="card-header">Datewise Report</div>
     <div class="card-body">
-        <?php echo form_open_multipart('datewise-collection-from-customer', 'name="datewise-collection-from-customer" id="datewiseCollectionFromCustomer" autocomplete="off"');?>
+        <?php echo form_open_multipart('datewise-assign-collection-report', 'name="datewise-assign-collection-report" id="datewiseAssignCollection-report" autocomplete="off"');?>
         <div class="row"> 
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="form-group row">
-                    <label class="col-sm-12 col-form-label">Customers</label>
+                    <label class="col-sm-12 col-form-label">Status</label>
                     <div class="col-sm-12">
-                        <select name="customer_id" class="form-control" required>
-                            <option value="">--Select Customer--</option>
-                            <?php foreach($allCustomer as $value):?>
-                                <option value="<?php echo $value->customer_id;?>"><?php echo $value->customer_name;?></option>
-                            <?php endforeach;?>
+                        <select name="status" class="form-control">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
                         </select>
                     </div>
                   </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group row">
                     <label class="col-sm-12 col-form-label">From Date</label>
                     <div class="col-sm-12">
@@ -55,7 +53,7 @@
                     </div>
                   </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group row">
                     <label class="col-sm-12 col-form-label">To Date</label>
                     <div class="col-sm-12">
@@ -63,7 +61,6 @@
                     </div>
                   </div>
             </div>
-            
             <div class="col-md-2">
                 <div class="form-group row">
                     <label class="col-sm-12 col-form-label">&nbsp;</label>
@@ -80,21 +77,25 @@
         <div class="row">
             <div class="col-md-12">
                 <?php
-                    if(isset($_POST['customer_id'])):
+                    if(isset($_POST['status'])):
                 ?>
-                <h5 style="text-align: center; text-decoration: underline;">Datewise Collection from customer</h5>
                 <center style="color: green; font-size: 18px; font-weight: bold;">
-                    (<?php echo $singleCustomer->customer_name;?>)<br>
-                    Phone no: <?php echo $singleCustomer->customer_mobile;?><br>
-                    Address: <?php echo $singleCustomer->customer_address;?><br>
+                <h5 style="text-align: center; text-decoration: underline;">Datewise Assign & Collection Report</h5>
                     <?php
-                        if (isset($_POST['from_date'])){
-                            echo "From: (" . date("d-m-Y", strtotime($_POST['from_date'])).")";
-                        }
+                    if (isset($_POST['from_date'])):
+                        echo "From: (" . date("d-m-Y", strtotime($_POST['from_date'])).")";
+                    endif;
 
-                        if (isset($_POST['to_date'])){
-                            echo " To (" . date("d-m-Y", strtotime($_POST['to_date'])).")";
-                        }
+                    if (isset($_POST['to_date'])):
+                        echo " To (" . date("d-m-Y", strtotime($_POST['to_date'])).")";
+                    endif;
+                    echo "<br>";
+					 
+                        if($status==1){
+                            echo "--Active--";
+                        }else{
+                            echo "--Inactive--";
+                        };
                     ?>
                 </center>
                 <br>
@@ -103,33 +104,44 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Collection Date</th>
-                            <th>Voucher ID</th>
-                            <th>Paid Amount</th>
+                            <th>Customer Name</th>
+                            <th>Assign Amount</th>
+                            <th>Received Amount</th>
+                            <th>Due</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
                             $sl=0;
-                            $totalCollection = 0;
-                            foreach ($datewiseCollectionFromCustomer as $value):
-                                $totalCollection += $value->collection_amount;
+                            $netAssignAmount = 0;
+                            $netTotalReceived = 0;
+                            $netDue = 0;
+                            foreach ($AllAssignCollectionReport as $value):
+                                $netAssignAmount += $value->assignAmount;
+                                $netTotalReceived += $value->totalReceived;
+                                $netDue += $value->due;
                                 $sl++
                         ?>
                         <tr>
-                            <td><?php echo $sl;?></td>
-                            <td><?php echo $value->last_paid_date_manual;?></td>
-                            <td><?php echo $value->voucher_id;?></td>
-                            <td><?php echo $value->collection_amount;?></td>
+                            <td><?= $sl;?></td>
+                            <td style="text-align: left;"><?= $value->customer_name;?></td>
+                            <td><?= $value->assignAmount;?></td>
+                            <td><?= $value->totalReceived;?></td>
+                            <td><?= $value->due;?></td>
                         </tr>
                         <?php endforeach;?>
                         <tr>
-                            <td colspan="3" style="text-align: right"><b>Total:</b></td>
-                            <td><?php echo $totalCollection;?></td>
+                            <td colspan="2" style="text-align: right;">Total:</td>
+                            <td style="text-align: center;"><b><?php echo $netAssignAmount;?></b></td>
+                            <td style="text-align: center;"><b><?php echo $netTotalReceived;?></b></td>
+                            <td style="text-align: center;"><b><?php echo $netDue;?></b></td>
                         </tr>
                     </tbody>
                 </table>
+                <div>
+                </div>
                 <?php endif;?>
+                
             </div>
         </div>
         </div>
@@ -138,7 +150,7 @@
   </div>
 </div>
 </div><!-- End Row-->
-<a href="<?php echo base_url('invoice');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Invoice List</a><br>
+<a href="<?php echo base_url('assign-collection-report-section');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Report Section</a><br>
 <button id="btnPrint" class="btn btn-primary" style="float: right;"> <i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</button>
 <script>
     $("#btnPrint").on("click", function() {
@@ -147,7 +159,7 @@
         var wt = $(window).width();
         var divContents = $("#print_content").html();
         var printWindow = window.open('', '', 'height=' + ht + 'px,width=' + wt + 'px');
-        printWindow.document.write('<html><head><title></title>');
+        printWindow.document.write('<html><head><title>f</title>');
         
         printWindow.document.write('<link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet"/>');
         

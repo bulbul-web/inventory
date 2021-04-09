@@ -121,14 +121,14 @@ class Invoice extends CI_Controller {
         $voucher_id = $cc; //$coo
         /*generate voucher ID*/
         
-        $voucherId_manual = $voucher_id;//$this->input->post('voucherId_manual', true);
+        $voucherId_manual = $this->input->post('voucherId_manual', true);
         
         // echo $voucher_id.'<br>';
         // echo $voucherId_manual.'<br>';
         // exit();
         $customer_id = $this->input->post('customer_id', true);
         if(empty($customer_id)){
-            $customer_id = 7;
+            $customer_id = 1;
         }else{
             $customer_id = $this->input->post('customer_id', true);
         }
@@ -250,6 +250,11 @@ class Invoice extends CI_Controller {
     public function insert_invoice_history($voucher_id){
         $data['voucher_id'] = $voucher_id;
         $data['customer_id'] = $this->input->post('customer_id', true);
+        if(empty($data['customer_id'])){
+            $data['customer_id'] = 1;
+        }else{
+            $data['customer_id'] = $this->input->post('customer_id', true);
+        }
         $data['last_paid_date'] = date("Y-m-d");
         $data['last_paid_date_manual'] = $this->input->post('invoice_date', true);
         $data['entry_by'] = $this->session->userdata('user_name');

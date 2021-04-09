@@ -221,5 +221,23 @@ $route['qrcode'] = 'QrcodeController/qrcode_generator_by_input';
 $route['qrcode-form'] = 'QrcodeController/qrcode_form';
 $route['save-qrcode'] = 'QrcodeController/save_qrcode';
 
+$route['sell-list-from-common-customer'] = 'AssignCollection/sell_list_from_common_customer';
+$route['sell-from-common-customer-add'] = 'AssignCollection/sell_from_common_customer_add_form';
+$route['save-assign-sell'] = 'AssignCollection/save_assign_sell';
+$route['edit-assign-amount/(:any)'] = 'AssignCollection/edit_assign_amount_form/$1';
+$route['update-assign-sell'] = 'AssignCollection/update_assign_sell';
+$route['delete-assign-amount/(:any)'] = 'AssignCollection/delete_assign_amount/$1';
+
+$route['amount-recieved-list-from-common-customer'] = 'AssignCollection/amount_recieved_list_from_common_customer';
+$route['amount-recieved-common-customer-add'] = 'AssignCollection/amount_recieved_common_customer_add_form';
+$route['save-received-amount'] = 'AssignCollection/save_received_amount';
+$route['edit-received-amount/(:any)'] = 'AssignCollection/edit_received_amount_form/$1';
+$route['update-received-amount'] = 'AssignCollection/update_received_amount';
+$route['delete-received-amount/(:any)'] = 'AssignCollection/delete_received_amount/$1';
+
+$route['assign-collection-report-section'] = 'AssignCollection/assign_collection_report_section';
+$route['datewise-assign-collection-report'] = 'AssignCollection/datewise_assign_collection_report';
+$route['customerwise-assign-collection-report'] = 'AssignCollection/customerwise_assign_collection_report';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
