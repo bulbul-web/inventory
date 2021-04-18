@@ -73,7 +73,7 @@ class Users_model extends CI_Model {
     } 
     
     public function datewise_collection($from_date, $to_date){
-        $result = $this->db->query("SELECT a.*, SUM(a.collection_amount) as totalCollection, b.customer_name FROM tbl_invoice_history a, tbl_customer b WHERE a.customer_id = b.customer_id AND a.last_paid_date_manual BETWEEN '$from_date' AND '$to_date' AND NOT (a.collection_amount <=> 0) GROUP BY a.last_paid_date_manual, a.customer_id")->result();
+        $result = $this->db->query("SELECT a.*, SUM(a.collection_amount) as totalCollection, b.customer_name FROM tbl_invoice_history a, tbl_customer b WHERE a.customer_id = b.customer_id AND a.last_paid_date_manual BETWEEN '$from_date' AND '$to_date' AND NOT (a.collection_amount <=> 0) GROUP BY a.customer_id")->result();
         return $result;
     } 
 

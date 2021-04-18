@@ -88,7 +88,6 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Collection Date</th>
                             <th>Customer Name</th>
                             <th>Paid Amount</th>
                         </tr>
@@ -103,13 +102,12 @@
                         ?>
                         <tr>
                             <td><?php echo $sl;?></td>
-                            <td><?php echo $value->last_paid_date_manual;?></td>
                             <td><?php echo $value->customer_name;?></td>
                             <td><?php echo $value->totalCollection;?></td>
                         </tr>
                         <?php endforeach;?>
                         <tr>
-                            <td colspan="3" style="text-align: right"><b>Total:</b></td>
+                            <td colspan="2" style="text-align: right"><b>Total:</b></td>
                             <td><?php echo $netTotalCollection;?></td>
                         </tr>
                     </tbody>
