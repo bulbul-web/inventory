@@ -104,7 +104,7 @@
                     ?>
                 </center>
                 <br>
-                <p style="text-align: right; font-weight: bold; font-size: 16px;">Before Certain Date amount: <?php if(empty($customerWiseAssgnClctnBfrCrtnDate->Totaldue)){echo '0';}else{echo $customerWiseAssgnClctnBfrCrtnDate->Totaldue;}?> &nbsp; &nbsp; </p>
+                <p style="text-align: right; font-weight: bold; font-size: 16px;">Previous Due: <?php if(empty($customerWiseAssgnClctnBfrCrtnDate->Totaldue)){echo '0';}else{echo round($customerWiseAssgnClctnBfrCrtnDate->Totaldue, 2);}?> &nbsp; &nbsp; </p>
                 <table width="100%" border="1" style="text-align: center;">
                     <thead>
                         <tr>
@@ -119,7 +119,7 @@
                     <tbody>
                         <?php 
                             $sl=0;
-                            $balance = $customerWiseAssgnClctnBfrCrtnDate->Totaldue;
+                            $balance = round($customerWiseAssgnClctnBfrCrtnDate->Totaldue, 2);
                             $totalSell_amount = 0;
                             $totalRecived_amount = 0;
                             $totalDue = 0;

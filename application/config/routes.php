@@ -147,6 +147,7 @@ $route['datewise-collection-from-customer'] = 'reports/datewise_collection_from_
 
 $route['account-reports-section'] = 'reports/account_reports_section';
 $route['date-wise-transaction-report'] = 'reports/date_wise_transaction_report';
+$route['transactionwise-voucher-report'] = 'reports/transactionwise_voucher_report';
 
 $route['expense-report-section'] = 'reports/expense_report_section';
 $route['datewise-expense'] = 'reports/datewise_expense';

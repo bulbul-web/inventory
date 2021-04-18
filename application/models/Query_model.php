@@ -196,6 +196,16 @@ class Query_model extends CI_Model {
         return $result;
     }
     
+    public function all_transaction_active(){
+        $result = $this->db->query("SELECT * FROM tbl_transactionhead WHERE active = 1 ")->result();
+        return $result;
+    }
+
+    public function single_transaction($TrasactionHeadID){
+        $result = $this->db->query("SELECT * FROM tbl_transactionhead WHERE TransactionHeadID = '$TrasactionHeadID' ")->row();
+        return $result;
+    }
+    
     public function viewAllCustomers(){
         $result = $this->db->select('*')
                         ->from('tbl_customer')
@@ -583,6 +593,11 @@ class Query_model extends CI_Model {
     
     public function customerwise_assign_collection_report_before_certain_date($customer_id, $from_date){
         $result = $this->db->query("SELECT a.trns_date, a.customer_id, a.customer_name,a.note, a.sell_amount, a.recived_amount,sum(a.sell_amount - a.recived_amount) AS Totaldue FROM (select b.trns_date, b.customer_id, c.customer_name, b.note, b.sell_amount, b.recived_amount from tbl_cltn_frm_cmn_cstmr b , tbl_customer c where c.customer_id = b.customer_id AND b.trns_date < '$from_date' AND NOT (b.status <=> '0') AND NOT (b.delete_status <=> 'deleted') AND b.customer_id = '$customer_id') a")->row();
+        return $result;
+    }
+
+    public function transactionwise_voucher_report($TrasactionHeadID, $from_date, $to_date){
+        $result = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, SUM(a.DR) as totalDR FROM tbl_transactions a WHERE a.TrasactionHeadID = '1' AND a.TrnDate BETWEEN '2021-03-14' AND '2021-04-09' GROUP BY a.VoucherID")->result();
         return $result;
     }
 

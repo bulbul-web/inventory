@@ -331,7 +331,7 @@ class Reports extends CI_Controller {
         }
         $result = $this->db->query
                 (
-                "SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID AND NOT (a.delete_status <=> 'deleted') AND a.TrnDate BETWEEN '$from_date' AND '$to_date' GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC"
+                "SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID AND NOT (a.status <=> '0') AND NOT (a.delete_status <=> 'deleted') AND a.TrnDate BETWEEN '$from_date' AND '$to_date' AND a.status = '$status' GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC"
                 )->result();
         $data = array();
         
@@ -349,6 +349,29 @@ class Reports extends CI_Controller {
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('reports/date_wise_transaction_report', $data, true);
+        $this->load->view('index', $data);
+    }
+
+    public function transactionwise_voucher_report(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['allTransaction'] = $this->query_model->all_transaction_active();
+        if(isset($_POST['TrasactionHeadID'])):
+            $TrasactionHeadID = $this->input->post('TrasactionHeadID', true);
+            $data['singleTransaction'] = $this->query_model->single_transaction($TrasactionHeadID);
+            $from_date = $this->input->post('from_date', true);
+            $to_date = $this->input->post('to_date', true);
+            // $data['trnsWiseVoucherReport'] = $this->query_model->transactionwise_voucher_report($TrasactionHeadID, $from_date, $to_date);
+            // $data['trnsWiseVoucherAmountBfrCrtnDate'] = $this->query_model->transactionwise_voucher_report_before_certain_date($TrasactionHeadID, $from_date);
+        endif;
+        $data['title'] = 'Transactionwise voucher report';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/transactionwise_voucher_report', $data, true);
         $this->load->view('index', $data);
     }
     
