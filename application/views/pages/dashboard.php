@@ -99,6 +99,8 @@
 </div><!--End Row-->
 
 
+
+<!-----Start Common sell and assign at-a-glance------->
 <div class="row">
 
 
@@ -151,8 +153,30 @@
     </a>
   </div>
 
+  <div class="col-12 col-lg-6 col-xl-4">
+    <a href="<?php echo base_url()?>sell-list-from-common-customer">
+      <div class="card bg-pattern-success">
+        <div class="card-body">
+          <div class="media">
+          <div class="media-body text-left">
+            <h4 class="text-white">
+                <?php
+                echo $netTotalAmountCommonCustomer - $totalAssignAmount->totalAssignAmount;
+                ?>
+            </h4>
+            <span class="text-white">Need to assign</span>
+          </div>
+          <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+            <i class="icon-pie-chart text-white"></i></div>
+        </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
     
 </div>
+<!-----END Common sell and assign at-a-glance------->
 
 
 <div class="row">
