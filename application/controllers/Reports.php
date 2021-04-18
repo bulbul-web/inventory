@@ -140,6 +140,25 @@ class Reports extends CI_Controller {
         $this->load->view('index', $data);
     }
     
+    public function datewise_product_out(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        if(isset($_POST['from_date'])):
+            $from_date = $this->input->post('from_date', true);
+            $to_date = $this->input->post('to_date', true);
+            $data['datewiseProductStockOut'] = $this->users_model->datewise_product_out($from_date, $to_date);
+        endif;
+        $data['title'] = 'Product stock out datewise';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/datewise_product_out', $data, true);
+        $this->load->view('index', $data);
+    }
+    
     public function datewise_collection_from_customer(){
         $data = array();
         $id = $this->session->userdata('user_id');
