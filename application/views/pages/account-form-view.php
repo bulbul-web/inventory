@@ -44,7 +44,7 @@
                         <div class="form-group row">
                           <label  class="col-sm-3 col-form-label">User Email</label>
                           <div class="col-sm-9">
-                              <input type="email" value="<?php echo $userInfo->user_email;?>" name="user_email"  class="form-control form-control-rounded">
+                              <input type="text" value="<?php echo $userInfo->user_email;?>" name="user_email"  class="form-control form-control-rounded">
                               <?php echo form_error('user_email', '<div class="error">', '</div>'); ?>
                           </div>
                         </div>

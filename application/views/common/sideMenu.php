@@ -1,7 +1,8 @@
 <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
 <div class="brand-logo">
  <a href="<?php echo base_url();?>">
-  <img src="<?php echo base_url();?>assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+  <?php $shopInfo = $this->db->query("SELECT * FROM tbl_user WHERE user_id = $userInfo->user_id")->row();?>
+  <img src="<?php echo base_url().$shopInfo->file;?>" class="logo-icon" alt="logo icon" style="width: 20px;">
   <h5 class="logo-text">POS</h5>
 </a>
     </div>

@@ -24,7 +24,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Account Sub Head list';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/account_sub_head_list', $data, true);
@@ -40,7 +40,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Sub Sub Head List';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/account_sub_sub_head_list', $data, true);
@@ -56,7 +56,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Tansaction Head List';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/acnt_tansaction_head_list', $data, true);
@@ -72,7 +72,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Opening Balance List';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/opening_balance', $data, true);
@@ -89,7 +89,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Transaction List';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/transaction_list', $data, true);
@@ -106,7 +106,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Journal Transaction List';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/journal_transaction_list', $data, true);
@@ -123,7 +123,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Fiscal Year';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/fiscal_year', $data, true);
@@ -138,7 +138,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Account Sub Head Add';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/account_sub_head_add', $data, true);
@@ -154,7 +154,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Account Sub Head Add';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/sub_head_edit_form', $data, true);
@@ -169,7 +169,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Account Sub Sub Head Add';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/account_sub_sub_head_add', $data, true);
@@ -184,7 +184,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Account Tansaction Head Add';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/account_tansaction_head_add', $data, true);
@@ -199,7 +199,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Fiscal Year Add';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/fiscal_year_add', $data, true);
@@ -214,7 +214,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Opening Balance Add';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/account_opening_blnce_add', $data, true);
@@ -229,7 +229,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Transaction Add';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         // $data['content'] = $this->load->view('pages/accounts/account_transaction_add', $data, true);
@@ -247,7 +247,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Journal Transaction Add';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         // $data['content'] = $this->load->view('pages/accounts/account_transaction_add', $data, true);
@@ -1098,7 +1098,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Transaction Update';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/account_transaction_add_mltiple_trns_all_edit_form', $data, true);
@@ -1116,7 +1116,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Transaction Update';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/edit_journal_transaction_account_form', $data, true);
@@ -1475,7 +1475,7 @@ class Account extends CI_Controller {
         $data['title'] = 'Voucher Details';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/accounts/DrCr_Voucher_Details', $data, true);

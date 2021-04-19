@@ -29,7 +29,7 @@ public function invoice()
         $data['title'] = 'Invoice';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/invoice/invoice', $data, true);
@@ -47,7 +47,7 @@ public function invoice()
         $data['title'] = 'Save Invoice';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/invoice/invoice_add_form', $data, true);
@@ -64,7 +64,7 @@ public function invoice()
         $data['title'] = 'Update Invoice';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/invoice/invoice_edit_form', $data, true);
@@ -238,7 +238,7 @@ public function invoice()
         $data['title'] = 'Invoice Details';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/invoice/invoice_single_view', $data, true);

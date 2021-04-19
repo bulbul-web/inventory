@@ -47,7 +47,7 @@
 			  <div class="form-group">
 			   <div class="position-relative has-icon-right">
 				  <label class="sr-only">Email</label>
-				  <input type="Email" name="user_email" class="form-control form-control-rounded" placeholder="Email" value="">
+				  <input type="text" name="user_email" class="form-control form-control-rounded" placeholder="User Name" value="">
 				  <div class="form-control-position">
 					  <i class="icon-user"></i>
 				  </div>

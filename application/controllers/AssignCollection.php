@@ -23,7 +23,7 @@ class AssignCollection extends CI_Controller {
         $data['title'] = 'Sell List';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/assignCollection/sell_list_from_common_customer', $data, true);
@@ -38,7 +38,7 @@ class AssignCollection extends CI_Controller {
         $data['title'] = 'Amount Recieved List';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/assignCollection/amount_recieved_list_from_common_customer', $data, true);
@@ -61,7 +61,7 @@ class AssignCollection extends CI_Controller {
         $data['title'] = 'Customerwise assign collection report';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/assignCollection/customerwise_assign_collection_report', $data, true);
@@ -77,7 +77,7 @@ class AssignCollection extends CI_Controller {
         $data['title'] = 'Assign Sell';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/assignCollection/sell_from_common_customer_add_form', $data, true);
@@ -92,7 +92,7 @@ class AssignCollection extends CI_Controller {
         $data['title'] = 'Amount Received';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/assignCollection/amount_recieved_common_customer_add_form', $data, true);
@@ -108,7 +108,7 @@ class AssignCollection extends CI_Controller {
         $data['title'] = 'Assign Sell Update';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/assignCollection/edit_assign_amount_form', $data, true);
@@ -124,7 +124,7 @@ class AssignCollection extends CI_Controller {
         $data['title'] = 'Received Amount Update';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/assignCollection/edit_received_amount_form', $data, true);
@@ -138,7 +138,7 @@ class AssignCollection extends CI_Controller {
         $data['title'] = 'Assign Collection Report Section';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/assignCollection/assign_collection_report_section', $data, true);
@@ -170,7 +170,7 @@ class AssignCollection extends CI_Controller {
         $data['title'] = 'Collection & Assign Report';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/assignCollection/datewise_assign_collection_report', $data, true);

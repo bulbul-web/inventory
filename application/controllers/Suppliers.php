@@ -32,7 +32,7 @@ public function suppliers()
         $data['title'] = 'Suppliers';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/suppliers/suppliers', $data, true);
@@ -51,7 +51,7 @@ public function suppliers()
         $data['title'] = 'Suppliers';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/suppliers/suppliers_add_form', $data, true);
@@ -68,7 +68,7 @@ public function suppliers()
         $data['title'] = 'Suppliers';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/suppliers/suppliers_edit_form', $data, true);

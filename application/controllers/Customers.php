@@ -26,7 +26,7 @@ class Customers extends CI_Controller {
         $data['title'] = 'Customers';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/customers/customers', $data, true);
@@ -44,7 +44,7 @@ class Customers extends CI_Controller {
         $data['title'] = 'Save Customer';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/customers/customers_add_form', $data, true);
@@ -94,7 +94,7 @@ class Customers extends CI_Controller {
         $data['title'] = 'Update Customer';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/customers/customers_edit_form', $data, true);

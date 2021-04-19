@@ -28,7 +28,7 @@ class Dashboard extends CI_Controller {
         $data['title'] = 'Dashboard';
         $data['css'] = $this->load->view('common/allcss', '', true);
         $data['scripts'] = $this->load->view('common/allscripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/dashboard', '', true);
@@ -44,7 +44,7 @@ class Dashboard extends CI_Controller {
         $data['title'] = 'Account';
         $data['css'] = $this->load->view('common/allcss', '', true);
         $data['scripts'] = $this->load->view('common/allscripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/account-form-view', $data, true);
@@ -60,7 +60,7 @@ class Dashboard extends CI_Controller {
         $data['title'] = 'Change Password';
         $data['css'] = $this->load->view('common/allcss', '', true);
         $data['scripts'] = $this->load->view('common/allscripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/change-password-form-view', $data, true);

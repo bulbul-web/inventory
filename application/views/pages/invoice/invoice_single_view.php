@@ -39,7 +39,12 @@
             <table style="width: 100%; margin: 0 auto;">
                 <tr>
                     <td style="width: 30%; text-align: center;">
+
+                        <?php $shopInfo = $this->db->query("SELECT * FROM tbl_user WHERE user_id = $userInfo->user_id")->row();?>
+                        <!-- <img src="<?php echo base_url().$shopInfo->file;?>" class="logo-icon" alt="logo icon" style="width: 70px;"></td> -->
+
                         <img src="<?php echo base_url();?>assets/images/logo-icon.png" class="logo-icon" alt="logo icon" style="width: 190px;"></td>
+
                     <!-- <td>
                         <?php
                             $row = $this->db->query("select * from tbl_warehouse")->row();
@@ -47,6 +52,7 @@
                         <h3 class="text-dark" style="padding: 0; margin: 0; line-height: 35px;"><?= $row->warehouse_name;?></h3>
                         <p style="margin: 0px; padding: 0px;"><?= $row->warehouse_address;?></p>
                     </td> -->
+
                 </tr>
                 <tr>
                     <td style="text-align: center;">

@@ -29,7 +29,7 @@ class Invoice extends CI_Controller {
         $data['title'] = 'Invoice';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/invoice/invoice', $data, true);
@@ -47,7 +47,7 @@ class Invoice extends CI_Controller {
         $data['title'] = 'Save Invoice';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/invoice/invoice_add_form', $data, true);
@@ -64,7 +64,7 @@ class Invoice extends CI_Controller {
         $data['title'] = 'Update Invoice';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/invoice/invoice_edit_form', $data, true);
@@ -171,7 +171,8 @@ class Invoice extends CI_Controller {
             $sdata['message'] = 'Invoice Created successfully';
             $this->session->set_userdata($sdata);
             $this->insert_invoice_history($voucher_id);
-            $this->invoice_form_view();
+            // $this->invoice_form_view();
+            $this->invoice_single_details($voucher_id);
         }else{
             $sdata = array();
             $sdata['message'] = 'Error';
@@ -284,7 +285,7 @@ class Invoice extends CI_Controller {
         $data['title'] = 'Invoice Details';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
-        $data['sideMenu'] = $this->load->view('common/sideMenu', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('pages/invoice/invoice_single_view', $data, true);
