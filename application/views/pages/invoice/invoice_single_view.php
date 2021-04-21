@@ -197,9 +197,17 @@
 </div>
 </div><!-- End Row-->
 
-<a href="<?php echo base_url('invoice');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Invoice List</a><br>
 
-<button onclick="PrintMe('divid')" class="btn btn-primary" style="float: right;"> <i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</button>
+
+<!-- <button onclick="PrintMe('divid')" class="btn btn-primary" style="float: right;"> <i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</button> -->
+<div class="row">
+    <div class="col-md-6">
+        <a href="<?php echo base_url('invoice');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Invoice List</a><br>
+    </div>
+    <div class="col-md-6 text-right">
+        <a href="<?php echo base_url();?>invoice-details-copy/<?php echo $value->voucher_id?>" class="btn btn-primary" target="_blank"><i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</a>
+    </div>
+</div>
 <script>
     // $("#btnPrint").on("click", function() {
     //     //alert($(window).height());

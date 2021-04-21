@@ -340,6 +340,16 @@ class Invoice extends CI_Controller {
         $this->query_model->delete_invoice_product($id);
         redirect(base_url()."edit-invoice/".$voucher_id);
     }
+
+    public function invoice_details_copy($voucher_id){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['voucher_info_customer'] = $this->query_model->voucher_info_customer($voucher_id);
+        $data['voucher_info_product'] = $this->query_model->voucher_info_product($voucher_id);
+        
+        $this->load->view('pages/invoice/invoice_details_copy', $data);
+    }
     
     
 }

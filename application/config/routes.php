@@ -123,6 +123,7 @@ $route['save-invoice'] = 'invoice/save_invoice';
 $route['edit-invoice/(:any)'] = 'invoice/edit_invoice_form_view/$1';
 $route['update-invoice'] = 'invoice/update_invoice';
 $route['invoice-details/(:any)'] = 'invoice/invoice_single_details/$1';
+$route['invoice-details-copy/(:any)'] = 'invoice/invoice_details_copy/$1';
 $route['invoice-status/(:num)/(:num)'] = 'invoice/invoice_status/$1/$2';
 $route['delete-invoice/(:num)'] = 'invoice/delete_invoice/$1';
 $route['delete-invoice-product/(:num)/(:num)'] = 'invoice/delete_invoice_product/$1/$2';
