@@ -128,9 +128,32 @@ class Invoice extends CI_Controller {
         // exit();
         $customer_id = $this->input->post('customer_id', true);
         if(empty($customer_id)){
-            $customer_id = 1;
+            if(!empty($this->input->post('customer_name_new', true))){
+                $cdata = array();
+                $cdata['customer_name'] = $this->input->post('customer_name_new', true);
+                $cdata['customer_address']= $this->input->post('customer_address_new', true);
+                $cdata['customer_mobile']= $this->input->post('customer_mobile_new', true);
+                $cdata['customer_email'] = $this->input->post('customer_email_new', true);
+                $cdata['entry_by'] = $this->session->userdata('user_name');
+                $cdata['entry_date'] = date("Y-m-d");
+                $cdata['customer_status'] = 1;
+                $customer_name = $cdata['customer_name'];
+                $checkingQr = $this->db->query("SELECT customer_name FROM tbl_customer WHERE customer_name='$customer_name'")->row();
+                if($checkingQr){
+                    $sdata = array();
+                    $sdata['message'] = 'Customer Name already exits';
+                    $this->session->set_userdata($sdata);
+                    $this->invoice_form_view();
+                }else{
+                    $this->query_model->saveCustomerData($cdata);
+                    $lastCustmoerId = $this->db->query("SELECT * FROM tbl_customer ORDER BY customer_id DESC LIMIT 1")->row();
+                    $customer_id = $lastCustmoerId->customer_id;//new customer id
+                }
+            }else{
+                $customer_id = 1;//for common customer
+            }
         }else{
-            $customer_id = $this->input->post('customer_id', true);
+            $customer_id = $this->input->post('customer_id', true);//exits customer id
         }
         
         $invoice_date = $this->input->post('invoice_date', true);

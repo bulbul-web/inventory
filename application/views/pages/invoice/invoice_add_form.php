@@ -43,8 +43,10 @@
             
             
             
-            <button type="button" class="btn btn-primary" onclick="showarea()">Customer</button>
-            <button type="button" class="btn btn-danger" onclick="hiddenarea()">Common Customer</button>
+            <button type="button" class="btn btn-primary" onclick="showarea()">Old Customer</button><!-----for exits customer----->
+            <button type="button" class="btn btn-success" onclick="hiddenareaAndShowCutomerAddarea()"><i aria-hidden="true" class="fa fa-plus-circle"></i> New Customer</button><!----new customer add---->
+            <button type="button" class="btn btn-danger" onclick="hiddenarea()">Common Customer</button><!---for common customer--->
+            
             
             
             <?php echo form_open('save-invoice', 'name="save-invoice" id="saveInvoice"');?>
@@ -80,14 +82,56 @@
 
                 </div>
 
+
+                <!---new customer---->
+                <div class="row newCustomerArea">
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label class="col-form-label">Name</label>
+                            <input type="text" name="customer_name_new" placeholder="customer name"  class="form-control form-control-rounded newCustmReq valueNull">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label class="col-form-label">Phone</label>
+                            <input type="number" name="customer_mobile_new" placeholder="Mobile no" class="form-control form-control-rounded newCustmReq valueNull">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label class="col-form-label">Email</label>
+                            <input type="email" name="customer_email_new" placeholder="Email" class="form-control form-control-rounded valueNull">
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+                <!---new customer---->
+
+
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group row hideArea">
-                        <div class="col-sm-12">
-                            <label class="col-form-label">Address</label>
-                            <input type="text" id="customer_address" class="form-control form-control-rounded valueNull" disabled="">
+                            <div class="col-sm-12">
+                                <label class="col-form-label">Address</label>
+                                <input type="text" id="customer_address" class="form-control form-control-rounded valueNull" disabled="">
+                            </div>
                         </div>
-                      </div>
+
+                        <!---new customer---->
+                        <div class="form-group row newCustomerArea">
+                            <div class="col-sm-12">
+                                <label class="col-form-label">Address</label>
+                                <input type="text" name="customer_address_new" placeholder="Address" class="form-control form-control-rounded valueNull">
+                            </div>
+                        </div>
+                        <!---new customer---->
+
                     </div>
                     <div class="col-md-4">
                         <div class="form-group row">
@@ -102,7 +146,7 @@
 
                 <div class="row">
                     <div class="col-md-8">
-                        <div class="form-group row hideArea">
+                        <div class="form-group row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Note</label>
                             <input type="text" name="note" class="form-control form-control-rounded">
@@ -192,18 +236,36 @@
    </div>
 </div>
 <script>
+    //for common customer
     function hiddenarea(){
+        $(".newCustomerArea").hide();
         $(".hideArea").hide();
         $('.required').removeAttr('required');
+        $('.newCustmReq').removeAttr('newCustmReq');
         $(".valueNull").val(null);
     }
+
+    //for exits customer
     function showarea(){
+        $(".newCustomerArea").hide();
         $(".hideArea").show();
+        $('.newCustmReq').removeAttr('newCustmReq');
         $('.required').attr('required', 'required');
+    }
+
+    //new customer add
+    function hiddenareaAndShowCutomerAddarea(){
+        $(".hideArea").hide();
+        $(".newCustomerArea").show();
+        $('.required').removeAttr('required');
+        $('.newCustmReq').attr('required', 'required');
+        $(".valueNull").val(null);
     }
 </script>
 <script type='text/javascript'>
 $(document).ready(function(){
+    $(".newCustomerArea").hide();
+    $('.newCustmReq').removeAttr('newCustmReq');
     $(".dueArea").hide();
     $(".duePaid").hide();
     $( "#datepicker" ).datepicker({dateFormat: "yy-mm-dd"});
