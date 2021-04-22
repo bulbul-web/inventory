@@ -100,7 +100,7 @@
                 </center>
                 <br>
                 
-                <table width="100%" border="1">
+                <table width="100%" border="1" style="text-align: center;">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -108,14 +108,18 @@
                             <th>Bill No.</th>
                             <th>Product Name</th>
                             <th>Stock In</th>
+                            <th>Price</th>
+                            <th>Total</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
                             $sl=0;
+                            $netTotalPrice = 0;
                             foreach ($result as $value):
-                            $sl++
+                                $netTotalPrice += $value->totalPrice;
+                                $sl++
                         ?>
                         <tr>
                             <td><?= $sl;?></td>
@@ -128,12 +132,21 @@
                             <td><?= $value->bill_no;?></td>
                             <td><?= $value->product_name;?></td>
                             <td><?= $value->quantity_in;?></td>
+                            <td><?= $value->buying_price;?></td>
+                            <td><?= round($value->totalPrice, 2);?></td>
                             <td>
                                 <a href="<?php echo base_url();?>stock-details/<?php echo $value->id;?>" target="__BLANK"><i class="fa fa-eye" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                         <?php endforeach;?>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="6" style="text-align: right; font-weight: bold;">Total:</td>
+                            <td><?php echo $netTotalPrice;?></td>
+                            <td>-</td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <div>
                 </div>

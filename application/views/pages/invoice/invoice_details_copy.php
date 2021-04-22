@@ -1,6 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>ff</title>
+    <title>Invoice</title>
 
     <style>
         
@@ -196,10 +196,12 @@
                         </tr>
                         <tr>
                             <td style="width: 50%;">
-                                <span style="text-decoration: overline; padding-left: 15px;"> Office </span>
+                                <p style="padding-left: 28px; line-height: 0px; margin-bottom: -4px;"> <?php echo $voucher_info_customer->entry_by?>  </p>
+                                <p style="text-decoration: overline; padding-left: 15px;"> Prepared by </p>
                             </td>
                             <td style="width: 50%; text-align: right;">
-                                <span style="text-decoration: overline; padding-left: 15px;"> Customer </span>
+                                <p style="padding-left: 15px; line-height: 0px; margin-bottom: -4px;"> &nbsp; </p>
+                                <p style="text-decoration: overline; padding-left: 15px;"> Customer </p>
                             </td>
                         </tr>
                     </table>
@@ -223,7 +225,7 @@
     <script type="text/javascript">
         $("#btnPrint").live("click", function () {
             var divContents = $("#dvContainer").html();
-            var printWindow = window.open('', '', 'height=400,width=800');
+            var printWindow = window.open('', '', 'height=auto,width=auto');
             printWindow.document.write('<html><head><title>DIV Contents</title>');
             printWindow.document.write('</head><body >');
             printWindow.document.write(divContents);

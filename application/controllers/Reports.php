@@ -73,6 +73,20 @@ class Reports extends CI_Controller {
         $this->load->view('index', $data);
     }
     
+    public function product_datewise_report(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['title'] = 'Stock Report';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/product_datewise_report', $data, true);
+        $this->load->view('index', $data);
+    }
+    
     public function datewise_stock_report(){
         if(isset($_POST['status'])){
             $status = $this->input->post('status', true);
@@ -85,7 +99,7 @@ class Reports extends CI_Controller {
         }
         $result = $this->db->query
                 (
-                "SELECT a.*, b.product_name, c.pack_size FROM tbl_stock_in a, tbl_product_info b, tbl_pack_size c WHERE a.product_id = b.product_id AND b.pack_size = c.id AND a.bill_date BETWEEN '$from_date' AND '$to_date' AND a.status = '$status'"
+                "SELECT a.*, b.product_name, c.pack_size, (a.quantity_in * a.buying_price) as totalPrice FROM tbl_stock_in a, tbl_product_info b, tbl_pack_size c WHERE a.product_id = b.product_id AND b.pack_size = c.id AND a.bill_date BETWEEN '$from_date' AND '$to_date' AND a.status = '$status'"
                 )->result();
         $data = array();
         $data['status'] = $status;

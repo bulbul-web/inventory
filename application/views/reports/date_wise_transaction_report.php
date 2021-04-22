@@ -181,7 +181,7 @@
   </div>
 </div>
 </div><!-- End Row-->
-<a href="<?php echo base_url('account-reports-section');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Report</a><br>
+<a href="<?php echo base_url('account-reports-section');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back to report section</a><br>
 <button id="btnPrint" class="btn btn-primary" style="float: right;"> <i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</button>
 <script>
     $("#btnPrint").on("click", function() {
