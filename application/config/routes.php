@@ -148,6 +148,8 @@ $route['all-report-section'] = 'reports/all_report_section';
 $route['customer-wise-report-payment'] = 'reports/customer_wise_report_payment';
 $route['datewise-collection-from-customer'] = 'reports/datewise_collection_from_customer';
 $route['datewise-collection'] = 'reports/datewise_collection';
+$route['supplier-and-datewise-buy-product'] = 'reports/supplier_and_datewise_buy_product';
+$route['datewise-buy-product'] = 'reports/datewise_buy_product';
 
 $route['account-reports-section'] = 'reports/account_reports_section';
 $route['date-wise-transaction-report'] = 'reports/date_wise_transaction_report';

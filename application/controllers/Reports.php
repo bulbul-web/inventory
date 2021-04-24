@@ -195,6 +195,47 @@ class Reports extends CI_Controller {
         $this->load->view('index', $data);
     }
     
+    public function supplier_and_datewise_buy_product(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['allSupplier'] = $this->users_model->allSupplier();
+        if(isset($_POST['supplier_id'])):
+            $supplier_id = $this->input->post('supplier_id', true);
+            $data['singleSupplier'] = $this->users_model->singleSupplier($supplier_id);
+            $from_date = $this->input->post('from_date', true);
+            $to_date = $this->input->post('to_date', true);
+            $data['supplierAndDatewiseBuyProduct'] = $this->users_model->supplier_and_datewise_buy_product($supplier_id, $from_date, $to_date);
+        endif;
+        $data['title'] = 'Supplier and datewise buy product';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/supplier_and_datewise_buy_product', $data, true);
+        $this->load->view('index', $data);
+    }
+    
+    public function datewise_buy_product(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        if(isset($_POST['from_date'])):
+            $from_date = $this->input->post('from_date', true);
+            $to_date = $this->input->post('to_date', true);
+            $data['DatewiseBuyProduct'] = $this->users_model->datewise_buy_product($from_date, $to_date);
+        endif;
+        $data['title'] = 'Datewise buy product';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/datewise_buy_product', $data, true);
+        $this->load->view('index', $data);
+    }
+
     public function datewise_collection(){
         $data = array();
         $id = $this->session->userdata('user_id');
