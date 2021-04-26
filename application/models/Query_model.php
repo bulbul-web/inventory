@@ -431,7 +431,7 @@ class Query_model extends CI_Model {
         $result = $this->db->query
                 (
                     
-                    "SELECT c.customer_name, i.voucher_id, sum(i.quantity * i.sale_price) as grandTotal, i.paid_amount, i.discount, i.invoice_date, i.status, i.note"
+                    "SELECT c.customer_name, i.*, sum(i.quantity * i.sale_price) as grandTotal"
                     . " FROM tbl_customer c, tbl_invoice i"
                     . " WHERE i.customer_id = c.customer_id AND NOT (i.delete_status <=> 'deleted')"
                     . " GROUP BY i.voucher_id"

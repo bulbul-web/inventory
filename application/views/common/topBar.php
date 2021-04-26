@@ -19,10 +19,14 @@
     <li class="nav-item">
       <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
         <span class="user-profile">
-          <?php if($userInfo->file == ""){ ?>
+          <?php 
+            $userInfoFxd = $this->db->query("SELECT * FROM tbl_user WHERE user_id = 1")->row();
+            if($userInfoFxd->file == ""){ 
+          
+          ?>
                 <img src="<?php echo base_url();?>assets/images/avatars/avatar-17.png" class="user-img" alt="user avatar">  
           <?php } else { ?>
-                <img src="<?php echo base_url().$userInfo->file;?>" class="user-img" alt="user avatar">
+                <img src="<?php echo base_url().$userInfoFxd->file;?>" class="user-img" alt="user avatar">
           <?php }?>
         </span>
       </a>
@@ -31,11 +35,11 @@
         <a href="javaScript:void();">
            <div class="media">
              <div class="avatar">
-                 <?php if($userInfo->file == ""){ ?>
+                 <?php if($userInfoFxd->file == ""){ ?>
                 <img src="<?php echo base_url();?>assets/images/avatars/avatar-17.png" class="align-self-start mr-3" alt="user avatar">  
                 <?php } else { ?>
-                      <img src="<?php echo base_url().$userInfo->file;?>" class="align-self-start mr-3" alt="user avatar">
-                <?php }?>
+                      <img src="<?php echo base_url().$userInfoFxd->file;?>" class="align-self-start mr-3" alt="user avatar">
+                <?php } ?>
              </div>
             <div class="media-body">
             <h6 class="mt-2 user-title"><?php echo $userInfo->user_name;?></h6>
@@ -44,8 +48,16 @@
            </div>
           </a>
         </li>
+        
         <li class="dropdown-divider"></li>
-        <a href="<?php echo base_url();?>account"><li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li></a>
+        <?php 
+          if($userInfo->user_role == 3){
+            echo '';
+          }else{
+        ?>
+          <a href="<?php echo base_url();?>account"><li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li></a>
+        <?php } ?>
+
         <li class="dropdown-divider"></li>
         <a href="<?php echo base_url();?>change-password"><li class="dropdown-item"><i class="icon-lock mr-2"></i></i> Change Password</li></a>
         <li class="dropdown-divider"></li>

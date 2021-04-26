@@ -1,19 +1,19 @@
 <!-- Breadcrumb-->
 <div class="row pt-2 pb-2">
    <div class="col-sm-9">
-    <h4 class="page-title">Invoice</h4>
+    <h4 class="page-title">order</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
-       <li class="breadcrumb-item active" aria-current="page">invoice</li>
+       <li class="breadcrumb-item active" aria-current="page">order</li>
     </ol>
     </div>
     <div class="col-sm-3">
         
         <div class="top-button-area">
-            <a class="btn btn-primary m-1" href="<?php echo base_url('invoice-form');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Add Invoice</a>
+            <a class="btn btn-primary m-1" href="<?php echo base_url('order-form');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Add order</a>
         </div>
         <div class="top-button-area">
-            <a class="btn btn-primary m-1" href="<?php echo base_url('invoice');?>"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+            <a class="btn btn-primary m-1" href="<?php echo base_url('order');?>"><i class="fa fa-retweet" aria-hidden="true"></i></a>
         </div>
 
      </div>
@@ -59,25 +59,12 @@
         <tbody>
             <?php 
                 $i=0; 
-                foreach ($invoice as $value):
+                foreach ($order as $value):
                 $i++;
             ?>
             <tr>
-                <td><a href="<?php echo base_url();?>edit-invoice/<?php echo $value->voucher_id;?>"> <i class="fa fa-edit"></i> <?php echo $i;?> </a></td>
-                <td>
-                    <?php 
-                        echo '<a href="'. base_url().'invoice-details/'.$value->voucher_id.'">'.$value->voucher_id.'</a></br>';
-                        if($value->order_by != NULL){
-                            $user = $this->db->query("SELECT * FROM tbl_user WHERE user_id = '$value->order_by' ")->row();
-                            echo '('.$user->user_name.')';
-                            if($value->order_status == 0){
-                                echo '</br><span style="color: red;">Not accepted</span>';
-                            }elseif ($value->order_status == 1) {
-                                echo '</br><span style="color: green;">accepted</span>';
-                            }
-                        }
-                    ?>
-                </td>
+                <td><a href="<?php echo base_url();?>edit-order/<?php echo $value->voucher_id;?>"> <i class="fa fa-edit"></i> <?php echo $i;?> </a></td>
+                <td><?php echo '<a href="'. base_url().'order-details/'.$value->voucher_id.'">'.$value->voucher_id.'</a>';?></td>
                 <td><?php echo $value->customer_name;?></td>
                 <td>
                     <?php
@@ -111,18 +98,18 @@
                 <td>
                         
                     <?php 
-                        if($value->status == 1){
+                        if($value->order_status == 1){
                     ?>
 
-                        <span class="badge badge-primary m-1">Active</span>
+                        <span class="badge badge-primary m-1">Accept</span>
                     <?php
                         }
                     ?>
 
                     <?php 
-                        if($value->status == 0){
+                        if($value->order_status == 0){
                     ?>
-                        <span class="badge badge-danger m-1">Inactive</span>
+                        <span class="badge badge-danger m-1">Pending</span>
                     <?php
                         }
                     ?>
@@ -130,17 +117,9 @@
                 </td>
                 <td>
                     <div class="btn-group m-1">
-                        <a href="<?php echo base_url();?>invoice-status/<?php echo $value->voucher_id;?>/<?php echo $value->status;?>" class="btn btn-dark waves-effect waves-light"> 
-                            <?php
-                                if($value->status == 0){
-                                    echo '<i class="fa fa-eye" aria-hidden="true"></i>';
-                                }else{
-                                    echo '<i class="fa fa-eye-slash" aria-hidden="true"></i>';
-                                }
-                            ?>
-                        </a>
-                        <a href="<?php echo base_url();?>edit-invoice/<?php echo $value->voucher_id;?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
-                        <a href="<?php echo base_url();?>delete-invoice/<?php echo $value->voucher_id;?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a>
+                        
+                        <a href="<?php echo base_url();?>edit-order/<?php echo $value->voucher_id;?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
+                        <a href="<?php echo base_url();?>delete-order/<?php echo $value->voucher_id;?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a>
                         
                      </div>
                 </td>

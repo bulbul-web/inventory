@@ -99,8 +99,8 @@
                     </td>
                     <td>
                         <div class="btn-group m-1">
-                            <!-- <a href="<?php echo base_url();?>edit-warehouse/<?php echo $value->warehouse_id?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
-                            <a href="<?php echo base_url();?>delete-warehouse/<?php echo $value->warehouse_id?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a> -->
+                            <a href="<?php echo base_url();?>edit-user/<?php echo $value->user_id?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
+                            <!-- <a href="<?php echo base_url();?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a> -->
                             
                          </div>
                     </td>

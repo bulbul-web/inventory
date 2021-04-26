@@ -127,6 +127,16 @@ $route['invoice-details-copy/(:any)'] = 'invoice/invoice_details_copy/$1';
 $route['invoice-status/(:num)/(:num)'] = 'invoice/invoice_status/$1/$2';
 $route['delete-invoice/(:num)'] = 'invoice/delete_invoice/$1';
 $route['delete-invoice-product/(:num)/(:num)'] = 'invoice/delete_invoice_product/$1/$2';
+$route['accept-order/(:any)'] = 'invoice/accept_order/$1';
+
+$route['order'] = 'order/order';
+$route['order-form'] = 'order/order_form_view';
+$route['save-order'] = 'order/save_order';
+$route['order-details/(:any)'] = 'order/order_single_details/$1';
+$route['edit-order/(:any)'] = 'order/edit_order_form_view/$1';
+$route['update-order'] = 'order/update_order';
+$route['delete-order-product/(:num)/(:num)'] = 'order/delete_order_product/$1/$2';
+$route['order-details-copy/(:any)'] = 'order/order_details_copy/$1';
 
 $route['loan'] = 'loan/loan';
 $route['loan-form'] = 'loan/loan_form_view';
@@ -223,6 +233,10 @@ $route['update-acnt-journal-tansaction-mltple-trns-all'] = 'account/update_acnt_
 
 
 $route['all-users'] = 'users/all_users';
+$route['add-user'] = 'users/add_user_form';
+$route['save-user'] = 'users/save_user';
+$route['edit-user/(:any)'] = 'users/edit_user_form/$1';
+$route['update-user-particular'] = 'users/update_user_particular';
 
 $route['qrcode'] = 'QrcodeController/qrcode_generator_by_input';
 $route['qrcode-form'] = 'QrcodeController/qrcode_form';

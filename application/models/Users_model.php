@@ -28,6 +28,25 @@ class Users_model extends CI_Model {
         return $userInfo;   
     }
     
+    public function single_user($user_id)
+    {
+        $userInfo = $this->db->select('*')
+                                ->from('tbl_user')
+                                ->where('user_id', $user_id)
+                                ->get()
+                                ->row();
+        return $userInfo;   
+    }
+
+    public function save_user($data){
+        $this->db->insert("tbl_user", $data);
+    }
+
+    public function update_user($data){
+        $this->db->where('user_id', $data['user_id']);
+        $this->db->update('tbl_user', $data);
+    }
+    
     
     public function update_users($img)
     {

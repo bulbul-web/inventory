@@ -1,10 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Invoice extends CI_Controller {
+class Order extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->loged_out();
+        $this->load->model('order_query');
     }
     
     private function loged_out(){
@@ -15,45 +16,44 @@ class Invoice extends CI_Controller {
         }
     }
 
-    public function invoice()
+    public function order()
     {
         $data = array();
         $id = $this->session->userdata('user_id');
         $data['userInfo'] = $this->users_model->user_info($id);
-        $data['invoice'] = $this->query_model->viewInvoice();
-        
+        $data['order'] = $this->order_query->vieworder($id);
 //        echo '<pre>';
-//        print_r($data['invoice']);
+//        print_r($data['order']);
 //        exit();
         
-        $data['title'] = 'Invoice';
+        $data['title'] = 'order';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
         $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
-        $data['content'] = $this->load->view('pages/invoice/invoice', $data, true);
+        $data['content'] = $this->load->view('pages/order/order', $data, true);
         $this->load->view('index', $data);
     }
     
     
     
-    public function invoice_form_view()
+    public function order_form_view()
     {
         $data = array();
         $id = $this->session->userdata('user_id');
         $data['userInfo'] = $this->users_model->user_info($id);
         
-        $data['title'] = 'Save Invoice';
+        $data['title'] = 'Save order';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
         $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
-        $data['content'] = $this->load->view('pages/invoice/invoice_add_form', $data, true);
+        $data['content'] = $this->load->view('pages/order/order_add_form', $data, true);
         $this->load->view('index', $data);
     }
-    public function edit_invoice_form_view($voucher_id)
+    public function edit_order_form_view($voucher_id)
     {
         $data = array();
         $id = $this->session->userdata('user_id');
@@ -61,45 +61,20 @@ class Invoice extends CI_Controller {
         $data['voucher_info_customer'] = $this->query_model->voucher_info_customer($voucher_id);
         $data['voucher_info_product'] = $this->query_model->voucher_info_product($voucher_id);
         
-        $data['title'] = 'Update Invoice';
+        $data['title'] = 'Update order';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
         $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
-        $data['content'] = $this->load->view('pages/invoice/invoice_edit_form', $data, true);
+        $data['content'] = $this->load->view('pages/order/order_edit_form', $data, true);
         $this->load->view('index', $data);
     }
     
     
-    
-    //for ajax field match and auto fill filds
-    public function get_all_customer_match($customer_name){
 
-        if(empty($customer_name)){
-            echo json_encode([]);
-            exit;
-        }
-        
-        $customers = $this->query_model->viewAllCustomersMatch($customer_name);
-        echo json_encode($customers);exit;
-    }
-    //for ajax field match and auto fill filds
     
-    //for ajax field match and auto fill filds
-    public function get_all_products_match($product_name){
-
-        if(empty($product_name)){
-            echo json_encode([]);
-            exit;
-        }
-        
-        $products = $this->query_model->viewAllProductsMatch($product_name);
-        echo json_encode($products);exit;
-    }
-    //for ajax field match and auto fill filds
-    
-    public function save_invoice(){
+    public function save_order(){
         $this->form_validation->set_rules('customer_name', 'Customer Name', 'required');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         
@@ -143,7 +118,7 @@ class Invoice extends CI_Controller {
                     $sdata = array();
                     $sdata['message'] = 'Customer Name already exits';
                     $this->session->set_userdata($sdata);
-                    $this->invoice_form_view();
+                    $this->order_form_view();
                 }else{
                     $this->query_model->saveCustomerData($cdata);
                     $lastCustmoerId = $this->db->query("SELECT * FROM tbl_customer ORDER BY customer_id DESC LIMIT 1")->row();
@@ -179,37 +154,36 @@ class Invoice extends CI_Controller {
                 'voucherId_manual' => $voucherId_manual,
                 'voucher_id' => $voucher_id,
                 'entry_by' => $this->session->userdata('user_name'),
+                'order_by' => $this->session->userdata('user_id'),
                 'entry_date' => date("Y-m-d"),
-                'status' => 1
+                'status' => 1,
+                'order_status' => 0
             ];
         }
-//        echo '<pre>';
-//        print_r($data);
-//        exit();
 
         //insert batch
         $insert_batch = $this->db->insert_batch('tbl_invoice', $data);
         if($insert_batch){
             $sdata = array();
-            $sdata['message'] = 'Invoice Created successfully';
+            $sdata['message'] = 'order Created successfully';
             $this->session->set_userdata($sdata);
-            $this->insert_invoice_history($voucher_id);
-            // $this->invoice_form_view();
-            $this->invoice_single_details($voucher_id);
+            $this->insert_order_history($voucher_id);
+            // $this->order_form_view();
+            $this->order_single_details($voucher_id);
         }else{
             $sdata = array();
             $sdata['message'] = 'Error';
             $this->session->set_userdata($sdata);
-            $this->invoice_form_view();
+            $this->order_form_view();
         }
     }
     
     
-    public function update_invoice(){
+    public function update_order(){
         
         $id = $this->input->post('id', true);
         $voucher_id = $this->input->post('voucher_id', true);
-        $status = $this->input->post('status', true);
+        $order_by = $this->input->post('order_by', true);
         $voucherId_manual = $voucher_id;//$this->input->post('voucherId_manual', true);
         $customer_id = $this->input->post('customer_id', true);
         $invoice_date = $this->input->post('invoice_date', true);
@@ -240,8 +214,10 @@ class Invoice extends CI_Controller {
                 'voucherId_manual' => $voucherId_manual,
                 'voucher_id' => $voucher_id,
                 'entry_by' => $this->session->userdata('user_name'),
+                'order_by' => $order_by,
                 'last_paid_date' => date("Y-m-d"),
-                'status' => $status
+                'status' => 1,
+                'order_status' => 0
             ];
            $data1[] = [
                 'product_id' => $product_id[$i],
@@ -249,6 +225,7 @@ class Invoice extends CI_Controller {
             
            
         }
+        
 
         for($x=0;$x<count($data1);$x++){
         
@@ -261,17 +238,18 @@ class Invoice extends CI_Controller {
                 $this->db->insert('tbl_invoice', $data[$x]);
              }
          }
+         
         $sdata = array();
-        $sdata['message'] = 'Invoice Updated successfully';
+        $sdata['message'] = 'order Updated successfully';
         $this->session->set_userdata($sdata);
 
-        $this->update_invoice_history($voucher_id);
-        redirect(base_url()."edit-invoice/".$voucher_id);
+        $this->update_order_history($voucher_id);
+        redirect(base_url()."edit-order/".$voucher_id);
       
         
     }
 
-    public function insert_invoice_history($voucher_id){
+    public function insert_order_history($voucher_id){
         $data['voucher_id'] = $voucher_id;
         $data['customer_id'] = $this->input->post('customer_id', true);
         if(empty($data['customer_id'])){
@@ -286,18 +264,18 @@ class Invoice extends CI_Controller {
         $this->db->insert('tbl_invoice_history', $data);
     }
 
-    public function update_invoice_history($voucher_id){
-        $invoiceInfo = $this->db->query("SELECT * FROM tbl_invoice WHERE voucher_id = '$voucher_id' GROUP BY voucher_id")->row();
-        $data['voucher_id'] = $invoiceInfo->voucher_id;
-        $data['customer_id'] = $invoiceInfo->customer_id;
-        $data['last_paid_date'] = $invoiceInfo->last_paid_date;
-        $data['last_paid_date_manual'] = $invoiceInfo->last_paid_date_manual;
-        $data['entry_by'] = $invoiceInfo->entry_by;
+    public function update_order_history($voucher_id){
+        $orderInfo = $this->db->query("SELECT * FROM tbl_invoice WHERE voucher_id = '$voucher_id' GROUP BY voucher_id")->row();
+        $data['voucher_id'] = $orderInfo->voucher_id;
+        $data['customer_id'] = $orderInfo->customer_id;
+        $data['last_paid_date'] = $orderInfo->last_paid_date;
+        $data['last_paid_date_manual'] = $orderInfo->last_paid_date_manual;
+        $data['entry_by'] = $orderInfo->entry_by;
         $data['collection_amount'] = $this->input->post('collection_amount', true);
         $this->db->insert('tbl_invoice_history', $data);
     }
     
-    public function invoice_single_details($voucher_id)
+    public function order_single_details($voucher_id)
     {
         $data = array();
         $id = $this->session->userdata('user_id');
@@ -305,60 +283,47 @@ class Invoice extends CI_Controller {
         $data['voucher_info_customer'] = $this->query_model->voucher_info_customer($voucher_id);
         $data['voucher_info_product'] = $this->query_model->voucher_info_product($voucher_id);
         
-        $data['title'] = 'Invoice Details';
+        $data['title'] = 'order Details';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
         $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
-        $data['content'] = $this->load->view('pages/invoice/invoice_single_view', $data, true);
+        $data['content'] = $this->load->view('pages/order/order_single_view', $data, true);
         $this->load->view('index', $data);
     }
     
-    public function invoice_status($voucher_id, $invoice_status){
-        $this->query_model->invoice_status($voucher_id, $invoice_status);
+    public function order_status($voucher_id, $order_status){
+        $this->order_query->order_status($voucher_id, $order_status);
         
         $sdata = array();
-        if($invoice_status == 1){
+        if($order_status == 1){
             $sdata['message'] = "Inactive";
         }else{
             $sdata['message'] = "Active";
         }
         
         $this->session->set_userdata($sdata);
-        $this->invoice();
+        $this->order();
     }
     
-    public function delete_invoice($voucher_id){
-        $this->query_model->delete_invoice($voucher_id);
-        $sdata = array();
-        $sdata['message'] = 'Successfully deleted';
-        $this->session->set_userdata($sdata);
-        $this->invoice();
-    }
-    public function delete_invoice_product($id, $voucher_id){
+    
+    public function delete_order_product($id, $voucher_id){
         $this->query_model->delete_invoice_product($id);
-        redirect(base_url()."edit-invoice/".$voucher_id);
+        redirect(base_url()."edit-order/".$voucher_id);
     }
 
-    public function invoice_details_copy($voucher_id){
+    public function order_details_copy($voucher_id){
         $data = array();
         $id = $this->session->userdata('user_id');
         $data['userInfo'] = $this->users_model->user_info($id);
         $data['voucher_info_customer'] = $this->query_model->voucher_info_customer($voucher_id);
         $data['voucher_info_product'] = $this->query_model->voucher_info_product($voucher_id);
         
-        $this->load->view('pages/invoice/invoice_details_copy', $data);
+        $this->load->view('pages/order/order_details_copy', $data);
     }
 
-    public function accept_order($voucher_id){
-        $this->db->set('status', 1);
-        $this->db->set('order_status', 1);
-        $this->db->where('voucher_id', $voucher_id);
-        $this->db->update('tbl_invoice');
-
-        $this->invoice_single_details($voucher_id);
-    }
+    
     
     
 }

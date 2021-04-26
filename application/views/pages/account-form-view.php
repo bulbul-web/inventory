@@ -42,7 +42,7 @@
                           </div>
                         </div>
                         <div class="form-group row">
-                          <label  class="col-sm-3 col-form-label">User Email</label>
+                          <label  class="col-sm-3 col-form-label">User Email or login name</label>
                           <div class="col-sm-9">
                               <input type="text" value="<?php echo $userInfo->user_email;?>" name="user_email"  class="form-control form-control-rounded">
                               <?php echo form_error('user_email', '<div class="error">', '</div>'); ?>

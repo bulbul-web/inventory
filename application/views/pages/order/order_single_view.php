@@ -21,7 +21,7 @@
     </div>
     <div class="col-sm-3">
         <div class="top-button-area">
-            <a class="btn btn-primary m-1" href="<?php echo base_url('invoice-form');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Create Invoice</a>
+            <a class="btn btn-primary m-1" href="<?php echo base_url('order-form');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Create order</a>
         </div>
 
      </div>
@@ -66,7 +66,7 @@
         <table style="width: 100%">
             <tr>
                 <td colspan="2" style="text-align: left;">
-                    <h2 class="text-primary" style="margin: 0; padding: 0;">Invoice</h2>
+                    <h2 class="text-primary" style="margin: 0; padding: 0;">order</h2>
                 </td>
             </tr>  
             <tr>
@@ -202,16 +202,10 @@
 <!-- <button onclick="PrintMe('divid')" class="btn btn-primary" style="float: right;"> <i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</button> -->
 <div class="row">
     <div class="col-md-6">
-        <a href="<?php echo base_url('invoice');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Invoice List</a><br>
+        <a href="<?php echo base_url('order');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To order List</a><br>
     </div>
     <div class="col-md-6 text-right">
-        <?php
-            if($voucher_info_customer->order_status != '' && $voucher_info_customer->order_status == 0){
-                echo '<a class="btn btn-danger" href="'.base_url().'accept-order/'.$voucher_info_customer->voucher_id.'">Accept and print</a>';
-            }else {
-        ?>
-            <a href="<?php echo base_url();?>invoice-details-copy/<?php echo $value->voucher_id?>" class="btn btn-primary" target="_blank"><i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</a>
-        <?php } ?>
+        <a href="<?php echo base_url();?>order-details-copy/<?php echo $value->voucher_id?>" class="btn btn-primary" target="_blank"><i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</a>
     </div>
 </div>
 <script>

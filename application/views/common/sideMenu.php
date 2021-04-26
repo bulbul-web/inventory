@@ -1,13 +1,48 @@
 <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
 <div class="brand-logo">
  <a href="<?php echo base_url();?>">
-  <?php $shopInfo = $this->db->query("SELECT * FROM tbl_user WHERE user_id = $userInfo->user_id")->row();?>
+  <?php $shopInfo = $this->db->query("SELECT * FROM tbl_user WHERE user_id = 1")->row();?>
   <img src="<?php echo base_url().$shopInfo->file;?>" class="logo-icon" alt="logo icon" style="width: 20px;">
   <h5 class="logo-text">POS</h5>
 </a>
     </div>
     <ul class="sidebar-menu do-nicescrol">
  <li class="sidebar-header">MAIN NAVIGATION</li>
+
+<?php if($userInfo->user_role == 3){ ?>
+
+  <li>
+    <a href="<?php echo base_url('order');?>" class="waves-effect">
+      <i class="fa fa-file"></i> <span>Order</span> 
+    </a>
+
+  </li>
+
+  <li>
+    <a href="javaScript:void();" class="waves-effect">
+      <i class="fa fa-line-chart" aria-hidden="true"></i>
+      <span>Reports</span> <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="sidebar-submenu">
+        <!-- <li>
+            <a href="<?php echo base_url('month-report');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Date wise Invoice</span> 
+            </a>
+        </li> -->
+        
+        <li>
+            <a href="<?php echo base_url('all-report-section');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-area-chart"></i> <span>All Reports</span> 
+            </a>
+        </li>
+        
+    </ul>
+  </li>
+
+<?php }else{ ?>
+  
+
+
  <li>
    <a href="<?php echo base_url();?>" class="waves-effect">
      <i class="icon-home"></i> <span>Dashboard</span> 
@@ -237,6 +272,8 @@
    </a>
 
  </li>
+
+ <?php } ?>
   
  
 </ul>
