@@ -351,7 +351,8 @@ class Invoice extends CI_Controller {
         $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
-        $data['content'] = $this->load->view('pages/invoice/invoice_single_view', $data, true);
+        // $data['content'] = $this->load->view('pages/invoice/invoice_single_view', $data, true);
+        $data['content'] = $this->load->view('pages/invoice/invoice_single_view_ndscc', $data, true);
         $this->load->view('index', $data);
     }
     
@@ -388,7 +389,8 @@ class Invoice extends CI_Controller {
         $data['voucher_info_customer'] = $this->query_model->voucher_info_customer($voucher_id);
         $data['voucher_info_product'] = $this->query_model->voucher_info_product($voucher_id);
         
-        $this->load->view('pages/invoice/invoice_details_copy', $data);
+        // $this->load->view('pages/invoice/invoice_details_copy', $data);
+        $this->load->view('pages/invoice/invoice_details_copy_ndscc', $data);
     }
 
     public function accept_order($voucher_id){
