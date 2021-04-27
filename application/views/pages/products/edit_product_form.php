@@ -105,6 +105,35 @@
                       <?php echo form_error('price', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
+
+
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Packet</label>
+                  <div class="col-sm-9">
+                      <select type="text" name="packet"  class="form-control" required="required">
+                          <option value="" <?php if($singleProduct->packet == ''){?> selected="selected" <?php } ?>>--Select Packet---</option>
+                          <option value="not" <?php if($singleProduct->packet == 'not'){?> selected="selected" <?php } ?>>No need</option>
+                          <option value="Bosta" <?php if($singleProduct->packet == 'Bosta'){?> selected="selected" <?php } ?>>Bosta</option>
+                          <option value="Carton" <?php if($singleProduct->packet == 'Carton'){?> selected="selected" <?php } ?>>Carton</option>
+                          <option value="Cane" <?php if($singleProduct->packet == 'Cane'){?> selected="selected" <?php } ?>>Cane</option>
+                      </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Pack quantity</label>
+                  <div class="col-sm-9">
+                      <input type="text" name="total_pack_size" value="<?php echo $singleProduct->total_pack_size; ?>"  class="form-control form-control-rounded">
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Product Segment</label>
+                  <div class="col-sm-9">
+                      <input type="text" name="product_segment" value="<?php echo $singleProduct->product_segment; ?>"  class="form-control form-control-rounded">
+                  </div>
+                </div>
+
+
                 <div class="form-group row">
                     <label for="rounded-input" class="col-sm-3 col-form-label">Image</label>
                     <div class="col-sm-9">

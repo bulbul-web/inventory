@@ -258,7 +258,7 @@
     </a>
   </div>
 
-  <?php } ?>
+  
 
     
 </div><!--End Row-->
@@ -342,6 +342,8 @@
 
 
 </div> <!---End Row--->
+
+<?php } ?>
 
 
 <div class="row">

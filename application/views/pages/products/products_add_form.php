@@ -101,6 +101,33 @@
                       <?php echo form_error('price', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
+                
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Packet</label>
+                  <div class="col-sm-9">
+                      <select type="text" name="packet"  class="form-control" required="required">
+                          <option value="">--Select Packet---</option>
+                          <option value="not">No need</option>
+                          <option value="Bosta">Bosta</option>
+                          <option value="Carton">Carton</option>
+                          <option value="Cane">Cane</option>
+                      </select>
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Pack quantity</label>
+                  <div class="col-sm-9">
+                      <input type="text" name="total_pack_size" value="<?php echo set_value('total_pack_size'); ?>"  class="form-control form-control-rounded">
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Product Segment</label>
+                  <div class="col-sm-9">
+                      <input type="text" name="product_segment" value="<?php echo set_value('product_segment'); ?>"  class="form-control form-control-rounded">
+                  </div>
+                </div>
             
                 <div class="form-group row">
                     <label for="rounded-input" class="col-sm-3 col-form-label">Image</label>

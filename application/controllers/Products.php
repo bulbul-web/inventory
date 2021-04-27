@@ -485,6 +485,9 @@ class Products extends CI_Controller {
                             $data['product_descrip'] = $this->input->post('product_descrip', true);
                             $data['product_code'] = $this->input->post('product_code', true);
                             $data['pack_size'] = $this->input->post('pack_size', true);
+                            $data['total_pack_size'] = $this->input->post('total_pack_size', true);
+                            $data['packet'] = $this->input->post('packet', true);
+                            $data['product_segment'] = $this->input->post('product_segment', true);
                             $data['price'] = $this->input->post('price', true);
                             $data['entry_by'] = $this->session->userdata('user_name');
                             $data['entry_date'] = date("Y-m-d");
@@ -558,6 +561,9 @@ class Products extends CI_Controller {
                 $data['product_descrip'] = $this->input->post('product_descrip', true);
                 $data['product_code'] = $this->input->post('product_code', true);
                 $data['pack_size'] = $this->input->post('pack_size', true);
+                $data['total_pack_size'] = $this->input->post('total_pack_size', true);
+                $data['packet'] = $this->input->post('packet', true);
+                $data['product_segment'] = $this->input->post('product_segment', true);
                 $data['price'] = $this->input->post('price', true);
                 $data['entry_by'] = $this->session->userdata('user_name');
                 $data['entry_date'] = date("Y-m-d");

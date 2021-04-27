@@ -36,6 +36,38 @@
 </div>
 <!-- End Breadcrumb-->
 
+<?php
+    $user_role = $this->session->userdata('user_role');
+    if($user_role == 3){
+?>
+
+<div class="report-section">
+    <div class="row">
+        
+        <div class="col-12 col-lg-6 col-xl-2">
+            <a href="<?php echo base_url('all-products-stock-report');?>">
+                <div class="card bg-pattern-danger fxd-height">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body text-left">
+                                <!-- <h4 class="text-white">ddd</h4> -->
+                                <span class="text-white">Stock Report</span>
+                            </div>
+                            <!-- <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+                                
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        
+    </div>
+</div>
+
+<?php } elseif ($user_role == 1) { ?>
+
 <div class="report-section">
     <div class="row">
 
@@ -267,3 +299,5 @@
 
     </div>
 </div>
+
+<?php } ?>
