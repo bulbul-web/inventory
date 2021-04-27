@@ -98,6 +98,42 @@ class Invoice extends CI_Controller {
         echo json_encode($products);exit;
     }
     //for ajax field match and auto fill filds
+
+
+    public function avalbaleStockStatus() {
+        $product_id = $this->input->post('product_id');
+        $stockin = $this->db->query("SELECT a.*, sum(a.quantity_in) as totalStockIn, c.pack_size FROM tbl_stock_in a, tbl_product_info b, tbl_pack_size c WHERE a.product_id = '$product_id' AND a.product_id = b.product_id AND b.pack_size = c.id")->row();
+        $stockOut = $this->db->query("SELECT a.*, sum(a.quantity) as totalStockOut, c.pack_size FROM tbl_invoice a, tbl_product_info b, tbl_pack_size c WHERE a.product_id = '$product_id' AND a.product_id = b.product_id AND b.pack_size = c.id")->row();
+        
+        if(isset($stockin->totalStockIn)){
+            $totalStockIn = $stockin->totalStockIn;
+        }else {
+            $totalStockIn = 0;
+        }
+
+        if(isset($stockOut->totalStockOut)){
+            $totalStockOut = $stockOut->totalStockOut;
+        }else {
+            $totalStockOut = 0;
+        }
+
+        $available = $totalStockIn - $totalStockOut;
+        if($available == 0){
+            $available = 'stock in this prodcut';
+        }
+
+        if(isset($stockin->totalStockIn)){
+            $pack_size = $stockin->pack_size;
+        }elseif(isset($stockOut->totalStockOut)) {
+            $pack_size = $stockOut->pack_size;
+        }
+
+        $resultdata = array();
+        $resultdata['available'] = $available;
+        $resultdata['pack_size'] = $pack_size;
+        echo json_encode($resultdata);
+    }
+
     
     public function save_invoice(){
         $this->form_validation->set_rules('customer_name', 'Customer Name', 'required');
@@ -161,6 +197,7 @@ class Invoice extends CI_Controller {
         
         $discount = $this->input->post('discount', true);
         $paid_amount = $this->input->post('paid_amount', true);
+        $payment_day = $this->input->post('payment_day', true);
         
         $product_id = $this->input->post('product_id', true);
         $quantity = $this->input->post('quantity', true);
@@ -176,6 +213,7 @@ class Invoice extends CI_Controller {
                 'note' => $note,
                 'discount' => $discount,
                 'paid_amount' => $paid_amount,
+                'payment_day' => $payment_day,
                 'voucherId_manual' => $voucherId_manual,
                 'voucher_id' => $voucher_id,
                 'entry_by' => $this->session->userdata('user_name'),
@@ -218,6 +256,7 @@ class Invoice extends CI_Controller {
         
         $discount = $this->input->post('discount', true);
         $paid_amount = $this->input->post('paid_amount', true);
+        $payment_day = $this->input->post('payment_day', true);
         $collection_amount = $this->input->post('collection_amount', true);
         $paid_amount = $paid_amount + $collection_amount;
         
@@ -237,6 +276,7 @@ class Invoice extends CI_Controller {
                 'note' => $note,
                 'discount' => $discount,
                 'paid_amount' => $paid_amount,
+                'payment_day' => $payment_day,
                 'voucherId_manual' => $voucherId_manual,
                 'voucher_id' => $voucher_id,
                 'entry_by' => $this->session->userdata('user_name'),

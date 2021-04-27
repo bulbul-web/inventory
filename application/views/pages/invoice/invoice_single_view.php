@@ -123,7 +123,7 @@
                         <tr>
                             <td><?= $i;?></td>
                             <td><?= $value->product_name;?></td>
-                            <td style="text-align: center;"><?= $value->quantity;?></td>
+                            <td style="text-align: center;"><?= $value->quantity.' '.$value->pack_size_name;?></td>
                             <td style="text-align: center;"><?= $value->sale_price;?></td>
                             <td style="text-align: center;"><?= $value->quantity * $value->sale_price;?></td>
                         </tr>

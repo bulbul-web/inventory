@@ -125,99 +125,110 @@
                 
                 <div class="row">
                     <div class="col-md-12">
-                        <table id="autocomplete_table" class="table table-bordered table-sm table-hover tbl-own" style="width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th>Quantity</th>
-                                    <th>Rate</th>
-                                    <th>Calculation</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                    $i = 0;
-                                    foreach($voucher_info_product as $value):
-                                    $i++;
-                                ?>
-                                <tr id="row_<?=$i;?>">
-                                    <td>
-                                        <input type="text" name="product_name" onchange="productPress(this)" id="product_name_<?=$i;?>" value="<?php echo $value->product_name;?>" placeholder="type product name" class="form-control autocomplete_txt" required="" disabled>
-                                        <?php echo form_error('product_name', '<div class="error">', '</div>'); ?>
-                                        <input type="hidden" name="product_id[]" value="<?php echo $value->product_id;?>" id="product_id<?=$i;?>"><!---id"product_id<?= $i;?>" it's ok--->
-                                        <input type="hidden" name="id[]" value="<?php echo $value->id;?>">
-                                    </td>
-                                    <td><input type="number" step=any name="quantity[]" onkeyup="qntyPress(this)" id="quantity_<?=$i;?>" value="<?php echo $value->quantity;?>" class="form-control"></td>
-                                    <td><input type="number" step=any name="sale_price[]" onkeyup="pricePress(this)" id="sale_price_<?=$i;?>" value="<?php echo $value->sale_price;?>" class="form-control"></td>
-                                    <td><input type="number" step=any name="invc_ttl_price[]" id="invc_ttl_price_<?=$i;?>" value="<?php echo ($value->quantity * $value->sale_price);?>" class="form-control" disabled="disabled"></td>
-                                    <td class="text-center"><a type="button" href="<?php echo base_url();?>delete-invoice-product/<?php echo $value->id;?>/<?=$value->voucher_id;?>" onclick="return confirm('Are you sure to remove?')" name="remove" data-row="row" scope="row" class="btn btn-danger btn-sm timesSpan">×</a></td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="3" class="text-right"><b>Discount:</b></td> 
-                                    <td class="text-right">
-                                        <input id="discountBox" onkeyup="setDiscount(this.value)" value="<?= $value->discount;?>" name="discount" type="number" step=any class="form-control w-100 text-center">
-                                    </td> 
-                                    <td align="center">
-                                        <button id="addInvoiceItem" name="add-invoice-item" type="button" class="btn btn-primary btn-sm">Add New Item</button>
-                                    </td>
-                                </tr> 
-                                <tr>
-                                    <?php
-                                        $voucher_id = $voucher_info_customer->voucher_id;
-                                        $result = $this->db->query
-                                                (
-                                                "select"
-                                                . " tbl_invoice.*, sum(tbl_invoice.quantity * tbl_invoice.sale_price) as grandTotal"
-                                                . " FROM tbl_invoice"
-                                                . " WHERE tbl_invoice.voucher_id = '$voucher_id' AND NOT (tbl_invoice.delete_status <=> 'deleted')"
-                                                )->row();
-                                        
+                        <div style="overflow-x:auto;">
+                            <table id="autocomplete_table" class="table table-bordered table-sm table-hover tbl-own" style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Quantity</th>
+                                        <th>Rate</th>
+                                        <th>Calculation</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        $i = 0;
+                                        foreach($voucher_info_product as $value):
+                                        $i++;
                                     ?>
-                                    <td colspan="3" class="text-right"><b>Grand Total:</b></td>
-                                    <td colspan="2" class="text-center">
-                                        <input type="number" step=any id="grandTotal" value="<?=$result->grandTotal;?>" disabled="disabled" class="form-control w-100 text-center">
-                                    </td>
-                                </tr> 
-                                <tr style="">
-                                    <td colspan="3" class="text-right"><b>Final Total:</b></td>
-                                    <td colspan="2" class="text-center">
-                                        <input type="number" step=any id="FinalAmount" value="<?= ($result->grandTotal - $value->discount)?>" disabled="disabled" class="form-control w-100 text-center">
-                                    </td>
-                                </tr> 
-                                <tr>
-                                    <td colspan="3" class="text-right"><b>Paid Amount:</b></td> 
-                                    <td colspan="2" class="text-right">
-                                        <input id="paidAmount" onkeyup="calculteDue(this.value)" value="<?= $value->paid_amount;?>" type="number" step=any required="required" class="form-control w-100 text-center" disabled="disabled">
-                                        <input name="paid_amount" value="<?= $value->paid_amount;?>" type="hidden" step=any required="required" class="form-control w-100 text-center">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" class="text-right"><b>Collection</b></td>
-                                    <td colspan="2" class="text-right">
-                                        <input name="collection_amount" type="number" step=any required="required" class="form-control w-100 text-center" value="0.00" />
-                                    </td>
-                                </tr>
-                                <tr class="dueArea">
-                                    <td colspan="3" class="text-right"><b>Recent Due:</b></td> 
-                                    <td class="text-center">
-                                        <input type="number" step=any disabled="disabled" id="dueBox" class="form-control w-100 text-center">
-                                    </td>
-                                </tr>
-                                <tr class="duePaid">
-                                    <td colspan="5" class="text-right text-success"><b>Total Paid.</b></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" class="text-right"><b>Previous Due:</b></td> 
-                                    <td colspan="2" class="text-center">
-                                        <input type="number" step=any disabled="disabled" id="dueBox" value="<?= ($result->grandTotal - $value->discount) - $value->paid_amount;?>" class="form-control w-100 text-center text-danger">
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                                    <tr id="row_<?=$i;?>">
+                                        <td>
+                                            <input type="text" name="product_name" onchange="productPress(this)" id="product_name_<?=$i;?>" value="<?php echo $value->product_name;?>" placeholder="type product name" class="form-control autocomplete_txt" required="" disabled>
+                                            <?php echo form_error('product_name', '<div class="error">', '</div>'); ?>
+                                            <input type="hidden" name="product_id[]" value="<?php echo $value->product_id;?>" id="product_id<?=$i;?>"><!---id"product_id<?= $i;?>" it's ok--->
+                                            <input type="hidden" name="id[]" value="<?php echo $value->id;?>">
+                                        </td>
+                                        <td>
+                                            <input type="number" step=any name="quantity[]" onkeyup="qntyPress(this)" id="quantity_<?=$i;?>" value="<?php echo $value->quantity;?>" class="form-control">
+                                            <p style="text-align: center; font-weight: bold; color: green"  id="avlableStock_1"></p>
+                                        </td>
+                                        <td><input type="number" step=any name="sale_price[]" onkeyup="pricePress(this)" id="sale_price_<?=$i;?>" value="<?php echo $value->sale_price;?>" class="form-control"></td>
+                                        <td><input type="number" step=any name="invc_ttl_price[]" id="invc_ttl_price_<?=$i;?>" value="<?php echo ($value->quantity * $value->sale_price);?>" class="form-control" disabled="disabled"></td>
+                                        <td class="text-center"><a type="button" href="<?php echo base_url();?>delete-invoice-product/<?php echo $value->id;?>/<?=$value->voucher_id;?>" onclick="return confirm('Are you sure to remove?')" name="remove" data-row="row" scope="row" class="btn btn-danger btn-sm timesSpan">×</a></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="text-right"><b>Discount:</b></td> 
+                                        <td class="text-right">
+                                            <input id="discountBox" onkeyup="setDiscount(this.value)" value="<?= $value->discount;?>" name="discount" type="number" step=any class="form-control w-100 text-center">
+                                        </td> 
+                                        <td align="center">
+                                            <button id="addInvoiceItem" name="add-invoice-item" type="button" class="btn btn-primary btn-sm">Add New Item</button>
+                                        </td>
+                                    </tr> 
+                                    <tr>
+                                        <?php
+                                            $voucher_id = $voucher_info_customer->voucher_id;
+                                            $result = $this->db->query
+                                                    (
+                                                    "select"
+                                                    . " tbl_invoice.*, sum(tbl_invoice.quantity * tbl_invoice.sale_price) as grandTotal"
+                                                    . " FROM tbl_invoice"
+                                                    . " WHERE tbl_invoice.voucher_id = '$voucher_id' AND NOT (tbl_invoice.delete_status <=> 'deleted')"
+                                                    )->row();
+                                            
+                                        ?>
+                                        <td colspan="3" class="text-right"><b>Grand Total:</b></td>
+                                        <td colspan="2" class="text-center">
+                                            <input type="number" step=any id="grandTotal" value="<?=$result->grandTotal;?>" disabled="disabled" class="form-control w-100 text-center">
+                                        </td>
+                                    </tr> 
+                                    <tr style="">
+                                        <td colspan="3" class="text-right"><b>Final Total:</b></td>
+                                        <td colspan="2" class="text-center">
+                                            <input type="number" step=any id="FinalAmount" value="<?= ($result->grandTotal - $value->discount)?>" disabled="disabled" class="form-control w-100 text-center">
+                                        </td>
+                                    </tr> 
+                                    <tr>
+                                        <td colspan="3" class="text-right"><b>Paid Amount:</b></td> 
+                                        <td colspan="2" class="text-right">
+                                            <input id="paidAmount" onkeyup="calculteDue(this.value)" value="<?= $value->paid_amount;?>" type="number" step=any required="required" class="form-control w-100 text-center" disabled="disabled">
+                                            <input name="paid_amount" value="<?= $value->paid_amount;?>" type="hidden" step=any required="required" class="form-control w-100 text-center">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-right"><b>Collection</b></td>
+                                        <td colspan="2" class="text-right">
+                                            <input name="collection_amount" type="number" step=any required="required" class="form-control w-100 text-center" value="0.00" />
+                                        </td>
+                                    </tr>
+                                    <tr class="dueArea">
+                                        <td colspan="3" class="text-right"><b>Recent Due:</b></td> 
+                                        <td class="text-center">
+                                            <input type="number" step=any disabled="disabled" id="dueBox" class="form-control w-100 text-center">
+                                        </td>
+                                    </tr>
+                                    <tr class="duePaid">
+                                        <td colspan="5" class="text-right text-success"><b>Total Paid.</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-right"><b>Previous Due:</b></td> 
+                                        <td colspan="2" class="text-center">
+                                            <input type="number" step=any disabled="disabled" id="dueBox" value="<?= ($result->grandTotal - $value->discount) - $value->paid_amount;?>" class="form-control w-100 text-center text-danger">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-right"><b>Day:</b></td> 
+                                        <td colspan="2" class="text-right">
+                                            <input value="<?= $value->payment_day;?>" name="payment_day" type="number" class="form-control w-100 text-center">
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="form-footer">
@@ -315,7 +326,10 @@ $(document).ready(function() {
                                 <input type="text"  name="product_name" onchange="productPress(this)" id="product_name_'+rowCount+'" placeholder="type product name" class="form-control autocomplete_txt" required="">\n\
                                 <input type="hidden" " name="product_id[]" id="product_id_'+rowCount+'">\n\
                             </td>';
-                    html += '<td><input type="number" step=any  name="quantity[]" onkeyup="qntyPress(this)" id="quantity_'+rowCount+'" value="0" class="form-control"></td>';
+                    html += '<td>\n\
+                                <input type="number" step=any  name="quantity[]" onkeyup="qntyPress(this)" id="quantity_'+rowCount+'" value="0" class="form-control">\n\
+                                <p style="text-align: center; font-weight: bold; color: green"  id="avlableStock_'+rowCount+'"></p>\n\
+                            </td>';
                     html += '<td><input type="number" step=any  name="sale_price[]" onkeyup="pricePress(this)" id="sale_price_'+rowCount+'" value="0" class="form-control"></td>';
                     html += '<td><input type="number" step=any  name="invc_ttl_price[]" id="invc_ttl_price_'+rowCount+'" value="0" class="form-control" disabled="disabled"></td>';
                     html += '<td class="text-center"><button type="button" id="remove_'+rowCount+'" name="remove" data-row="row" scope="row" class="btn btn-danger btn-sm timesSpan delete_row">×</button></td>';
@@ -477,7 +491,24 @@ function setDiscount(discount){
                     $('#product_id_'+rowNo).val(data.product_id);
 //                    $('#quantity_'+rowNo).val(data.quantity);
                     $('#quantity_'+rowNo).val(1);
-                    $('#sale_price_'+rowNo).val(data.price);
+                    $('#sale_price_'+rowNo).val(data.price); 
+
+                    product_id = data.product_id;
+                    $.ajax({
+                        type: 'post',
+                        url: '<?php echo base_url(); ?>Invoice/avalbaleStockStatus',
+                        data: {
+                            product_id: product_id
+                        },
+                        dataType: 'json', // this bit here
+                        success: function (response) {
+                            console.log(response.available);
+                            // $('#avlableStock_'+rowNo).val(response.challan_date);
+                            $('#avlableStock_'+rowNo).text(response.available + ' ' + response.pack_size);
+                        }
+                    });
+
+
                 }
 
             }		      	
