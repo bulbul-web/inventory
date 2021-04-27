@@ -136,6 +136,7 @@ class Order extends CI_Controller {
         
         $discount = $this->input->post('discount', true);
         $paid_amount = $this->input->post('paid_amount', true);
+        $payment_day = $this->input->post('payment_day', true);
         
         $product_id = $this->input->post('product_id', true);
         $quantity = $this->input->post('quantity', true);
@@ -151,6 +152,7 @@ class Order extends CI_Controller {
                 'note' => $note,
                 'discount' => $discount,
                 'paid_amount' => $paid_amount,
+                'payment_day' => $payment_day,
                 'voucherId_manual' => $voucherId_manual,
                 'voucher_id' => $voucher_id,
                 'entry_by' => $this->session->userdata('user_name'),
@@ -192,6 +194,7 @@ class Order extends CI_Controller {
         
         $discount = $this->input->post('discount', true);
         $paid_amount = $this->input->post('paid_amount', true);
+        $payment_day = $this->input->post('payment_day', true);
         $collection_amount = $this->input->post('collection_amount', true);
         $paid_amount = $paid_amount + $collection_amount;
         
@@ -211,6 +214,7 @@ class Order extends CI_Controller {
                 'note' => $note,
                 'discount' => $discount,
                 'paid_amount' => $paid_amount,
+                'payment_day' => $payment_day,
                 'voucherId_manual' => $voucherId_manual,
                 'voucher_id' => $voucher_id,
                 'entry_by' => $this->session->userdata('user_name'),
