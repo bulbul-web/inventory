@@ -506,6 +506,9 @@ function setDiscount(discount){
                             console.log(response.available);
                             // $('#avlableStock_'+rowNo).val(response.challan_date);
                             $('#avlableStock_'+rowNo).text(response.available + ' ' + response.pack_size);
+                        },
+                        error: function (response) { 
+                            $('#avlableStock_'+rowNo).text("Check stock");
                         }
                     });
 

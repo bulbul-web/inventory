@@ -118,8 +118,8 @@ class Invoice extends CI_Controller {
         }
 
         $available = $totalStockIn - $totalStockOut;
-        if($available == 0){
-            $available = 'stock in this prodcut';
+        if($available <= 0 ){
+            $available = 'Out of stock';
         }
 
         if(isset($stockin->totalStockIn)){
