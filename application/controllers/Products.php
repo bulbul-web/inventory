@@ -461,77 +461,87 @@ class Products extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         
         if($this->form_validation->run()){
+
+
+            $data['product_type_id'] = $this->input->post('product_type_id', true);
+            $data['product_name'] = $this->input->post('product_name', true);
+            $data['product_name_bangla'] = $this->input->post('product_name_bangla', true);
+            $data['product_descrip'] = $this->input->post('product_descrip', true);
+            $data['product_code'] = $this->input->post('product_code', true);
+            $data['pack_size'] = $this->input->post('pack_size', true);
+            $data['total_pack_size'] = $this->input->post('total_pack_size', true);
+            $data['packet'] = $this->input->post('packet', true);
+            $data['product_segment'] = $this->input->post('product_segment', true);
+            $data['price'] = $this->input->post('price', true);
+            $data['entry_by'] = $this->session->userdata('user_name');
+            $data['entry_date'] = date("Y-m-d");
+            $data['image'] = '';
+            $data['product_status'] = $this->input->post('product_status', true);
             
+            $text = $this->db->query('SELECT product_id FROM tbl_product_info ORDER BY product_id DESC LIMIT 1')->row();
+            if(!empty($text)){
+                $text = $text->product_id;
+
+            }else{
+                $text = 0;
+            }
+            $text = intval($text)+1;
+            $height = '80';
+            $type = 'code128';
+            $data['barcode'] = '/assets/images/product-barcode/'.$this->Barcode($text, $height, $type);//barcode xampp old a kaj kore but 
+
+            if($_FILES['image']['name'] == '' || $_FILES['image']['size'] == 0){
+                $this->query_model->saveProductData($data);
+                $sdata = array();
+                $sdata['message'] = 'Successfully Save';
+                $this->session->set_userdata($sdata);
+                $this->products_form();
+            } else {
             
-            if ($_FILES['image']['size'] <= 10000000) {
-    //           10000000
-               
-                //file extension
-                $fileExt = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                if ($_FILES['image']['size'] <= 10000000) {
+        //           10000000
                 
-                if ($fileExt == 'jpg' || $fileExt == 'png'){
+                    //file extension
+                    $fileExt = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
                     
-                    //file size
-                    $file = $_FILES["image"]['tmp_name'];
-                    list($width, $height) = getimagesize($file);
-                    
-                    if($width <= "1000" || $height <= "1000"){
-                        $result = $this->do_upload('image');
-                        if ($result['upload_data']) {
-                            $img = '/assets/images/products/' . $result['upload_data']['file_name'];
-                            $data['product_type_id'] = $this->input->post('product_type_id', true);
-                            $data['product_name'] = $this->input->post('product_name', true);
-                            $data['product_name_bangla'] = $this->input->post('product_name_bangla', true);
-                            $data['product_descrip'] = $this->input->post('product_descrip', true);
-                            $data['product_code'] = $this->input->post('product_code', true);
-                            $data['pack_size'] = $this->input->post('pack_size', true);
-                            $data['total_pack_size'] = $this->input->post('total_pack_size', true);
-                            $data['packet'] = $this->input->post('packet', true);
-                            $data['product_segment'] = $this->input->post('product_segment', true);
-                            $data['price'] = $this->input->post('price', true);
-                            $data['entry_by'] = $this->session->userdata('user_name');
-                            $data['entry_date'] = date("Y-m-d");
-                            $data['image'] = $img;
-                            $data['product_status'] = $this->input->post('product_status', true);
-                            
-                            $text = $this->db->query('SELECT product_id FROM tbl_product_info ORDER BY product_id DESC LIMIT 1')->row();
-                            if(!empty($text)){
-                                $text = $text->product_id;
+                    if ($fileExt == 'jpg' || $fileExt == 'png'){
+                        
+                        //file size
+                        $file = $_FILES["image"]['tmp_name'];
+                        list($width, $height) = getimagesize($file);
+                        
+                        if($width <= "1000" || $height <= "1000"){
+                            $result = $this->do_upload('image');
+                            if ($result['upload_data']) {
+                                $img = '/assets/images/products/' . $result['upload_data']['file_name'];
+                                $data['image'] = $img;
 
-                            }else{
-                                $text = 0;
+                                $this->query_model->saveProductData($data);
+
+                                $sdata = array();
+                                $sdata['message'] = 'Successfully Save';
+                                $this->session->set_userdata($sdata);
+                                $this->products_form();
                             }
-                            $text = intval($text)+1;
-                            $height = '80';
-                            $type = 'code128';
-                            $data['barcode'] = '/assets/images/product-barcode/'.$this->Barcode($text, $height, $type);
-                            $this->query_model->saveProductData($data);
-
+                        }else{
                             $sdata = array();
-                            $sdata['message'] = 'Successfully Save';
+                            $sdata['message'] = 'Image size will be (400 x 400)';
                             $this->session->set_userdata($sdata);
                             $this->products_form();
                         }
                     }else{
                         $sdata = array();
-                        $sdata['message'] = 'Image size will be (400 x 400)';
+                        $sdata['message'] = 'Select an image (jpg/png)';
                         $this->session->set_userdata($sdata);
                         $this->products_form();
                     }
                 }else{
                     $sdata = array();
-                    $sdata['message'] = 'Select an image (jpg/png)';
+                    $sdata['message'] = 'Select an image in size less than 1MB';
                     $this->session->set_userdata($sdata);
                     $this->products_form();
                 }
-            }else{
-                $sdata = array();
-                $sdata['message'] = 'Select an image in size less than 1MB';
-                $this->session->set_userdata($sdata);
-                $this->products_form();
-            }
-            
-            
+            }  
         } else {
             $sdata = array();
             $sdata['message'] = 'Try';
