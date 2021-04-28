@@ -91,6 +91,7 @@
                             <th>Bill Date</th>
                             <th>Bill No</th>
                             <th>Supplier Name</th>
+                            <th>Product Name</th>
                             <th>Quantity</th>
                             <th>Unit price</th>
                             <th>Amount</th>
@@ -109,13 +110,14 @@
                             <td><?php echo $value->bill_date;?></td>
                             <td><?php echo $value->bill_no;?></td>
                             <td><?php echo $value->supplier_name;?></td>
-                            <td><?php echo $value->quantity_in;?></td>
+                            <td><?php echo $value->product_name;?></td>
+                            <td><?php echo $value->quantity_in.' '.$value->pack_size;?></td>
                             <td><?php echo $value->buying_price;?></td>
                             <td><?php echo round($value->totalBuyingPrice, 2);?></td>
                         </tr>
                         <?php endforeach;?>
                         <tr>
-                            <td colspan="6" style="text-align: right"><b>Total:</b></td>
+                            <td colspan="7" style="text-align: right"><b>Total:</b></td>
                             <td><?php echo $netTotalBuy;?></td>
                         </tr>
                     </tbody>

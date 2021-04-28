@@ -107,12 +107,12 @@ class Users_model extends CI_Model {
     } 
     
     public function supplier_and_datewise_buy_product($supplier_id, $from_date, $to_date){
-        $result = $this->db->query("SELECT a.*, b.supplier_name, (a.quantity_in * a.buying_price) as totalBuyingPrice FROM tbl_stock_in a, tbl_supplier b WHERE a.supplier_id = b.supplier_id AND a.bill_date BETWEEN '$from_date' AND '$to_date' AND NOT (a.status <=> 0) AND a.supplier_id = '$supplier_id'")->result();
+        $result = $this->db->query("SELECT a.*, b.supplier_name, (a.quantity_in * a.buying_price) as totalBuyingPrice, pi.*, ps.pack_size FROM tbl_stock_in a, tbl_supplier b, tbl_product_info pi, tbl_pack_size ps WHERE a.supplier_id = b.supplier_id AND a.bill_date BETWEEN '$from_date' AND '$to_date' AND NOT (a.status <=> 0) AND a.supplier_id = '$supplier_id' AND a.product_id = pi.product_id AND pi.pack_size = ps.id")->result();
         return $result;
     } 
     
     public function datewise_buy_product($from_date, $to_date){
-        $result = $this->db->query("SELECT a.*, b.supplier_name, (a.quantity_in * a.buying_price) as totalBuyingPrice FROM tbl_stock_in a, tbl_supplier b WHERE a.supplier_id = b.supplier_id AND a.bill_date BETWEEN '$from_date' AND '$to_date' AND NOT (a.status <=> 0)")->result();
+        $result = $this->db->query("SELECT a.*, b.supplier_name, (a.quantity_in * a.buying_price) as totalBuyingPrice, pi.*, ps.pack_size FROM tbl_stock_in a, tbl_supplier b, tbl_product_info pi, tbl_pack_size ps WHERE a.supplier_id = b.supplier_id AND a.bill_date BETWEEN '$from_date' AND '$to_date' AND NOT (a.status <=> 0) AND a.product_id = pi.product_id AND pi.pack_size = ps.id")->result();
         return $result;
     } 
 

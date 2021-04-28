@@ -28,7 +28,25 @@
 <div class="row">
    <div class="col-lg-12">
      <div class="card">
-        <div class="card-header text-uppercase">Update order ID: <span style="color: red;"><?php echo $voucher_info_customer->voucher_id;?></span></div>
+        <div class="card-header text-uppercase">Update order ID: <span style="color: red;"><?php echo $voucher_info_customer->voucher_id;?></span>
+            <span style="margin-left: 15px; color: green;">
+                ----> <?php
+                    $payment_day = $voucher_info_customer->payment_day;
+                    $date1 = $voucher_info_customer->entry_date;
+                    $date2 = date('Y-m-d');
+                    
+                    
+                    $diff = abs(strtotime($date2) - strtotime($date1));
+                    
+                    $years = floor($diff / (365*60*60*24));
+                    $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+                    $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+                    
+                    // printf("%d years, %d months, %d days\n", $years, $months, $days);
+                    printf("Left: %d days (of %d days)\n", $days, $payment_day);
+                ?> <----
+            </span>
+        </div>
         <div class="card-body">
             <center> 
                 <font color="#FF0000" style="font-size: 20px;">
