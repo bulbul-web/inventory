@@ -224,7 +224,11 @@
             <h4 class="text-white">
                 <?php
                 $totalAssignAmount = $this->db->query("SELECT *, SUM(sell_amount) AS totalAssignAmount FROM tbl_cltn_frm_cmn_cstmr WHERE trans_status = 'assign' GROUP BY trans_status")->row();
-                echo $totalAssignAmount->totalAssignAmount;
+                if(isset($totalAssignAmount)){
+                  if(!empty($totalAssignAmount->totalAssignAmount)){
+                    echo $totalAssignAmount->totalAssignAmount;
+                  }
+                }
                 ?>
             </h4>
             <span class="text-white">Total Assign Amount</span>
@@ -245,7 +249,9 @@
           <div class="media-body text-left">
             <h4 class="text-white">
                 <?php
-                echo $netTotalAmountCommonCustomer - $totalAssignAmount->totalAssignAmount;
+                if(isset($totalAssignAmount)){
+                  echo $netTotalAmountCommonCustomer - $totalAssignAmount->totalAssignAmount;
+                }
                 ?>
             </h4>
             <span class="text-white">Need to assign</span>

@@ -115,13 +115,21 @@
                                         <td>
                                             <?php 
                                                 $orderByDetails = $this->db->query("SELECT * FROM tbl_user WHERE user_id = '$voucher_info_customer->order_by'")->row();
-                                                echo $orderByDetails->user_name;
+                                                if(isset($orderByDetails)){
+                                                    echo $orderByDetails->user_name;
+                                                }
                                             ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td> <b>Contact No</b></td>
-                                        <td><?php echo $orderByDetails->user_mobile;?></td>
+                                        <td>
+                                            <?php 
+                                                if(isset($orderByDetails)){
+                                                    echo $orderByDetails->user_mobile;
+                                                }
+                                            ?>
+                                        </td>
                                     </tr>
                                 </table>
                             </td>
