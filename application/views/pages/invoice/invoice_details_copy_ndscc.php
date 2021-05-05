@@ -250,8 +250,12 @@
 
     </div>
 
-    <!-- <a href="<?php echo base_url('invoice');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Invoice List</a><br> -->
-    <!-- <button id="btnPrint" class="btn btn-primary" style="float: right;"> <i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</button> -->
+    <table>
+        <tr>
+            <td><button onclick="HTMLtoPDF()">pdf</button></td>
+            <td><button id="btnPrint" class="btn btn-primary" style="float: right;"> <i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</button></td>
+        </tr>
+    </table>
 
     <script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -266,6 +270,25 @@
             printWindow.document.close();
             printWindow.print();
         });
+    </script>
+
+    <script src="<?php echo base_url();?>assets/js/html2pdf.bundle.js"></script>
+    <script>
+        function HTMLtoPDF(){
+           
+
+            var element = document.getElementById('dvContainer');
+            var opt = {
+            margin:       .5,
+            filename:     '<?php echo $voucher_info_customer->voucher_id;?>.pdf',
+            image:        { type: 'jpeg', quality: 1 },
+            html2canvas:  { scale: 4 },
+            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+            
+        }
     </script>
 
 
