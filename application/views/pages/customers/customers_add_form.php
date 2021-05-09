@@ -8,7 +8,9 @@
     </ol>
     </div>
     <div class="col-sm-3">
-        
+        <div class="top-button-area">
+            <a class="btn btn-primary m-1" href="<?php echo base_url('customers');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Customer list</a>
+        </div>
 
      </div>
 </div>

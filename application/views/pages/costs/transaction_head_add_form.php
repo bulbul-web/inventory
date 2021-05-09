@@ -1,14 +1,16 @@
 <!-- Breadcrumb-->
 <div class="row pt-2 pb-2">
    <div class="col-sm-9">
-    <h4 class="page-title">Add Transaction Head</h4>
+    <h4 class="page-title">Add Expense Head</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
-       <li class="breadcrumb-item active" aria-current="page">Add Transaction Head</li>
+       <li class="breadcrumb-item active" aria-current="page">Add Expense Head</li>
     </ol>
     </div>
     <div class="col-sm-3">
-        
+        <div class="top-button-area">
+            <a class="btn btn-primary m-1" href="<?php echo base_url('costs-head');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Expense Head List</a>
+        </div>
 
      </div>
 </div>
@@ -17,7 +19,7 @@
 <div class="row">
    <div class="col-lg-12">
      <div class="card">
-        <div class="card-header text-uppercase">Add Transaction Head Form</div>
+        <div class="card-header text-uppercase">Add Expense Head Form</div>
         <div class="card-body">
             <center> 
                 <font color="#FF0000" style="font-size: 20px;">

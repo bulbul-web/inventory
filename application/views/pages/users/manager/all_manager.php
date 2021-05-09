@@ -1,15 +1,15 @@
 <!-- Breadcrumb-->
 <div class="row pt-2 pb-2">
    <div class="col-sm-9">
-    <h4 class="page-title">All Expense Head</h4>
+    <h4 class="page-title">manager List</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
-       <li class="breadcrumb-item active" aria-current="page">All Expense Head</li>
+       <li class="breadcrumb-item active" aria-current="page">manager List</li>
     </ol>
     </div>
     <div class="col-sm-3">
         <div class="top-button-area">
-            <a class="btn btn-primary m-1" href="<?php echo base_url('transaction-head-add');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Add Expense Head</a>
+            <a class="btn btn-primary m-1" href="<?php echo base_url('manager-add');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Add manager</a>
         </div>
 
      </div>
@@ -40,8 +40,10 @@
         <thead>
             <tr>
                 <th>SL.</th>
-                <th>Expense Head Name</th>
-                <th>Description</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>user name</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -51,24 +53,49 @@
             
             <?php 
                 $i = 0;
-                foreach ($allCostsHead as $value){
+                foreach ($managerList as $value){
                     $i++;
                 
             ?>
                 <tr>
                     <td><?php echo $i;?></td>
                     <td>
-                        <?php echo $value->trnsaction_head;?>
-                    </td>
-                    <td>
                         <?php
-                            if($value->description == ""){
+                            if($value->name == ""){
                                 echo '-';
                             }else{
-                                echo $value->description;
+                                echo $value->name;
                             }
                         ?>
                     </td>
+                    <td>
+                        <?php
+                            if($value->phone == ""){
+                                echo '-';
+                            }else{
+                                echo $value->phone;
+                            }
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                            if($value->email == ""){
+                                echo '-';
+                            }else{
+                                echo $value->email;
+                            }
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                            if($value->user_email == ""){
+                                echo '-';
+                            }else{
+                                echo $value->user_email;
+                            }
+                        ?>
+                    </td>
+                    
                     <td>
                         
                         <?php 
@@ -91,8 +118,8 @@
                     </td>
                     <td>
                         <div class="btn-group m-1">
-                            <a href="<?php echo base_url();?>edit-transaction-head/<?php echo $value->id?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
-                            <a href="<?php echo base_url();?>delete-transaction-head/<?php echo $value->id?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a>
+                            <a href="<?php echo base_url();?>edit-manager/<?php echo $value->id?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
+                            <a href="<?php echo base_url();?>change-password-manager/<?php echo $value->id?>"  class="btn btn-danger waves-effect waves-light"> <i class="fa fa-lock"></i> </a>
                             
                          </div>
                     </td>
@@ -103,8 +130,10 @@
         <tfoot>
             <tr>
                 <th>SL.</th>
-                <th>Expense Head Name</th>
-                <th>Description</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>User name</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>

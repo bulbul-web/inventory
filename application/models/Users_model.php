@@ -42,9 +42,36 @@ class Users_model extends CI_Model {
         $this->db->insert("tbl_user", $data);
     }
 
+    public function save_manager($data){
+        $this->db->insert("tbl_manager", $data);
+    }
+
+    public function save_regional_manager($data){
+        $this->db->insert("tbl_regional_manager", $data);
+    }
+
+    public function save_salesman($data){
+        $this->db->insert("tbl_salesman", $data);
+    }
+
     public function update_user($data){
         $this->db->where('user_id', $data['user_id']);
         $this->db->update('tbl_user', $data);
+    }
+
+    public function update_manager($data){
+        $this->db->where('id', $data['id']);
+        $this->db->update('tbl_manager', $data);
+    }
+
+    public function update_regional_manager($data){
+        $this->db->where('id', $data['id']);
+        $this->db->update('tbl_regional_manager', $data);
+    }
+
+    public function update_salesman($data){
+        $this->db->where('id', $data['id']);
+        $this->db->update('tbl_salesman', $data);
     }
     
     
@@ -83,6 +110,21 @@ class Users_model extends CI_Model {
     }
     public function singleCustomer($customer_id){
         $result = $this->db->query("select * from tbl_customer where customer_id = $customer_id ")->row();
+        return $result;
+    }
+
+    public function single_manager($manager_id){
+        $result = $this->db->query("SELECT a.*, b.* FROM tbl_manager a, tbl_user b WHERE a.id = b.m_rm_s_id AND b.user_role = 1 AND a.id = '$manager_id' ")->row();
+        return $result;
+    }
+
+    public function single_regional_manager($regiional_manager_id){
+        $result = $this->db->query("SELECT a.*, b.* FROM tbl_regional_manager a, tbl_user b WHERE a.id = b.m_rm_s_id AND b.user_role = 2 AND a.id = '$regiional_manager_id' ")->row();
+        return $result;
+    }
+
+    public function single_salesman($salesman_id){
+        $result = $this->db->query("SELECT a.*, b.* FROM tbl_salesman a, tbl_user b WHERE a.id = b.m_rm_s_id AND b.user_role = 3 AND a.id = '$salesman_id' ")->row();
         return $result;
     }
     
@@ -128,6 +170,31 @@ class Users_model extends CI_Model {
 
     public function all_users(){
         $result = $this->db->query("SELECT * FROM tbl_user WHERE NOT (user_email <=> 'Jait') ORDER BY user_id DESC")->result();
+        return $result;
+    }
+
+    public function manager_list(){
+        $result = $this->db->query("SELECT a.*, b.* FROM tbl_manager a, tbl_user b WHERE a.id = b.m_rm_s_id AND b.user_role = 1 ORDER BY id DESC")->result();
+        return $result;
+    }
+
+    public function regional_manager_list(){
+        $result = $this->db->query("SELECT a.*, b.*, c.id as manager_id, c.name as manager_name FROM tbl_regional_manager a, tbl_user b, tbl_manager c WHERE a.id = b.m_rm_s_id AND c.id = a.manager_id AND b.user_role = 2 ORDER BY id DESC")->result();
+        return $result;
+    }
+
+    public function salesman_list(){
+        $result = $this->db->query("SELECT a.*, b.* FROM tbl_salesman a, tbl_user b WHERE a.id = b.m_rm_s_id AND b.user_role = 3 ORDER BY id DESC")->result();
+        return $result;
+    }
+
+    public function manager_list_active(){
+        $result = $this->db->query("SELECT * FROM tbl_manager WHERE status = 1 ORDER BY name ASC")->result();
+        return $result;
+    }
+
+    public function regional_manager_list_active(){
+        $result = $this->db->query("SELECT * FROM tbl_regional_manager WHERE status = 1 ORDER BY name ASC")->result();
         return $result;
     }
     

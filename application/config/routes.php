@@ -238,6 +238,30 @@ $route['save-user'] = 'users/save_user';
 $route['edit-user/(:any)'] = 'users/edit_user_form/$1';
 $route['update-user-particular'] = 'users/update_user_particular';
 
+$route['manager-add'] = 'users/add_manager_form';
+$route['save-manager'] = 'users/save_manager';
+$route['manager-list'] = 'users/manager_list';
+$route['edit-manager/(:any)'] = 'users/edit_manager_form/$1';
+$route['update-manager-particular'] = 'users/update_manager_particular';
+$route['change-password-manager/(:any)'] = 'users/change_password_form_view_manager/$1';
+$route['update-password-manager'] = 'users/change_password_manager';
+
+$route['regional-manager-add'] = 'users/add_regional_manager_form';
+$route['save-regional-manager'] = 'users/save_regional_manager';
+$route['regional-manager-list'] = 'users/regional_manager_list';
+$route['edit-regional-manager/(:any)'] = 'users/edit_regional_manager_form/$1';
+$route['update-regional-manager-particular'] = 'users/update_regional_manager_particular';
+$route['change-password-regional-manager/(:any)'] = 'users/change_password_regional_manager/$1';
+$route['update-password-regional-manager'] = 'users/update_password_regional_manager';
+
+$route['salesman-add'] = 'users/add_salesman_form';
+$route['save-salesman'] = 'users/save_salesman';
+$route['salesman-list'] = 'users/salesman_list';
+$route['edit-salesman/(:any)'] = 'users/edit_salesman_form/$1';
+$route['update-salesman-particular'] = 'users/update_salesman_particular';
+$route['change-password-salesman/(:any)'] = 'users/change_password_salesman/$1';
+$route['update-password-salesman'] = 'users/update_password_salesman';
+
 $route['qrcode'] = 'QrcodeController/qrcode_generator_by_input';
 $route['qrcode-form'] = 'QrcodeController/qrcode_form';
 $route['save-qrcode'] = 'QrcodeController/save_qrcode';

@@ -83,6 +83,29 @@
   }else{
 ?>
 
+<div class="col-12 col-lg-6 col-xl-3">
+  <a href="<?php echo base_url()?>product-type">
+    <div class="card bg-pattern-success">
+      <div class="card-body">
+        <div class="media">
+        <div class="media-body text-left">
+          <h4 class="text-white">
+              <?php
+              $category = $this->db->query("SELECT count(product_type_id) as totalCategory FROM tbl_product_type WHERE product_type_status = 1")->row();
+              if (isset($category)):
+                  echo $category->totalCategory;
+              endif;
+              ?>
+          </h4>
+          <span class="text-white">Product Category</span>
+        </div>
+        <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+          <i class="icon-pie-chart text-white"></i></div>
+      </div>
+      </div>
+    </div>
+  </a>
+</div>
 
   <div class="col-12 col-lg-6 col-xl-3">
       <a href="<?php echo base_url()?>products">
@@ -98,7 +121,7 @@
                   endif;
                   ?>
               </h4>
-              <span class="text-white">Products</span>
+              <span class="text-white">Total Product</span>
             </div>
             <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
               <i class="icon-basket-loaded text-white"></i></div>
@@ -122,39 +145,16 @@
               endif;
               ?>
           </h4>
-          <span class="text-white">Supplier</span>
+          <span class="text-white">Supplier Name</span>
         </div>
         <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
-          <i class="icon-wallet text-white"></i></div>
+          <i class="icon-user text-white"></i></div>
       </div>
       </div>
     </div>
   </a>
 </div>
 
-<div class="col-12 col-lg-6 col-xl-3">
-  <a href="<?php echo base_url()?>product-type">
-    <div class="card bg-pattern-success">
-      <div class="card-body">
-        <div class="media">
-        <div class="media-body text-left">
-          <h4 class="text-white">
-              <?php
-              $category = $this->db->query("SELECT count(product_type_id) as totalCategory FROM tbl_product_type WHERE product_type_status = 1")->row();
-              if (isset($category)):
-                  echo $category->totalCategory;
-              endif;
-              ?>
-          </h4>
-          <span class="text-white">Category</span>
-        </div>
-        <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
-          <i class="icon-pie-chart text-white"></i></div>
-      </div>
-      </div>
-    </div>
-  </a>
-</div>
 
 <div class="col-12 col-lg-6 col-xl-3">
   <a href="<?php echo base_url()?>customers">
@@ -170,7 +170,7 @@
               endif;
               ?>
           </h4>
-          <span class="text-white">Customer</span>
+          <span class="text-white">Customer Name</span>
         </div>
         <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
           <i class="icon-user text-white"></i></div>
