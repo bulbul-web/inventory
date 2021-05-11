@@ -513,6 +513,37 @@ class Query_model extends CI_Model {
     }
 
 
+    public function order_info_customer($order_id){
+        $result = $this->db->query
+                (
+                "SELECT c.*, i.*"
+                . " FROM tbl_customer c, tbl_order i"
+                . " WHERE i.customer_id = c.customer_id AND i.order_id = '$order_id' AND NOT (i.delete_status <=> 'deleted')"
+                . " GROUP BY i.order_id"                    
+                )->row();
+        return $result;
+    }
+
+    public function order_info_product($order_id){
+        $result = $this->db->query
+                (
+                "SELECT"
+                . " c.*,"
+                . " pi.*,"
+                . " i.*,"
+                . " ps.pack_size as pack_size_name"
+                . " FROM"
+                . " tbl_customer c,"
+                . " tbl_product_info pi,"
+                . " tbl_order i,"
+                . " tbl_pack_size ps"
+                . " WHERE"
+                . " i.customer_id = c.customer_id AND i.product_id = pi.product_id AND i.order_id = '$order_id' AND NOT (i.delete_status <=> 'deleted')"
+                . " AND pi.pack_size = ps.id"                
+                )->result();
+        return $result;
+    }
+
     public function voucher_info_customer($voucher_id){
         $result = $this->db->query
                 (
@@ -582,6 +613,12 @@ class Query_model extends CI_Model {
         $this->db->set('delete_status', 'deleted');
         $this->db->where('id', $id);
         $this->db->update('tbl_invoice');
+    }
+    public function delete_salesman_order_product($id){
+        $this->db->set('status', '0');
+        $this->db->set('delete_status', 'deleted');
+        $this->db->where('id', $id);
+        $this->db->update('tbl_order');
     }
 
     public function qrcodeList(){

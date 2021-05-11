@@ -11,8 +11,15 @@
 
 <?php if($userInfo->user_role == 3){ ?>
 
-  <li>
+  <!-- <li>
     <a href="<?php echo base_url('order');?>" class="waves-effect">
+      <i class="fa fa-file"></i> <span>Order</span> 
+    </a>
+
+  </li> -->
+
+  <li>
+    <a href="<?php echo base_url('salesman-order-form');?>" class="waves-effect">
       <i class="fa fa-file"></i> <span>Order</span> 
     </a>
 
@@ -270,7 +277,7 @@
   <li>
     <a href="javaScript:void();" class="waves-effect">
       <i class="fa fa-user" aria-hidden="true"></i>
-      <span>User setup</span> <i class="fa fa-angle-left pull-right"></i>
+      <span>Marketing setup</span> <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="sidebar-submenu">
         

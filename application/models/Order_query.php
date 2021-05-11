@@ -17,6 +17,34 @@ class Order_query extends CI_Model {
         return $result;
     }
 
+    public function view_salesman_order($id){
+        
+        $result = $this->db->query
+                (
+                    
+                    "SELECT c.customer_name, i.*, sum(i.quantity * i.sale_price) as grandTotal"
+                    . " FROM tbl_customer c, tbl_order i"
+                    . " WHERE i.customer_id = c.customer_id AND NOT (i.delete_status <=> 'deleted') AND i.order_by = '$id'"
+                    . " GROUP BY i.order_id"
+                    . " ORDER BY i.id DESC"
+                )->result();
+        return $result;
+    }
+
+    public function view_salesman_order_all(){
+        
+        $result = $this->db->query
+                (
+                    
+                    "SELECT c.customer_name, i.*, sum(i.quantity * i.sale_price) as grandTotal"
+                    . " FROM tbl_customer c, tbl_order i"
+                    . " WHERE i.customer_id = c.customer_id AND NOT (i.delete_status <=> 'deleted')"
+                    . " GROUP BY i.order_id"
+                    . " ORDER BY i.id DESC"
+                )->result();
+        return $result;
+    }
+
 
 
 }
