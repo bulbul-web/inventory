@@ -294,5 +294,8 @@ $route['assign-collection-report-section'] = 'AssignCollection/assign_collection
 $route['datewise-assign-collection-report'] = 'AssignCollection/datewise_assign_collection_report';
 $route['customerwise-assign-collection-report'] = 'AssignCollection/customerwise_assign_collection_report';
 
+$route['visit-add'] = 'Visit/visit_add_form';
+$route['save-visitor'] = 'Visit/save_visitor';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

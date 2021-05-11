@@ -5,7 +5,6 @@ class Order extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->loged_out();
-        $this->load->model('order_query');
     }
     
     private function loged_out(){

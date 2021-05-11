@@ -46,6 +46,24 @@
     </ul>
   </li>
 
+  <li>
+    <a href="javaScript:void();" class="waves-effect">
+      <i class="fa fa-building-o" aria-hidden="true"></i>
+      <span>Visit Info</span> <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="sidebar-submenu">
+        
+        
+        <li>
+            <a href="<?php echo base_url('visit-add');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-building"></i> <span>Visit</span> 
+            </a>
+        </li>
+
+        
+    </ul>
+  </li>
+
 <?php }else{ ?>
   
 
