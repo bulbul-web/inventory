@@ -38,6 +38,26 @@
             <?php echo form_open('save-customers', 'name="save-customers" id="saveCustomers"');?>
 
                 <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Customer Type</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" name="customer_type" required="">
+                        <option value="">Select Customer Type</option>
+
+                        <!-- <?php
+                          $customer_type = $this->db->query("SELECT * FROM tbl_customer_type WHERE status = 1 ")->result();
+                          foreach ($customer_type as $value) {                        
+                        ?>
+                          <option value="<?php echo $value->id;?>"><?php echo $value->name;?></option>
+                        <?php } ?> -->
+
+                        <option value="Corporate">Corporate</option>
+                        <option value="Retailer">Retailer</option>
+                        <option value="Modern Trade">Modern Trade</option>
+                      </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
                   <label class="col-sm-3 col-form-label">customer Name</label>
                   <div class="col-sm-9">
                       <input type="text" name="customer_name" value="<?php echo set_value('customer_name'); ?>" class="form-control form-control-rounded">

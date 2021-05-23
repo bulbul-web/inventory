@@ -86,6 +86,9 @@ class Query_model extends CI_Model {
     public function saveProductTypeData($data){
         $this->db->insert('tbl_product_type', $data);
     }
+    public function saveProductCategoryData($data){
+        $this->db->insert('tbl_product_category', $data);
+    }
     public function single_product_type($product_type_id){
         $result = $this->db->select('*')
                         ->from('tbl_product_type')
@@ -209,9 +212,10 @@ class Query_model extends CI_Model {
     public function viewAllCustomers(){
         $result = $this->db->select('*')
                         ->from('tbl_customer')
-                        ->order_by('customer_id', 'ASC')
+                        ->order_by('customer_id', 'DESC')
                         ->get()
                         ->result();
+        // $result = $this->db->query("SELECT c.*, ct.name as ctmr_type_name FROM tbl_customer c, tbl_customer_type ct WHERE c.customer_type = ct.id ORDER BY c.customer_name DESC")->result();
         return $result;
     }
     public function viewAllPackSize(){

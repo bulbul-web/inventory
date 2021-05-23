@@ -1,0 +1,7 @@
+1. 22-05-21 -- 'tbl_customer_type' added
+
+2.    "     -- 'tbl_product_category' added
+
+3.    "     -- Column added ('customer_type') in 'tbl_customer'
+
+4. 23-05-21 -- 'tbl_company' added

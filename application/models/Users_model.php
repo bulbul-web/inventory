@@ -91,6 +91,24 @@ class Users_model extends CI_Model {
         $this->db->where('user_id', $id);
         $this->db->update('tbl_user', $data);
     }
+
+    public function update_company($img){
+        $data = array();
+        $id = $this->input->post('id', TRUE);
+        
+        $data['name'] = $this->input->post('name', true);
+        $data['email'] = $this->input->post('email', true);
+        $data['mobile'] = $this->input->post('mobile', true);
+        $data['address'] = $this->input->post('address', true);
+        $data['file'] = $img;
+        
+        unset($data['status']);
+        unset($data['user_pass']);
+        unset($data['user_role']);
+        
+        $this->db->where('id', $id);
+        $this->db->update('tbl_company', $data);
+    }
     
     public function update_password($data)
     {

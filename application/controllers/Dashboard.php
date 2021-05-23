@@ -50,6 +50,83 @@ class Dashboard extends CI_Controller {
         $data['content'] = $this->load->view('pages/account-form-view', $data, true);
         $this->load->view('index', $data);
     }
+
+    public function company_setup()
+    {
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['companyInfo'] = $this->db->query('SELECT * FROM tbl_company where id = 1')->row();
+        
+        $data['title'] = 'Account';
+        $data['css'] = $this->load->view('common/allcss', '', true);
+        $data['scripts'] = $this->load->view('common/allscripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('pages/company_setup', $data, true);
+        $this->load->view('index', $data);
+    }
+
+    public function update_company(){
+        $this->form_validation->set_rules('name', 'Company Name', 'required');
+        $this->form_validation->set_rules('address', 'Address', 'required');
+        
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        
+        if($this->form_validation->run()){
+            if($_FILES['file']['name'] == '' || $_FILES['file']['size'] == 0){
+                $img = $this->input->post('old_file', TRUE);
+                $this->users_model->update_company($img);
+
+                $sdata = array();
+                $sdata['message'] = 'Successfully Updated';
+                $this->session->set_userdata($sdata);
+                $this->company_setup();
+            }
+            else{
+
+                if ($_FILES['file']['size'] <= 10000000) {
+        //           10000000
+
+                    //file extension
+                    $fileExt = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+                    if ($fileExt == 'jpg' || $fileExt == 'png'){
+                        $path = "./".$this->input->post('old_file', TRUE);
+                        unlink($path);
+
+                        $result = $this->do_upload('file');
+                        if ($result['upload_data']) {
+                            $img = '/assets/images/avatars/' . $result['upload_data']['file_name'];
+                            $this->users_model->update_company($img);
+
+
+                            $sdata = array();
+                            $sdata['message'] = 'Successfully Updated';
+                            $this->session->set_userdata($sdata);
+                            $this->company_setup();
+                        }
+                    }else{
+                        $sdata = array();
+                        $sdata['message'] = 'Select an image (jpg/png)';
+                        $this->session->set_userdata($sdata);
+                        $this->company_setup();
+                    }
+                }else{
+                    $sdata = array();
+                    $sdata['message'] = 'Select an image in size less than 1MB';
+                    $this->session->set_userdata($sdata);
+                    $this->company_setup();
+                }
+
+            }
+        } else {
+            $sdata = array();
+            $sdata['message'] = 'Try again!';
+            $this->session->set_userdata($sdata);
+            $this->company_setup();
+        }
+    }
     
     public function change_password_form_view()
     {

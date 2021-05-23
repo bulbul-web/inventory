@@ -82,33 +82,33 @@
     </a>
     <ul class="sidebar-submenu">
         <li>
+            <a href="<?php echo base_url('company-setup');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Company-setup</span> 
+            </a>
+        </li>
+        <li>
             <a href="<?php echo base_url('suppliers-form');?>" class="waves-effect">
               <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Suppliers</span> 
             </a>
         </li>
         <li>
-            <a href="<?php echo base_url('products-type-form');?>" class="waves-effect">
-              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Products Type</span> 
-            </a>
-        </li>
-        <li>
-            <a href="<?php echo base_url('pack-size-add');?>" class="waves-effect">
-              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Pack Size</span> 
-            </a>
-        </li>
-        <li>
-            <a href="<?php echo base_url('products-form');?>" class="waves-effect">
-              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Products</span> 
+            <a href="<?php echo base_url('products-section');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Product</span> 
             </a>
         </li>
         <li>
             <a href="<?php echo base_url('customer-form');?>" class="waves-effect">
-              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Customers</span> 
+              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Customer</span> 
             </a>
         </li>
         <li>
             <a href="<?php echo base_url('warehouse-form');?>" class="waves-effect">
-              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Warehouse</span> 
+              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Outlet</span> 
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo base_url('marketing-setup-section');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Marketing</span> 
             </a>
         </li>
     </ul>
@@ -286,35 +286,6 @@
         <li>
             <a href="<?php echo base_url('all-users');?>" class="waves-effect">
               <i aria-hidden="true" class="fa fa-user-o"></i> <span>All users</span> 
-            </a>
-        </li>
-        
-    </ul>
-  </li>
-
-  <li>
-    <a href="javaScript:void();" class="waves-effect">
-      <i class="fa fa-user" aria-hidden="true"></i>
-      <span>Marketing setup</span> <i class="fa fa-angle-left pull-right"></i>
-    </a>
-    <ul class="sidebar-submenu">
-        
-        
-        <li>
-            <a href="<?php echo base_url('manager-add');?>" class="waves-effect">
-              <i aria-hidden="true" class="fa fa-user-o"></i> <span>Manager</span> 
-            </a>
-        </li>
-
-        <li>
-            <a href="<?php echo base_url('regional-manager-add');?>" class="waves-effect">
-              <i aria-hidden="true" class="fa fa-user-o"></i> <span>Regional Manager</span> 
-            </a>
-        </li>
-
-        <li>
-            <a href="<?php echo base_url('salesman-add');?>" class="waves-effect">
-              <i aria-hidden="true" class="fa fa-user-o"></i> <span>Salesman</span> 
             </a>
         </li>
         

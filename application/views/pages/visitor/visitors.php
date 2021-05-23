@@ -1,10 +1,10 @@
 <!-- Breadcrumb-->
 <div class="row pt-2 pb-2">
    <div class="col-sm-9">
-    <h4 class="page-title">Customers</h4>
+    <h4 class="page-title">visitors</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
-       <li class="breadcrumb-item active" aria-current="page">Customers</li>
+       <li class="breadcrumb-item active" aria-current="page">visitors</li>
     </ol>
     </div>
     <div class="col-sm-3">
@@ -40,8 +40,7 @@
         <thead>
             <tr>
                 <th>SL.</th>
-                <th>Customer Type</th>
-                <th>Name</th>
+                <th>Visitor Name</th>
                 <th>Mobile</th>
                 <th>Email</th>
                 <th>Address</th>
@@ -54,7 +53,7 @@
             
             <?php 
                 $i = 0;
-                foreach ($customers as $value){
+                foreach ($allVisitor as $value){
                     $i++;
                 
             ?>
@@ -62,53 +61,44 @@
                     <td><?php echo $i;?></td>
                     <td>
                         <?php
-                            if($value->customer_type == ""){
+                            if($value->name == ""){
                                 echo '-';
                             }else{
-                                echo $value->customer_type;
+                                echo $value->name;
                             }
                         ?>
                     </td>
                     <td>
                         <?php
-                            if($value->customer_name == ""){
+                            if($value->phone == ""){
                                 echo '-';
                             }else{
-                                echo $value->customer_name;
+                                echo $value->phone;
                             }
                         ?>
                     </td>
                     <td>
                         <?php
-                            if($value->customer_mobile == ""){
+                            if($value->email == ""){
                                 echo '-';
                             }else{
-                                echo $value->customer_mobile;
+                                echo $value->email;
                             }
                         ?>
                     </td>
                     <td>
                         <?php
-                            if($value->customer_email == ""){
+                            if($value->address == ""){
                                 echo '-';
                             }else{
-                                echo $value->customer_email;
-                            }
-                        ?>
-                    </td>
-                    <td>
-                        <?php
-                            if($value->customer_address == ""){
-                                echo '-';
-                            }else{
-                                echo $value->customer_address;
+                                echo $value->address;
                             }
                         ?>
                     </td>
                     <td>
                         
                         <?php 
-                            if($value->customer_status == 1){
+                            if($value->status == 1){
                         ?>
                             
                             <span class="badge badge-primary m-1">Active</span>
@@ -117,7 +107,7 @@
                         ?>
                         
                         <?php 
-                            if($value->customer_status == 0){
+                            if($value->status == 0){
                         ?>
                             <span class="badge badge-danger m-1">Inactive</span>
                         <?php
@@ -127,8 +117,7 @@
                     </td>
                     <td>
                         <div class="btn-group m-1">
-                            <a href="<?php echo base_url();?>edit-customer/<?php echo $value->customer_id?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
-                            <a href="<?php echo base_url();?>delete-customer/<?php echo $value->customer_id?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a>
+                            <a href="<?php echo base_url();?>edit-visitor/<?php echo $value->id?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
                          </div>
                     </td>
                 </tr>

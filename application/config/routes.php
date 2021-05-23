@@ -62,6 +62,8 @@ $route['account'] = 'dashboard/account_form_view';
 $route['update-user'] = 'dashboard/update_user';
 $route['change-password'] = 'dashboard/change_password_form_view';
 $route['update-password'] = 'dashboard/change_password';
+$route['company-setup'] = 'dashboard/company_setup';
+$route['update-company'] = 'dashboard/update_company';
 
 $route['suppliers'] = 'suppliers/suppliers';
 $route['suppliers-form'] = 'suppliers/suppliers_add_form_view';
@@ -71,6 +73,9 @@ $route['update-suppliers'] = 'suppliers/update_suppliers';
 $route['delete-supplier/(.+)'] = 'suppliers/delete_supplier/$1';
 
 
+$route['products-category-form'] = 'products/products_category_form';
+$route['save-products-category'] = 'products/save_products_category';
+
 $route['product-type'] = 'products/product_type';
 $route['products-type-form'] = 'products/products_type_add_form_view';
 $route['save-products-type'] = 'products/save_products_type';
@@ -78,6 +83,7 @@ $route['edit-product-type/(.+)'] = 'products/edit_product_type_form_view/$1';
 $route['update-product-type'] = 'products/update_product_type';
 $route['delete-product-type/(.+)'] = 'products/delete_product_type/$1';
 
+$route['products-section'] = 'products/products_section';
 $route['products'] = 'products/products';
 $route['product-details/(.+)'] = 'products/product_details/$1';
 $route['products-form'] = 'products/products_form';
@@ -170,6 +176,9 @@ $route['datewise-collection-from-customer'] = 'reports/datewise_collection_from_
 $route['datewise-collection'] = 'reports/datewise_collection';
 $route['supplier-and-datewise-buy-product'] = 'reports/supplier_and_datewise_buy_product';
 $route['datewise-buy-product'] = 'reports/datewise_buy_product';
+$route['productwise-profit'] = 'reports/productwise_profit';
+
+$route['invoice-report-section'] = 'reports/invoice_report_section';
 
 $route['account-reports-section'] = 'reports/account_reports_section';
 $route['date-wise-transaction-report'] = 'reports/date_wise_transaction_report';
@@ -248,6 +257,7 @@ $route['save-user'] = 'users/save_user';
 $route['edit-user/(:any)'] = 'users/edit_user_form/$1';
 $route['update-user-particular'] = 'users/update_user_particular';
 
+$route['marketing-setup-section'] = 'users/marketing_setup_section';
 $route['manager-add'] = 'users/add_manager_form';
 $route['save-manager'] = 'users/save_manager';
 $route['manager-list'] = 'users/manager_list';
@@ -296,6 +306,7 @@ $route['customerwise-assign-collection-report'] = 'AssignCollection/customerwise
 
 $route['visit-add'] = 'Visit/visit_add_form';
 $route['save-visitor'] = 'Visit/save_visitor';
+$route['visitor'] = 'Visit/visitor_list';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

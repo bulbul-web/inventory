@@ -216,6 +216,20 @@ class Reports extends CI_Controller {
         $data['content'] = $this->load->view('reports/supplier_and_datewise_buy_product', $data, true);
         $this->load->view('index', $data);
     }
+
+    public function productwise_profit(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['title'] = 'Productwise profit';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/productwise_profit', $data, true);
+        $this->load->view('index', $data);
+    }
     
     public function datewise_buy_product(){
         $data = array();
@@ -465,6 +479,20 @@ class Reports extends CI_Controller {
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('reports/transactionwise_voucher_report', $data, true);
+        $this->load->view('index', $data);
+    }
+
+    public function invoice_report_section(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['title'] = 'Account Reports';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/invoice_report_section', $data, true);
         $this->load->view('index', $data);
     }
     

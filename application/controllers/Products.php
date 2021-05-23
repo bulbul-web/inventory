@@ -30,7 +30,20 @@ class Products extends CI_Controller {
         );
     }
     
-    
+    public function products_section()
+    {
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);        
+        $data['title'] = 'Product Setup';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('pages/products/products_section', $data, true);
+        $this->load->view('index', $data);
+    }
 
     public function product_type()
     {
@@ -229,6 +242,21 @@ class Products extends CI_Controller {
         $data['content'] = $this->load->view('pages/products/products_type_add_form', $data, true);
         $this->load->view('index', $data);
     }
+
+    public function products_category_form()
+    {
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);        
+        $data['title'] = 'Product Category Add';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('pages/products/products_category_form', $data, true);
+        $this->load->view('index', $data);
+    }
     public function products_form()
     {
         $data = array();
@@ -342,6 +370,26 @@ class Products extends CI_Controller {
             $this->products_type_add_form_view();
         } else {
             $this->products_type_add_form_view();
+        }
+    }
+
+    public function save_products_category()
+    {
+        
+        $this->form_validation->set_rules('name', 'Product Type', 'required|is_unique[tbl_product_category.name]');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        
+        if($this->form_validation->run()){
+            $data['name'] = $this->input->post('name', true);
+            $data['status'] = $this->input->post('status', true);
+            $this->query_model->saveProductCategoryData($data);
+            
+            $sdata = array();
+            $sdata['message'] = 'Successfully Save';
+            $this->session->set_userdata($sdata);
+            $this->products_category_form();
+        } else {
+            $this->products_category_form();
         }
     }
     public function save_stock_in()

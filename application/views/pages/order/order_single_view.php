@@ -42,8 +42,10 @@
 
                         <?php $shopInfo = $this->db->query("SELECT * FROM tbl_user WHERE user_id = $userInfo->user_id")->row();?>
                         <!-- <img src="<?php echo base_url().$shopInfo->file;?>" class="logo-icon" alt="logo icon" style="width: 70px;"></td> -->
-
-                        <img src="<?php echo base_url();?>assets/images/logo-icon.png" class="logo-icon" alt="logo icon" style="width: 190px;"></td>
+						<?php
+							$companyInfo = $this->db->query('SELECT * FROM tbl_company where id = 1')->row();
+						?>
+                        <img src="<?php echo base_url().$companyInfo->file;?>" class="logo-icon" alt="logo icon" style="width: 190px;"></td>
 
                     <!-- <td>
                         <?php
@@ -56,8 +58,8 @@
                 </tr>
                 <tr>
                     <td style="text-align: center;">
-                        <h3 class="text-dark" style="padding: 0; margin: 0; line-height: 35px;">VarietiesBD</h3>
-                        <p style="margin: 0px; padding: 0px;">Bashaboo</p>
+                        <h3 class="text-dark" style="padding: 0; margin: 0; line-height: 35px;"><?php echo $companyInfo->name;?></h3>
+                        <p style="margin: 0px; padding: 0px;"><?php echo $companyInfo->address;?></p>
                     </td>
                 </tr>
             </table>

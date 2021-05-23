@@ -42,8 +42,10 @@
 
                         <?php $shopInfo = $this->db->query("SELECT * FROM tbl_user WHERE user_id = $userInfo->user_id")->row();?>
                         <!-- <img src="<?php echo base_url().$shopInfo->file;?>" class="logo-icon" alt="logo icon" style="width: 70px;"></td> -->
-
-                        <img src="<?php echo base_url();?>assets/images/logo-icon.png" class="logo-icon" alt="logo icon" style="width: 90px;"></td>
+						<?php
+							$companyInfo = $this->db->query('SELECT * FROM tbl_company where id = 1')->row();
+						?>
+                        <img src="<?php echo base_url().$companyInfo->file;?>" class="logo-icon" alt="logo icon" style="width: 90px;"></td>
 
                     <!-- <td>
                         <?php
@@ -56,8 +58,8 @@
                 </tr>
                 <tr>
                     <td style="text-align: center;">
-                        <h3 class="text-dark" style="padding: 0; margin: 0; line-height: 35px;">NDS Crop Care</h3>
-                        <p style="margin: 0px; padding: 0px;">Plot : 14423 ,Saidnagar ,Vatara  Dhaka -1212</p>
+                        <h3 class="text-dark" style="padding: 0; margin: 0; line-height: 35px;"><?php $companyInfo->name;?></h3>
+                        <p style="margin: 0px; padding: 0px;"><?php echo $companyInfo->address;?></p>
                     </td>
                 </tr>
             </table>
@@ -239,12 +241,19 @@
     </div>
     <div class="col-md-6 text-right">
         <?php
-            if($voucher_info_customer->order_status != '' && $voucher_info_customer->order_status == 0){
-                echo '<a class="btn btn-danger" href="'.base_url().'accept-order/'.$voucher_info_customer->voucher_id.'">Accept and print</a>';
-            }else {
+            $user_role = $this->session->userdata('user_role');
+            if($user_role == 3){
+                echo '<a href=" '.base_url().'order-details-copy/'.$value->voucher_id.'" class="btn btn-primary" target="_blank"><i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</a>';
+            }else{
+                if($voucher_info_customer->order_status != '' && $voucher_info_customer->order_status == 0){
+                    echo '<a class="btn btn-danger" href="'.base_url().'accept-order/'.$voucher_info_customer->voucher_id.'">Accept and print</a>';
+                }else {
         ?>
-            <a href="<?php echo base_url();?>order-details-copy/<?php echo $value->voucher_id?>" class="btn btn-primary" target="_blank"><i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</a>
-        <?php } ?>
+            <a href="<?php echo base_url();?>order-details-copy/<?php echo $value->order_id?>" class="btn btn-primary" target="_blank"><i class="fa fa-print" aria-hidden="true" style="font-size: 25px; margin-right: 10px;"></i>Print</a>
+        <?php
+                } 
+            } 
+        ?>
     </div>
 </div>
 <script>

@@ -15,6 +15,23 @@ class Visit extends CI_Controller {
         }
     }
 
+    public function visitor_list()
+    {
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['allVisitor'] = $this->visit_query->allVisitor();
+                
+        $data['title'] = 'Visitor Add';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('pages/visitor/visitors', $data, true);
+        $this->load->view('index', $data);
+    }
+
     public function visit_add_form()
     {
         $data = array();
@@ -75,7 +92,7 @@ class Visit extends CI_Controller {
             
 
             if($_FILES['image']['name'] == '' || $_FILES['image']['size'] == 0){
-                // $this->visit_query->saveVisitorData($data);
+                $this->visit_query->saveVisitorData($data);
                 if($check == 'customer'){          
                     $this->query_model->saveCustomerData($cdata);
                 }
@@ -100,7 +117,7 @@ class Visit extends CI_Controller {
                             $img = '/assets/images/products/' . $result['upload_data']['file_name'];
                             $data['image'] = $img;
 
-                            // $this->visit_query->saveVisitorData($data);
+                            $this->visit_query->saveVisitorData($data);
                             if($check == 'customer'){
                                 $this->query_model->saveCustomerData($cdata);
                             }

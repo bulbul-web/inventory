@@ -66,6 +66,7 @@ class Customers extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         
         if($this->form_validation->run()){
+            $data['customer_type'] = $this->input->post('customer_type', true);
             $data['customer_name'] = $this->input->post('customer_name', true);
             $data['customer_address'] = $this->input->post('customer_address', true);
             $data['customer_mobile'] = $this->input->post('customer_mobile', true);
@@ -113,6 +114,7 @@ class Customers extends CI_Controller {
         
         if($this->form_validation->run()){
             $data['customer_id'] = $this->input->post('customer_id', true);
+            $data['customer_type'] = $this->input->post('customer_type', true);
             $data['customer_name'] = $this->input->post('customer_name', true);
             $data['customer_address'] = $this->input->post('customer_address', true);
             $data['customer_mobile'] = $this->input->post('customer_mobile', true);

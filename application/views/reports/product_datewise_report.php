@@ -32,55 +32,55 @@
   <div class="card">
       <div class="card-header">Single Product Datewise Stock Report</div>
     <div class="card-body">
+        <form method="post">
+            <div class="row"> 
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-form-label">Product</label>
+                        <div class="col-sm-12">
+                            <select name="product_names" class="form-control">
+                                <?php
+                                    $products = $this->db->query("SELECT pi.product_name, pi.product_id FROM tbl_product_info pi, tbl_stock_in si WHERE si.product_id = pi.product_id AND pi.product_status = 1 GROUP BY si.product_id")->result();
+                                    foreach ($products as $product):
+                                ?>
+                                
+                                <option value="<?= $product->product_id;?>"><?= $product->product_name;?></option>
+                                <?php endforeach;?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-form-label">From Date</label>
+                        <div class="col-sm-12">
+                            <input type="text" name="from_date" id="fromDate" value="<?php echo set_value('from_date');?>" class="form-control form-control-rounded" required="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-form-label">To Date</label>
+                        <div class="col-sm-12">
+                            <input type="text" name="to_date" id="toDate" value="<?php echo set_value('to_date');?>" class="form-control form-control-rounded" required="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-form-label">&nbsp;</label>
+                        <div class="col-sm-12">
+                            <button type="submit" name="submit" class="btn btn-success">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>      
+        </form>
         <div id="print_content">
         <div class="row">
             <div class="col-md-12">
                 <br>
-                <form method="post">
-                    <div class="row"> 
-                        <div class="col-md-4">
-                            <div class="form-group row">
-                                <label class="col-sm-12 col-form-label">Status</label>
-                                <div class="col-sm-12">
-                                    <select name="product_names" class="form-control">
-                                        <?php
-                                            $products = $this->db->query("SELECT pi.product_name, pi.product_id FROM tbl_product_info pi, tbl_stock_in si WHERE si.product_id = pi.product_id AND pi.product_status = 1 GROUP BY si.product_id")->result();
-                                            foreach ($products as $product):
-                                        ?>
-                                        
-                                        <option value="<?= $product->product_id;?>"><?= $product->product_name;?></option>
-                                        <?php endforeach;?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group row">
-                                <label class="col-sm-12 col-form-label">From Date</label>
-                                <div class="col-sm-12">
-                                    <input type="text" name="from_date" id="fromDate" value="<?php echo set_value('from_date');?>" class="form-control form-control-rounded" required="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group row">
-                                <label class="col-sm-12 col-form-label">To Date</label>
-                                <div class="col-sm-12">
-                                    <input type="text" name="to_date" id="toDate" value="<?php echo set_value('to_date');?>" class="form-control form-control-rounded" required="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group row">
-                                <label class="col-sm-12 col-form-label">&nbsp;</label>
-                                <div class="col-sm-12">
-                                    <button type="submit" name="submit" class="btn btn-success">View</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>      
-                </form>
                     
                    
                 

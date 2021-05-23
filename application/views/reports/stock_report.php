@@ -32,34 +32,32 @@
   <div class="card">
       <div class="card-header">Single Product Stock Report</div>
     <div class="card-body">
+        <div class="row">
+
+            <div class="col-md-6">
+                <form method="post">
+                    <select name="product_names">
+                        <?php
+                            $products = $this->db->query("SELECT pi.product_name, pi.product_id FROM tbl_product_info pi, tbl_stock_in si WHERE si.product_id = pi.product_id AND pi.product_status = 1 GROUP BY si.product_id")->result();
+                            foreach ($products as $product):
+                        ?>
+                        
+                        <option value="<?= $product->product_id;?>"><?= $product->product_name;?></option>
+                        <?php endforeach;?>
+                    </select>
+                    <button type="submit" name="submit">View</button>
+                </form>
+            </div>
+
+            <div class="col-md-6 text-right">
+                <a href="<?php echo base_url();?>product-datewise-report" class="btn btn-primary"> Datewise Report</a>
+            </div>
+            
+        </div>
         <div id="print_content">
         <div class="row">
             <div class="col-md-12">
                 <br>
-                
-                <div class="row">
-
-                    <div class="col-md-6">
-                        <form method="post">
-                            <select name="product_names">
-                                <?php
-                                    $products = $this->db->query("SELECT pi.product_name, pi.product_id FROM tbl_product_info pi, tbl_stock_in si WHERE si.product_id = pi.product_id AND pi.product_status = 1 GROUP BY si.product_id")->result();
-                                    foreach ($products as $product):
-                                ?>
-                                
-                                <option value="<?= $product->product_id;?>"><?= $product->product_name;?></option>
-                                <?php endforeach;?>
-                            </select>
-                            <button type="submit" name="submit">View</button>
-                        </form>
-                    </div>
-
-                    <div class="col-md-6 text-right">
-                        <a href="<?php echo base_url();?>product-datewise-report" class="btn btn-primary"> Datewise Report</a>
-                    </div>
-                    
-                </div>
-                
                 <?php
                     if(isset($_POST['submit'])){
                         echo '<h5 style="text-align: center; text-decoration: underline;">Product Wise stock report</h5>';
