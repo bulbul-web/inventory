@@ -4,7 +4,7 @@
     <h4 class="page-title">Update Product Type</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
-       <li class="breadcrumb-item active" aria-current="page">Update Product Type</li>
+		<li class="breadcrumb-item active" aria-current="page"><a href="<?php echo base_url('products-section');?>">Product Section</a></li>
     </ol>
     </div>
     <div class="col-sm-3">
@@ -34,6 +34,22 @@
             </center>
             
             <?php echo form_open('update-product-type', 'name="update-product-type" id="updateProductType"');?>
+
+              <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Product Category</label>
+                  <div class="col-sm-9">
+                      <select name="product_category_id" class="form-control" required="">
+                          <option value="">Select Product Category</option>
+                          <?php
+                            $productCategory = $this->query_model->viewAllproductCategory();
+                            foreach ($productCategory as $value) {
+                                                      
+                          ?>
+                            <option value="<?php echo $value->id;?>"><?php echo $value->name;?></option>
+                          <?php } ?>
+                      </select>
+                  </div>
+                </div>
 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Type Name</label>
@@ -73,4 +89,5 @@
 
 <script>
     document.forms['update-product-type'].elements['productTypeStatus'].value=<?php echo $singleProductType->product_type_status; ?>;//for active inactive.
+    document.forms['update-product-type'].elements['product_category_id'].value=<?php echo $singleProductType->product_category_id; ?>;//for active inactive.
 </script>

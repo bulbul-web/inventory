@@ -20,7 +20,8 @@
       <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
         <span class="user-profile">
           <?php 
-            $userInfoFxd = $this->db->query("SELECT * FROM tbl_user WHERE user_id = 1")->row();
+            $id = $this->session->userdata('user_id');
+            $userInfoFxd = $this->db->query("SELECT * FROM tbl_user WHERE user_id = $id")->row();
             if($userInfoFxd->file == ""){ 
           
           ?>
@@ -50,14 +51,7 @@
         </li>
         
         <li class="dropdown-divider"></li>
-        <?php 
-          if($userInfo->user_role == 3){
-            echo '';
-          }else{
-        ?>
           <a href="<?php echo base_url();?>account"><li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li></a>
-        <?php } ?>
-
         <li class="dropdown-divider"></li>
         <a href="<?php echo base_url();?>change-password"><li class="dropdown-item"><i class="icon-lock mr-2"></i></i> Change Password</li></a>
         <li class="dropdown-divider"></li>

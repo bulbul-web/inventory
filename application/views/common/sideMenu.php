@@ -11,12 +11,12 @@
 
 <?php if($userInfo->user_role == 3){ ?>
 
-  <!-- <li>
+  <li>
     <a href="<?php echo base_url('order');?>" class="waves-effect">
-      <i class="fa fa-file"></i> <span>Order</span> 
+      <i class="fa fa-file"></i> <span>Order ndscc</span> 
     </a>
 
-  </li> -->
+  </li>
 
   <li>
     <a href="<?php echo base_url('salesman-order-form');?>" class="waves-effect">
@@ -97,7 +97,7 @@
             </a>
         </li>
         <li>
-            <a href="<?php echo base_url('customer-form');?>" class="waves-effect">
+            <a href="<?php echo base_url('customer-section');?>" class="waves-effect">
               <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Customer</span> 
             </a>
         </li>

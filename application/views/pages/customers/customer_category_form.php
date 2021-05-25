@@ -1,15 +1,15 @@
 <!-- Breadcrumb-->
 <div class="row pt-2 pb-2">
    <div class="col-sm-9">
-    <h4 class="page-title">Add Products category</h4>
+    <h4 class="page-title">Add customer category</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
-		<li class="breadcrumb-item active" aria-current="page"><a href="<?php echo base_url('products-section');?>">Product Section</a></li>
+		<li class="breadcrumb-item active" aria-current="page"><a href="<?php echo base_url('customer-section');?>">customer Section</a></li>
     </ol>
     </div>
     <div class="col-sm-3">
       <div class="top-button-area">
-          <a class="btn btn-primary m-1" href="<?php echo base_url('product-category');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Product category list</a>
+          <a class="btn btn-primary m-1" href="<?php echo base_url('customer-category');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> customer category list</a>
       </div>
 
     </div>
@@ -19,7 +19,7 @@
 <div class="row">
    <div class="col-lg-12">
      <div class="card">
-        <div class="card-header text-uppercase">Add Products category Form</div>
+        <div class="card-header text-uppercase">Add customer category Form</div>
         <div class="card-body">
             <center> 
                 <font color="#FF0000" style="font-size: 20px;">
@@ -35,10 +35,10 @@
                 </font>
             </center>
             
-            <?php echo form_open('save-products-category', 'name="save-products-category" id="saveProductscategory"');?>
+            <?php echo form_open('save-customer-category', 'name="save-customer-category" id="savecustomercategory"');?>
 
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Product category Name</label>
+                  <label class="col-sm-3 col-form-label">customer category Name</label>
                   <div class="col-sm-9">
                       <input type="text" name="name" value="<?php echo set_value('name'); ?>" class="form-control form-control-rounded">
                       <?php echo form_error('name', '<div class="error">', '</div>'); ?>
@@ -55,7 +55,7 @@
                   </div>
                 </div>
             <div class="form-footer">
-                <a href="<?php echo base_url('products-section');?>" class="btn btn-secondary"><i class="fa fa-times"></i> Cancel</a>
+                <a href="<?php echo base_url('customer-section');?>" class="btn btn-secondary"><i class="fa fa-times"></i> Cancel</a>
               <button category="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Save</button>
             </div>
 

@@ -4,7 +4,7 @@
     <h4 class="page-title">Add Products Type</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
-       <li class="breadcrumb-item active" aria-current="page">Add Products Type</li>
+		<li class="breadcrumb-item active" aria-current="page"><a href="<?php echo base_url('products-section');?>">Product Section</a></li>
     </ol>
     </div>
     <div class="col-sm-3">
@@ -37,6 +37,23 @@
             
             <?php echo form_open('save-products-type', 'name="save-products-type" id="saveProductsType"');?>
 
+                
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Product Category</label>
+                  <div class="col-sm-9">
+                      <select name="product_category_id" class="form-control" required="">
+                          <option value="">Select Product Category</option>
+                          <?php
+                            $productCategory = $this->query_model->viewAllproductCategory();
+                            foreach ($productCategory as $value) {
+                                                      
+                          ?>
+                            <option value="<?php echo $value->id;?>"><?php echo $value->name;?></option>
+                          <?php } ?>
+                      </select>
+                  </div>
+                </div>
+
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Type Name</label>
                   <div class="col-sm-9">
@@ -62,7 +79,7 @@
                   </div>
                 </div>
             <div class="form-footer">
-                <a href="<?php echo base_url('product-type');?>" class="btn btn-secondary"><i class="fa fa-times"></i> Cancel</a>
+                <a href="<?php echo base_url('products-section');?>" class="btn btn-secondary"><i class="fa fa-times"></i> Cancel</a>
               <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Save</button>
             </div>
 

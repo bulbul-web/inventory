@@ -65,6 +65,22 @@ class Query_model extends CI_Model {
                         ->result();
         return $result;
     }
+    public function viewAllcustomerCategory(){
+        $result = $this->db->select('*')
+                        ->from('tbl_customer_category')
+                        ->order_by('id', 'DESC')
+                        ->get()
+                        ->result();
+        return $result;
+    }
+    public function viewAllcustomersubCategory(){
+        $result = $this->db->select('*')
+                        ->from('tbl_customer_subcategory')
+                        ->order_by('id', 'DESC')
+                        ->get()
+                        ->result();
+        return $result;
+    }
     public function viewAllProductsTypeActive(){
         $result = $this->db->select('*')
                         ->from('tbl_product_type')
@@ -89,6 +105,12 @@ class Query_model extends CI_Model {
     public function saveProductCategoryData($data){
         $this->db->insert('tbl_product_category', $data);
     }
+    public function saveCustomerCategoryData($data){
+        $this->db->insert('tbl_customer_category', $data);
+    }
+    public function saveCustomersubCategoryData($data){
+        $this->db->insert('tbl_customer_subcategory', $data);
+    }
     public function single_product_type($product_type_id){
         $result = $this->db->select('*')
                         ->from('tbl_product_type')
@@ -100,8 +122,12 @@ class Query_model extends CI_Model {
     public function saveStockInData($data){
         $this->db->insert('tbl_stock_in', $data);
     }
+    public function insertStockInHistory($data){
+        $this->db->insert('tbl_stock_in_history', $data);
+    }
     public function updateProductTypeData(){
         $product_type_id = $this->input->post('product_type_id', true);
+        $data['product_category_id'] = $this->input->post('product_category_id', true);
         $data['product_type_name'] = $this->input->post('product_type_name', true);
         $data['product_type_descrip'] = $this->input->post('product_type_descrip', true);
         $data['entry_by'] = $this->session->userdata('user_name');
@@ -215,13 +241,21 @@ class Query_model extends CI_Model {
                         ->order_by('customer_id', 'DESC')
                         ->get()
                         ->result();
-        // $result = $this->db->query("SELECT c.*, ct.name as ctmr_type_name FROM tbl_customer c, tbl_customer_type ct WHERE c.customer_type = ct.id ORDER BY c.customer_name DESC")->result();
+        // $result = $this->db->query("SELECT c.*, ct.name as ctmr_type_name FROM tbl_customer c, tbl_customer_category ct WHERE c.customer_type = ct.id ORDER BY c.customer_name DESC")->result();
         return $result;
     }
     public function viewAllPackSize(){
         $result = $this->db->select('*')
                         ->from('tbl_pack_size')
                         ->order_by('id', 'ASC')
+                        ->get()
+                        ->result();
+        return $result;
+    }
+    public function viewAllproductCategory(){
+        $result = $this->db->select('*')
+                        ->from('tbl_product_category')
+                        ->order_by('id', 'DESC')
                         ->get()
                         ->result();
         return $result;
@@ -234,12 +268,48 @@ class Query_model extends CI_Model {
                         ->row();
         return $result;
     }
+    public function viewProductCatergoryById($id){
+        $result = $this->db->select('*')
+                        ->from('tbl_product_category')
+                        ->where('id', $id)
+                        ->get()
+                        ->row();
+        return $result;
+    }
+    public function viewCustomerCatergoryById($id){
+        $result = $this->db->select('*')
+                        ->from('tbl_customer_category')
+                        ->where('id', $id)
+                        ->get()
+                        ->row();
+        return $result;
+    }
+    public function viewCustomersubCatergoryById($id){
+        $result = $this->db->select('*')
+                        ->from('tbl_customer_subcategory')
+                        ->where('id', $id)
+                        ->get()
+                        ->row();
+        return $result;
+    }
     public function savePackSizeData($data){
         $this->db->insert('tbl_pack_size', $data);
     }
     public function updatePackSizeData($data){
         $this->db->where('id', $data['id']);
         $this->db->update('tbl_pack_size', $data);
+    }
+    public function updateProductCategoryData($data){
+        $this->db->where('id', $data['id']);
+        $this->db->update('tbl_product_category', $data);
+    }
+    public function updatecustomerCategoryData($data){
+        $this->db->where('id', $data['id']);
+        $this->db->update('tbl_customer_category', $data);
+    }
+    public function updatecustomersubCategoryData($data){
+        $this->db->where('id', $data['id']);
+        $this->db->update('tbl_customer_subcategory', $data);
     }
     public function delete_pack_size($id){
         $this->db->where('id', $id);
@@ -642,6 +712,11 @@ class Query_model extends CI_Model {
 
     public function transactionwise_voucher_report($TrasactionHeadID, $from_date, $to_date){
         $result = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, SUM(a.DR) as totalDR FROM tbl_transactions a WHERE a.TrasactionHeadID = '1' AND a.TrnDate BETWEEN '2021-03-14' AND '2021-04-09' GROUP BY a.VoucherID")->result();
+        return $result;
+    }
+
+    public function customerReportAll(){
+        $result = $this->db->query("SELECT a.*, b.name as customerCategory, c.name as customerSubcategory, d.name as salesman FROM tbl_customer a, tbl_customer_category b, tbl_customer_subcategory c, tbl_salesman d WHERE a.customer_category = b.id AND a.customer_subcategory = c.id AND a.user_id = d.id ORDER BY a.customer_id DESC")->result();
         return $result;
     }
 

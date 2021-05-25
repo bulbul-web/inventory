@@ -75,6 +75,9 @@ $route['delete-supplier/(.+)'] = 'suppliers/delete_supplier/$1';
 
 $route['products-category-form'] = 'products/products_category_form';
 $route['save-products-category'] = 'products/save_products_category';
+$route['product-category'] = 'products/product_category';
+$route['edit-product-category/(.+)'] = 'products/edit_product_category/$1';
+$route['update-product-category'] = 'products/update_product_category';
 
 $route['product-type'] = 'products/product_type';
 $route['products-type-form'] = 'products/products_type_add_form_view';
@@ -107,6 +110,17 @@ $route['edit-pack-size/(.+)'] = 'products/edit_pack_size_form_view/$1';
 $route['update-pack-size'] = 'products/update_pack_size';
 $route['delete-pack-size/(.+)'] = 'products/delete_pack_size/$1';
 
+$route['customer-section'] = 'customers/customer_section';
+$route['customer-category-form'] = 'customers/customer_category_form';
+$route['save-customer-category'] = 'customers/save_customer_category';
+$route['customer-category'] = 'customers/customer_category';
+$route['edit-customer-category/(.+)'] = 'customers/edit_customer_category/$1';
+$route['update-customer-category'] = 'customers/update_customer_category';
+$route['customer-subcategory-form'] = 'customers/customer_subcategory_form';
+$route['save-customer-subcategory'] = 'customers/save_customer_subcategory';
+$route['customer-subcategory'] = 'customers/customer_subcategory';
+$route['edit-customer-subcategory/(.+)'] = 'customers/edit_customer_subcategory/$1';
+$route['update-customer-subcategory'] = 'customers/update_customer_subcategory';
 $route['customers'] = 'customers/customers';
 $route['customer-form'] = 'customers/customer_form_view';
 $route['save-customers'] = 'customers/save_customers';
@@ -307,6 +321,10 @@ $route['customerwise-assign-collection-report'] = 'AssignCollection/customerwise
 $route['visit-add'] = 'Visit/visit_add_form';
 $route['save-visitor'] = 'Visit/save_visitor';
 $route['visitor'] = 'Visit/visitor_list';
+$route['edit-visitor/(.+)'] = 'Visit/edit_visitor/$1';
+$route['update-visitor'] = 'Visit/update_visitor';
+
+$route['customer-report-all'] = 'Customers/customer_report_all';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -29,7 +29,10 @@
 		<div class="card-body">
 		 <div class="card-content p-2">
 		 	<div class="text-center">
-		 		<img src="<?php echo base_url();?>assets/images/logo-icon.png" style="width: 190px;">
+				<?php
+					$companyInfo = $this->db->query('SELECT * FROM tbl_company where id = 1')->row();
+				?>
+		 		<img src="<?php echo base_url().$companyInfo->file;?>" style="width: 190px;">
 		 	</div>
 		  <div class="card-title text-uppercase text-center py-3">Sign In</div>
                   <div class="alert alert-danger text-center">

@@ -4,7 +4,7 @@
     <h4 class="page-title">Update Products</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
-       <li class="breadcrumb-item active" aria-current="page">Update Products</li>
+		<li class="breadcrumb-item active" aria-current="page"><a href="<?php echo base_url('products-section');?>">Product Section</a></li>
     </ol>
     </div>
     <div class="col-sm-3">

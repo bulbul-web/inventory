@@ -1,10 +1,10 @@
 <!-- Breadcrumb-->
 <div class="row pt-2 pb-2">
    <div class="col-sm-9">
-    <h4 class="page-title">Add Pack Size</h4>
+    <h4 class="page-title">update Customer Category</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
-		<li class="breadcrumb-item active" aria-current="page"><a href="<?php echo base_url('products-section');?>">Product Section</a></li>
+       <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo base_url('customer-section');?>">Customer Section</a></li>
     </ol>
     </div>
     <div class="col-sm-3">
@@ -17,7 +17,7 @@
 <div class="row">
    <div class="col-lg-12">
      <div class="card">
-        <div class="card-header text-uppercase">Add Pack Size Form</div>
+        <div class="card-header text-uppercase">update Customer Category Form</div>
         <div class="card-body">
             <center> 
                 <font color="#FF0000" style="font-size: 20px;">
@@ -33,23 +33,16 @@
                 </font>
             </center>
             
-            <?php echo form_open('update-pack-size', 'name="update-pack-size" id="updatePackSize"');?>
+            <?php echo form_open('update-customer-category', 'name="update-customer-category" id="updatecustomerCategory"');?>
 
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Pack Size Name</label>
+            <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Customer Category Name</label>
                   <div class="col-sm-9">
                       <input type="hidden" name="id" value="<?php echo $value->id; ?>" class="form-control form-control-rounded">
-                      <input type="text" name="pack_size" value="<?php echo $value->pack_size; ?>" class="form-control form-control-rounded">
-                      <?php echo form_error('pack_size', '<div class="error">', '</div>'); ?>
+                      <input type="text" name="name" value="<?php echo $value->name; ?>" class="form-control form-control-rounded">
+                      <?php echo form_error('name', '<div class="error">', '</div>'); ?>
                   </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Description</label>
-                  <div class="col-sm-9">
-                      <input type="text" name="description" value=""  class="form-control form-control-rounded">
-                  </div>
-                </div>
-                
+                </div>                
                 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Status</label>
@@ -61,8 +54,8 @@
                   </div>
                 </div>
             <div class="form-footer">
-                <a href="<?php echo base_url('pack-size');?>" class="btn btn-secondary"><i class="fa fa-times"></i> Cancel</a>
-              <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Update</button>
+                <a href="<?php echo base_url('customer-category');?>" class="btn btn-secondary"><i class="fa fa-times"></i> Cancel</a>
+              <button category="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Update</button>
             </div>
 
             <?php echo form_close();?>
@@ -72,6 +65,5 @@
 </div>
 
 <script>
-    document.forms['update-pack-size'].elements['status'].value=<?php echo $value->status; ?>;
-    document.forms['update-pack-size'].elements['description'].value="<?php echo $value->description; ?>";//description value from database
+    document.forms['update-customer-category'].elements['status'].value=<?php echo $value->status; ?>;
 </script>

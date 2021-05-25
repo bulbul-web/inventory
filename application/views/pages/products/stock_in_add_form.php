@@ -140,7 +140,12 @@
 
                 </div>
                 
-                
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Payment</label>
+                  <div class="col-sm-9">
+                      <input type="number" step=any name="payment" value="<?php echo set_value('payment'); ?>"  class="form-control form-control-rounded">
+                  </div>
+                </div>
             
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Note</label>

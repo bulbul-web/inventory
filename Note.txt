@@ -1,7 +1,15 @@
-1. 22-05-21 -- 'tbl_customer_type' added
+1. 22-05-21 -- 'tbl_customer_category' added
 
 2.    "     -- 'tbl_product_category' added
 
-3.    "     -- Column added ('customer_type') in 'tbl_customer'
+3.    "     -- Column added ('customer_category') in 'tbl_customer'
 
 4. 23-05-21 -- 'tbl_company' added
+
+5.    "     -- Column added ('product_category_id') in 'tbl_product_type'
+
+6. 24-05-21 -- ALTER TABLE `tbl_customer` ADD `visitor_id` INT NULL AFTER `customer_status`, ADD `user_id` INT NULL AFTER `visitor_id`;
+
+7.    "     -- 'tbl_customer_subcategory' added
+
+8.    "     -- ALTER TABLE `tbl_customer` ADD `customer_subcategory` INT NULL AFTER `customer_category`;

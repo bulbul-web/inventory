@@ -10,5 +10,9 @@ class Visit_query extends CI_Model {
         $result = $this->db->query("SELECT * FROM tbl_visit_info")->result();
         return $result;
     }
+    public function singleVisitor($visitorId){
+        $result = $this->db->query("SELECT * FROM tbl_visit_info WHERE id = '$visitorId' ")->row();
+        return $result;
+    }
 
 }

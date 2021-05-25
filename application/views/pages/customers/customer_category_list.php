@@ -1,15 +1,15 @@
 <!-- Breadcrumb-->
 <div class="row pt-2 pb-2">
    <div class="col-sm-9">
-    <h4 class="page-title">All Pack Size</h4>
+    <h4 class="page-title">All Customer Category</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
-		<li class="breadcrumb-item active" aria-current="page"><a href="<?php echo base_url('products-section');?>">Product Section</a></li>
+		<li class="breadcrumb-item active" aria-current="page"><a href="<?php echo base_url('customer-section');?>">customer Section</a></li>
     </ol>
     </div>
     <div class="col-sm-3">
         <div class="top-button-area">
-            <a class="btn btn-primary m-1" href="<?php echo base_url('pack-size-add');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Pack Size Add</a>
+            <a class="btn btn-primary m-1" href="<?php echo base_url('customer-category-form');?>"><i aria-hidden="true" class="fa fa-plus-circle"></i> Customer Category Add</a>
         </div>
 
      </div>
@@ -40,8 +40,7 @@
         <thead>
             <tr>
                 <th>SL.</th>
-                <th>Pack Size</th>
-                <th>Description</th>
+                <th>Customer Category</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -50,7 +49,7 @@
             
             <?php 
                 $i = 0;
-                foreach ($packSize as $value){
+                foreach ($customerCategory as $value){
                     $i++;
                 
             ?>
@@ -58,21 +57,10 @@
                     <td><?php echo $i;?></td>
                     <td>
                         <?php
-                            //$prTId = $value->product_type_id;
-                            //$proType = $this->query_model->single_product_type($prTId);
-                            if($value->pack_size == ""){
+                            if($value->name == ""){
                                 echo '-';
                             }else{
-                                echo $value->pack_size;
-                            }
-                        ?>
-                    </td>
-                    <td>
-                        <?php
-                            if($value->description == ""){
-                                echo '-';
-                            }else{
-                                echo $value->description;
+                                echo $value->name;
                             }
                         ?>
                     </td>
@@ -99,8 +87,8 @@
                     </td>
                     <td>
                         <div class="btn-group m-1">
-                            <a href="<?php echo base_url();?>edit-pack-size/<?php echo $value->id?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
-                            <!--- <a href="<?php //echo base_url();?>delete-pack-size/<?php //echo $value->id?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light"> <i class="fa fa fa-trash-o"></i> </a> ---->
+                            <a href="<?php echo base_url();?>edit-customer-category/<?php echo $value->id?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
+                            <!--- <a href="<?php //echo base_url();?>delete-customer-category/<?php //echo $value->id?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light"> <i class="fa fa fa-trash-o"></i> </a> ---->
                          </div>
                     </td>
                 </tr>
@@ -110,7 +98,7 @@
         <tfoot>
             <tr>
                 <th>SL.</th>
-                <th>Pack Size</th>
+                <th>Customer Category</th>
                 <th>Description</th>
                 <th>Status</th>
                 <th>Action</th>

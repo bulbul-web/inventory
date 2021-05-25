@@ -78,6 +78,23 @@ class Products extends CI_Controller {
         $data['content'] = $this->load->view('pages/products/pack_size_list', $data, true);
         $this->load->view('index', $data);
     }
+
+    public function product_category()
+    {
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['productCategory'] = $this->query_model->viewAllproductCategory();
+        
+        $data['title'] = 'Pack Size';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('pages/products/product_category_list', $data, true);
+        $this->load->view('index', $data);
+    }
     public function pack_size_add_form_view(){
         $data = array();
         $id = $this->session->userdata('user_id');
@@ -129,6 +146,23 @@ class Products extends CI_Controller {
         $data['content'] = $this->load->view('pages/products/pack_size_edit_form_view', $data, true);
         $this->load->view('index', $data);
     }
+    public function edit_product_category($id){
+        
+
+        $data = array();
+        $user_id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($user_id);
+        $data['value'] = $this->query_model->viewProductCatergoryById($id);
+        
+        $data['title'] = 'Pack Size update';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('pages/products/product_category_edit_form_view', $data, true);
+        $this->load->view('index', $data);
+    }
     public function update_pack_size(){
         $this->form_validation->set_rules('pack_size', 'Pack Size', 'required');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -148,6 +182,24 @@ class Products extends CI_Controller {
             $this->edit_pack_size_form_view($data['id']);
         } else {
             $this->edit_pack_size_form_view($data['id']);
+        }
+    }
+    public function update_product_category(){
+        $this->form_validation->set_rules('name', 'Category Name', 'required');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        
+        if($this->form_validation->run()){
+            $data['id'] = $this->input->post('id', true);
+            $data['name'] = $this->input->post('name', true);
+            $data['status'] = $this->input->post('status', true);
+            $this->query_model->updateProductCategoryData($data);
+            
+            $sdata = array();
+            $sdata['message'] = 'Successfully updated';
+            $this->session->set_userdata($sdata);
+            $this->edit_product_category($data['id']);
+        } else {
+            $this->edit_product_category($data['id']);
         }
     }
     public function delete_pack_size($id){
@@ -357,6 +409,7 @@ class Products extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         
         if($this->form_validation->run()){
+            $data['product_category_id'] = $this->input->post('product_category_id', true);
             $data['product_type_name'] = $this->input->post('product_type_name', true);
             $data['product_type_descrip'] = $this->input->post('product_type_descrip', true);
             $data['entry_by'] = $this->session->userdata('user_name');
@@ -424,16 +477,24 @@ class Products extends CI_Controller {
             $data['entry_by'] = $this->session->userdata('user_name');
             $data['entry_date'] = date("Y-m-d");
             $data['status'] = $this->input->post('status', true);
+            $data['payment'] = $this->input->post('payment', true);
 
             // echo '<pre>';
             // print_r($data);
             // exit();
             $this->query_model->saveStockInData($data);
+
+            $hdata['bill_no'] = $data['bill_no'];
+            $hdata['payment'] = $data['payment'];
+            $hdata['entry_date'] = date("Y-m-d");
+            $hdata['entry_by'] = $data['entry_by'];
+            $this->query_model->insertStockInHistory($hdata);
             
             $sdata = array();
             $sdata['message'] = 'Stock in successfully added';
             $this->session->set_userdata($sdata);
             $this->stock_in_form();
+            $this->form_validation->unset_field_data();
         } else {
             $this->stock_in_form();
         }
@@ -467,7 +528,14 @@ class Products extends CI_Controller {
             $data['entry_by'] = $this->session->userdata('user_name');
             $data['entry_date'] = date("Y-m-d");
             $data['status'] = $this->input->post('status', true);
+            $data['payment'] = $this->input->post('payment', true);
             $this->query_model->updateStockInData($data);
+            
+            $hdata['bill_no'] = $data['bill_no'];
+            $hdata['payment'] = $data['payment'];
+            $hdata['entry_date'] = date("Y-m-d");
+            $hdata['entry_by'] = $data['entry_by'];
+            $this->query_model->insertStockInHistory($hdata);
             
             $sdata = array();
             $sdata['message'] = 'Stock in successfully Updated';

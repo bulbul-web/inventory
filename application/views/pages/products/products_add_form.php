@@ -4,7 +4,7 @@
     <h4 class="page-title">Add Products</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
-       <li class="breadcrumb-item active" aria-current="page">Add Products</li>
+		<li class="breadcrumb-item active" aria-current="page"><a href="<?php echo base_url('products-section');?>">Product Section</a></li>
     </ol>
     </div>
     <div class="col-sm-3">
@@ -150,7 +150,7 @@
                   </div>
                 </div>
             <div class="form-footer">
-                <a href="<?php echo base_url('products');?>" class="btn btn-secondary"><i class="fa fa-times"></i> Cancel</a>
+                <a href="<?php echo base_url('products-section');?>" class="btn btn-secondary"><i class="fa fa-times"></i> Cancel</a>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Save</button>
             </div>
 

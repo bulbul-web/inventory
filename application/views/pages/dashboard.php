@@ -181,7 +181,7 @@
               endif;
               ?>
           </h4>
-          <span class="text-white">Product Category</span>
+          <span class="text-white">Product Type</span>
         </div>
         <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
           <i class="icon-pie-chart text-white"></i></div>

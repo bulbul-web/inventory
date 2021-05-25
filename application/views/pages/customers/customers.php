@@ -4,7 +4,7 @@
     <h4 class="page-title">Customers</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
-       <li class="breadcrumb-item active" aria-current="page">Customers</li>
+        <li class="breadcrumb-item"><a href="<?php echo base_url('customer-section');?>">Customer Section</a></li>
     </ol>
     </div>
     <div class="col-sm-3">
@@ -40,7 +40,6 @@
         <thead>
             <tr>
                 <th>SL.</th>
-                <th>Customer Type</th>
                 <th>Name</th>
                 <th>Mobile</th>
                 <th>Email</th>
@@ -60,15 +59,6 @@
             ?>
                 <tr>
                     <td><?php echo $i;?></td>
-                    <td>
-                        <?php
-                            if($value->customer_type == ""){
-                                echo '-';
-                            }else{
-                                echo $value->customer_type;
-                            }
-                        ?>
-                    </td>
                     <td>
                         <?php
                             if($value->customer_name == ""){
@@ -138,7 +128,6 @@
         <tfoot>
             <tr>
                 <th>SL.</th>
-                <th>Customer Type</th>
                 <th>Name</th>
                 <th>Mobile</th>
                 <th>Email</th>
