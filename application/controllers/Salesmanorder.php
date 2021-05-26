@@ -40,6 +40,32 @@ class Salesmanorder extends CI_Controller {
         $data['content'] = $this->load->view('pages/salesmanorder/order', $data, true);
         $this->load->view('index', $data);
     }
+
+    public function reject_salesman_order_list()
+    {
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $userRole = $this->session->userdata('user_role');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        if($userRole == 3){
+            $data['order'] = $this->order_query->view_salesman_reject_order($id);
+        }else{
+            $data['order'] = $this->order_query->view_salesman_reject_order_all();
+        }
+        
+//        echo '<pre>';
+//        print_r($data['order']);
+//        exit();
+        
+        $data['title'] = 'order';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('pages/salesmanorder/reject_salesman_order_list', $data, true);
+        $this->load->view('index', $data);
+    }
     
     
     
@@ -330,8 +356,8 @@ class Salesmanorder extends CI_Controller {
         $data['order_info_customer'] = $this->query_model->order_info_customer($order_id);
         $data['order_info_product'] = $this->query_model->order_info_product($order_id);
         
-        $this->load->view('pages/salesmanorder/order_details_copy', $data);
-        // $this->load->view('pages/salesmanorder/order_details_copy_ndscc', $data);
+        // $this->load->view('pages/salesmanorder/order_details_copy', $data);
+        $this->load->view('pages/salesmanorder/order_details_copy_ndscc', $data);
     }
 
     public function accept_salesman_order($order_id){
@@ -397,6 +423,17 @@ class Salesmanorder extends CI_Controller {
             $this->insert_invoice_history($voucher_id);
             redirect('invoice-details/'. $voucher_id); 
         }
+
+        $this->order_single_details($order_id);
+    }
+    public function reject_salesman_order(){
+        $order_id = $this->input->post('order_id', TRUE);
+        $reject_for = $this->input->post('reject_for', TRUE);
+        $this->db->set('status', 0);
+        $this->db->set('reject_for', $reject_for);
+        $this->db->set('order_status', 2);//reject
+        $this->db->where('order_id', $order_id);
+        $this->db->update('tbl_order');
 
         $this->order_single_details($order_id);
     }

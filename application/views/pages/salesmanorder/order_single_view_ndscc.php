@@ -60,6 +60,12 @@
                     <td style="text-align: center;">
                         <h3 class="text-dark" style="padding: 0; margin: 0; line-height: 35px;"><?php echo $companyInfo->name;?></h3>
                         <p style="margin: 0px; padding: 0px;"><?php echo $companyInfo->address;?></p>
+                        <?php
+                            if($order_info_customer->reject_for != ''){
+                                echo '<span style="color: red;">REJECTED ORDER</span>';
+                                echo '<p style="color: red; font-weight: bold;">['.$order_info_customer->reject_for.']</p>';
+                            }
+                        ?>
                     </td>
                 </tr>
             </table>
@@ -239,7 +245,41 @@
     <div class="col-md-6">
         <a href="<?php echo base_url('salesman-order');?>" class="btn btn-secondary"><i class="fa fa-angle-left"></i> Back To Order List</a><br>
     </div>
-    <div class="col-md-6 text-right">
+    <div class="col-md-3 text-right">
+        <?php
+            if($order_info_customer->order_status == 2){
+                
+            }else{
+        ?>
+            <button class="btn btn-warning" data-toggle="modal" data-target="#rejectForm" >Reject Order</button>
+        <?php } ?>
+    </div>
+        <!-- Modal -->
+        <div class="modal fade" id="rejectForm">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"> Reject for</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="<?php echo base_url();?>reject-salesman-order" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" name="order_id" value="<?php echo $order_info_customer->order_id?>" />
+                            <textarea type="text" name="reject_for" class="form-control" value="" placeholder="Why reject"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Reject</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Modal end-->
+    
+    <div class="col-md-3 text-right">
         <?php
             $user_role = $this->session->userdata('user_role');
             if($user_role == 3){

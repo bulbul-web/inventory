@@ -63,6 +63,11 @@
                             <td style="text-align: center;">
                                 <h3 class="text-dark" style="padding: 0; margin: 0; line-height: 35px;"><?php echo $companyInfo->name;?></h3>
                                 <p style="margin: 0px; padding: 0px;"><?php echo $companyInfo->address;?></p></br>
+                                <?php
+                                    if($order_info_customer->reject_for != ''){
+                                        echo '<span style="color: red;">REJECTED ORDER</span>';
+                                    }
+                                ?>
                             </td>
                         </tr>
                     </table>

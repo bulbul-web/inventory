@@ -84,7 +84,6 @@
                     <div class="col-sm-9">
                         <select name="user_role" class="form-control">
                             <option value="1">Admin</option>
-                            <option value="3">Salesman</option>
                         </select>
                     </div>
                 </div>

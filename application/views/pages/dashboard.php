@@ -6,7 +6,7 @@
 ?>
 
 <!-------old order info from tbl_ivoice ----->
-  <div class="col-12 col-lg-4 col-xl-4">
+  <!---<div class="col-12 col-lg-4 col-xl-4">
     <a href="<?php echo base_url()?>order">
         <div class="card bg-pattern-primary">
           <div class="card-body">
@@ -79,7 +79,7 @@
           </div>
         </div>
     </a>
-  </div>
+  </div> --->
 <!-------end old order info from tbl_ivoice ----->
 
 <!-------order info from tbl_order ----->
@@ -87,7 +87,7 @@
 <h6 class="text-center">------Marketing------</h6>
 </div>
 
-<div class="col-12 col-lg-4 col-xl-4">
+<div class="col-12 col-lg-3 col-xl-3">
     <a href="<?php echo base_url()?>salesman-order">
         <div class="card bg-pattern-primary">
           <div class="card-body">
@@ -112,7 +112,7 @@
     </a>
   </div>
 
-  <div class="col-12 col-lg-4 col-xl-4">
+  <div class="col-12 col-lg-3 col-xl-3">
     <!-- <a href="<?php echo base_url()?>salesman-order"> -->
         <div class="card bg-pattern-primary">
           <div class="card-body">
@@ -137,7 +137,7 @@
     <!-- </a> -->
   </div>
 
-  <div class="col-12 col-lg-4 col-xl-4">
+  <div class="col-12 col-lg-3 col-xl-3">
     <!-- <a href="<?php echo base_url()?>salesman-order"> -->
         <div class="card bg-pattern-primary">
           <div class="card-body">
@@ -160,6 +160,31 @@
           </div>
         </div>
     <!-- </a> -->
+  </div>
+
+  <div class="col-12 col-lg-3 col-xl-3">
+    <a href="<?php echo base_url()?>reject-salesman-order-list">
+        <div class="card bg-pattern-primary">
+          <div class="card-body">
+            <div class="media">
+            <div class="media-body text-left">
+              <h4 class="text-white">
+                  <?php
+                  $userId = $this->session->userdata('user_id');
+                  $orders = $this->db->query("SELECT * FROM tbl_order WHERE order_status = 2 AND NOT (delete_status <=> 'deleted') AND order_by = '$userId' GROUP BY order_id")->result();
+                  if (isset($orders)):
+                      echo count($orders);
+                  endif;
+                  ?>
+              </h4>
+              <span class="text-white">Not Accept</span>
+            </div>
+            <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+              <i class="icon-basket-loaded text-white"></i></div>
+          </div>
+          </div>
+        </div>
+    </a>
   </div>
 <!-------end order info from tbl_order ----->
 
@@ -354,91 +379,13 @@
 </div><!--End Row-->
 <!-----END Common sell and assign at-a-glance------->
 
-<!-------old order info from tbl_invoice ----->
 <div class="row">
-    
-
-<div class="col-12 col-lg-4 col-xl-4">
-    <a href="<?php echo base_url()?>invoice">
-        <div class="card bg-pattern-primary">
-          <div class="card-body">
-            <div class="media">
-            <div class="media-body text-left">
-              <h4 class="text-white">
-                  <?php
-                  $orders = $this->db->query("SELECT * FROM tbl_invoice WHERE NOT (order_status <=> NULL) AND NOT (delete_status <=> 'deleted') GROUP BY voucher_id")->result();
-                  if (isset($orders)):
-                      echo count($orders);
-                  endif;
-                  ?>
-              </h4>
-              <span class="text-white">Total Order</span>
-            </div>
-            <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
-              <i class="icon-basket-loaded text-white"></i></div>
-          </div>
-          </div>
-        </div>
-    </a>
-  </div>
-
-  <div class="col-12 col-lg-4 col-xl-4">
-    <a href="<?php echo base_url()?>invoice">
-        <div class="card bg-pattern-primary">
-          <div class="card-body">
-            <div class="media">
-            <div class="media-body text-left">
-              <h4 class="text-white">
-                  <?php
-                  $orders = $this->db->query("SELECT * FROM tbl_invoice WHERE order_status = 1 AND NOT (delete_status <=> 'deleted') GROUP BY voucher_id")->result();
-                  if (isset($orders)):
-                      echo count($orders);
-                  endif;
-                  ?>
-              </h4>
-              <span class="text-white">Accept Order</span>
-            </div>
-            <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
-              <i class="icon-basket-loaded text-white"></i></div>
-          </div>
-          </div>
-        </div>
-    </a>
-  </div>
-
-  <div class="col-12 col-lg-4 col-xl-4">
-    <a href="<?php echo base_url()?>invoice">
-        <div class="card bg-pattern-primary">
-          <div class="card-body">
-            <div class="media">
-            <div class="media-body text-left">
-              <h4 class="text-white">
-                  <?php
-                  $orders = $this->db->query("SELECT * FROM tbl_invoice WHERE order_status = 0 AND NOT (delete_status <=> 'deleted') GROUP BY voucher_id")->result();
-                  if (isset($orders)):
-                      echo count($orders);
-                  endif;
-                  ?>
-              </h4>
-              <span class="text-white">Not Accept</span>
-            </div>
-            <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
-              <i class="icon-basket-loaded text-white"></i></div>
-          </div>
-          </div>
-        </div>
-    </a>
-  </div>
-  <!-------end old order info from tbl_invoice ----->
-
-                
-
-  <!-------order info from tbl_order ----->
+    <!-------order info from tbl_order ----->
 <div class="col-12 col-lg-12 col-xl-12">
 <h6 class="text-center">------Marketing------</h6>
 </div>
 
-<div class="col-12 col-lg-4 col-xl-4">
+<div class="col-12 col-lg-3 col-xl-3">
     <a href="<?php echo base_url()?>salesman-order">
         <div class="card bg-pattern-primary">
           <div class="card-body">
@@ -462,7 +409,7 @@
     </a>
   </div>
 
-  <div class="col-12 col-lg-4 col-xl-4">
+  <div class="col-12 col-lg-3 col-xl-3">
     <!-- <a href="<?php echo base_url()?>salesman-order"> -->
         <div class="card bg-pattern-primary">
           <div class="card-body">
@@ -486,7 +433,7 @@
     <!-- </a> -->
   </div>
 
-  <div class="col-12 col-lg-4 col-xl-4">
+  <div class="col-12 col-lg-3 col-xl-3">
     <!-- <a href="<?php echo base_url()?>salesman-order"> -->
         <div class="card bg-pattern-primary">
           <div class="card-body">
@@ -510,9 +457,33 @@
         </div>
     <!-- </a> -->
   </div>
-<!-------end order info from tbl_order ----->
 
-</div> <!---End Row--->
+  <div class="col-12 col-lg-3 col-xl-3">
+    <a href="<?php echo base_url()?>reject-salesman-order-list">
+        <div class="card bg-pattern-primary">
+          <div class="card-body">
+            <div class="media">
+            <div class="media-body text-left">
+              <h4 class="text-white">
+                  <?php
+                  $userId = $this->session->userdata('user_id');
+                  $orders = $this->db->query("SELECT * FROM tbl_order WHERE order_status = 2 AND NOT (delete_status <=> 'deleted') GROUP BY order_id")->result();
+                  if (isset($orders)):
+                      echo count($orders);
+                  endif;
+                  ?>
+              </h4>
+              <span class="text-white">Not Accept</span>
+            </div>
+            <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+              <i class="icon-basket-loaded text-white"></i></div>
+          </div>
+          </div>
+        </div>
+    </a>
+  </div>
+<!-------end order info from tbl_order ----->
+</div>
 
 <?php } ?>
 

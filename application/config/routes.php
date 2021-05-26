@@ -159,6 +159,7 @@ $route['delete-order-product/(:num)/(:num)'] = 'order/delete_order_product/$1/$2
 $route['order-details-copy/(:any)'] = 'order/order_details_copy/$1';
 
 $route['salesman-order'] = 'salesmanorder/order';
+$route['reject-salesman-order-list'] = 'salesmanorder/reject_salesman_order_list';
 $route['salesman-order-form'] = 'salesmanorder/order_form_view';
 $route['save-salesman-order'] = 'salesmanorder/save_order';
 $route['salesman-order-details/(:any)'] = 'salesmanorder/order_single_details/$1';
@@ -167,6 +168,7 @@ $route['update-salesman-order'] = 'salesmanorder/update_order';
 $route['delete-salesman-order-product/(:num)/(:num)'] = 'salesmanorder/delete_order_product/$1/$2';
 $route['salesman-order-details-copy/(:any)'] = 'salesmanorder/order_details_copy/$1';
 $route['accept-salesman-order/(:any)'] = 'salesmanorder/accept_salesman_order/$1';
+$route['reject-salesman-order'] = 'salesmanorder/reject_salesman_order';
 
 $route['loan'] = 'loan/loan';
 $route['loan-form'] = 'loan/loan_form_view';

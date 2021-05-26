@@ -62,10 +62,6 @@
                 $i=0; 
                 foreach ($order as $value):
                 $i++;
-                    if($value->order_status == 2){
-
-                    }
-                    else{
             ?>
             <tr>
                 <td>
@@ -74,7 +70,7 @@
                             echo $i;
                         }else {    
                     ?>
-                        <a href="<?php echo base_url();?>edit-salesman-order/<?php echo $value->order_id;?>"> <i class="fa fa-edit"></i> <?php echo $i;?> </a>
+                        <!-- <a href="<?php echo base_url();?>edit-salesman-order/<?php echo $value->order_id;?>"> <i class="fa fa-edit"></i> <?php echo $i;?> </a> -->
                     <?php } ?>
                 </td>
                 <td>
@@ -146,14 +142,13 @@
                                 echo '<a href="'. base_url().'salesman-order-details/'.$value->order_id.'">View/Accept</a>';
                             }else{
                         ?>
-                            <a href="<?php echo base_url();?>edit-salesman-order/<?php echo $value->order_id;?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
-                            <a href="<?php echo base_url();?>delete-salesman-order/<?php echo $value->order_id;?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a>
+                            <!-- <a href="<?php echo base_url();?>edit-salesman-order/<?php echo $value->order_id;?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a> -->
                         <?php } ?>
                         
                      </div>
                 </td>
             </tr>
-            <?php } endforeach;?>
+            <?php endforeach;?>
             
         </tbody>
         <tfoot>
