@@ -265,6 +265,9 @@ class Customers extends CI_Controller {
             $data['customer_name'] = $this->input->post('customer_name', true);
             $data['customer_address'] = $this->input->post('customer_address', true);
             $data['customer_mobile'] = $this->input->post('customer_mobile', true);
+            $data['contact_person_name'] = $this->input->post('contact_person_name', true);
+            $data['contact_person_mobile'] = $this->input->post('contact_person_mobile', true);
+            $data['contact_person_email'] = $this->input->post('contact_person_email', true);
             $data['customer_email'] = $this->input->post('customer_email', true);
             $data['entry_by'] = $this->session->userdata('user_name');
             $data['entry_date'] = date("Y-m-d");
@@ -317,6 +320,9 @@ class Customers extends CI_Controller {
             $data['customer_address'] = $this->input->post('customer_address', true);
             $data['customer_mobile'] = $this->input->post('customer_mobile', true);
             $data['customer_email'] = $this->input->post('customer_email', true);
+            $data['contact_person_name'] = $this->input->post('contact_person_name', true);
+            $data['contact_person_mobile'] = $this->input->post('contact_person_mobile', true);
+            $data['contact_person_email'] = $this->input->post('contact_person_email', true);
             $data['entry_by'] = $this->session->userdata('user_name');
             $data['entry_date'] = date("Y-m-d");
             $data['customer_status'] = $this->input->post('customer_status', true);

@@ -109,6 +109,24 @@
                   </div>
                 </div>
                 <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Contact Person Name</label>
+                  <div class="col-sm-9">
+                      <input type="text" name="contact_person_name" value="<?php echo $singleCustomer->contact_person_name; ?>" class="form-control form-control-rounded">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Contact Person Mobile</label>
+                  <div class="col-sm-9">
+                      <input type="text" name="contact_person_mobile" value="<?php echo $singleCustomer->contact_person_mobile; ?>" class="form-control form-control-rounded">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Contact Person Email</label>
+                  <div class="col-sm-9">
+                      <input type="email" name="contact_person_email" value="<?php echo $singleCustomer->contact_person_email; ?>" class="form-control form-control-rounded">
+                  </div>
+                </div>
+                <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Status</label>
                   <div class="col-sm-9">
                       <select name="customer_status" id="customerStatus" class="form-control">

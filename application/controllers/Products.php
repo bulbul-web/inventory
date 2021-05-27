@@ -494,7 +494,6 @@ class Products extends CI_Controller {
             $sdata['message'] = 'Stock in successfully added';
             $this->session->set_userdata($sdata);
             $this->stock_in_form();
-            $this->form_validation->unset_field_data();
         } else {
             $this->stock_in_form();
         }
