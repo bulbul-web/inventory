@@ -42,7 +42,8 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Name</label>
                   <div class="col-sm-9">
-                      <input type="hidden" name="hidden" value="<?php echo $singleVisitor->id; ?>" class="form-control form-control-rounded">
+                      <input type="hidden" name="user_id" value="<?php echo $singleVisitor->user_id; ?>" class="form-control form-control-rounded">
+                      <input type="hidden" name="id" value="<?php echo $singleVisitor->id; ?>" class="form-control form-control-rounded">
                       <input type="text" name="name" value="<?php echo $singleVisitor->name; ?>" class="form-control form-control-rounded" required="">
                       <?php echo form_error('name', '<div class="error">', '</div>'); ?>
                   </div>
@@ -96,6 +97,7 @@
                   <label for="rounded-input" class="col-sm-3 col-form-label">Image</label>
                   <div class="col-sm-9">
                       <input type="file" class="form-control"  name="image">
+                      <input type="hidden" class="form-control"  name="old_image" value="<?php echo $singleVisitor->image;?>">
                       <span class="error">Upload (png/jpg) and size(400 x 400)</span>
                       <br>
                       <?php if($singleVisitor->image == ""){ ?>

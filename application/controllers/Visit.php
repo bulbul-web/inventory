@@ -171,10 +171,9 @@ class Visit extends CI_Controller {
     public function update_visitor(){
         $this->form_validation->set_rules(
                 'name', 'Name',
-                'required|min_length[2]|max_length[50]|is_unique[tbl_visit_info.name]|is_unique[tbl_customer.customer_name]',
+                'required|min_length[2]|max_length[50]',
                 array(
-                        'required'      => 'You have not provided %s.',
-                        'is_unique'     => 'This %s already exists.'
+                        'required'      => 'You have not provided %s.'
                 )
         );     
         
@@ -183,6 +182,7 @@ class Visit extends CI_Controller {
 
 
             $data = array();
+            $data['id'] = $this->input->post('id', true);
             $data['name'] = $this->input->post('name', true);
             $data['phone'] = $this->input->post('phone', true);
             $data['email'] = $this->input->post('email', true);
@@ -190,12 +190,8 @@ class Visit extends CI_Controller {
             $data['address'] = $this->input->post('address', true);
             $data['visit_date'] = $this->input->post('visit_date', true);
             $data['next_visit_date'] = $this->input->post('next_visit_date', true);
-            $user_id = $this->session->userdata('user_id');
-            $salesman = $this->db->query("SELECT * FROM tbl_user WHERE user_id = '$user_id' ")->row();
-            $data['user_id'] = $salesman->m_rm_s_id;
-            $data['entry_date'] = date("Y-m-d");
-            $data['image'] = '';
-            $data['status'] = 1;
+            $data['user_id'] = $this->input->post('user_id', true);
+            $data['status'] = $this->input->post('status', true);;
 
 
             $check = $this->input->post('check', true);
@@ -206,24 +202,24 @@ class Visit extends CI_Controller {
             $cdata['customer_mobile']= $data['phone'];
             $cdata['customer_email'] = $data['email'];
             $cdata['entry_by'] = $this->session->userdata('user_name');
-            $cdata['user_id'] = $salesman->m_rm_s_id;
-            $lastid = $this->db->query('SELECT id FROM tbl_visit_info ORDER BY CAST(id AS int) DESC LIMIT 1')->row();
-            $lastid = $lastid->id + 1;
-            $cdata['visitor_id'] = $lastid;
+            $cdata['user_id'] = $data['user_id'];
+            $cdata['visitor_id'] = $data['id'];
             $cdata['entry_date'] = date("Y-m-d");
             $cdata['customer_status'] = 1;
             
 
             if($_FILES['image']['name'] == '' || $_FILES['image']['size'] == 0){
-                $this->visit_query->saveVisitorData($data);
-                if($check == 'customer'){          
+                $img = $this->input->post('old_image', true);
+                $data['image'] = $img;
+                $this->visit_query->updateVisitorData($data);
+                if($check == 'customer'){       
                     $this->query_model->saveCustomerData($cdata);
                 }
 
                 $sdata = array();
                 $sdata['message'] = 'Successfully Save';
                 $this->session->set_userdata($sdata);
-                $this->visit_add_form();
+                $this->edit_visitor($data['id']);
             } else {
             
                 if ($_FILES['image']['size'] <= 10000000) {
@@ -239,8 +235,7 @@ class Visit extends CI_Controller {
                         if ($result['upload_data']) {
                             $img = '/assets/images/products/' . $result['upload_data']['file_name'];
                             $data['image'] = $img;
-
-                            $this->visit_query->saveVisitorData($data);
+                            $this->visit_query->updateVisitorData($data);
                             if($check == 'customer'){
                                 $this->query_model->saveCustomerData($cdata);
                             }
@@ -248,27 +243,27 @@ class Visit extends CI_Controller {
                             $sdata = array();
                             $sdata['message'] = 'Successfully Save';
                             $this->session->set_userdata($sdata);
-                            $this->visit_add_form();
+                            $this->edit_visitor($data['id']);
                         }
                         
                     }else{
                         $sdata = array();
                         $sdata['message'] = 'Select an image (jpg/png)';
                         $this->session->set_userdata($sdata);
-                        $this->visit_add_form();
+                        $this->edit_visitor($data['id']);
                     }
                 }else{
                     $sdata = array();
                     $sdata['message'] = 'Select an image in size less than 1MB';
                     $this->session->set_userdata($sdata);
-                    $this->visit_add_form();
+                    $this->edit_visitor($data['id']);
                 }
             }  
         } else {
             $sdata = array();
             $sdata['message'] = 'Try';
             $this->session->set_userdata($sdata);
-            $this->visit_add_form();
+            $this->edit_visitor($data['id']);
         }
     }
 

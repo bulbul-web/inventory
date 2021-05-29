@@ -249,7 +249,7 @@ class Users extends CI_Controller {
             $data['user_mobile'] = $this->input->post('phone');
             $data['status'] = 1;
             $data['user_pass'] = md5($this->input->post('user_pass'));
-            $data['user_role'] = 1; //manager = 1
+            $data['user_role'] = 4; //manager = 4
 
             $this->users_model->save_user($data);
             $sdata = array();

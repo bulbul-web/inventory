@@ -71,9 +71,11 @@
                             if($value->user_role == 1){
                                 echo 'Admin';
                             }elseif($value->user_role == 2){
-                                echo 'Dealer';
+                                echo 'General Manager';
                             }elseif($value->user_role == 3){
                                 echo 'Sales Man';
+                            }elseif($value->user_role == 4){
+                                echo 'Manager';
                             }
                         ?>
                     </td>
@@ -99,7 +101,11 @@
                     </td>
                     <td>
                         <div class="btn-group m-1">
-                            <a href="<?php echo base_url();?>edit-user/<?php echo $value->user_id?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
+                            <?php
+                                if($value->user_role == 1){
+                            ?>
+                                <a href="<?php echo base_url();?>edit-user/<?php echo $value->user_id?>" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-edit"></i> </a>
+                            <?php } ?>
                             <!-- <a href="<?php echo base_url();?>" onclick="return confirm('Are you sure to remove?')" class="btn btn-danger waves-effect waves-light" style="display: none;"> <i class="fa fa fa-trash-o"></i> </a> -->
                             
                          </div>

@@ -4,7 +4,7 @@
     <h4 class="page-title">manager List</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
-       <li class="breadcrumb-item active" aria-current="page">manager List</li>
+       <li class="breadcrumb-item"><a href="<?php echo base_url('marketing-setup-section');?>">Marketing Section</a></li>
     </ol>
     </div>
     <div class="col-sm-3">

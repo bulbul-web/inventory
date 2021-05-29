@@ -132,7 +132,7 @@ class Users_model extends CI_Model {
     }
 
     public function single_manager($manager_id){
-        $result = $this->db->query("SELECT a.*, b.* FROM tbl_manager a, tbl_user b WHERE a.id = b.m_rm_s_id AND b.user_role = 1 AND a.id = '$manager_id' ")->row();
+        $result = $this->db->query("SELECT a.*, b.* FROM tbl_manager a, tbl_user b WHERE a.id = b.m_rm_s_id AND b.user_role = 4 AND a.id = '$manager_id' ")->row();
         return $result;
     }
 
@@ -192,7 +192,7 @@ class Users_model extends CI_Model {
     }
 
     public function manager_list(){
-        $result = $this->db->query("SELECT a.*, b.* FROM tbl_manager a, tbl_user b WHERE a.id = b.m_rm_s_id AND b.user_role = 1 ORDER BY id DESC")->result();
+        $result = $this->db->query("SELECT a.*, b.* FROM tbl_manager a, tbl_user b WHERE a.id = b.m_rm_s_id AND b.user_role = 4 ORDER BY id DESC")->result();
         return $result;
     }
 

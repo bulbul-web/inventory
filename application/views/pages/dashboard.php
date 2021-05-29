@@ -177,7 +177,7 @@
                   endif;
                   ?>
               </h4>
-              <span class="text-white">Not Accept</span>
+              <span class="text-white">Rejected</span>
             </div>
             <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
               <i class="icon-basket-loaded text-white"></i></div>
@@ -189,7 +189,7 @@
 <!-------end order info from tbl_order ----->
 
 <?php
-  }else{
+  }elseif($userInfo->user_role == 1){
 ?>
 
 <div class="col-12 col-lg-6 col-xl-3">
@@ -473,7 +473,7 @@
                   endif;
                   ?>
               </h4>
-              <span class="text-white">Not Accept</span>
+              <span class="text-white">Rejected</span>
             </div>
             <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
               <i class="icon-basket-loaded text-white"></i></div>
@@ -484,6 +484,215 @@
   </div>
 <!-------end order info from tbl_order ----->
 </div>
+
+<?php }elseif($userInfo->user_role == 3 || $userInfo->user_role == 4){ ?>
+  <div class="col-12 col-lg-6 col-xl-3">
+  <a href="<?php echo base_url()?>product-type">
+    <div class="card bg-pattern-success">
+      <div class="card-body">
+        <div class="media">
+        <div class="media-body text-left">
+          <h4 class="text-white">
+              <?php
+              $category = $this->db->query("SELECT count(product_type_id) as totalCategory FROM tbl_product_type WHERE product_type_status = 1")->row();
+              if (isset($category)):
+                  echo $category->totalCategory;
+              endif;
+              ?>
+          </h4>
+          <span class="text-white">Product Type</span>
+        </div>
+        <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+          <i class="icon-pie-chart text-white"></i></div>
+      </div>
+      </div>
+    </div>
+  </a>
+</div>
+
+  <div class="col-12 col-lg-6 col-xl-3">
+      <a href="<?php echo base_url()?>products">
+        <div class="card bg-pattern-primary">
+          <div class="card-body">
+            <div class="media">
+            <div class="media-body text-left">
+              <h4 class="text-white">
+                  <?php
+                  $totalProducts = $this->db->query("SELECT count(product_id) as totalProduct FROM tbl_product_info WHERE  product_status=1 ")->row();
+                  if (isset($totalProducts)):
+                      echo $totalProducts->totalProduct;
+                  endif;
+                  ?>
+              </h4>
+              <span class="text-white">Total Product</span>
+            </div>
+            <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+              <i class="icon-basket-loaded text-white"></i></div>
+          </div>
+          </div>
+        </div>
+    </a>
+  </div>
+
+<div class="col-12 col-lg-6 col-xl-3">
+  <a href="<?php echo base_url()?>suppliers">
+    <div class="card bg-pattern-danger">
+      <div class="card-body">
+        <div class="media">
+        <div class="media-body text-left">
+          <h4 class="text-white">
+              <?php
+              $suppliers = $this->db->query("SELECT count(supplier_id) as totalSupplier FROM tbl_supplier WHERE  supplier_status=1 ")->row();
+              if (isset($suppliers)):
+                  echo $suppliers->totalSupplier;
+              endif;
+              ?>
+          </h4>
+          <span class="text-white">Supplier Name</span>
+        </div>
+        <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+          <i class="icon-user text-white"></i></div>
+      </div>
+      </div>
+    </div>
+  </a>
+</div>
+
+
+<div class="col-12 col-lg-6 col-xl-3">
+  <a href="<?php echo base_url()?>customers">
+    <div class="card bg-pattern-warning">
+      <div class="card-body">
+        <div class="media">
+        <div class="media-body text-left">
+          <h4 class="text-white">
+              <?php
+              $tcustomer = $this->db->query("SELECT count(customer_id) as totalCustomer FROM tbl_customer WHERE customer_status = 1")->row();
+              if (isset($tcustomer)):
+                  echo $tcustomer->totalCustomer;
+              endif;
+              ?>
+          </h4>
+          <span class="text-white">Customer Name</span>
+        </div>
+        <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+          <i class="icon-user text-white"></i></div>
+      </div>
+      </div>
+    </div>
+  </a>
+</div>
+
+</div><!--End Row-->
+
+
+
+
+
+<div class="row">
+    <!-------order info from tbl_order ----->
+<div class="col-12 col-lg-12 col-xl-12">
+<h6 class="text-center">------Marketing------</h6>
+</div>
+
+<div class="col-12 col-lg-3 col-xl-3">
+    <a href="<?php echo base_url()?>salesman-order">
+        <div class="card bg-pattern-primary">
+          <div class="card-body">
+            <div class="media">
+            <div class="media-body text-left">
+              <h4 class="text-white">
+                  <?php
+                  $orders = $this->db->query("SELECT * FROM tbl_order WHERE NOT (order_status <=> NULL) AND NOT (delete_status <=> 'deleted') GROUP BY order_id")->result();
+                  if (isset($orders)):
+                      echo count($orders);
+                  endif;
+                  ?>
+              </h4>
+              <span class="text-white">Total Order</span>
+            </div>
+            <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+              <i class="icon-basket-loaded text-white"></i></div>
+          </div>
+          </div>
+        </div>
+    </a>
+  </div>
+
+  <div class="col-12 col-lg-3 col-xl-3">
+    <!-- <a href="<?php echo base_url()?>salesman-order"> -->
+        <div class="card bg-pattern-primary">
+          <div class="card-body">
+            <div class="media">
+            <div class="media-body text-left">
+              <h4 class="text-white">
+                  <?php
+                  $orders = $this->db->query("SELECT * FROM tbl_order WHERE order_status = 1 AND NOT (delete_status <=> 'deleted') GROUP BY order_id")->result();
+                  if (isset($orders)):
+                      echo count($orders);
+                  endif;
+                  ?>
+              </h4>
+              <span class="text-white">Accept Order</span>
+            </div>
+            <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+              <i class="icon-basket-loaded text-white"></i></div>
+          </div>
+          </div>
+        </div>
+    <!-- </a> -->
+  </div>
+
+  <div class="col-12 col-lg-3 col-xl-3">
+    <!-- <a href="<?php echo base_url()?>salesman-order"> -->
+        <div class="card bg-pattern-primary">
+          <div class="card-body">
+            <div class="media">
+            <div class="media-body text-left">
+              <h4 class="text-white">
+                  <?php
+                  $userId = $this->session->userdata('user_id');
+                  $orders = $this->db->query("SELECT * FROM tbl_order WHERE order_status = 0 AND NOT (delete_status <=> 'deleted') GROUP BY order_id")->result();
+                  if (isset($orders)):
+                      echo count($orders);
+                  endif;
+                  ?>
+              </h4>
+              <span class="text-white">Not Accept</span>
+            </div>
+            <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+              <i class="icon-basket-loaded text-white"></i></div>
+          </div>
+          </div>
+        </div>
+    <!-- </a> -->
+  </div>
+
+  <div class="col-12 col-lg-3 col-xl-3">
+    <a href="<?php echo base_url()?>reject-salesman-order-list">
+        <div class="card bg-pattern-primary">
+          <div class="card-body">
+            <div class="media">
+            <div class="media-body text-left">
+              <h4 class="text-white">
+                  <?php
+                  $userId = $this->session->userdata('user_id');
+                  $orders = $this->db->query("SELECT * FROM tbl_order WHERE order_status = 2 AND NOT (delete_status <=> 'deleted') GROUP BY order_id")->result();
+                  if (isset($orders)):
+                      echo count($orders);
+                  endif;
+                  ?>
+              </h4>
+              <span class="text-white">Rejected</span>
+            </div>
+            <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+              <i class="icon-basket-loaded text-white"></i></div>
+          </div>
+          </div>
+        </div>
+    </a>
+  </div>
+<!-------end order info from tbl_order ----->
 
 <?php } ?>
 

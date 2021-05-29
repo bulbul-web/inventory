@@ -64,7 +64,7 @@
     </ul>
   </li>
 
-<?php }else{ ?>
+<?php }elseif($userInfo->user_role == 1){ ?>
   
 
 
@@ -299,6 +299,42 @@
 
  </li>
 
+ <?php } elseif($userInfo->user_role == 3 || $userInfo->user_role == 4){ ?>
+
+  <li>
+   <a href="<?php echo base_url();?>" class="waves-effect">
+     <i class="icon-home"></i> <span>Dashboard</span> 
+   </a>
+
+ </li>
+
+  <li>
+   <a href="<?php echo base_url('invoice-form');?>" class="waves-effect">
+     <i class="fa fa-file"></i> <span>Invoice</span> 
+   </a>
+
+ </li>
+
+  <li>
+    <a href="javaScript:void();" class="waves-effect">
+      <i class="fa fa-line-chart" aria-hidden="true"></i>
+      <span>Reports</span> <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="sidebar-submenu">
+        <!-- <li>
+            <a href="<?php echo base_url('month-report');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-user-circle-o"></i> <span>Date wise Invoice</span> 
+            </a>
+        </li> -->
+        
+        <li>
+            <a href="<?php echo base_url('all-report-section');?>" class="waves-effect">
+              <i aria-hidden="true" class="fa fa-area-chart"></i> <span>All Reports</span> 
+            </a>
+        </li>
+        
+    </ul>
+  </li>
  <?php } ?>
   
  

@@ -14,5 +14,9 @@ class Visit_query extends CI_Model {
         $result = $this->db->query("SELECT * FROM tbl_visit_info WHERE id = '$visitorId' ")->row();
         return $result;
     }
+    public function updateVisitorData($data){
+        $this->db->where('id', $data['id']);
+        $this->db->update('tbl_visit_info', $data);
+    }
 
 }
