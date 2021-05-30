@@ -191,10 +191,15 @@ $route['customer-wise-report-payment'] = 'reports/customer_wise_report_payment';
 $route['datewise-collection-from-customer'] = 'reports/datewise_collection_from_customer';
 $route['datewise-collection'] = 'reports/datewise_collection';
 $route['supplier-and-datewise-buy-product'] = 'reports/supplier_and_datewise_buy_product';
+$route['supplier-and-datewise-payment-history'] = 'reports/supplier_and_datewise_payment_history';
+$route['datewise-payment-history'] = 'reports/datewise_payment_history';
 $route['datewise-buy-product'] = 'reports/datewise_buy_product';
 $route['productwise-profit'] = 'reports/productwise_profit';
 
 $route['invoice-report-section'] = 'reports/invoice_report_section';
+$route['stock-report-section'] = 'reports/stock_report_section';
+$route['stock-out-report-section'] = 'reports/stock_out_report_section';
+$route['collection-report-section'] = 'reports/collection_report_section';
 
 $route['account-reports-section'] = 'reports/account_reports_section';
 $route['date-wise-transaction-report'] = 'reports/date_wise_transaction_report';

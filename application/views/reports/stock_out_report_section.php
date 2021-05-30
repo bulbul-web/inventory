@@ -20,13 +20,13 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
         <li class="breadcrumb-item"><a href="<?php echo base_url('all-report-section');?>">Report Section</a></li>
-        <li class="breadcrumb-item active" aria-current="page">
-            <?php
-                    if(isset($title)){
-                        echo $title;
-                    }
-                ?>
-        </li>
+       <li class="breadcrumb-item active" aria-current="page">
+           <?php
+                if(isset($title)){
+                    echo $title;
+                }
+            ?>
+       </li>
     </ol>
     </div>
     <div class="col-sm-3">
@@ -40,14 +40,14 @@
 <div class="report-section">
     <div class="row">
         
-    <div class="col-12 col-lg-6 col-xl-2">
-            <a href="<?php echo base_url('name-month-report');?>">
-                <div class="card bg-pattern-primary fxd-height">
+        <div class="col-12 col-lg-6 col-xl-2">
+            <a href="<?php echo base_url('datewise-product-out');?>">
+                <div class="card bg-pattern-success fxd-height">
                     <div class="card-body">
                         <div class="media">
                             <div class="media-body text-left">
                                 <!-- <h4 class="text-white">ddd</h4> -->
-                                <span class="text-white">Name and Date wise Invoice</span>
+                                <span class="text-white">Datewise Product Out</span>
                             </div>
                             <!-- <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
                                 
@@ -58,15 +58,14 @@
             </a>
         </div>
 
-
         <div class="col-12 col-lg-6 col-xl-2">
-            <a href="<?php echo base_url('month-report');?>">
-                <div class="card bg-pattern-danger fxd-height">
+            <a href="<?php echo base_url('product-out-by-customer');?>">
+                <div class="card bg-pattern-success fxd-height">
                     <div class="card-body">
                         <div class="media">
                             <div class="media-body text-left">
                                 <!-- <h4 class="text-white">ddd</h4> -->
-                                <span class="text-white">Date wise Invoice</span>
+                                <span class="text-white">Product out by Collection</span>
                             </div>
                             <!-- <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
                                 

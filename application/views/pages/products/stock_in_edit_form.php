@@ -8,9 +8,10 @@
     </ol>
     </div>
     <div class="col-sm-3">
-        
-
-     </div>
+        <div class="top-button-area">
+            <a class="btn btn-primary m-1" href="<?php echo base_url();?>edit-stock-in/<?php echo $singleStockIn->id; ?>"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+        </div>
+    </div>
 </div>
 <!-- End Breadcrumb-->
 
@@ -138,10 +139,34 @@
 
                 </div>
                 
+                <div class="row">
+                      <div class="col-md-3">
+                          <?php
+                            $bill_no = $singleStockIn->bill_no;
+                            $totalBuyingPrice = $this->db->query("SELECT *, round((quantity_in * buying_price), 2) as totalBuyingPrice FROM tbl_stock_in WHERE bill_no = '$bill_no' ")->row();
+                            $totalPayment = $this->db->query("SELECT id,  round(SUM(payment), 2) as totalPayment FROM tbl_stock_in_history WHERE bill_no = '$bill_no' GROUP BY bill_no ")->row();
+
+                          ?>
+                      </div>
+                      <div class="col-md-9">
+                          <div class="row">
+                              <div class="col-md-3"><h6 style="color: green; margin: 0px;">Total Price: </h6></div>
+                              <div class="col-md-8"><p style="color: green; margin: 0px;"><b><?php echo $totalBuyingPrice->totalBuyingPrice; ?></b></p></div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-3"><h6 style="color: green; margin: 0px;">Previous Payment: </h6></div>
+                              <div class="col-md-8"><p style="color: green; margin: 0px;"><b><?php echo $totalPayment->totalPayment; ?></b></p></div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-3"><h6 style="color: red; margin: 0px;">Due: </h6></div>
+                              <div class="col-md-8"><p style="color: red; margin: 0px;"><b><?php echo round(($totalBuyingPrice->totalBuyingPrice - $totalPayment->totalPayment), 2)?></b></p></div>
+                          </div>
+                      </div>
+                </div>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Payment</label>
                   <div class="col-sm-9">
-                      <input type="number" step=any name="payment" value="<?php echo $singleStockIn->payment; ?>"  class="form-control form-control-rounded">
+                      <input type="number" step=any name="payment" value="0"  class="form-control form-control-rounded">
                   </div>
                 </div>
             

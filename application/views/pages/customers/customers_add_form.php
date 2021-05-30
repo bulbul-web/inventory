@@ -56,7 +56,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Customer Sub Category</label>
                   <div class="col-sm-9">
-                    <select class="form-control" name="customer_subcategory" id="customerSubcategory" required="" >
+                    <select class="form-control" name="customer_subcategory" id="customerSubcategory" >
                         <option value="">Select Customer Subcategory</option>
                       </select>
                   </div>

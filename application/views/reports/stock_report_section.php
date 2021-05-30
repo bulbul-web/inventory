@@ -19,6 +19,7 @@
     </h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo base_url('all-report-section');?>">Report Section</a></li>
        <li class="breadcrumb-item active" aria-current="page">
            <?php
                 if(isset($title)){
@@ -36,14 +37,46 @@
 </div>
 <!-- End Breadcrumb-->
 
-<?php
-    $user_role = $this->session->userdata('user_role');
-    if($user_role == 3){
-?>
-
 <div class="report-section">
     <div class="row">
         
+    <div class="col-12 col-lg-6 col-xl-2">
+            <a href="<?php echo base_url('stock-report');?>">
+                <div class="card bg-pattern-warning fxd-height">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body text-left">
+                                <!-- <h4 class="text-white">ddd</h4> -->
+                                <span class="text-white">Product Wise Stock Report</span>
+                            </div>
+                            <!-- <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+                                
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <div class="col-12 col-lg-6 col-xl-2">
+            <a href="<?php echo base_url('datewise-stock-report');?>">
+                <div class="card bg-pattern-primary fxd-height">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body text-left">
+                                <!-- <h4 class="text-white">ddd</h4> -->
+                                <span class="text-white">Datewise Product Stock Report</span>
+                            </div>
+                            <!-- <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+                                
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
         <div class="col-12 col-lg-6 col-xl-2">
             <a href="<?php echo base_url('all-products-stock-report');?>">
                 <div class="card bg-pattern-danger fxd-height">
@@ -62,23 +95,14 @@
             </a>
         </div>
 
-        
-    </div>
-</div>
-
-<?php } elseif ($user_role == 1) { ?>
-
-<div class="report-section">
-    <div class="row">
-
-    <div class="col-12 col-lg-6 col-xl-2">
-            <a href="<?php echo base_url('invoice-report-section');?>">
-                <div class="card bg-pattern-primary fxd-height">
+        <div class="col-12 col-lg-6 col-xl-2">
+            <a href="<?php echo base_url('supplier-and-datewise-buy-product');?>">
+                <div class="card bg-pattern-warning fxd-height">
                     <div class="card-body">
                         <div class="media">
                             <div class="media-body text-left">
                                 <!-- <h4 class="text-white">ddd</h4> -->
-                                <span class="text-white">Invoice Report</span>
+                                <span class="text-white">Supplier and datewise buy product</span>
                             </div>
                             <!-- <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
                                 
@@ -90,13 +114,13 @@
         </div>
 
         <div class="col-12 col-lg-6 col-xl-2">
-            <a href="<?php echo base_url('stock-report-section');?>">
-                <div class="card bg-pattern-primary fxd-height">
+            <a href="<?php echo base_url('datewise-buy-product');?>">
+                <div class="card bg-pattern-warning fxd-height">
                     <div class="card-body">
                         <div class="media">
                             <div class="media-body text-left">
                                 <!-- <h4 class="text-white">ddd</h4> -->
-                                <span class="text-white">Stock In Report</span>
+                                <span class="text-white">Datewise buy product</span>
                             </div>
                             <!-- <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
                                 
@@ -108,13 +132,13 @@
         </div>
 
         <div class="col-12 col-lg-6 col-xl-2">
-            <a href="<?php echo base_url('stock-out-report-section');?>">
-                <div class="card bg-pattern-primary fxd-height">
+            <a href="<?php echo base_url('supplier-and-datewise-payment-history');?>">
+                <div class="card bg-pattern-warning fxd-height">
                     <div class="card-body">
                         <div class="media">
                             <div class="media-body text-left">
                                 <!-- <h4 class="text-white">ddd</h4> -->
-                                <span class="text-white">Stock Out Report</span>
+                                <span class="text-white">Supplier and datewise Payment History</span>
                             </div>
                             <!-- <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
                                 
@@ -126,13 +150,13 @@
         </div>
 
         <div class="col-12 col-lg-6 col-xl-2">
-            <a href="<?php echo base_url('collection-report-section');?>">
-                <div class="card bg-pattern-primary fxd-height">
+            <a href="<?php echo base_url('datewise-payment-history');?>">
+                <div class="card bg-pattern-warning fxd-height">
                     <div class="card-body">
                         <div class="media">
                             <div class="media-body text-left">
                                 <!-- <h4 class="text-white">ddd</h4> -->
-                                <span class="text-white">Collection Report</span>
+                                <span class="text-white">Datewise Payment History</span>
                             </div>
                             <!-- <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
                                 
@@ -142,28 +166,6 @@
                 </div>
             </a>
         </div>
-
-        <div class="col-12 col-lg-6 col-xl-2">
-            <a href="<?php echo base_url('customer-report-all');?>">
-                <div class="card bg-pattern-primary fxd-height">
-                    <div class="card-body">
-                        <div class="media">
-                            <div class="media-body text-left">
-                                <!-- <h4 class="text-white">ddd</h4> -->
-                                <span class="text-white">Customer Report</span>
-                            </div>
-                            <!-- <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
-                                
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-
 
     </div>
 </div>
-
-<?php } ?>
