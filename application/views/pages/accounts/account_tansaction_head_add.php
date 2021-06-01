@@ -78,7 +78,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Transaction Head Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="TransHeadDescription" value="<?php echo set_value('TransHeadDescription'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Transaction head name" name="TransHeadDescription" value="<?php echo set_value('TransHeadDescription'); ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('TransHeadDescription', '<div class="error">', '</div>')?>
                   </div>
                 </div>  

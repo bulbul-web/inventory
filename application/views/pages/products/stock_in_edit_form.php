@@ -40,7 +40,7 @@
                         <div class="form-group row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Challan Date</label>
-                            <input type="text" name="challan_date" id="challan_date" value="<?php echo $singleStockIn->challan_date;?>"  class="form-control form-control-rounded">
+                            <input type="text" placeholder="Challan date" name="challan_date" id="challan_date" value="<?php echo $singleStockIn->challan_date;?>"  class="form-control form-control-rounded">
                             <input type="hidden" name="id" value="<?php echo $singleStockIn->id;?>">
                             
                             <?php echo form_error('challan_date', '<div class="error">', '</div>'); ?>
@@ -61,7 +61,7 @@
                         <div class="form-group row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Bill Date</label>
-                            <input type="text" name="bill_date" id="bill_date" value="<?php echo $singleStockIn->bill_date;?>" class="form-control form-control-rounded">
+                            <input type="text" placeholder="Purchase date" name="bill_date" id="bill_date" value="<?php echo $singleStockIn->bill_date;?>" class="form-control form-control-rounded">
                             <?php echo form_error('bill_date', '<div class="error">', '</div>'); ?>
                         </div>
                       </div>
@@ -113,7 +113,7 @@
                         <div class="form-group row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Quantity</label>
-                            <input type="number" step=any name="quantity_in" value="<?php echo $singleStockIn->quantity_in; ?>" class="form-control form-control-rounded">
+                            <input type="number" placeholder="Quantity" step=any name="quantity_in" value="<?php echo $singleStockIn->quantity_in; ?>" class="form-control form-control-rounded">
                             <?php echo form_error('quantity_in', '<div class="error">', '</div>'); ?>
                         </div>
                       </div>
@@ -122,7 +122,7 @@
                         <div class="form-group row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Buying Price/unit</label>
-                            <input type="number" step=any name="buying_price" value="<?php echo $singleStockIn->buying_price; ?>" class="form-control form-control-rounded">
+                            <input type="number" placeholder="Buying price per quantity" step=any name="buying_price" value="<?php echo $singleStockIn->buying_price; ?>" class="form-control form-control-rounded">
                             <?php echo form_error('buying_price', '<div class="error">', '</div>'); ?>
                         </div>
                       </div>
@@ -131,7 +131,7 @@
                         <div class="form-group row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Sale Price/unit</label>
-                            <input type="number" step=any name="sale_price" value="<?php echo $singleStockIn->sale_price; ?>" class="form-control form-control-rounded">
+                            <input type="number" placeholder="Sale price per quantity" step=any name="sale_price" value="<?php echo $singleStockIn->sale_price; ?>" class="form-control form-control-rounded">
                             <?php echo form_error('sale_price', '<div class="error">', '</div>'); ?>
                         </div>
                       </div>
@@ -166,14 +166,14 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Payment</label>
                   <div class="col-sm-9">
-                      <input type="number" step=any name="payment" value="0"  class="form-control form-control-rounded">
+                      <input type="number" placeholder="Payment" step=any name="payment" value="0"  class="form-control form-control-rounded">
                   </div>
                 </div>
             
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Note</label>
                   <div class="col-sm-9">
-                      <input type="text" name="note" value="<?php echo $singleStockIn->note; ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Note" name="note" value="<?php echo $singleStockIn->note; ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
                 

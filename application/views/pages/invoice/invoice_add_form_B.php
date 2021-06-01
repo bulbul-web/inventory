@@ -82,7 +82,7 @@
                         <div class="form-group row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Date</label>
-                            <input type="text" name="invoice_date" id="datepicker" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
+                            <input type="text" placeholder="Date" name="invoice_date" id="datepicker" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
                             <?php echo form_error('invoice_date', '<div class="error">', '</div>'); ?>
                         </div>
                       </div>

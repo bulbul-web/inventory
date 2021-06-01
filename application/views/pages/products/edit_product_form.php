@@ -53,7 +53,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="product_name" value="<?php echo $singleProduct->product_name; ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Product name" name="product_name" value="<?php echo $singleProduct->product_name; ?>" class="form-control form-control-rounded">
                       <input type="hidden" name="product_id" value="<?php echo $singleProduct->product_id; ?>" class="form-control form-control-rounded">
                       <?php echo form_error('product_name', '<div class="error">', '</div>'); ?>
                   </div>
@@ -62,20 +62,20 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Name Bangla</label>
                   <div class="col-sm-9">
-                      <input type="text" name="product_name_bangla" value="<?php echo $singleProduct->product_name_bangla; ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Product name bangla" name="product_name_bangla" value="<?php echo $singleProduct->product_name_bangla; ?>" class="form-control form-control-rounded">
                   </div>
                 </div>
             
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Description</label>
                   <div class="col-sm-9">
-                      <input type="text" name="product_descrip" value="<?php echo $singleProduct->product_descrip; ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Product description" name="product_descrip" value="<?php echo $singleProduct->product_descrip; ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Code</label>
                   <div class="col-sm-9">
-                      <input type="text" name="product_code" value="<?php echo $singleProduct->product_code; ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Product code" name="product_code" value="<?php echo $singleProduct->product_code; ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('product_code', '<div class="error">', '</div>'); ?>
                       <input type="hidden" name="old_barcode" value="<?php echo $singleProduct->barcode;?>">
                   </div>
@@ -101,7 +101,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Price</label>
                   <div class="col-sm-9">
-                      <input type="text" name="price" value="<?php echo $singleProduct->price; ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Price" name="price" value="<?php echo $singleProduct->price; ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('price', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -122,14 +122,14 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Pack quantity</label>
                   <div class="col-sm-9">
-                      <input type="text" name="total_pack_size" value="<?php echo $singleProduct->total_pack_size; ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Pack quantity" name="total_pack_size" value="<?php echo $singleProduct->total_pack_size; ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
                 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Segment</label>
                   <div class="col-sm-9">
-                      <input type="text" name="product_segment" value="<?php echo $singleProduct->product_segment; ?>"  class="form-control form-control-rounded">
+                      <input type="text" name="product_segment" placeholder="Product segment" value="<?php echo $singleProduct->product_segment; ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
 

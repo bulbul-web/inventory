@@ -102,6 +102,7 @@ $route['stock-details/(.+)'] = 'products/stock_in_details/$1';
 $route['edit-stock-in/(.+)'] = 'products/edit_stock_in_form/$1';
 $route['update-stock-in'] = 'products/update_stock_in';
 $route['delete-stock-in/(.+)'] = 'products/delete_stock_in/$1';
+$route['purchase-report/(.+)'] = 'products/purchase_report/$1';
 
 $route['pack-size'] = 'products/pack_size_list';
 $route['pack-size-add'] = 'products/pack_size_add_form_view';

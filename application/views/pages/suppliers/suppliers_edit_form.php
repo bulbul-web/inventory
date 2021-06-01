@@ -38,7 +38,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Supplier Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="supplier_name" value="<?php echo $singleSupplier->supplier_name;?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Supplier name" name="supplier_name" value="<?php echo $singleSupplier->supplier_name;?>" class="form-control form-control-rounded">
                       <input type="hidden" name="supplier_id" value="<?php echo $singleSupplier->supplier_id;?>" />
                       <?php echo form_error('supplier_name', '<div class="error">', '</div>'); ?>
                   </div>
@@ -46,19 +46,19 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Supplier Address</label>
                   <div class="col-sm-9">
-                      <input type="text" name="supplier_address" value="<?php echo $singleSupplier->supplier_address; ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Supplier address" name="supplier_address" value="<?php echo $singleSupplier->supplier_address; ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Supplier Mobile</label>
                   <div class="col-sm-9">
-                      <input type="text" name="supplier_mobile" value="<?php echo $singleSupplier->supplier_mobile; ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Supplier mobile" name="supplier_mobile" value="<?php echo $singleSupplier->supplier_mobile; ?>" class="form-control form-control-rounded">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Supplier Email</label>
                   <div class="col-sm-9">
-                      <input type="email" name="supplier_email" value="<?php echo $singleSupplier->supplier_email; ?>" class="form-control form-control-rounded">
+                      <input type="email" placeholder="Supplier email" name="supplier_email" value="<?php echo $singleSupplier->supplier_email; ?>" class="form-control form-control-rounded">
                   </div>
                 </div>
                 <div class="form-group row">

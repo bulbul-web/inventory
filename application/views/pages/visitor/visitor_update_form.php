@@ -44,7 +44,7 @@
                   <div class="col-sm-9">
                       <input type="hidden" name="user_id" value="<?php echo $singleVisitor->user_id; ?>" class="form-control form-control-rounded">
                       <input type="hidden" name="id" value="<?php echo $singleVisitor->id; ?>" class="form-control form-control-rounded">
-                      <input type="text" name="name" value="<?php echo $singleVisitor->name; ?>" class="form-control form-control-rounded" required="">
+                      <input type="text" placeholder="Institute name" name="name" value="<?php echo $singleVisitor->name; ?>" class="form-control form-control-rounded" required="">
                       <?php echo form_error('name', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -52,35 +52,35 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Phone</label>
                   <div class="col-sm-9">
-                      <input type="text" name="phone" value="<?php echo $singleVisitor->phone; ?>"  class="form-control form-control-rounded" required="">
+                      <input type="text" name="phone" placeholder="Institute phone number" value="<?php echo $singleVisitor->phone; ?>"  class="form-control form-control-rounded" required="">
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Email</label>
                   <div class="col-sm-9">
-                      <input type="email" name="email" value="<?php echo $singleVisitor->email; ?>"  class="form-control form-control-rounded">
+                      <input type="email" name="email" placeholder="Institute email" value="<?php echo $singleVisitor->email; ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
             
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Description</label>
                   <div class="col-sm-9">
-                      <input type="text" name="description" value="<?php echo $singleVisitor->description; ?>"  class="form-control form-control-rounded">
+                      <input type="text" name="description" placeholder="Description" value="<?php echo $singleVisitor->description; ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">address</label>
                   <div class="col-sm-9">
-                      <input type="text" name="address" value="<?php echo $singleVisitor->address; ?>"  class="form-control form-control-rounded" required="">
+                      <input type="text" name="address" placeholder="Institute address" value="<?php echo $singleVisitor->address; ?>"  class="form-control form-control-rounded" required="">
                   </div>
                 </div>
                 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Visit Date</label>
                   <div class="col-sm-9">
-                    <input type="text" name="visit_date" id="visitdate" value="<?php echo $singleVisitor->visit_date; ?>" class="form-control form-control-rounded">
+                    <input type="text" placeholder="Visit date" name="visit_date" id="visitdate" value="<?php echo $singleVisitor->visit_date; ?>" class="form-control form-control-rounded">
                       <?php echo form_error('visit_date', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -88,7 +88,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Next visit Date</label>
                   <div class="col-sm-9">
-                    <input type="text" name="next_visit_date" id="nextvisitdate" value="<?php echo $singleVisitor->next_visit_date;?>" class="form-control form-control-rounded">
+                      <input type="text" name="next_visit_date" placeholder="Next visit date" id="nextvisitdate" value="<?php echo $singleVisitor->next_visit_date;?>" class="form-control form-control-rounded">
                       <?php echo form_error('next_visit_date', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>

@@ -38,7 +38,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Head Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="trnsaction_head" value="<?php echo $singleCostsHead->trnsaction_head; ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Transaction Head name" name="trnsaction_head" value="<?php echo $singleCostsHead->trnsaction_head; ?>" class="form-control form-control-rounded">
                       <input type="hidden" name="id" value="<?php echo $singleCostsHead->id; ?>" class="form-control form-control-rounded">
                       <?php echo form_error('trnsaction_head', '<div class="error">', '</div>'); ?>
                   </div>
@@ -47,7 +47,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Head Description</label>
                   <div class="col-sm-9">
-                      <input type="text" name="description" value="<?php echo $singleCostsHead->description; ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Description" name="description" value="<?php echo $singleCostsHead->description; ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>                
                 

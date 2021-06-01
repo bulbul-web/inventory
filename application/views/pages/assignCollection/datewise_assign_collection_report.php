@@ -49,7 +49,7 @@
                 <div class="form-group row">
                     <label class="col-sm-12 col-form-label">From Date</label>
                     <div class="col-sm-12">
-                        <input type="text" name="from_date" id="fromDate" value="<?php echo set_value('from_date');?>" class="form-control form-control-rounded" required="">
+                        <input type="text" placeholder="From date" name="from_date" id="fromDate" value="<?php echo set_value('from_date');?>" class="form-control form-control-rounded" required="">
                     </div>
                   </div>
             </div>
@@ -57,7 +57,7 @@
                 <div class="form-group row">
                     <label class="col-sm-12 col-form-label">To Date</label>
                     <div class="col-sm-12">
-                        <input type="text" name="to_date" id="toDate" value="<?php echo set_value('to_date');?>" class="form-control form-control-rounded" required="">
+                        <input type="text" placeholder="To date" name="to_date" id="toDate" value="<?php echo set_value('to_date');?>" class="form-control form-control-rounded" required="">
                     </div>
                   </div>
             </div>

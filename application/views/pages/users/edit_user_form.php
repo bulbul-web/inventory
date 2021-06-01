@@ -40,7 +40,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="user_name" value="<?php echo $singleUser->user_name; ?>" class="form-control form-control-rounded">
+                      <input type="text" name="user_name" placeholder="User name" value="<?php echo $singleUser->user_name; ?>" class="form-control form-control-rounded">
                       <input type="hidden" name="user_id" value="<?php echo $singleUser->user_id; ?>" class="form-control form-control-rounded">
                       <?php echo form_error('user_name', '<div class="error">', '</div>'); ?>
                   </div>
@@ -49,7 +49,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Email or (Login name)</label>
                   <div class="col-sm-9">
-                      <input type="text" name="user_email" value="<?php echo $singleUser->user_email; ?>"  class="form-control form-control-rounded">
+                      <input type="text" name="user_email" placeholder="Login name" value="<?php echo $singleUser->user_email; ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('user_email', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -57,7 +57,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Phone</label>
                   <div class="col-sm-9">
-                      <input type="text" name="user_mobile" value="<?php echo $singleUser->user_mobile; ?>"  class="form-control form-control-rounded">
+                      <input type="text" name="user_mobile" placeholder="Mobile number" value="<?php echo $singleUser->user_mobile; ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('user_mobile', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>

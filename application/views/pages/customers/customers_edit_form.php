@@ -38,7 +38,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Customer Category</label>
                   <div class="col-sm-9">
-                    <select class="form-control" name="customer_category" id="customerCategory" required="" onchange="getCustomerSubcategory()" >
+                    <select class="form-control" name="customer_category" id="customerCategory" onchange="getCustomerSubcategory()" >
                         <option value="">Select Customer Category</option>
 
                         <?php
@@ -85,45 +85,45 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">customer Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="customer_name" value="<?php echo $singleCustomer->customer_name; ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Customer name" name="customer_name" value="<?php echo $singleCustomer->customer_name; ?>" class="form-control form-control-rounded">
                       <input type="hidden" name="customer_id" value="<?php echo $singleCustomer->customer_id; ?>" class="form-control form-control-rounded">
                       <?php echo form_error('customer_name', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">customer Address</label>
+                  <label class="col-sm-3 col-form-label">Customer Address</label>
                   <div class="col-sm-9">
-                      <input type="text" name="customer_address" value="<?php echo $singleCustomer->customer_address; ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Customer address" name="customer_address" value="<?php echo $singleCustomer->customer_address; ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">customer Mobile</label>
+                  <label class="col-sm-3 col-form-label">Customer Mobile</label>
                   <div class="col-sm-9">
-                      <input type="text" name="customer_mobile" value="<?php echo $singleCustomer->customer_mobile; ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Customer mobile" name="customer_mobile" value="<?php echo $singleCustomer->customer_mobile; ?>" class="form-control form-control-rounded">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">customer Email</label>
+                  <label class="col-sm-3 col-form-label">Customer Email</label>
                   <div class="col-sm-9">
-                      <input type="email" name="customer_email" value="<?php echo $singleCustomer->customer_email; ?>" class="form-control form-control-rounded">
+                      <input type="email" placeholder="Customer email" name="customer_email" value="<?php echo $singleCustomer->customer_email; ?>" class="form-control form-control-rounded">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Contact Person Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="contact_person_name" value="<?php echo $singleCustomer->contact_person_name; ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Contact person name" name="contact_person_name" value="<?php echo $singleCustomer->contact_person_name; ?>" class="form-control form-control-rounded">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Contact Person Mobile</label>
                   <div class="col-sm-9">
-                      <input type="text" name="contact_person_mobile" value="<?php echo $singleCustomer->contact_person_mobile; ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Contact person mobile" name="contact_person_mobile" value="<?php echo $singleCustomer->contact_person_mobile; ?>" class="form-control form-control-rounded">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Contact Person Email</label>
                   <div class="col-sm-9">
-                      <input type="email" name="contact_person_email" value="<?php echo $singleCustomer->contact_person_email; ?>" class="form-control form-control-rounded">
+                      <input type="email" placeholder="Contact person email" name="contact_person_email" value="<?php echo $singleCustomer->contact_person_email; ?>" class="form-control form-control-rounded">
                   </div>
                 </div>
                 <div class="form-group row">

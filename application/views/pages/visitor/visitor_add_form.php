@@ -42,7 +42,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="name" value="<?php echo set_value('name'); ?>" class="form-control form-control-rounded" required="">
+                      <input type="text" placeholder="Institute name" name="name" value="<?php echo set_value('name'); ?>" class="form-control form-control-rounded" required="">
                       <?php echo form_error('name', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -50,35 +50,35 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Phone</label>
                   <div class="col-sm-9">
-                      <input type="text" name="phone" value="<?php echo set_value('phone'); ?>"  class="form-control form-control-rounded" required="">
+                      <input type="text" name="phone" placeholder="Institute mobile number" value="<?php echo set_value('phone'); ?>"  class="form-control form-control-rounded" required="">
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Email</label>
                   <div class="col-sm-9">
-                      <input type="email" name="email" value="<?php echo set_value('email'); ?>"  class="form-control form-control-rounded">
+                      <input type="email" name="email" placeholder="Institute email" value="<?php echo set_value('email'); ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
             
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Description</label>
                   <div class="col-sm-9">
-                      <input type="text" name="description" value="<?php echo set_value('description'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Description" name="description" value="<?php echo set_value('description'); ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Address</label>
                   <div class="col-sm-9">
-                      <input type="text" name="address" value="<?php echo set_value('address'); ?>"  class="form-control form-control-rounded" required="">
+                      <input type="text" name="address" placeholder="Address" value="<?php echo set_value('address'); ?>"  class="form-control form-control-rounded" required="">
                   </div>
                 </div>
                 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Visit Date</label>
                   <div class="col-sm-9">
-                    <input type="text" name="visit_date" id="visitdate" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
+                    <input type="text" name="visit_date" placeholder="Visit date" id="visitdate" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
                       <?php echo form_error('visit_date', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -86,7 +86,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Next visit Date</label>
                   <div class="col-sm-9">
-                    <input type="text" name="next_visit_date" id="nextvisitdate" value="" class="form-control form-control-rounded">
+                    <input type="text" placeholder="Nex visit date" name="next_visit_date" id="nextvisitdate" value="" class="form-control form-control-rounded">
                       <?php echo form_error('next_visit_date', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>

@@ -53,7 +53,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="product_name" value="<?php echo set_value('product_name'); ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Product name" name="product_name" value="<?php echo set_value('product_name'); ?>" class="form-control form-control-rounded">
                       <?php echo form_error('product_name', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -61,20 +61,20 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Name Bangla</label>
                   <div class="col-sm-9">
-                      <input type="text" name="product_name_bangla" value="<?php echo set_value('product_name_bangla'); ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Product name bangla" name="product_name_bangla" value="<?php echo set_value('product_name_bangla'); ?>" class="form-control form-control-rounded">
                   </div>
                 </div>
             
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Description</label>
                   <div class="col-sm-9">
-                      <input type="text" name="product_descrip" value="<?php echo set_value('product_descrip'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Product description" name="product_descrip" value="<?php echo set_value('product_descrip'); ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Code</label>
                   <div class="col-sm-9">
-                      <input type="text" name="product_code" value="<?php echo set_value('product_code'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Product code" name="product_code" value="<?php echo set_value('product_code'); ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('product_code', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -99,7 +99,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Price</label>
                   <div class="col-sm-9">
-                      <input type="text" name="price" value="<?php echo set_value('price'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Product price" name="price" value="<?php echo set_value('price'); ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('price', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -120,14 +120,14 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Pack quantity</label>
                   <div class="col-sm-9">
-                      <input type="text" name="total_pack_size" value="<?php echo set_value('total_pack_size'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Pack quantity" name="total_pack_size" value="<?php echo set_value('total_pack_size'); ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
                 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Segment</label>
                   <div class="col-sm-9">
-                      <input type="text" name="product_segment" value="<?php echo set_value('product_segment'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Product segment" name="product_segment" value="<?php echo set_value('product_segment'); ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
             

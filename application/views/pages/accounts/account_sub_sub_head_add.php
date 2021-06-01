@@ -68,7 +68,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Enter Sub Sub Head Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="SSubHeadDescription" value="<?php echo set_value('SSubHeadDescription'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Sub sub head name" name="SSubHeadDescription" value="<?php echo set_value('SSubHeadDescription'); ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('SSubHeadDescription', '<div class="error">', '</div>')?>
                   </div>
                 </div>  

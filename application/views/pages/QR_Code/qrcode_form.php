@@ -40,7 +40,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="name" value="<?php echo set_value('name'); ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Name" name="name" value="<?php echo set_value('name'); ?>" class="form-control form-control-rounded">
                       <?php echo form_error('name', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -48,14 +48,14 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Email</label>
                   <div class="col-sm-9">
-                      <input type="email" name="email" value="<?php echo set_value('email'); ?>"  class="form-control form-control-rounded">
+                      <input type="email" placeholder="Email" name="email" value="<?php echo set_value('email'); ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('email', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Mobile</label>
                   <div class="col-sm-9">
-                      <input type="text" name="mobile" value="<?php echo set_value('mobile'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" name="mobile" placeholder="Mobile" value="<?php echo set_value('mobile'); ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('mobile', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -65,7 +65,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Website link</label>
                   <div class="col-sm-9">
-                      <input type="text" name="website_link" value="<?php echo set_value('website_link'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" name="website_link" placeholder="Website link" value="<?php echo set_value('website_link'); ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('website_link', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>

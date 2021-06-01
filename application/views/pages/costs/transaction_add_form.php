@@ -46,7 +46,7 @@
                         <div class="form-group row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Date</label>
-                            <input type="text" name="trnsction_date" id="datepicker" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
+                            <input type="text" placeholder="Date" name="trnsction_date" id="datepicker" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
                             <?php echo form_error('trnsction_date', '<div class="error">', '</div>'); ?>
                         </div>
                       </div>
@@ -56,7 +56,7 @@
                         <div class="form-group row hideArea">
                         <div class="col-sm-12">
                             <label class="col-form-label">Note</label>
-                            <input type="text" name="note" class="form-control form-control-rounded">
+                            <input type="text" placeholder="Note" name="note" class="form-control form-control-rounded">
                         </div>
                       </div>
                     </div>

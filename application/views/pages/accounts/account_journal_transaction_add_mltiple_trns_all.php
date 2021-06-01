@@ -45,7 +45,7 @@
                     <div class="form-group row">
                     <div class="col-sm-12">
                         <label class="col-form-label">Transaction Date</label>
-                        <input type="text" name="TrnDate" id="datepicker" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded" required="">
+                        <input type="text" placeholder="Transaction Date" name="TrnDate" id="datepicker" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded" required="">
                         <?php echo form_error('TrnDate', '<div class="error">', '</div>'); ?>
                         
                     </div>

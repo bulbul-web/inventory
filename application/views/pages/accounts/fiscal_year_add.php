@@ -46,7 +46,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">First Day of the fiscal year</label>
                   <div class="col-sm-3">                        
-                        <input type="date" name="startDate" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
+                        <input type="date" placeholder="Start date" name="startDate" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
                         <?php echo form_error('startDate', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>  
@@ -55,7 +55,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Last Day of the fiscal year</label>
                   <div class="col-sm-3">                        
-                        <input type="date" name="endDate" value="" class="form-control form-control-rounded">
+                        <input type="date" placeholder="End date" name="endDate" value="" class="form-control form-control-rounded">
                         <?php echo form_error('endDate', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>  

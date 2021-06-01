@@ -38,7 +38,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Warehouse Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="warehouse_name" value="<?php echo $singleWarehouse->warehouse_name; ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Outlet/warehouse name" name="warehouse_name" value="<?php echo $singleWarehouse->warehouse_name; ?>" class="form-control form-control-rounded">
                       <input type="hidden" name="warehouse_id" value="<?php echo $singleWarehouse->warehouse_id; ?>">
                       <?php echo form_error('warehouse_name', '<div class="error">', '</div>'); ?>
                   </div>
@@ -46,7 +46,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Warehouse Address</label>
                   <div class="col-sm-9">
-                      <input type="text" name="warehouse_address" value="<?php echo $singleWarehouse->warehouse_address; ?>"  class="form-control form-control-rounded">
+                      <input type="text" name="warehouse_address" placeholder="Address" value="<?php echo $singleWarehouse->warehouse_address; ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('warehouse_address', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>

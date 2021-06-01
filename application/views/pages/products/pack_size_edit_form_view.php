@@ -39,14 +39,14 @@
                   <label class="col-sm-3 col-form-label">Pack Size Name</label>
                   <div class="col-sm-9">
                       <input type="hidden" name="id" value="<?php echo $value->id; ?>" class="form-control form-control-rounded">
-                      <input type="text" name="pack_size" value="<?php echo $value->pack_size; ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Pack size name" name="pack_size" value="<?php echo $value->pack_size; ?>" class="form-control form-control-rounded">
                       <?php echo form_error('pack_size', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Description</label>
                   <div class="col-sm-9">
-                      <input type="text" name="description" value=""  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Pack size description" name="description" value=""  class="form-control form-control-rounded">
                   </div>
                 </div>
                 

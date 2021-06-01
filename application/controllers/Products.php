@@ -474,7 +474,7 @@ class Products extends CI_Controller {
             $data['buying_price'] = $this->input->post('buying_price', true);
             $data['sale_price'] = $this->input->post('sale_price', true);
             $data['note'] = $this->input->post('note', true);
-            $data['entry_by'] = $this->session->userdata('user_name');
+            $data['entry_by'] = $this->session->userdata('user_id');
             $data['entry_date'] = date("Y-m-d");
             $data['status'] = $this->input->post('status', true);
             $data['payment'] = $this->input->post('payment', true);
@@ -493,11 +493,29 @@ class Products extends CI_Controller {
             $sdata = array();
             $sdata['message'] = 'Stock in successfully added';
             $this->session->set_userdata($sdata);
-            $this->stock_in_form();
+            // $this->stock_in_form();
+            $this->purchase_report($data['bill_no']);
         } else {
             $this->stock_in_form();
         }
     }
+    public function purchase_report($bill_no){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['purchase_info_supplier'] = $this->query_model->purchase_info_supplier($bill_no);
+        $data['purchase_info_product'] = $this->query_model->purchase_info_product($bill_no);
+        
+        $data['title'] = 'Purchase Details';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('pages/suppliers/purchase_report', $data, true);
+        $this->load->view('index', $data);
+    }
+
     public function update_stock_in()
     {
         $this->form_validation->set_rules('challan_date', 'Challan Date', 'required');
@@ -524,7 +542,7 @@ class Products extends CI_Controller {
             $data['buying_price'] = $this->input->post('buying_price', true);
             $data['sale_price'] = $this->input->post('sale_price', true);
             $data['note'] = $this->input->post('note', true);
-            $data['entry_by'] = $this->session->userdata('user_name');
+            $data['entry_by'] = $this->session->userdata('user_id');
             $data['entry_date'] = date("Y-m-d");
             $data['status'] = $this->input->post('status', true);
             $data['payment'] = $this->input->post('payment', true);

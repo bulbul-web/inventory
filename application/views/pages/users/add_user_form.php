@@ -40,7 +40,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="user_name" value="<?php echo set_value('user_name'); ?>" class="form-control form-control-rounded">
+                      <input type="text" name="user_name" value="<?php echo set_value('user_name'); ?>" placeholder="User name" class="form-control form-control-rounded">
                       <?php echo form_error('user_name', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -48,7 +48,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Email or (Login name)</label>
                   <div class="col-sm-9">
-                      <input type="text" name="user_email" value="<?php echo set_value('user_email'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Login name" name="user_email" value="<?php echo set_value('user_email'); ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('user_email', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -56,7 +56,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Phone</label>
                   <div class="col-sm-9">
-                      <input type="text" name="user_mobile" value="<?php echo set_value('user_mobile'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" name="user_mobile" placeholder="Mobile number" value="<?php echo set_value('user_mobile'); ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('user_mobile', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -64,7 +64,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Password</label>
                   <div class="col-sm-9">
-                      <input type="text" name="user_pass" value="<?php echo set_value('user_pass'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Password" name="user_pass" value="<?php echo set_value('user_pass'); ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('user_pass', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -72,7 +72,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Confirm Password</label>
                   <div class="col-sm-9">
-                      <input type="text" name="confirm_password" value="<?php echo set_value('confirm_password'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" name="confirm_password" placeholder="Confirm password" value="<?php echo set_value('confirm_password'); ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('confirm_password', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>

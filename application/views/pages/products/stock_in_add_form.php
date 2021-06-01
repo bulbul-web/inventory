@@ -35,13 +35,13 @@
                 </font>
             </center>
             
-            <?php echo form_open_multipart('save-stock-in', 'name="save-stock-in" id="saveStockIn"');?>
+            <?php echo form_open_multipart('save-stock-in', 'name="save-stock-in" id="saveStockIn" autocomplete="off" ');?>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Challan Date</label>
-                            <input type="text" name="challan_date" id="challan_date" value=""  class="form-control form-control-rounded">
+                            <input type="text" placeholder="Challan date" name="challan_date" id="challan_date" value=""  class="form-control form-control-rounded">
                             
                             <?php echo form_error('challan_date', '<div class="error">', '</div>'); ?>
                         </div>
@@ -52,7 +52,7 @@
                         <div class="form-group row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Bill No</label>
-                            <input type="text" name="bill_no" value="<?php set_value('bill_no');?>" class="form-control form-control-rounded">
+                            <input type="text" placeholder="Manual bill no" name="bill_no" value="<?php set_value('bill_no');?>" class="form-control form-control-rounded">
                             <?php echo form_error('bill_no', '<div class="error">', '</div>'); ?>
                         </div>
                       </div>
@@ -62,7 +62,7 @@
                         <div class="form-group row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Bill Date</label>
-                            <input type="text" name="bill_date" id="bill_date" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
+                            <input type="text" placeholder="Purchase date" name="bill_date" id="bill_date" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
                             <?php echo form_error('bill_date', '<div class="error">', '</div>'); ?>
                         </div>
                       </div>
@@ -114,7 +114,7 @@
                         <div class="form-group row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Quantity</label>
-                            <input type="number" step=any name="quantity_in" value="<?php echo set_value('quantity_in'); ?>" class="form-control form-control-rounded">
+                            <input type="number" placeholder="Total quantity" step=any name="quantity_in" value="<?php echo set_value('quantity_in'); ?>" id="quentity" class="form-control form-control-rounded sum">
                             <?php echo form_error('quantity_in', '<div class="error">', '</div>'); ?>
                         </div>
                       </div>
@@ -123,7 +123,7 @@
                         <div class="form-group row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Buying Price/unit</label>
-                            <input type="number" step=any name="buying_price" value="<?php echo set_value('buying_price'); ?>" class="form-control form-control-rounded">
+                            <input type="number" placeholder="Buying price per quantity" step=any name="buying_price" value="<?php echo set_value('buying_price'); ?>" id="price" class="form-control form-control-rounded sum">
                             <?php echo form_error('buying_price', '<div class="error">', '</div>'); ?>
                         </div>
                       </div>
@@ -132,25 +132,38 @@
                         <div class="form-group row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Sale Price/unit</label>
-                            <input type="number" step=any name="sale_price" value="<?php echo set_value('sale_price'); ?>" class="form-control form-control-rounded">
+                            <input type="number" placeholder="Sale price per quantity" step=any name="sale_price" value="<?php echo set_value('sale_price'); ?>" class="form-control form-control-rounded">
                             <?php echo form_error('sale_price', '<div class="error">', '</div>'); ?>
                         </div>
                       </div>
                     </div>
 
                 </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Total</label>
+                  <div class="col-sm-9">
+                      <input type="text" id='total' disabled=""  class="form-control form-control-rounded">
+                  </div>
+                </div>
                 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Payment</label>
                   <div class="col-sm-9">
-                      <input type="number" step=any name="payment" value="<?php echo set_value('payment'); ?>"  class="form-control form-control-rounded">
+                      <input type="number" placeholder="Payment" step=any name="payment" value="<?php echo set_value('payment'); ?>" id="payment" class="form-control form-control-rounded payment">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Due</label>
+                  <div class="col-sm-9">
+                      <input type="text" id='duetotal' disabled=""  class="form-control form-control-rounded">
                   </div>
                 </div>
             
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Note</label>
                   <div class="col-sm-9">
-                      <input type="text" name="note" value="<?php echo set_value('note'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Note" name="note" value="<?php echo set_value('note'); ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
                 
@@ -178,5 +191,45 @@
     $(document).ready(function(){
         $( "#challan_date" ).datepicker({dateFormat: "yy-mm-dd"});
         $( "#bill_date" ).datepicker({dateFormat: "yy-mm-dd"});
+
+        $(".sum").on("keydown keyup", function() {
+            calculatePrice();
+        });
+        $(".payment").on("keydown keyup", function() {
+            paymentcalculation();
+        });
     });
+
+    function calculatePrice(){
+        var totalPrice;
+        var quentity = $("#quentity").val();
+        var price = $("#price").val();
+        //iterate through each textboxes and add the values
+        $(".sum").each(function() {
+            //add only if the value is number
+            if (!isNaN(this.value) && this.value.length != 0) {
+                totalPrice = quentity * price;
+                $(this).css("background-color", "#fff");
+            }else if (this.value.length != 0){
+                $(this).css("background-color", "red");
+            }
+        });
+        $("#total").val(totalPrice.toFixed(2));
+    }
+
+    function paymentcalculation() {
+        var duetotal;
+        var total = $("#total").val();
+        var payment = $("#payment").val();
+        $(".payment").each(function() {
+            if(!isNaN(total) && total != 0){
+                duetotal = total - payment;
+                $(this).css("background-color", "#fff");
+            }else if(total != 0){
+                $(this).css("background-color", "red");
+            }
+            $("#duetotal").val(duetotal.toFixed(2));
+        });
+    }
+
 </script>

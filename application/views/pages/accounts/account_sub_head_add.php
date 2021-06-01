@@ -57,7 +57,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Enter Sub Head Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="SubHeadDescription" value="<?php echo set_value('SubHeadDescription'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Enter sub head name" name="SubHeadDescription" value="<?php echo set_value('SubHeadDescription'); ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('SubHeadDescription', '<div class="error">', '</div>')?>
                   </div>
                 </div>  
@@ -65,7 +65,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Note</label>
                   <div class="col-sm-9">
-                      <input type="number" name="note" value="0" value="<?php echo set_value('note'); ?>"  class="form-control form-control-rounded" required="">
+                      <input type="number" placeholder="Note" name="note" value="0" value="<?php echo set_value('note'); ?>"  class="form-control form-control-rounded" required="">
                   </div>
                 </div>              
                 

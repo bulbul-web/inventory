@@ -36,7 +36,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Name</label>
                           <div class="col-sm-9">
-                              <input type="text" value="<?php echo $companyInfo->name;?>" name="name" class="form-control form-control-rounded">
+                              <input type="text" placeholder="Company name" value="<?php echo $companyInfo->name;?>" name="name" class="form-control form-control-rounded">
                               <input type="hidden" value="<?php echo $companyInfo->id;?>" name="id" class="form-control form-control-rounded">
                               <?php echo form_error('name', '<div class="error">', '</div>'); ?>
                           </div>
@@ -44,19 +44,19 @@
                         <div class="form-group row">
                           <label  class="col-sm-3 col-form-label">Email</label>
                           <div class="col-sm-9">
-                              <input type="text" value="<?php echo $companyInfo->email;?>" name="email"  class="form-control form-control-rounded">
+                              <input type="text" placeholder="Company Email" value="<?php echo $companyInfo->email;?>" name="email"  class="form-control form-control-rounded">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label  class="col-sm-3 col-form-label">Phone</label>
                           <div class="col-sm-9">
-                              <input type="text" value="<?php echo $companyInfo->mobile;?>" name="mobile"  class="form-control form-control-rounded">
+                              <input type="text" placeholder="Company phone number" value="<?php echo $companyInfo->mobile;?>" name="mobile"  class="form-control form-control-rounded">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label  class="col-sm-3 col-form-label">Address</label>
                           <div class="col-sm-9">
-                              <input type="text" value="<?php echo $companyInfo->address;?>" name="address"  class="form-control form-control-rounded">
+                              <input type="text" placeholder="Company address" value="<?php echo $companyInfo->address;?>" name="address"  class="form-control form-control-rounded">
                           </div>
                         </div>
                         <div class="form-group row">

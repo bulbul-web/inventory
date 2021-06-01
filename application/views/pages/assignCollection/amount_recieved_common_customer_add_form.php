@@ -65,7 +65,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-form-label">Date</label>
                         <div class="col-sm-12">
-                            <input id="trnsDate" type="text" name="trns_date" value="<?php echo date('Y-m-d'); ?>" class="form-control" required/>
+                            <input id="trnsDate" type="text" placeholder="Date" name="trns_date" value="<?php echo date('Y-m-d'); ?>" class="form-control" required/>
                         </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-form-label">Note</label>
                         <div class="col-sm-12">
-                            <input type="text" name="note" value="" class="form-control"/>
+                            <input type="text" placeholder="Note" name="note" value="" class="form-control"/>
                         </div>
                     </div>
                 </div>

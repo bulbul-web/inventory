@@ -57,14 +57,14 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Type Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="product_type_name" value="<?php echo set_value('product_type_name'); ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Product type name" name="product_type_name" value="<?php echo set_value('product_type_name'); ?>" class="form-control form-control-rounded">
                       <?php echo form_error('product_type_name', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Products Description</label>
                   <div class="col-sm-9">
-                      <input type="text" name="product_type_descrip" value="<?php echo set_value('product_type_descrip'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Product description" name="product_type_descrip" value="<?php echo set_value('product_type_descrip'); ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
                 

@@ -156,7 +156,7 @@
                         <div class="media">
                             <div class="media-body text-left">
                                 <!-- <h4 class="text-white">ddd</h4> -->
-                                <span class="text-white">Datewise Payment History</span>
+                                <span class="text-white">Datewise Supplier Payment History</span>
                             </div>
                             <!-- <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
                                 

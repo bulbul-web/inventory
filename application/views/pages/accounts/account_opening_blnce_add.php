@@ -38,7 +38,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Select Date</label>
                   <div class="col-sm-5">
-                        <input type="text" name="opening_balance_date" id="datepicker" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
+                        <input type="text" placeholder="Opening balance Date" name="opening_balance_date" id="datepicker" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
                         <?php echo form_error('opening_balance_date', '<div class="error">', '</div>'); ?>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                 <div class="form-group row" id="crRow">
                   <label class="col-sm-3 col-form-label">Amount</label>
                   <div class="col-sm-5">
-                        <input type="number" step=any name="CR"  class="form-control">
+                        <input type="number" step=any name="CR" placeholder="CR"  class="form-control">
                         <?php echo form_error('CR', '<div class="error">', '</div>');?>
                   </div>
                 </div>
@@ -85,7 +85,7 @@
                 <div class="form-group row" id="drRow">
                   <label class="col-sm-3 col-form-label">Amount</label>
                   <div class="col-sm-5">
-                        <input type="number" step=any name="DR"  class="form-control">
+                        <input type="number" step=any name="DR" placeholder="DR" class="form-control">
                         <?php echo form_error('DR', '<div class="error">', '</div>');?>
                   </div>
                 </div>

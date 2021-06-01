@@ -44,7 +44,7 @@
                     <div class="form-group row">
                     <div class="col-sm-12">
                         <label class="col-form-label">Transaction Date</label>
-                        <input type="text" name="TrnDate" id="datepicker" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
+                        <input type="text" name="TrnDate" id="datepicker" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded" placeholder="Transaction date">
                         <?php echo form_error('TrnDate', '<div class="error">', '</div>'); ?>
                         
                     </div>
@@ -149,7 +149,7 @@
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <label class="col-form-label">Note</label>
-                                            <input type="text" name="note[]" class="form-control" required="">
+                                            <input type="text" placeholder="Note" name="note[]" class="form-control" required="">
                                         </div>
                                     </div>
                                 </td>
@@ -252,7 +252,7 @@
                         <div class="form-group row">\n\
                             <div class="col-sm-12">\n\
                                 <label class="col-form-label">Note</label>\n\
-                                <input type="text" name="note[]" class="form-control" required="">\n\
+                                <input type="text" name="note[]" class="form-control" placeholder="Note" required="">\n\
                             </div>\n\
                         </div>\n\
                         </td>';

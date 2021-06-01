@@ -40,7 +40,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="name" value="<?php echo $singleManager->name; ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Manager name" name="name" value="<?php echo $singleManager->name; ?>" class="form-control form-control-rounded">
                       <input type="hidden" name="id" value="<?php echo $singleManager->id; ?>" class="form-control form-control-rounded">
                       <input type="hidden" name="user_id" value="<?php echo $singleManager->user_id; ?>" class="form-control form-control-rounded">
                       <?php echo form_error('name', '<div class="error">', '</div>'); ?>
@@ -50,21 +50,21 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Email</label>
                   <div class="col-sm-9">
-                      <input type="email" name="email" value="<?php echo $singleManager->email; ?>"  class="form-control form-control-rounded">
+                      <input type="email" placeholder="Manager email" name="email" value="<?php echo $singleManager->email; ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Phone</label>
                   <div class="col-sm-9">
-                      <input type="text" name="phone" value="<?php echo $singleManager->phone; ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Phone" name="phone" value="<?php echo $singleManager->phone; ?>"  class="form-control form-control-rounded">
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Login name</label>
                   <div class="col-sm-9">
-                      <input type="text" name="user_email" value="<?php echo $singleManager->user_email; ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Login name" name="user_email" value="<?php echo $singleManager->user_email; ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('user_email', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>

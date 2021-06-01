@@ -720,4 +720,13 @@ class Query_model extends CI_Model {
         return $result;
     }
 
+    public function purchase_info_supplier($bill_no){
+        $result = $this->db->query("SELECT si.*, s.supplier_name, s.supplier_address, s.supplier_mobile, s.supplier_email FROM tbl_stock_in si, tbl_supplier s WHERE s.supplier_id = si.supplier_id and si.bill_no = '$bill_no'")->row();
+        return $result;
+    }
+    public function purchase_info_product($bill_no){
+        $result = $this->db->query("SELECT si.*, pi.product_name, pi.product_segment, pi.pack_size, ps.pack_size as pack_size_name FROM tbl_stock_in si, tbl_product_info pi, tbl_pack_size ps WHERE si.product_id = pi.product_id AND pi.pack_size = ps.id AND si.bill_no = '$bill_no'")->result();
+        return $result;
+    }
+
 }

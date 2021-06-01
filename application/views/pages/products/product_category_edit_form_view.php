@@ -39,7 +39,7 @@
                   <label class="col-sm-3 col-form-label">Product category Name</label>
                   <div class="col-sm-9">
                       <input type="hidden" name="id" value="<?php echo $value->id; ?>" class="form-control form-control-rounded">
-                      <input type="text" name="name" value="<?php echo $value->name; ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Product category name" name="name" value="<?php echo $value->name; ?>" class="form-control form-control-rounded">
                       <?php echo form_error('name', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>                

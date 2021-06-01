@@ -66,7 +66,7 @@
                             if($value->product_name == ""){
                                 echo '-';
                             }else{
-                                echo '<a href="'.base_url().'stock-details/'.$value->id.'">'.$value->product_name.'</a>';
+                                echo '<a href="'.base_url().'purchase-report/'.$value->bill_no.'">'.$value->product_name.'</a>';
                             }
                         ?>
                     </td>

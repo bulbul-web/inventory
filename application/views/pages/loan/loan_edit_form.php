@@ -38,26 +38,26 @@
                     <label class="col-sm-3 col-form-label">Loan From<span style="color: #fd3550;">*</span></label>
                   <div class="col-sm-9">
                       <input type="hidden" name="id" value="<?php echo $loanSingle->id; ?>" class="form-control form-control-rounded">
-                      <input type="text" name="loan_from" value="<?php echo $loanSingle->loan_from; ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Loan from (bank/person)" name="loan_from" value="<?php echo $loanSingle->loan_from; ?>" class="form-control form-control-rounded">
                       <?php echo form_error('loan_from', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Mobile</label>
                   <div class="col-sm-9">
-                      <input type="text" name="mobile" value="<?php echo $loanSingle->mobile; ?>" class="form-control form-control-rounded">
+                      <input type="text" placeholder="Mobile" name="mobile" value="<?php echo $loanSingle->mobile; ?>" class="form-control form-control-rounded">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Email</label>
                   <div class="col-sm-9">
-                      <input type="text" name="email" value="<?php echo $loanSingle->email; ?>" class="form-control form-control-rounded">
+                      <input type="text" name="email" placeholder="Email" value="<?php echo $loanSingle->email; ?>" class="form-control form-control-rounded">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Address<span style="color: #fd3550;">*</span></label>
                   <div class="col-sm-9">
-                      <input type="text" name="address" value="<?php echo $loanSingle->address; ?>"  class="form-control form-control-rounded">
+                      <input type="text" name="address" placeholder="Address" value="<?php echo $loanSingle->address; ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('address', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -71,7 +71,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Loan Amount<span style="color: #fd3550;">*</span></label>
                   <div class="col-sm-9">
-                      <input type="number" step=any name="loan_amount" value="<?php echo $loanSingle->loan_amount; ?>"  class="form-control form-control-rounded">
+                      <input type="number" placeholder="Loan amount" step=any name="loan_amount" value="<?php echo $loanSingle->loan_amount; ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('loan_amount', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -90,7 +90,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">End Date<span style="color: #fd3550;">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="end_date" id="end_date" value="<?php echo $loanSingle->end_date; ?>" class="form-control form-control-rounded">
+                                <input type="text" placeholder="End date" name="end_date" id="end_date" value="<?php echo $loanSingle->end_date; ?>" class="form-control form-control-rounded">
                                 <?php echo form_error('end_date', '<div class="error">', '</div>'); ?>
                             </div>
                         </div>

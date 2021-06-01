@@ -40,7 +40,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Transaction Date</label>
                   <div class="col-sm-5">
-                        <input type="text" name="TrnDate" id="datepicker" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
+                        <input type="text" placeholder="Transaction date" name="TrnDate" id="datepicker" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-rounded">
                         <?php echo form_error('TrnDate', '<div class="error">', '</div>'); ?>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                 <div class="form-group row" id="crRow">
                   <label class="col-sm-3 col-form-label">Amount</label>
                   <div class="col-sm-5">
-                        <input type="number" step=any name="CR"  class="form-control" value="<?php echo set_value('CR'); ?>">
+                        <input type="number" placeholder="CR" step=any name="CR"  class="form-control" value="<?php echo set_value('CR'); ?>">
                         <?php echo form_error('CR', '<div class="error">', '</div>');?>
                   </div>
                 </div>
@@ -109,7 +109,7 @@
                 <div class="form-group row" id="drRow">
                   <label class="col-sm-3 col-form-label">Amount</label>
                   <div class="col-sm-5">
-                        <input type="number" step=any name="DR"  class="form-control" value="<?php echo set_value('DR'); ?>">
+                        <input type="number" step=any name="DR" placeholder="DR"  class="form-control" value="<?php echo set_value('DR'); ?>">
                         <?php echo form_error('DR', '<div class="error">', '</div>');?>
                   </div>
                 </div>
@@ -117,7 +117,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Note</label>
                   <div class="col-sm-9">
-                        <input type="text" name="Note"  class="form-control" value="<?php echo set_value('Note'); ?>">
+                        <input type="text" name="Note" placeholder="Note"  class="form-control" value="<?php echo set_value('Note'); ?>">
                         <?php echo form_error('Note', '<div class="error">', '</div>');?>
                   </div>
                 </div>
