@@ -35,7 +35,21 @@
             
             <?php echo form_open_multipart('update-products', 'name="update-products" id="updateProducts"');?>
 
-                
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Product Category</label>
+                  <div class="col-sm-9">
+                      <select name="product_category_id" id="productCatId" class="form-control" onChange="getProductTypeByProdCatId(this.value)">
+                            <option value="">Select Category</option>
+                            <?php
+                              $AllproductCategory = $this->db->query("SELECT * FROM tbl_product_category WHERE status = 1")->result();
+                              foreach($AllproductCategory as $productCategory){ 
+                            ?>
+                            <option value="<?php echo $productCategory->id;?>"><?php echo $productCategory->name;?></option>
+                            <?php } ?>
+                      </select>
+                      <?php echo form_error('product_category_id', '<div class="error">', '</div>'); ?>
+                  </div>
+                </div>
             
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Type</label>
@@ -110,7 +124,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Packet</label>
                   <div class="col-sm-9">
-                      <select type="text" name="packet"  class="form-control" required="required">
+                      <select type="text" name="packet"  class="form-control">
                           <option value="" <?php if($singleProduct->packet == ''){?> selected="selected" <?php } ?>>--Select Packet---</option>
                           <option value="not" <?php if($singleProduct->packet == 'not'){?> selected="selected" <?php } ?>>No need</option>
                           <option value="Bosta" <?php if($singleProduct->packet == 'Bosta'){?> selected="selected" <?php } ?>>Bosta</option>
@@ -173,4 +187,17 @@
     document.forms['update-products'].elements['productTypeId'].value=<?php echo $singleProduct->product_type_id; ?>;
     document.forms['update-products'].elements['productStatus'].value=<?php echo $singleProduct->product_status; ?>;
     document.forms['update-products'].elements['packSize'].value=<?php echo $singleProduct->pack_size; ?>;
+</script>
+
+<script type="text/javascript">
+  function getProductTypeByProdCatId(catagory_id){
+    $.ajax({
+      type: 'post',
+      data: {catagory_id: catagory_id},
+      url: '<?php echo base_url()?>Products/getProductTypeByProdCatId',
+      success: function (response) {
+              document.getElementById("productTypeId").innerHTML = response;
+          }
+    });
+  }
 </script>

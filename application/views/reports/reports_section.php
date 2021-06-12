@@ -66,7 +66,7 @@
     </div>
 </div>
 
-<?php } elseif ($user_role == 1) { ?>
+<?php } elseif ($user_role == 1 || $user_role == 4) { ?>
 
 <div class="report-section">
     <div class="row">

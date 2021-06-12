@@ -586,6 +586,7 @@ class Products extends CI_Controller {
                         'is_unique'     => 'This %s already exists.'
                 )
         );     
+        $this->form_validation->set_rules('product_category_id', 'Product Category', 'required');
         $this->form_validation->set_rules('product_type_id', 'Product Type', 'required');
         //$this->form_validation->set_rules('product_name', 'Product Name', 'required');
         $this->form_validation->set_rules('pack_size', 'Pack Size', 'required');
@@ -596,6 +597,7 @@ class Products extends CI_Controller {
         if($this->form_validation->run()){
 
 
+            $data['product_category_id'] = $this->input->post('product_category_id', true);
             $data['product_type_id'] = $this->input->post('product_type_id', true);
             $data['product_name'] = $this->input->post('product_name', true);
             $data['product_name_bangla'] = $this->input->post('product_name_bangla', true);
@@ -685,6 +687,7 @@ class Products extends CI_Controller {
     
     public function update_products()
     {
+        $this->form_validation->set_rules('product_category_id', 'Product Category', 'required');
         $this->form_validation->set_rules('product_type_id', 'Product Type', 'required');
         $this->form_validation->set_rules('product_name', 'Product Name', 'required');
         $this->form_validation->set_rules('product_code', 'Product Code', 'required');
@@ -698,6 +701,7 @@ class Products extends CI_Controller {
                 
                 $img = $this->input->post('old_image', true);
                 $data['product_id'] = $this->input->post('product_id', true);
+                $data['product_category_id'] = $this->input->post('product_category_id', true);
                 $data['product_type_id'] = $this->input->post('product_type_id', true);
                 $data['product_name'] = $this->input->post('product_name', true);
                 $data['product_name_bangla'] = $this->input->post('product_name_bangla', true);
@@ -744,6 +748,7 @@ class Products extends CI_Controller {
                             
                             $img = '/assets/images/products/' . $result['upload_data']['file_name'];
                             $data['product_id'] = $this->input->post('product_id', true);
+                            $data['product_category_id'] = $this->input->post('product_category_id', true);
                             $data['product_type_id'] = $this->input->post('product_type_id', true);
                             $data['product_name'] = $this->input->post('product_name', true);
                             $data['product_name_bangla'] = $this->input->post('product_name_bangla', true);
@@ -845,6 +850,15 @@ class Products extends CI_Controller {
         $sdata['message'] = 'Successfully deleted';
         $this->session->set_userdata($sdata);
         redirect('products');
+    }
+
+    public function getProductTypeByProdCatId(){
+        $catagory_id = $this->input->post('catagory_id');
+        $productCat = $this->db->query("SELECT * FROM tbl_product_type WHERE product_category_id = $catagory_id AND product_type_status = 1 ORDER BY product_type_name ASC")->result();
+        echo "<option value=''>" . 'Select Product Type' . "</option>";
+        foreach ($productCat as $value) :
+            echo "<option value='$value->product_type_id'>" . ucfirst($value->product_type_name) . "</option>";
+        endforeach;
     }
     
     

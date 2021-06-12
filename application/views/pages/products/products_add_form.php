@@ -36,15 +36,28 @@
             </center>
             
             <?php echo form_open_multipart('save-products', 'name="save-products" id="saveProducts"');?>
+
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Product Category</label>
+                  <div class="col-sm-9">
+                      <select name="product_category_id" id="productCatId" class="form-control" onChange="getProductTypeByProdCatId(this.value)">
+                            <option value="">Select Category</option>
+                            <?php
+                              $AllproductCategory = $this->db->query("SELECT * FROM tbl_product_category WHERE status = 1")->result();
+                              foreach($AllproductCategory as $productCategory){ 
+                            ?>
+                            <option value="<?php echo $productCategory->id;?>"><?php echo $productCategory->name;?></option>
+                            <?php } ?>
+                      </select>
+                      <?php echo form_error('product_category_id', '<div class="error">', '</div>'); ?>
+                  </div>
+                </div>
                 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Product Type</label>
                   <div class="col-sm-9">
                       <select name="product_type_id" id="productTypeId" class="form-control">
                             <option value="">Select Product Type</option>
-                            <?php foreach($AllproductType as $productType){ ?>
-                            <option value="<?php echo $productType->product_type_id;?>"><?php echo $productType->product_type_name;?></option>
-                            <?php } ?>
                       </select>
                       <?php echo form_error('product_type_id', '<div class="error">', '</div>'); ?>
                   </div>
@@ -82,7 +95,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Measurement Scale</label>
                   <div class="col-sm-9">
-                      <select name="pack_size" id="productTypeId" class="form-control">
+                      <select name="pack_size" class="form-control">
                             <option value="">Select Measurement Scale</option>
                             <?php
                                 $AllPackSize = $this->db->query("select * from tbl_pack_size")->result();
@@ -159,3 +172,16 @@
      </div>
    </div>
 </div>
+
+<script type="text/javascript">
+  function getProductTypeByProdCatId(catagory_id){
+    $.ajax({
+      type: 'post',
+      data: {catagory_id: catagory_id},
+      url: '<?php echo base_url()?>Products/getProductTypeByProdCatId',
+      success: function (response) {
+              document.getElementById("productTypeId").innerHTML = response;
+          }
+    });
+  }
+</script>
