@@ -92,59 +92,60 @@
                     ?>
                 </center>
                 <br>
-                
-                <table width="100%" border="1" style="text-align: center;">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Product Name</th>
-                            <th>Buy price</th>
-                            <th>Sale price</th>
-                            <th>Balance</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            
-                            $dateWiseBuySellReport = $this->db->query("SELECT e.product_name, e.invoice_date, e.product_id, e.totalSalePrice, e.TotalByingPrice, e.balance, f.pack_size FROM  
-                            (SELECT d.product_name,d.pack_size, c.invoice_date, c.product_id, c.totalSalePrice, c.TotalByingPrice, c.totalSalePrice - c.TotalByingPrice as balance from
-                            (
-                            SELECT a.invoice_date, a.product_id, a.totalSalePrice, b.TotalByingPrice FROM
-                                (SELECT invoice_date, product_id, sum(quantity * sale_price) as totalSalePrice
-                                FROM tbl_invoice
-                                WHERE invoice_date BETWEEN '$from_date' AND '$to_date'
-                                GROUP BY product_id) a
-                        
-                                LEFT JOIN 
-                        
-                                (SELECT product_id, sum(quantity_in * buying_price) as TotalByingPrice
-                                FROM tbl_stock_in
-                                GROUP BY product_id) b
-                        
-                                on a.product_id = b.product_id
-                            ) c
-                        
-                            LEFT JOIN
-                                (SELECT pack_size, product_id, product_name FROM tbl_product_info) d
-                            on d.product_id = c.product_id) e
-                            
-                            LEFT JOIN
-                                (SELECT id, pack_size FROM tbl_pack_size) f
-                            ON f.id = e.pack_size")->result();
-                            $sl = 0;
-                            foreach ($dateWiseBuySellReport as $value):
-                                $sl++
-                        ?>
-                        <tr>
-                            <td><?php echo $sl;?></td>
-                            <td><?php echo $value->product_name;?></td>
-                            <td><?php echo round($value->TotalByingPrice, 2);?></td>
-                            <td><?php echo $value->totalSalePrice;?></td>
-                            <td><?php echo $value->balance;?></td>
-                        </tr>
-                        <?php endforeach;?>
-                    </tbody>
-                </table>
+                <div style="overflow-x:auto; width: 100%;">
+					<table width="100%" border="1" style="text-align: center;">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Product Name</th>
+								<th>Buy price</th>
+								<th>Sale price</th>
+								<th>Balance</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+								
+								$dateWiseBuySellReport = $this->db->query("SELECT e.product_name, e.invoice_date, e.product_id, e.totalSalePrice, e.TotalByingPrice, e.balance, f.pack_size FROM  
+								(SELECT d.product_name,d.pack_size, c.invoice_date, c.product_id, c.totalSalePrice, c.TotalByingPrice, c.totalSalePrice - c.TotalByingPrice as balance from
+								(
+								SELECT a.invoice_date, a.product_id, a.totalSalePrice, b.TotalByingPrice FROM
+									(SELECT invoice_date, product_id, sum(quantity * sale_price) as totalSalePrice
+									FROM tbl_invoice
+									WHERE invoice_date BETWEEN '$from_date' AND '$to_date'
+									GROUP BY product_id) a
+							
+									LEFT JOIN 
+							
+									(SELECT product_id, sum(quantity_in * buying_price) as TotalByingPrice
+									FROM tbl_stock_in
+									GROUP BY product_id) b
+							
+									on a.product_id = b.product_id
+								) c
+							
+								LEFT JOIN
+									(SELECT pack_size, product_id, product_name FROM tbl_product_info) d
+								on d.product_id = c.product_id) e
+								
+								LEFT JOIN
+									(SELECT id, pack_size FROM tbl_pack_size) f
+								ON f.id = e.pack_size")->result();
+								$sl = 0;
+								foreach ($dateWiseBuySellReport as $value):
+									$sl++
+							?>
+							<tr>
+								<td><?php echo $sl;?></td>
+								<td><?php echo $value->product_name;?></td>
+								<td><?php echo round($value->TotalByingPrice, 2);?></td>
+								<td><?php echo $value->totalSalePrice;?></td>
+								<td><?php echo $value->balance;?></td>
+							</tr>
+							<?php endforeach;?>
+						</tbody>
+					</table>
+				</div>
                 <?php endif;?>
             </div>
         </div>

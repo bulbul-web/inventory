@@ -41,6 +41,7 @@
             <tr>
                 <th>SL.</th>
                 <th>Name</th>
+                <th>Login Name</th>
                 <th>User Role</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -66,12 +67,23 @@
                             }
                         ?>
                     </td>
+
+                    <td>
+                        <?php
+                            if($value->user_email == ""){
+                                echo '-';
+                            }else{
+                                echo $value->user_email;
+                            }
+                        ?>
+                    </td>
+
                     <td>
                         <?php
                             if($value->user_role == 1){
                                 echo 'Admin';
                             }elseif($value->user_role == 2){
-                                echo 'General Manager';
+                                echo 'Regional Manager';
                             }elseif($value->user_role == 3){
                                 echo 'Sales Man';
                             }elseif($value->user_role == 4){
@@ -118,6 +130,7 @@
             <tr>
                 <th>SL.</th>
                 <th>Name</th>
+                <th>Login Name</th>
                 <th>User Role</th>
                 <th>Status</th>
                 <th>Action</th>

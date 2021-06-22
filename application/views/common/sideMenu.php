@@ -299,7 +299,7 @@
 
  </li>
 
- <?php } elseif($userInfo->user_role == 3 || $userInfo->user_role == 4){ ?>
+ <?php } elseif($userInfo->user_role == 3 || $userInfo->user_role == 4 || $userInfo->user_role == 2){ ?>
 
   <li>
    <a href="<?php echo base_url();?>" class="waves-effect">

@@ -152,7 +152,7 @@ class Users_model extends CI_Model {
     }
     
     public function product_out_by_customer($customer_id, $from_date, $to_date){
-        $result = $this->db->query("SELECT i.*, c.customer_name, pi.product_name, sum(i.quantity) as totalQuantity FROM tbl_invoice i, tbl_customer c, tbl_product_info pi WHERE i.customer_id = '$customer_id' AND c.customer_id = i.customer_id AND pi.product_id = i.product_id AND i.invoice_date BETWEEN '$from_date' AND '$to_date' AND NOT (i.delete_status <=> 'deleted') GROUP BY i.product_id")->result();
+        $result = $this->db->query("SELECT i.*, c.customer_name, pi.product_name, sum(i.quantity) as totalQuantity, pi.product_id, pi.pack_size, ps.pack_size FROM tbl_invoice i, tbl_customer c, tbl_product_info pi, tbl_pack_size ps WHERE i.customer_id = '$customer_id' AND c.customer_id = i.customer_id AND ps.id = pi.pack_size AND pi.product_id = i.product_id AND i.invoice_date BETWEEN '$from_date' AND '$to_date' AND NOT (i.delete_status <=> 'deleted') GROUP BY i.product_id")->result();
         return $result;
     } 
     

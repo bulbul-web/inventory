@@ -83,52 +83,53 @@
                     ?>
                 </center>
                 <br>
-                
-                <table width="100%" border="1" style="text-align: center;">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Bill Date</th>
-                            <th>Bill No</th>
-                            <th>Supplier Name</th>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Buy price</th>
-                            <th>Sale price</th>
-                            <th>Amount (Buy)</th>
-                            <th>Amount (Sale)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            $sl=0;
-                            $netTotalBuy = 0;
-                            $totalSalePrice = 0;
-                            foreach ($DatewiseBuyProduct as $value):
-                                $netTotalBuy += $value->totalBuyingPrice;
-                                $totalSalePrice = $totalSalePrice + ($value->sale_price * $value->quantity_in);
-                                $sl++
-                        ?>
-                        <tr>
-                            <td><?php echo $sl;?></td>
-                            <td><?php echo $value->bill_date;?></td>
-                            <td><?php echo $value->bill_no;?></td>
-                            <td><?php echo $value->supplier_name;?></td>
-                            <td><?php echo $value->product_name;?></td>
-                            <td><?php echo $value->quantity_in.' '.$value->pack_size;?></td>
-                            <td><?php echo $value->buying_price;?></td>
-                            <td><?php echo $value->sale_price;?></td>
-                            <td><?php echo round($value->totalBuyingPrice, 2);?></td>
-                            <td><?php echo $value->sale_price * $value->quantity_in;?></td>
-                        </tr>
-                        <?php endforeach;?>
-                        <tr>
-                            <td colspan="8" style="text-align: right"><b>Total:</b></td>
-                            <td><?php echo $netTotalBuy;?></td>
-                            <td><?php echo $totalSalePrice;?></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="overflow-x:auto; width: 100%;">
+					<table width="100%" border="1" style="text-align: center;">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Bill Date</th>
+								<th>Bill No</th>
+								<th>Supplier Name</th>
+								<th>Product Name</th>
+								<th>Quantity</th>
+								<th>Buy price</th>
+								<th>Sale price</th>
+								<th>Amount (Buy)</th>
+								<th>Amount (Sale)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+								$sl=0;
+								$netTotalBuy = 0;
+								$totalSalePrice = 0;
+								foreach ($DatewiseBuyProduct as $value):
+									$netTotalBuy += $value->totalBuyingPrice;
+									$totalSalePrice = $totalSalePrice + ($value->sale_price * $value->quantity_in);
+									$sl++
+							?>
+							<tr>
+								<td><?php echo $sl;?></td>
+								<td><?php echo $value->bill_date;?></td>
+								<td><?php echo $value->bill_no;?></td>
+								<td><?php echo $value->supplier_name;?></td>
+								<td><?php echo $value->product_name;?></td>
+								<td><?php echo $value->quantity_in.' '.$value->pack_size;?></td>
+								<td><?php echo $value->buying_price;?></td>
+								<td><?php echo $value->sale_price;?></td>
+								<td><?php echo round($value->totalBuyingPrice, 2);?></td>
+								<td><?php echo $value->sale_price * $value->quantity_in;?></td>
+							</tr>
+							<?php endforeach;?>
+							<tr>
+								<td colspan="8" style="text-align: right"><b>Total:</b></td>
+								<td><?php echo $netTotalBuy;?></td>
+								<td><?php echo $totalSalePrice;?></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
                 <?php endif;?>
             </div>
         </div>

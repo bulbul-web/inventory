@@ -36,40 +36,44 @@
         <div id="print_content">
         <div class="row">
             
-                <table width="100%" border="1" style="text-align: center;">
-                    <thead>
-                        <tr>
-                            <th>Catagory Name</th>
-                            <th>Subcategory Name</th>
-                            <th>Salesman name</th>
-                            <th>Customer Name</th>
-                            <th>Phone</th>
-                            <th>Address</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            $i = 0;
-                            foreach($customerReportAll as $value):
-                                
-                                $i++;
-                        ?>
+                <div style="overflow-x: auto;">
+                    <table width="100%" border="1" style="text-align: center;">
+                        <thead>
                             <tr>
-                                
-                                <td><?php echo $value->customerCategory;?></td>
-                                <td><?php echo $value->customerSubcategory;?></td>
-                                <td><?= $value->salesman ;?></td>
-                                <td><?= $value->customer_name ;?></td>
-                                <td><?= $value->customer_mobile ;?></td>
-                                <td><?= $value->customer_address ;?></td>
-                                <td><?= $value->customer_email ;?></td>
+                                <th>SL.</th>
+                                <th>Catagory Name</th>
+                                <th>Subcategory Name</th>
+                                <th>Salesman name</th>
+                                <th>Customer Name</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Email</th>
                             </tr>
-                        <?php endforeach;?>
-                        
-                        
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $i = 0;
+                                foreach($customerReportAll as $value):
+                                    
+                                    $i++;
+                            ?>
+                                <tr>
+                                    
+                                    <td><?php echo $i;?></td>
+                                    <td><?php echo $value->customerCategory;?></td>
+                                    <td><?php echo $value->customerSubcategory;?></td>
+                                    <td><?= $value->salesman ;?></td>
+                                    <td><?= $value->customer_name ;?></td>
+                                    <td><?= $value->customer_mobile ;?></td>
+                                    <td><?= $value->customer_address ;?></td>
+                                    <td><?= $value->customer_email ;?></td>
+                                </tr>
+                            <?php endforeach;?>
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         </div>

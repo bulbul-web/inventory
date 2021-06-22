@@ -98,44 +98,46 @@
                 <br>
                                     
                 </div>
-                <table width="100%" border="1" style="text-align: center;">
-                    <thead>
-                        <tr>
-                            <th>Stock In</th>
-                            <th>Stock Out</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        <tr>
-                            
-                            <td><?php echo $stock_in_result->total_quantity;?></td>
-                            <td><?php echo $stock_out_result->stock_out;?></td>
-                            
-                        </tr>
-                        <tr>
-                            <td><?= 'Total: '. round($stock_in_result->totalPrice, 2) . ' tk';?></td>
-                            <td><?= 'Total: '. round($stock_out_result->quantityOutPrice, 2) . ' tk';?></td>
-                        </tr>
-                        
-                        
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="2" style="text-align: center; font-weight: bold;">
-                            
-                            <?php
-                                $balance = $stock_out_result->quantityOutPrice - $stock_in_result->totalPrice;
-                                if($balance > 0){
-                                    echo 'Profit: '. round($balance, 2);
-                                }else {
-                                    echo 'Loss: '. round($balance, 2);
-                                }
-                            ?>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
+				<div style="overflow-x:auto; width: 100%;">
+					<table width="100%" border="1" style="text-align: center;">
+						<thead>
+							<tr>
+								<th>Stock In</th>
+								<th>Stock Out</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+							<tr>
+								
+								<td><?php echo $stock_in_result->total_quantity;?></td>
+								<td><?php echo $stock_out_result->stock_out;?></td>
+								
+							</tr>
+							<tr>
+								<td><?= 'Total: '. round($stock_in_result->totalPrice, 2) . ' tk';?></td>
+								<td><?= 'Total: '. round($stock_out_result->quantityOutPrice, 2) . ' tk';?></td>
+							</tr>
+							
+							
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="2" style="text-align: center; font-weight: bold;">
+								
+								<?php
+									$balance = $stock_out_result->quantityOutPrice - $stock_in_result->totalPrice;
+									if($balance > 0){
+										echo 'Profit: '. round($balance, 2);
+									}else {
+										echo 'Loss: '. round($balance, 2);
+									}
+								?>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
 
 
                 

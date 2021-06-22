@@ -143,7 +143,7 @@
                 
                 <div class="row">
                     <div class="col-md-12">
-                        <div style="overflow-x:auto;">
+                        <div style="overflow-x:auto; width: 100%;">
                             <table id="autocomplete_table" class="table table-bordered table-sm table-hover tbl-own" style="width: 100%;">
                                 <thead>
                                     <tr>

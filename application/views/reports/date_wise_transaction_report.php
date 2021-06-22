@@ -103,74 +103,75 @@
                     ?>
                 </center>
                 <br>
-                
-                <table width="100%" border="1">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Transaction Date</th>
-                            <th>Voucher No</th>
-                            <th>Control Head Name</th>
-                            <th>Total CR</th>
-                            <th>Total DR</th>
-                            <th>View</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            $sl=0;
-                            $totalCR = 0;
-                            $totalDR = 0;
-                            foreach ($result as $value):
-                                $totalCR += $value->totalCR;
-                                $totalDR += $value->totalDR;
-                                $sl++
-                        ?>
-                        <tr>
-                            <td><?= $sl;?></td>
-                            <td>
-                                <?php
-                                    $date = date_create("$value->TrnDate");
-                                    echo date_format($date,"d/m/Y");
-                                ?>
-                            </td>
-                            <td>
-                                <?php echo $value->VoucherID;?>
-                            </td>
-                            <td>
-                                <?php
-                                    $voucherNo = $value->VoucherNo; 
-                                    $transactionControlHead = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID and VoucherNo = '$voucherNo' AND checkControlHead = '1' AND NOT (a.delete_status <=> 'deleted') GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")->row();
-                                    echo $transactionControlHead->TransHeadDescription;
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                    echo $value->totalCR;
-                                ?>
-                            </td>
-                            <td>
-                                
-                                <?php
-                                    echo $value->totalDR;
-                                ?>
-                            
-                            </td>
-                            <td>
-                                <?php 
-                                    echo '<a href="'.base_url().'DrCr-Voucher-Details/'.$value->VoucherNo.'" target="_BLANK">View & Print</a>';
-                                ?>
-                            </td>
-                        </tr>
-                        <?php endforeach;?>
-                        <tr>
-                            <td colspan="4" style="text-align: right;">Total:</td>
-                            <td style="text-align: center;"><b><?php echo $totalCR;?></b></td>
-                            <td style="text-align: center;"><b><?php echo $totalDR;?></b></td>
-                            <td style="text-align: center;"><b>--</b></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="overflow-x:auto; width: 100%;">
+					<table width="100%" border="1">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Transaction Date</th>
+								<th>Voucher No</th>
+								<th>Control Head Name</th>
+								<th>Total CR</th>
+								<th>Total DR</th>
+								<th>View</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+								$sl=0;
+								$totalCR = 0;
+								$totalDR = 0;
+								foreach ($result as $value):
+									$totalCR += $value->totalCR;
+									$totalDR += $value->totalDR;
+									$sl++
+							?>
+							<tr>
+								<td><?= $sl;?></td>
+								<td>
+									<?php
+										$date = date_create("$value->TrnDate");
+										echo date_format($date,"d/m/Y");
+									?>
+								</td>
+								<td>
+									<?php echo $value->VoucherID;?>
+								</td>
+								<td>
+									<?php
+										$voucherNo = $value->VoucherNo; 
+										$transactionControlHead = $this->db->query("SELECT a.*, sum(a.CR) as totalCR, sum(a.DR) as totalDR, b.TransHeadDescription FROM tbl_transactions a, tbl_transactionhead b WHERE b.TransactionHeadID = a.TrasactionHeadID and VoucherNo = '$voucherNo' AND checkControlHead = '1' AND NOT (a.delete_status <=> 'deleted') GROUP BY a.VoucherNo ORDER BY a.TransactionID DESC")->row();
+										echo $transactionControlHead->TransHeadDescription;
+									?>
+								</td>
+								<td>
+									<?php
+										echo $value->totalCR;
+									?>
+								</td>
+								<td>
+									
+									<?php
+										echo $value->totalDR;
+									?>
+								
+								</td>
+								<td>
+									<?php 
+										echo '<a href="'.base_url().'DrCr-Voucher-Details/'.$value->VoucherNo.'" target="_BLANK">View & Print</a>';
+									?>
+								</td>
+							</tr>
+							<?php endforeach;?>
+							<tr>
+								<td colspan="4" style="text-align: right;">Total:</td>
+								<td style="text-align: center;"><b><?php echo $totalCR;?></b></td>
+								<td style="text-align: center;"><b><?php echo $totalDR;?></b></td>
+								<td style="text-align: center;"><b>--</b></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
                 <?php endif;?>
                 
             </div>

@@ -716,7 +716,20 @@ class Query_model extends CI_Model {
     }
 
     public function customerReportAll(){
-        $result = $this->db->query("SELECT a.*, b.name as customerCategory, c.name as customerSubcategory, d.name as salesman FROM tbl_customer a, tbl_customer_category b, tbl_customer_subcategory c, tbl_salesman d WHERE a.customer_category = b.id AND a.customer_subcategory = c.id AND a.user_id = d.id ORDER BY a.customer_id DESC")->result();
+        $user_role = $this->session->userdata('user_role');
+        $user_id = $this->session->userdata('user_id');
+        if($user_role == 1):
+            $result = $this->db->query("SELECT a.*, b.name AS customerCategory, c.name AS customerSubcategory, d.name AS salesman, d.id as salesMan_id, d.manager_id, d.regional_manager_id FROM tbl_customer a LEFT OUTER JOIN tbl_customer_category b ON a.customer_category = b.id LEFT OUTER JOIN tbl_customer_subcategory c ON a.customer_subcategory = c.id LEFT OUTER JOIN tbl_salesman d ON a.user_id = d.id ORDER BY a.customer_id DESC")->result();
+        elseif($user_role == 2):
+            $result = $this->db->query("SELECT a.*, b.name AS customerCategory, c.name AS customerSubcategory, d.name AS salesman, d.id as salesMan_id, d.manager_id, d.regional_manager_id FROM tbl_customer a LEFT OUTER JOIN tbl_customer_category b ON a.customer_category = b.id LEFT OUTER JOIN tbl_customer_subcategory c ON a.customer_subcategory = c.id LEFT OUTER JOIN tbl_salesman d ON a.user_id = d.id ORDER BY a.customer_id DESC")->result();
+        elseif($user_role == 3):
+            $salesman_id = $this->db->query("SELECT a.*, b.user_id, b.m_rm_s_id FROM tbl_salesman a JOIN tbl_user b ON a.id = b.m_rm_s_id WHERE b.user_role = 3 AND b.user_id = $user_id ")->row();
+            $salesman_id = $salesman_id->id;
+            $result = $this->db->query("SELECT a.*, b.name AS customerCategory, c.name AS customerSubcategory, d.name AS salesman, d.id as salesMan_id, d.manager_id, d.regional_manager_id FROM tbl_customer a LEFT OUTER JOIN tbl_customer_category b ON a.customer_category = b.id LEFT OUTER JOIN tbl_customer_subcategory c ON a.customer_subcategory = c.id LEFT OUTER JOIN tbl_salesman d ON a.user_id = d.id WHERE d.id = $salesman_id ORDER BY a.customer_id DESC")->result();
+        elseif($user_role == 4):
+            $result = $this->db->query("SELECT a.*, b.name AS customerCategory, c.name AS customerSubcategory, d.name AS salesman, d.id as salesMan_id, d.manager_id, d.regional_manager_id FROM tbl_customer a LEFT OUTER JOIN tbl_customer_category b ON a.customer_category = b.id LEFT OUTER JOIN tbl_customer_subcategory c ON a.customer_subcategory = c.id LEFT OUTER JOIN tbl_salesman d ON a.user_id = d.id ORDER BY a.customer_id DESC")->result();
+        endif;
+        
         return $result;
     }
 

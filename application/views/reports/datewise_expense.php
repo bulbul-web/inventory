@@ -98,49 +98,50 @@
                     ?>
                 </center>
                 <br>
-                
-                <table width="100%" border="1">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Transaction Date</th>
-                            <th>Transaction No.</th>
-                            <th>Note</th>
-                            <th>Costs</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            $sl=0;
-                            $total = 0;
-                            foreach ($result as $value):
-                            $total += $value->totalAmount;
-                            $sl++
-                        ?>
-                        <tr>
-                            <td><?= $sl;?></td>
-                            <td>
-                                <?php
-                                    $date = date_create("$value->trnsction_date");
-                                    echo date_format($date,"d/m/Y");
-                                ?>
-                            </td>
-                            <td><?= $value->trnsction_id;?></td>
-                            <td><?= $value->note;?></td>
-                            <td><?= $value->totalAmount;?></td>
-                            <td>
-                                <a href="<?php echo base_url();?>costs-details/<?php echo $value->trnsction_id;?>" target="__BLANK"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                            </td>
-                        </tr>
-                        <?php endforeach;?>
-                        <tr>
-                            <td colspan="4" style="text-align: right;">Total:</td>
-                            <td style="text-align: center;"><b><?= $total;?></b></td>
-                            <td style="text-align: center;"><b>--</b></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="overflow-x:auto; width: 100%;">
+					<table width="100%" border="1">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Transaction Date</th>
+								<th>Transaction No.</th>
+								<th>Note</th>
+								<th>Costs</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+								$sl=0;
+								$total = 0;
+								foreach ($result as $value):
+								$total += $value->totalAmount;
+								$sl++
+							?>
+							<tr>
+								<td><?= $sl;?></td>
+								<td>
+									<?php
+										$date = date_create("$value->trnsction_date");
+										echo date_format($date,"d/m/Y");
+									?>
+								</td>
+								<td><?= $value->trnsction_id;?></td>
+								<td><?= $value->note;?></td>
+								<td><?= $value->totalAmount;?></td>
+								<td>
+									<a href="<?php echo base_url();?>costs-details/<?php echo $value->trnsction_id;?>" target="__BLANK"><i class="fa fa-eye" aria-hidden="true"></i></a>
+								</td>
+							</tr>
+							<?php endforeach;?>
+							<tr>
+								<td colspan="4" style="text-align: right;">Total:</td>
+								<td style="text-align: center;"><b><?= $total;?></b></td>
+								<td style="text-align: center;"><b>--</b></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
                 <div>
                     
                     <?php 

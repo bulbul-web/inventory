@@ -105,51 +105,53 @@
                 </center>
                 <br>
                 <p style="text-align: right; font-weight: bold; font-size: 16px;">Previous Due: <?php if(empty($customerWiseAssgnClctnBfrCrtnDate->Totaldue)){echo '0';}else{echo round($customerWiseAssgnClctnBfrCrtnDate->Totaldue, 2);}?> &nbsp; &nbsp; </p>
-                <table width="100%" border="1" style="text-align: center;">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Date</th>
-                            <th>Note</th>
-                            <th>Sell Amount</th>
-                            <th>Received Amount</th>
-                            <th>Balance</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            $sl=0;
-                            $balance = round($customerWiseAssgnClctnBfrCrtnDate->Totaldue, 2);
-                            $totalSell_amount = 0;
-                            $totalRecived_amount = 0;
-                            $totalDue = 0;
-                            foreach ($customerWiseAssignCollection as $value):
-                                $totalSell_amount += $value->sell_amount;
-                                $totalRecived_amount += $value->recived_amount;
-                                $totalDue += $value->due;
-                            $sl++
-                        ?>
-                        <tr>
-                            <td><?= $sl;?></td>
-                            <td><?= $value->trns_date;?></td>
-                            <td><?= $value->note;?></td>
-                            <td><?= $value->sell_amount;?></td>
-                            <td><?= $value->recived_amount;?></td>
-                            <td>
-                                <?php
-                                    echo $balance = ($balance + $value->sell_amount) - $value->recived_amount;
-                                ?>
-                            </td>
-                        </tr>
-                        <?php endforeach;?>
-                        <tr>
-                            <td colspan="3" style="text-align: right;"><b>Total:</b></td>
-                            <td><b><?php echo $netTotalSell = $totalSell_amount + $customerWiseAssgnClctnBfrCrtnDate->Totaldue;?></b></td>
-                            <td><b><?php echo $totalRecived_amount;?></b></td>
-                            <td><b>--</b></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="overflow-x:auto; width: 100%;">
+					<table width="100%" border="1" style="text-align: center;">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Date</th>
+								<th>Note</th>
+								<th>Sell Amount</th>
+								<th>Received Amount</th>
+								<th>Balance</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+								$sl=0;
+								$balance = round($customerWiseAssgnClctnBfrCrtnDate->Totaldue, 2);
+								$totalSell_amount = 0;
+								$totalRecived_amount = 0;
+								$totalDue = 0;
+								foreach ($customerWiseAssignCollection as $value):
+									$totalSell_amount += $value->sell_amount;
+									$totalRecived_amount += $value->recived_amount;
+									$totalDue += $value->due;
+								$sl++
+							?>
+							<tr>
+								<td><?= $sl;?></td>
+								<td><?= $value->trns_date;?></td>
+								<td><?= $value->note;?></td>
+								<td><?= $value->sell_amount;?></td>
+								<td><?= $value->recived_amount;?></td>
+								<td>
+									<?php
+										echo $balance = ($balance + $value->sell_amount) - $value->recived_amount;
+									?>
+								</td>
+							</tr>
+							<?php endforeach;?>
+							<tr>
+								<td colspan="3" style="text-align: right;"><b>Total:</b></td>
+								<td><b><?php echo $netTotalSell = $totalSell_amount + $customerWiseAssgnClctnBfrCrtnDate->Totaldue;?></b></td>
+								<td><b><?php echo $totalRecived_amount;?></b></td>
+								<td><b>--</b></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
                 <?php endif;?>
             </div>
         </div>

@@ -82,45 +82,46 @@
                     ?>
                 </center>
                 <br>
-                
-                <table width="100%" border="1" style="text-align: center;">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Supplier Name</th>
-                            <th>Total Amount</th>
-                            <th>Paid</th>
-                            <th>Due</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            $sl=0;
-                            $totalAmount = 0;
-                            $netTotalPaymant = 0;
-                            $totalDue = 0;
-                            foreach ($datewisePaymentHistory as $value):
-                                $totalAmount = $totalAmount + $value->TotalBuyingPrice;
-                                $netTotalPaymant = $netTotalPaymant + $value->totalPayment;
-                                $totalDue = $totalDue + $value->due;
-                                $sl++
-                        ?>
-                        <tr>
-                            <td><?php echo $sl;?></td>
-                            <td><?php echo $value->supplier_name;?></td>
-                            <td><?php echo $value->TotalBuyingPrice;?></td>
-                            <td><?php echo round($value->totalPayment, 2);?></td>
-                            <td><?php echo $value->due;?></td>
-                        </tr>
-                        <?php endforeach;?>
-                        <tr>
-                            <td colspan="2" style="text-align: right"><b>Total:</b></td>
-                            <td><?php echo $totalAmount;?></td>
-                            <td><?php echo $netTotalPaymant;?></td>
-                            <td><?php echo $totalDue;?></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="overflow-x:auto; width: 100%;">
+					<table width="100%" border="1" style="text-align: center;">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Supplier Name</th>
+								<th>Total Amount</th>
+								<th>Paid</th>
+								<th>Due</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+								$sl=0;
+								$totalAmount = 0;
+								$netTotalPaymant = 0;
+								$totalDue = 0;
+								foreach ($datewisePaymentHistory as $value):
+									$totalAmount = $totalAmount + $value->TotalBuyingPrice;
+									$netTotalPaymant = $netTotalPaymant + $value->totalPayment;
+									$totalDue = $totalDue + $value->due;
+									$sl++
+							?>
+							<tr>
+								<td><?php echo $sl;?></td>
+								<td><?php echo $value->supplier_name;?></td>
+								<td><?php echo $value->TotalBuyingPrice;?></td>
+								<td><?php echo round($value->totalPayment, 2);?></td>
+								<td><?php echo $value->due;?></td>
+							</tr>
+							<?php endforeach;?>
+							<tr>
+								<td colspan="2" style="text-align: right"><b>Total:</b></td>
+								<td><?php echo $totalAmount;?></td>
+								<td><?php echo $netTotalPaymant;?></td>
+								<td><?php echo $totalDue;?></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
                 <?php endif;?>
             </div>
         </div>

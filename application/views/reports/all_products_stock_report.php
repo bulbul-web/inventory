@@ -62,52 +62,54 @@
                                 )->result();
                     
                 ?>
-                    <table width="100%" border="1" style="text-align: center;">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Product Name</th>
-                                <th>Stock In</th>
-                                <!-- <th>Pack Size</th> -->
-                                <th>Stock Out</th>
-                                <th>Available Stock</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                $i=0;
-                                foreach($stock_out_result as $value):
-                                    $i++;
-                            ?>
-                                <tr>
-                                    <td><?php echo $i; ?></td>
-                                    <td><?php echo $value->product_name; ?></td>
-                                    <td><?php echo $value->stockIn.' ('.$value->packName.')'; ?></td>
-                                    <!-- <td><?php echo $value->packName; ?></td> -->
-                                    <td>
-                                        <?php 
-                                            if($value->stockOut == ''){
-                                                echo '0';
-                                            }else{
-                                                echo $value->stockOut; 
-                                            }
-                                        ?>
-                                    </td>
-                                    <td>
-                                        <?php 
-                                            if($value->available_quantity == ''){
-                                                echo $value->stockIn;
-                                            }else{
-                                                echo $value->available_quantity; 
-                                            }
-                                        ?>
-                                    </td>
-                                    
-                                </tr>
-                            <?php endforeach;?>
-                        </tbody>
-                    </table>
+                    <div style="overflow-x:auto; width: 100%;">
+						<table width="100%" border="1" style="text-align: center;">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Product Name</th>
+									<th>Stock In</th>
+									<!-- <th>Pack Size</th> -->
+									<th>Stock Out</th>
+									<th>Available Stock</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+									$i=0;
+									foreach($stock_out_result as $value):
+										$i++;
+								?>
+									<tr>
+										<td><?php echo $i; ?></td>
+										<td><?php echo $value->product_name; ?></td>
+										<td><?php echo $value->stockIn.' '.$value->packName.''; ?></td>
+										<!-- <td><?php echo $value->packName; ?></td> -->
+										<td>
+											<?php 
+												if($value->stockOut == ''){
+													echo '0';
+												}else{
+													echo $value->stockOut; 
+												}
+											?>
+										</td>
+										<td>
+											<?php 
+												if($value->available_quantity == ''){
+													echo $value->stockIn;
+												}else{
+													echo $value->available_quantity; 
+												}
+											?>
+										</td>
+										
+									</tr>
+								<?php endforeach;?>
+							</tbody>
+						</table>
+					</div>
                 <?php }?>
             </div>
         </div>

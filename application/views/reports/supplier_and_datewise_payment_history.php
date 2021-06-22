@@ -98,52 +98,53 @@
                     ?>
                 </center>
                 <br>
-                
-                <table width="100%" border="1" style="text-align: center;">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Payment Date</th>
-                            <th>Bill No</th>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Total Amount</th>
-                            <th>Paid</th>
-                            <th>Due</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            $sl=0;
-                            $totalAmount = 0;
-                            $netTotalPaymant = 0;
-                            $totalDue = 0;
-                            foreach ($supplierAndDatewisePaymentHistory as $value):
-                                $totalAmount = $totalAmount + $value->totalBuyingPrice;
-                                $netTotalPaymant = $netTotalPaymant + $value->TotalPaymant;
-                                $due = $value->totalBuyingPrice - $value->TotalPaymant;
-                                $totalDue = $totalDue + $due;
-                                $sl++
-                        ?>
-                        <tr>
-                            <td><?php echo $sl;?></td>
-                            <td><?php echo $value->entry_date;?></td>
-                            <td><?php echo $value->bill_no;?></td>
-                            <td><?php echo $value->product_name;?></td>
-                            <td><?php echo $value->quantity_in.' '.$value->pack_size;?></td>
-                            <td><?php echo $value->totalBuyingPrice;?></td>
-                            <td><?php echo round($value->TotalPaymant, 2);?></td>
-                            <td><?php echo $due;?></td>
-                        </tr>
-                        <?php endforeach;?>
-                        <tr>
-                            <td colspan="5" style="text-align: right"><b>Total:</b></td>
-                            <td><?php echo $totalAmount;?></td>
-                            <td><?php echo $netTotalPaymant;?></td>
-                            <td><?php echo $totalDue;?></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="overflow-x:auto; width: 100%;">
+					<table width="100%" border="1" style="text-align: center;">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Payment Date</th>
+								<th>Bill No</th>
+								<th>Product Name</th>
+								<th>Quantity</th>
+								<th>Total Amount</th>
+								<th>Paid</th>
+								<th>Due</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+								$sl=0;
+								$totalAmount = 0;
+								$netTotalPaymant = 0;
+								$totalDue = 0;
+								foreach ($supplierAndDatewisePaymentHistory as $value):
+									$totalAmount = $totalAmount + $value->totalBuyingPrice;
+									$netTotalPaymant = $netTotalPaymant + $value->TotalPaymant;
+									$due = $value->totalBuyingPrice - $value->TotalPaymant;
+									$totalDue = $totalDue + $due;
+									$sl++
+							?>
+							<tr>
+								<td><?php echo $sl;?></td>
+								<td><?php echo $value->entry_date;?></td>
+								<td><?php echo $value->bill_no;?></td>
+								<td><?php echo $value->product_name;?></td>
+								<td><?php echo $value->quantity_in.' '.$value->pack_size;?></td>
+								<td><?php echo $value->totalBuyingPrice;?></td>
+								<td><?php echo round($value->TotalPaymant, 2);?></td>
+								<td><?php echo $due;?></td>
+							</tr>
+							<?php endforeach;?>
+							<tr>
+								<td colspan="5" style="text-align: right"><b>Total:</b></td>
+								<td><?php echo $totalAmount;?></td>
+								<td><?php echo $netTotalPaymant;?></td>
+								<td><?php echo $totalDue;?></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
                 <?php endif;?>
             </div>
         </div>

@@ -83,35 +83,36 @@
                     ?>
                 </center>
                 <br>
-                
-                <table width="100%" border="1" style="text-align: center;">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Customer Name</th>
-                            <th>Paid Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            $sl=0;
-                            $netTotalCollection = 0;
-                            foreach ($datewiseCollection as $value):
-                                $netTotalCollection += $value->totalCollection;
-                                $sl++
-                        ?>
-                        <tr>
-                            <td><?php echo $sl;?></td>
-                            <td><?php echo $value->customer_name;?></td>
-                            <td><?php echo $value->totalCollection;?></td>
-                        </tr>
-                        <?php endforeach;?>
-                        <tr>
-                            <td colspan="2" style="text-align: right"><b>Total:</b></td>
-                            <td><?php echo $netTotalCollection;?></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="overflow-x:auto; width: 100%;">
+					<table width="100%" border="1" style="text-align: center;">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Customer Name</th>
+								<th>Paid Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+								$sl=0;
+								$netTotalCollection = 0;
+								foreach ($datewiseCollection as $value):
+									$netTotalCollection += $value->totalCollection;
+									$sl++
+							?>
+							<tr>
+								<td><?php echo $sl;?></td>
+								<td><?php echo $value->customer_name;?></td>
+								<td><?php echo $value->totalCollection;?></td>
+							</tr>
+							<?php endforeach;?>
+							<tr>
+								<td colspan="2" style="text-align: right"><b>Total:</b></td>
+								<td><?php echo $netTotalCollection;?></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
                 <?php endif;?>
             </div>
         </div>

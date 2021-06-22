@@ -75,7 +75,7 @@
             <tr>
                 <td>
                     <?php 
-                        if($userRole == 1){
+                        if($userRole == 1 || $userRole == 2 || $userRole == 4){
                             echo $i;
                         }else {    
                     ?>
@@ -86,7 +86,7 @@
                     <?php 
                         echo '<a href="'. base_url().'salesman-order-details/'.$value->order_id.'">'.$value->order_id.'</a>';
                         if($value->order_by != NULL){
-                            if($userRole == 1){
+                            if($userRole == 1 || $userRole == 2 || $userRole == 4){
                                 $user = $this->db->query("SELECT * FROM tbl_user WHERE user_id = '$value->order_by' ")->row();
                                 echo '<br>('.$user->user_name.')';
                             }
@@ -147,7 +147,7 @@
                     <div class="btn-group m-1">
                         <?php
                             
-                            if($userRole == 1){
+                            if($userRole == 1 || $userRole == 2 || $userRole == 4){
                                 echo '<a href="'. base_url().'salesman-order-details/'.$value->order_id.'">View/Accept</a>';
                             }else{
                         ?>

@@ -82,75 +82,77 @@
                 <br>
                                     
                 </div>
-                <table width="100%" border="1" style="text-align: center;">
-                    <thead>
-                        <tr>
-                            <th>Bill Date</th>
-                            <th>Stock In</th>
-                            <th>Price</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            $i = 0;
-                            $sum = 0;
-                            $netTotalPrice = 0;
-                            foreach($stock_in_result as $value):
-                                $sum += $value->total_quantity;
-                                $netTotalPrice += $value->totalPrice;
-                                $i++;
-                        ?>
-                            <tr>
-                                <td>
-                                    <?php
-                                        $date = date_create("$value->bill_date");
-                                        echo date_format($date,"d/m/Y");
-                                    ?>
-                                </td>
-                                <td><?php echo $value->total_quantity;?></td>
-                                <td><?= $value->buying_price;?></td>
-                                <td><?= round($value->totalPrice, 2);?></td>
-                            </tr>
-                        <?php endforeach;?>
-                        <tr>
-                            <td style="text-align: right;">Total Stock In:</td>
-                            <td>
-                                <?php
-                                    echo $sum;
-                                ?>
-                            </td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">Total Stock Out:</td>
-                            <td>
-                                <?php
-                                    if(empty($stock_out_result->stock_out)){echo 0;}else{ echo $stock_out_result->stock_out;}
-                                ?>
-                            </td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">Available:</td>
-                            <td>
-                                <?php
-                                    echo $sum - $stock_out_result->stock_out;
-                                ?>
-                            </td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="3" style="text-align: right; font-weight: bold;">Total:</td>
-                            <td><?php echo $netTotalPrice;?></td>
-                        </tr>
-                    </tfoot>
-                </table>
+				<div style="overflow-x:auto; width: 100%;">
+					<table width="100%" border="1" style="text-align: center;">
+						<thead>
+							<tr>
+								<th>Bill Date</th>
+								<th>Stock In</th>
+								<th>Price</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+								$i = 0;
+								$sum = 0;
+								$netTotalPrice = 0;
+								foreach($stock_in_result as $value):
+									$sum += $value->total_quantity;
+									$netTotalPrice += $value->totalPrice;
+									$i++;
+							?>
+								<tr>
+									<td>
+										<?php
+											$date = date_create("$value->bill_date");
+											echo date_format($date,"d/m/Y");
+										?>
+									</td>
+									<td><?php echo $value->total_quantity;?></td>
+									<td><?= $value->buying_price;?></td>
+									<td><?= round($value->totalPrice, 2);?></td>
+								</tr>
+							<?php endforeach;?>
+							<tr>
+								<td style="text-align: right;">Total Stock In:</td>
+								<td>
+									<?php
+										echo $sum;
+									?>
+								</td>
+								<td>-</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td style="text-align: right;">Total Stock Out:</td>
+								<td>
+									<?php
+										if(empty($stock_out_result->stock_out)){echo 0;}else{ echo $stock_out_result->stock_out;}
+									?>
+								</td>
+								<td>-</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td style="text-align: right;">Available:</td>
+								<td>
+									<?php
+										echo $sum - $stock_out_result->stock_out;
+									?>
+								</td>
+								<td>-</td>
+								<td>-</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="3" style="text-align: right; font-weight: bold;">Total:</td>
+								<td><?php echo $netTotalPrice;?></td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
 
 
                 

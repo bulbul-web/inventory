@@ -96,7 +96,7 @@
               <h4 class="text-white">
                   <?php
                   $userId = $this->session->userdata('user_id');
-                  $orders = $this->db->query("SELECT * FROM tbl_order WHERE NOT (order_status <=> NULL) AND NOT (delete_status <=> 'deleted') AND order_by = '$userId' GROUP BY order_id")->result();
+                  $orders = $this->db->query("SELECT * FROM tbl_order WHERE NOT (order_status <=> 2) AND NOT (delete_status <=> 'deleted') AND order_by = '$userId' GROUP BY order_id")->result();
                   if (isset($orders)):
                       echo count($orders);
                   endif;
@@ -393,7 +393,7 @@
             <div class="media-body text-left">
               <h4 class="text-white">
                   <?php
-                  $orders = $this->db->query("SELECT * FROM tbl_order WHERE NOT (order_status <=> NULL) AND NOT (delete_status <=> 'deleted') GROUP BY order_id")->result();
+                  $orders = $this->db->query("SELECT * FROM tbl_order WHERE order_status != 2 AND NOT (delete_status <=> 'deleted') GROUP BY order_id")->result();
                   if (isset($orders)):
                       echo count($orders);
                   endif;
@@ -485,7 +485,7 @@
 <!-------end order info from tbl_order ----->
 </div>
 
-<?php }elseif($userInfo->user_role == 3 || $userInfo->user_role == 4){ ?>
+<?php }elseif($userInfo->user_role == 4 || $userInfo->user_role == 2){ ?>
   <div class="col-12 col-lg-6 col-xl-3">
   <a href="<?php echo base_url()?>product-type">
     <div class="card bg-pattern-success">
@@ -603,10 +603,15 @@
             <div class="media-body text-left">
               <h4 class="text-white">
                   <?php
-                  $orders = $this->db->query("SELECT * FROM tbl_order WHERE NOT (order_status <=> NULL) AND NOT (delete_status <=> 'deleted') GROUP BY order_id")->result();
-                  if (isset($orders)):
-                      echo count($orders);
-                  endif;
+                    $user_id = $this->session->userdata('user_id');
+                    if($userInfo->user_role == 2):
+                      $orders = $this->db->query("SELECT o.*, u.user_name, u.user_role, u.m_rm_s_id, s.name salesmane_name, s.regional_manager_id, s.manager_id, uu.user_name, uu.user_id as regional_manager_user_id FROM tbl_order o JOIN tbl_user u ON o.order_by = u.user_id JOIN tbl_salesman s ON u.m_rm_s_id = s.id JOIN tbl_user uu ON uu.m_rm_s_id = s.regional_manager_id WHERE NOT (o.order_status <=> 2) AND NOT(o.delete_status <=> 'deleted') AND uu.user_role = 2 AND uu.user_id = $user_id GROUP BY o.order_id")->result();
+                    elseif($userInfo->user_role == 4):
+                      $orders = $this->db->query("SELECT o.*, sum(o.quantity * o.sale_price) as grandTotal, c.customer_name, u.user_name, u.user_role, u.m_rm_s_id, s.id, s.name, s.manager_id, s.regional_manager_id, uu.user_id, uu.user_role FROM tbl_order o JOIN tbl_user u ON u.user_id = o.order_by JOIN tbl_customer c ON o.customer_id = c.customer_id JOIN tbl_salesman s ON u.m_rm_s_id = s.id JOIN tbl_user uu ON uu.m_rm_s_id = s.manager_id WHERE NOT (o.order_status <=> 2) AND NOT(o.delete_status <=> 'deleted') AND uu.user_role = 4 AND uu.user_id = $user_id GROUP BY o.order_id ORDER BY convert(o.order_id, decimal) DESC")->result();
+                    endif;
+                    if (isset($orders)):
+                        echo count($orders);
+                    endif;
                   ?>
               </h4>
               <span class="text-white">Total Order</span>
@@ -627,10 +632,15 @@
             <div class="media-body text-left">
               <h4 class="text-white">
                   <?php
-                  $orders = $this->db->query("SELECT * FROM tbl_order WHERE order_status = 1 AND NOT (delete_status <=> 'deleted') GROUP BY order_id")->result();
-                  if (isset($orders)):
-                      echo count($orders);
-                  endif;
+                    $user_id = $this->session->userdata('user_id');
+                    if($userInfo->user_role == 2):
+                      $orders = $this->db->query("SELECT o.*, u.user_name, u.user_role, u.m_rm_s_id, s.name salesmane_name, s.regional_manager_id, s.manager_id, uu.user_name, uu.user_id as regional_manager_user_id FROM tbl_order o JOIN tbl_user u ON o.order_by = u.user_id JOIN tbl_salesman s ON u.m_rm_s_id = s.id JOIN tbl_user uu ON uu.m_rm_s_id = s.regional_manager_id WHERE o.order_status = 1 AND NOT(o.delete_status <=> 'deleted') AND uu.user_role = 2 AND uu.user_id = $user_id GROUP BY o.order_id")->result();
+                    elseif($userInfo->user_role == 4):
+                      $orders = $this->db->query("SELECT o.*, sum(o.quantity * o.sale_price) as grandTotal, c.customer_name, u.user_name, u.user_role, u.m_rm_s_id, s.id, s.name, s.manager_id, s.regional_manager_id, uu.user_id, uu.user_role FROM tbl_order o JOIN tbl_user u ON u.user_id = o.order_by JOIN tbl_customer c ON o.customer_id = c.customer_id JOIN tbl_salesman s ON u.m_rm_s_id = s.id JOIN tbl_user uu ON uu.m_rm_s_id = s.manager_id WHERE o.order_status = 1 AND NOT(o.delete_status <=> 'deleted') AND uu.user_role = 4 AND uu.user_id = $user_id GROUP BY o.order_id ORDER BY convert(o.order_id, decimal) DESC")->result();
+                    endif;
+                    if (isset($orders)):
+                        echo count($orders);
+                    endif;
                   ?>
               </h4>
               <span class="text-white">Accept Order</span>
@@ -651,11 +661,15 @@
             <div class="media-body text-left">
               <h4 class="text-white">
                   <?php
-                  $userId = $this->session->userdata('user_id');
-                  $orders = $this->db->query("SELECT * FROM tbl_order WHERE order_status = 0 AND NOT (delete_status <=> 'deleted') GROUP BY order_id")->result();
-                  if (isset($orders)):
-                      echo count($orders);
-                  endif;
+                    $user_id = $this->session->userdata('user_id');
+                    if($userInfo->user_role == 2):
+                      $orders = $this->db->query("SELECT o.*, u.user_name, u.user_role, u.m_rm_s_id, s.name salesmane_name, s.regional_manager_id, s.manager_id, uu.user_name, uu.user_id as regional_manager_user_id FROM tbl_order o JOIN tbl_user u ON o.order_by = u.user_id JOIN tbl_salesman s ON u.m_rm_s_id = s.id JOIN tbl_user uu ON uu.m_rm_s_id = s.regional_manager_id WHERE o.order_status = 0 AND NOT(o.delete_status <=> 'deleted') AND uu.user_role = 2 AND uu.user_id = $user_id GROUP BY o.order_id")->result();
+                    elseif($userInfo->user_role == 4):
+                      $orders = $this->db->query("SELECT o.*, sum(o.quantity * o.sale_price) as grandTotal, c.customer_name, u.user_name, u.user_role, u.m_rm_s_id, s.id, s.name, s.manager_id, s.regional_manager_id, uu.user_id, uu.user_role FROM tbl_order o JOIN tbl_user u ON u.user_id = o.order_by JOIN tbl_customer c ON o.customer_id = c.customer_id JOIN tbl_salesman s ON u.m_rm_s_id = s.id JOIN tbl_user uu ON uu.m_rm_s_id = s.manager_id WHERE o.order_status = 0 AND NOT(o.delete_status <=> 'deleted') AND uu.user_role = 4 AND uu.user_id = $user_id GROUP BY o.order_id ORDER BY convert(o.order_id, decimal) DESC")->result();
+                    endif;
+                    if (isset($orders)):
+                        echo count($orders);
+                    endif;
                   ?>
               </h4>
               <span class="text-white">Not Accept</span>
@@ -676,11 +690,15 @@
             <div class="media-body text-left">
               <h4 class="text-white">
                   <?php
-                  $userId = $this->session->userdata('user_id');
-                  $orders = $this->db->query("SELECT * FROM tbl_order WHERE order_status = 2 AND NOT (delete_status <=> 'deleted') GROUP BY order_id")->result();
-                  if (isset($orders)):
-                      echo count($orders);
-                  endif;
+                    $user_id = $this->session->userdata('user_id');
+                    if($userInfo->user_role == 2):
+                      $orders = $this->db->query("SELECT o.*, u.user_name, u.user_role, u.m_rm_s_id, s.name salesmane_name, s.regional_manager_id, s.manager_id, uu.user_name, uu.user_id as regional_manager_user_id FROM tbl_order o JOIN tbl_user u ON o.order_by = u.user_id JOIN tbl_salesman s ON u.m_rm_s_id = s.id JOIN tbl_user uu ON uu.m_rm_s_id = s.regional_manager_id WHERE o.order_status = 2 AND NOT(o.delete_status <=> 'deleted') AND uu.user_role = 2 AND uu.user_id = $user_id GROUP BY o.order_id")->result();
+                    elseif($userInfo->user_role == 4):
+                      $orders = $this->db->query("SELECT o.*, sum(o.quantity * o.sale_price) as grandTotal, c.customer_name, u.user_name, u.user_role, u.m_rm_s_id, s.id, s.name, s.manager_id, s.regional_manager_id, uu.user_id, uu.user_role FROM tbl_order o JOIN tbl_user u ON u.user_id = o.order_by JOIN tbl_customer c ON o.customer_id = c.customer_id JOIN tbl_salesman s ON u.m_rm_s_id = s.id JOIN tbl_user uu ON uu.m_rm_s_id = s.manager_id WHERE o.order_status = 2 AND NOT(o.delete_status <=> 'deleted') AND uu.user_role = 4 AND uu.user_id = $user_id GROUP BY o.order_id ORDER BY convert(o.order_id, decimal) DESC")->result();
+                    endif;
+                    if (isset($orders)):
+                        echo count($orders);
+                    endif;
                   ?>
               </h4>
               <span class="text-white">Rejected</span>

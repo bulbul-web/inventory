@@ -99,61 +99,62 @@
                     ?>
                 </center>
                 <br>
-                
-                <table width="100%" border="1">
-                    <thead>
-                        <tr>
-                            <th style="text-align: center;">#</th>
-                            <th style="text-align: center;">Voucher No.</th>
-                            <th style="text-align: center;">Customer Name</th>
-                            <th style="text-align: center;">Total</th>
-                            <th style="text-align: center;">Discount</th>
-                            <th style="text-align: center;">Paid</th>
-                            <th style="text-align: center;">Due</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            $sl=0;
-                            $netTotal = 0;
-                            $totalDiscount = 0;
-                            $dueTotal = 0;
-                            $total = 0;
-                            foreach ($result as $value): 
-                                $netTotal += $value->grandTotal;
-                                $totalDiscount += $value->discount;
-                                $grandTotal = ($value->grandTotal - $value->discount);
-                                $dueTotal += $grandTotal - $value->paid_amount;
-                                $total += $value->paid_amount;
-                                $sl++
-                        ?>
-                        <tr>
-                            <td><?= $sl;?></td>
-                            <td style="text-align: center;"><?= $value->voucher_id;?></td>
-                            <td><?= $value->customer_name;?></td>
-                            <td style="text-align: center;"><?= $value->grandTotal;?></td>
-                            <td style="text-align: center;"><?= $value->discount;?></td>
-                            <td style="text-align: center;"><?= $value->paid_amount;?></td>
-                            <td style="text-align: center;">
-                                <?php
-                                    //after discount then grandtotal and then show the due
-                                    $grandTotal = ($value->grandTotal - $value->discount);
-                                    $due = $grandTotal - $value->paid_amount;
-                                    echo $due;
-                                ?>
-                            </td>
-                        </tr>
-                        <?php endforeach;?>
-                        <tr>
-                            <td colspan="3" style="text-align: right;">Total:</td>
-                            <td style="text-align: center;"><b><?= $netTotal;?></b></td>
-                            <td style="text-align: center;"><b><?= $totalDiscount;?></b></td>
-                            <td style="text-align: center;"><b><?= $total;?></b></td>
-                            <td style="text-align: center;"><b><?php echo $dueTotal;?></b>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="overflow-x:auto; width: 100%;">
+					<table width="100%" border="1">
+						<thead>
+							<tr>
+								<th style="text-align: center;">#</th>
+								<th style="text-align: center;">Voucher No.</th>
+								<th style="text-align: center;">Customer Name</th>
+								<th style="text-align: center;">Total</th>
+								<th style="text-align: center;">Discount</th>
+								<th style="text-align: center;">Paid</th>
+								<th style="text-align: center;">Due</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+								$sl=0;
+								$netTotal = 0;
+								$totalDiscount = 0;
+								$dueTotal = 0;
+								$total = 0;
+								foreach ($result as $value): 
+									$netTotal += $value->grandTotal;
+									$totalDiscount += $value->discount;
+									$grandTotal = ($value->grandTotal - $value->discount);
+									$dueTotal += $grandTotal - $value->paid_amount;
+									$total += $value->paid_amount;
+									$sl++
+							?>
+							<tr>
+								<td><?= $sl;?></td>
+								<td style="text-align: center;"><?= $value->voucher_id;?></td>
+								<td><?= $value->customer_name;?></td>
+								<td style="text-align: center;"><?= $value->grandTotal;?></td>
+								<td style="text-align: center;"><?= $value->discount;?></td>
+								<td style="text-align: center;"><?= $value->paid_amount;?></td>
+								<td style="text-align: center;">
+									<?php
+										//after discount then grandtotal and then show the due
+										$grandTotal = ($value->grandTotal - $value->discount);
+										$due = $grandTotal - $value->paid_amount;
+										echo $due;
+									?>
+								</td>
+							</tr>
+							<?php endforeach;?>
+							<tr>
+								<td colspan="3" style="text-align: right;">Total:</td>
+								<td style="text-align: center;"><b><?= $netTotal;?></b></td>
+								<td style="text-align: center;"><b><?= $totalDiscount;?></b></td>
+								<td style="text-align: center;"><b><?= $total;?></b></td>
+								<td style="text-align: center;"><b><?php echo $dueTotal;?></b>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
                 <?php endif;?>
             </div>
         </div>

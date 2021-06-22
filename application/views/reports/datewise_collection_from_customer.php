@@ -98,37 +98,38 @@
                     ?>
                 </center>
                 <br>
-                
-                <table width="100%" border="1" style="text-align: center;">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Collection Date</th>
-                            <th>Voucher ID</th>
-                            <th>Paid Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            $sl=0;
-                            $totalCollection = 0;
-                            foreach ($datewiseCollectionFromCustomer as $value):
-                                $totalCollection += $value->collection_amount;
-                                $sl++
-                        ?>
-                        <tr>
-                            <td><?php echo $sl;?></td>
-                            <td><?php echo $value->last_paid_date_manual;?></td>
-                            <td><?php echo $value->voucher_id;?></td>
-                            <td><?php echo $value->collection_amount;?></td>
-                        </tr>
-                        <?php endforeach;?>
-                        <tr>
-                            <td colspan="3" style="text-align: right"><b>Total:</b></td>
-                            <td><?php echo $totalCollection;?></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="overflow-x:auto; width: 100%;">
+					<table width="100%" border="1" style="text-align: center;">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Collection Date</th>
+								<th>Voucher ID</th>
+								<th>Paid Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+								$sl=0;
+								$totalCollection = 0;
+								foreach ($datewiseCollectionFromCustomer as $value):
+									$totalCollection += $value->collection_amount;
+									$sl++
+							?>
+							<tr>
+								<td><?php echo $sl;?></td>
+								<td><?php echo $value->last_paid_date_manual;?></td>
+								<td><?php echo $value->voucher_id;?></td>
+								<td><?php echo $value->collection_amount;?></td>
+							</tr>
+							<?php endforeach;?>
+							<tr>
+								<td colspan="3" style="text-align: right"><b>Total:</b></td>
+								<td><?php echo $totalCollection;?></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
                 <?php endif;?>
             </div>
         </div>

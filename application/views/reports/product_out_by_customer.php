@@ -98,29 +98,30 @@
                     ?>
                 </center>
                 <br>
-                
-                <table width="100%" border="1" style="text-align: center;">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Product Name</th>
-                            <th>Total Quantity</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            $sl=0;
-                            foreach ($customerWiseProductInfo as $value):
-                            $sl++
-                        ?>
-                        <tr>
-                            <td><?= $sl;?></td>
-                            <td><?= $value->product_name;?></td>
-                            <td><?= $value->totalQuantity;?></td>
-                        </tr>
-                        <?php endforeach;?>
-                    </tbody>
-                </table>
+                <div style="overflow-x:auto; width: 100%;">
+					<table width="100%" border="1" style="text-align: center;">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Product Name</th>
+								<th>Total Quantity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+								$sl=0;
+								foreach ($customerWiseProductInfo as $value):
+								$sl++
+							?>
+							<tr>
+								<td><?= $sl;?></td>
+								<td><?= $value->product_name;?></td>
+								<td><?= $value->totalQuantity.' '.$value->pack_size;?></td>
+							</tr>
+							<?php endforeach;?>
+						</tbody>
+					</table>
+				</div>
                 <?php endif;?>
             </div>
         </div>
