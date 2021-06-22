@@ -31,9 +31,19 @@
     <div id="dvContainer" style="float: left;">
 
         <?php
-            for($c=1; $c<=2; $c++){ 
-                ($c==1)? $text = "Office Copy" : $text = "Customer Copy";
-                ($c==1)? $sl = "1" : $sl = "2";
+            $totalRow = 0;
+            for($c=1; $c<=3; $c++){ 
+                if($c==1){ 
+                    $text = "Office Copy";
+                    $sl = "1"; 
+                } elseif ($c==2){
+                    $text = "Customer Copy";
+                    $sl = "2";
+                } elseif ($c==3){
+                    $text = "Marketing Officer Copy";
+                    $sl = "3";
+                }
+                $totalRow++;
         ?>
 
             <div class="div_style">
@@ -243,7 +253,7 @@
                     
             </div>
             <?php
-                if($c==1)
+                if($c==1 || $c==2)
                 {
                    echo "<p style='page-break-after:always'></p>";
                 }
@@ -351,13 +361,24 @@
     </script>
     <script>  
         $(document).ready(function() {
-            var number_1 = document.getElementById("paidAmountValue_1").innerText;  
-            var Inwords_1 = toWordsconver(number_1);
-            document.getElementById("paidAmountValueInWord_1").innerHTML = Inwords_1;
+                        
+            for (let sl = 1; sl <= <?php echo $totalRow;?>; sl++) {
+                var number = document.getElementById("paidAmountValue_"+sl).innerText;  
+                var Inwords = toWordsconver(number);
+                document.getElementById("paidAmountValueInWord_"+sl).innerHTML = Inwords;                
+            }
             
-            var number_2 = document.getElementById("paidAmountValue_2").innerText;  
-            var Inwords_2 = toWordsconver(number_2);
-            document.getElementById("paidAmountValueInWord_2").innerHTML = Inwords_2;
+            // var number_1 = document.getElementById("paidAmountValue_1").innerText;  
+            // var Inwords_1 = toWordsconver(number_1);
+            // document.getElementById("paidAmountValueInWord_1").innerHTML = Inwords_1;
+            
+            // var number_2 = document.getElementById("paidAmountValue_2").innerText;  
+            // var Inwords_2 = toWordsconver(number_2);
+            // document.getElementById("paidAmountValueInWord_2").innerHTML = Inwords_2;
+
+            // var number_3 = document.getElementById("paidAmountValue_3").innerText;  
+            // var Inwords_3 = toWordsconver(number_3);
+            // document.getElementById("paidAmountValueInWord_3").innerHTML = Inwords_3;
         });
     </script>
 </body>
