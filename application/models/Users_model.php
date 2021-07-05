@@ -179,7 +179,25 @@ class Users_model extends CI_Model {
     public function datewise_payment_history($from_date, $to_date){
         $result = $this->db->query("SELECT d.TotalBuyingPrice, d.supplier_id, d.totalPayment, d.due, e.supplier_name FROM (SELECT b.TotalBuyingPrice, b.supplier_id, c.totalPayment, round(b.TotalBuyingPrice - c.totalPayment, 2) as due FROM (SELECT a.supplier_id,a.bill_no, sum(a.quantity_in * a.buying_price) as TotalBuyingPrice FROM tbl_stock_in a WHERE a.bill_date BETWEEN '$from_date' AND '$to_date' GROUP by a.supplier_id) b LEFT JOIN (SELECT sih.bill_no, SUM(sih.payment) as totalPayment FROM tbl_stock_in_history sih, tbl_stock_in si WHERE sih.bill_no = si.bill_no GROUP BY si.supplier_id) c ON b.bill_no = c.bill_no) d LEFT JOIN (SELECT s.supplier_id, s.supplier_name FROM tbl_supplier s ) e ON e.supplier_id = d.supplier_id")->result();
         return $result;
-    } 
+    }
+    
+    public function supplier_due_list(){
+        $result = $this->db->query("SELECT c.bill_no, c.totalBuyingPrice, c.totalPayment, c.due, c.supplier_id, supplier_name
+        FROM (
+                SELECT a.supplier_id, a.bill_no, ROUND(a.totalBuyingPrice, 2) as totalBuyingPrice, b.totalPayment, ROUND((a.totalBuyingPrice - b.totalPayment), 2) as due
+                FROM (
+                    SELECT bill_no, SUM(quantity_in * buying_price) AS totalBuyingPrice, supplier_id 
+                    FROM tbl_stock_in
+                    GROUP BY bill_no
+                    ) a
+                LEFT OUTER JOIN (SELECT bill_no, sum(payment) as totalPayment FROM tbl_stock_in_history GROUP BY bill_no) b
+                ON(a.bill_no = b.bill_no)
+            ) c
+        JOIN tbl_supplier s
+        ON(c.supplier_id = s.supplier_id)
+        WHERE c.due > 0")->result();
+        return $result;
+    }
     
     public function datewise_buy_product($from_date, $to_date){
         $result = $this->db->query("SELECT a.*, b.supplier_name, (a.quantity_in * a.buying_price) as totalBuyingPrice, pi.*, ps.pack_size FROM tbl_stock_in a, tbl_supplier b, tbl_product_info pi, tbl_pack_size ps WHERE a.supplier_id = b.supplier_id AND a.bill_date BETWEEN '$from_date' AND '$to_date' AND NOT (a.status <=> 0) AND a.product_id = pi.product_id AND pi.pack_size = ps.id")->result();

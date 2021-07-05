@@ -201,6 +201,7 @@ $route['invoice-report-section'] = 'reports/invoice_report_section';
 $route['stock-report-section'] = 'reports/stock_report_section';
 $route['stock-out-report-section'] = 'reports/stock_out_report_section';
 $route['collection-report-section'] = 'reports/collection_report_section';
+$route['supplier-due-list'] = 'reports/supplier_due_list';
 
 $route['account-reports-section'] = 'reports/account_reports_section';
 $route['date-wise-transaction-report'] = 'reports/date_wise_transaction_report';

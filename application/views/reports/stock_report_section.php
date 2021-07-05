@@ -167,5 +167,23 @@
             </a>
         </div>
 
+        <div class="col-12 col-lg-6 col-xl-2">
+            <a href="<?php echo base_url('supplier-due-list');?>">
+                <div class="card bg-pattern-primary fxd-height">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body text-left">
+                                <!-- <h4 class="text-white">ddd</h4> -->
+                                <span class="text-white">Due list</span>
+                            </div>
+                            <!-- <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+                                
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
     </div>
 </div>

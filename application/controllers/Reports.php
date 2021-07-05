@@ -258,6 +258,21 @@ class Reports extends CI_Controller {
         $this->load->view('index', $data);
     }
 
+    public function supplier_due_list(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['supplierDueList'] = $this->users_model->supplier_due_list();
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['title'] = 'Supplier due list';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/supplier_due_list', $data, true);
+        $this->load->view('index', $data);
+    }
+
     public function productwise_profit(){
         $data = array();
         $id = $this->session->userdata('user_id');
