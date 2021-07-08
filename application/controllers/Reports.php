@@ -277,13 +277,27 @@ class Reports extends CI_Controller {
         $data = array();
         $id = $this->session->userdata('user_id');
         $data['userInfo'] = $this->users_model->user_info($id);
-        $data['title'] = 'Productwise profit';
+        $data['title'] = 'Buy Sell Info';
         $data['css'] = $this->load->view('common/dataTableCss', '', true);
         $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
         $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
         $data['topBar'] = $this->load->view('common/topBar', $data, true);
         $data['footer'] = $this->load->view('common/footer', '', true);
         $data['content'] = $this->load->view('reports/productwise_profit', $data, true);
+        $this->load->view('index', $data);
+    }
+
+    public function datewise_profit(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['title'] = 'Datewise Product Profit';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('reports/datewise_profit', $data, true);
         $this->load->view('index', $data);
     }
     

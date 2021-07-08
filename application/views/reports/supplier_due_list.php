@@ -35,7 +35,14 @@
         <div id="print_content">
         <div class="row">
             <div class="col-md-12">
-                
+                <center>
+                    <?php
+                        $companyInfo = $this->db->query('SELECT * FROM tbl_company where id = 1')->row();
+                    ?>
+                    <img src="<?php echo base_url().$companyInfo->file;?>" class="logo-icon" alt="logo icon" style="width: 90px;">
+                    <h3 class="text-dark" style="padding: 0; margin: 0; line-height: 35px;"><?php echo $companyInfo->name;?></h3>
+                    <p style="margin: 0px; padding: 0px;"><?php echo $companyInfo->address;?></p></br>
+                </center>
                 <h5 style="text-align: center; text-decoration: underline;">Supplier due list</h5>
                 <br>
                 <div style="overflow-x:auto; width: 100%;">
@@ -64,7 +71,7 @@
 							?>
 							<tr>
 								<td><?php echo $sl;?></td>
-								<td><?php echo $value->supplier_name;?></td>
+								<td><?php echo '<a href=" '.base_url().'edit-stock-in/'.$value->bill_no.' " target="_BLANK"> '.$value->supplier_name.'</a>';?></td>
 								<td><?php echo '<a href=" '.base_url().'purchase-report/'.$value->bill_no.' " target="_BLANK"> '.$value->bill_no.'</a>';?></td>
 								<td><?php echo $value->totalBuyingPrice;?></td>
 								<td><?php echo $value->totalPayment;?></td>

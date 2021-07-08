@@ -21,7 +21,10 @@
     </div>
     <div class="col-sm-3">
         <div class="top-button-area">
-            <a class="btn btn-primary m-1" href="<?php echo base_url();?>productwise-profit"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+            <a class="btn btn-primary m-1" href="<?php echo base_url();?>datewise-profit"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+        </div>
+        <div class="top-button-area">
+            <a class="btn btn-primary m-1" href="<?php echo base_url();?>productwise-profit">Buy Sell Info</a>
         </div>
      </div>
 </div>
@@ -30,7 +33,7 @@
 <div class="row">
 <div class="col-lg-12">
   <div class="card">
-      <div class="card-header">Buy Sell Info</div>
+      <div class="card-header">Datewise Profit Report</div>
     <div class="card-body">
         <div class="row">
 
@@ -38,36 +41,28 @@
             <form method="post">
                 <div class="row"> 
                 
-                    <!-- <div class="col-md-3">
+                    <div class="col-md-3">
                         <div class="form-group row">
                             <label class="col-sm-12 col-form-label">From Date</label>
                             <div class="col-sm-12">
                                 <input type="text" name="from_date" id="fromDate" value="<?php echo set_value('from_date');?>" class="form-control form-control-rounded" required="">
                             </div>
                         </div>
-                    </div> -->
-                    <!-- <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
                         <div class="form-group row">
                             <label class="col-sm-12 col-form-label">To Date</label>
                             <div class="col-sm-12">
                                 <input type="text" name="to_date" id="toDate" value="<?php echo set_value('to_date');?>" class="form-control form-control-rounded" required="">
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     
                     <div class="col-md-2">
                         <div class="form-group row">
                             <label class="col-sm-12 col-form-label">&nbsp;</label>
                             <div class="col-sm-12">
-                                <button type="submit" name="submit" value="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i>Buy Sell Info</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group row">
-                            <label class="col-sm-12 col-form-label">&nbsp;</label>
-                            <div class="col-sm-12">
-                                <a href="<?php echo base_url();?>/datewise-profit" class="btn btn-success"><i class="fa fa-check-square-o"></i>Date wise Report</a>
+                                <button type="submit" name="submit" value="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> Report</button>
                             </div>
                         </div>
                     </div>
@@ -94,7 +89,7 @@
                     <h3 class="text-dark" style="padding: 0; margin: 0; line-height: 35px;"><?php echo $companyInfo->name;?></h3>
                     <p style="margin: 0px; padding: 0px;"><?php echo $companyInfo->address;?></p></br>
                 </center>
-                <h5 style="text-align: center; text-decoration: underline;">Products buy sell information</h5>
+                <h5 style="text-align: center; text-decoration: underline;">Datewise Product Profit</h5>
                 <center style="color: green; font-size: 18px; font-weight: bold;">
                     <?php
                         if (isset($_POST['from_date'])){
@@ -114,105 +109,43 @@
 						<thead>
 							<tr>
 								<th>#</th>
+								<th>Date</th>
 								<th>Product Name</th>
-								<th>Total Buy price</th>
-								<th>Total Sale price</th>
-								<th>Balance</th>
-								<th>Available Stock</th>
+								<th>Buy price (Unit)</th>
+								<th>Quantity (Sell)</th>
+								<th>Buy price</th>
+								<th>Sell price</th>
+								<th>Profit</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php 
 								
-								$dateWiseBuySellReport = $this->db->query("SELECT
-                                e.product_name,
-                                e.product_id,
-                                e.totalSalePrice,
-                                e.TotalByingPrice,
-                                e.balance,
-                                f.pack_size,
-                                e.totalStockIn,
-                                e.totalSellQuantity,
-                                e.totalStockIn - e.totalSellQuantity AS availableStock
-                            FROM
-                                (
-                                SELECT
-                                    d.product_name,
-                                    d.pack_size,
-                                    c.invoice_date,
-                                    c.product_id,
-                                    c.totalSalePrice,
-                                    c.TotalByingPrice,
-                                    c.totalSalePrice - c.TotalByingPrice AS balance,
-                                    c.totalStockIn,
-                                    c.totalSellQuantity
-                                FROM
-                                    (
-                                    SELECT
-                                        a.invoice_date,
-                                        a.product_id,
-                                        a.totalSalePrice,
-                                        b.TotalByingPrice,
-                                        b.totalStockIn,
-                                        a.totalSellQuantity
-                                    FROM
-                                        (
-                                        SELECT
-                                            invoice_date,
-                                            product_id,
-                                            SUM(quantity * sale_price) AS totalSalePrice,
-                                            SUM(quantity) AS totalSellQuantity
-                                        FROM
-                                            tbl_invoice
-                                        GROUP BY
-                                            product_id
-                                    ) a
-                                LEFT JOIN(
-                                    SELECT
-                                        product_id,
-                                        SUM(quantity_in * buying_price) AS TotalByingPrice,
-                                        SUM(quantity_in) AS totalStockIn
-                                    FROM
-                                        tbl_stock_in
-                                    GROUP BY
-                                        product_id
-                                ) b
-                            ON
-                                a.product_id = b.product_id
-                                ) c
-                            LEFT JOIN(
-                                SELECT
-                                    pack_size,
-                                    product_id,
-                                    product_name
-                                FROM
-                                    tbl_product_info
-                            ) d
-                            ON
-                                d.product_id = c.product_id
-                            ) e
-                            LEFT JOIN(
-                                SELECT
-                                    id,
-                                    pack_size
-                                FROM
-                                    tbl_pack_size
-                            ) f
-                            ON
-                                f.id = e.pack_size")->result();
+								$dateWiseBuySellReport = $this->db->query("SELECT p.product_name, ps.pack_size, i.invoice_date, i.product_id, sum(i.quantity * sale_price) as totalSalePrice, SUM(i.quantity) as totalSellQuantity, p.buy_price, (p.buy_price * SUM(i.quantity)) AS totalBuyPrice, ((sum(i.quantity * sale_price)) - (p.buy_price * SUM(i.quantity))) AS profit FROM tbl_invoice i JOIN tbl_product_info p ON(i.product_id = p.product_id) JOIN tbl_pack_size ps on(p.pack_size = ps.id) WHERE i.invoice_date BETWEEN '$from_date' AND '$to_date' GROUP BY i.product_id")->result();
 								$sl = 0;
+                                $netTotalSalePrice = 0;
+                                $totalProfit = 0;
 								foreach ($dateWiseBuySellReport as $value):
-									$sl++
+									$sl++;
+                                    $netTotalSalePrice = $netTotalSalePrice + $value->totalSalePrice;
+                                    $totalProfit = $totalProfit + $value->profit;
 							?>
 							<tr>
 								<td><?php echo $sl;?></td>
+								<td><?php echo $value->invoice_date;?></td>
 								<td><?php echo $value->product_name;?></td>
-								<td><?php echo round($value->TotalByingPrice, 2);?></td>
+								<td><?php echo $value->buy_price;?></td>
+								<td><?php echo $value->totalSellQuantity.' - '.$value->pack_size;?></td>
+								<td><?php echo $value->totalBuyPrice;?></td>
 								<td><?php echo $value->totalSalePrice;?></td>
-								<td><?php echo $value->balance;?></td>
-								<td style="text-align: left;"> &nbsp;&nbsp;&nbsp; <?php echo $value->availableStock.' - '.$value->pack_size;?></td>
+								<td><?php echo $value->profit;?></td>
 							</tr>
 							<?php endforeach;?>
+                            <tr>
+                                <td colspan="6" style="text-align: Right;"><b>Total: </b></td>
+                                <td style="text-align: center;"><b><?php echo $netTotalSalePrice; ?></b></td>
+                                <td style="text-align: center;"><b><?php echo $totalProfit; ?></b></td>
+                            </tr>
 						</tbody>
 					</table>
 				</div>

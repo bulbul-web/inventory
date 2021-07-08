@@ -82,6 +82,14 @@
                 <?php
                     if(isset($_POST['customer_id'])):
                 ?>
+				<center>
+                    <?php
+                        $companyInfo = $this->db->query('SELECT * FROM tbl_company where id = 1')->row();
+                    ?>
+                    <img src="<?php echo base_url().$companyInfo->file;?>" class="logo-icon" alt="logo icon" style="width: 90px;">
+                    <h3 class="text-dark" style="padding: 0; margin: 0; line-height: 35px;"><?php echo $companyInfo->name;?></h3>
+                    <p style="margin: 0px; padding: 0px;"><?php echo $companyInfo->address;?></p></br>
+                </center>
                 <h5 style="text-align: center; text-decoration: underline;">Datewise Collection from customer</h5>
                 <center style="color: green; font-size: 18px; font-weight: bold;">
                     (<?php echo $singleCustomer->customer_name;?>)<br>

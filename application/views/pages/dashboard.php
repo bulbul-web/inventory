@@ -289,6 +289,99 @@
   </a>
 </div>
 
+
+<div class="col-12 col-lg-6 col-xl-3">
+  <a href="<?php echo base_url()?>all-products-stock-report">
+    <div class="card bg-pattern-warning">
+      <div class="card-body">
+        <div class="media">
+        <div class="media-body text-left">
+          <h4 class="text-white">
+              STOCK
+          </h4>
+          <span class="text-white">Stock Report</span>
+        </div>
+        <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+          <i class="icon-basket-loaded text-white"></i></div>
+      </div>
+      </div>
+    </div>
+  </a>
+</div>
+
+<div class="col-12 col-lg-6 col-xl-3">
+    <a href="<?php echo base_url()?>supplier-due-list">
+      <div class="card bg-pattern-danger">
+        <div class="card-body">
+          <div class="media">
+          <div class="media-body text-left">
+            <h4 class="text-white">
+                <?php
+                $totalSupplierDue = $this->db->query("SELECT SUM(c.due) AS totalSupplierDue FROM ( SELECT a.supplier_id, a.bill_no, ROUND(a.totalBuyingPrice, 2) as totalBuyingPrice, b.totalPayment, ROUND((a.totalBuyingPrice - b.totalPayment), 2) as due FROM ( SELECT bill_no, SUM(quantity_in * buying_price) AS totalBuyingPrice, supplier_id FROM tbl_stock_in GROUP BY bill_no ) a LEFT OUTER JOIN (SELECT bill_no, sum(payment) as totalPayment FROM tbl_stock_in_history GROUP BY bill_no) b ON(a.bill_no = b.bill_no) ) c JOIN tbl_supplier s ON(c.supplier_id = s.supplier_id) WHERE c.due > 0")->row();
+                if (isset($totalSupplierDue)):
+                    echo $totalSupplierDue->totalSupplierDue;
+                endif;
+                ?>
+            </h4>
+            <span class="text-white">Supplier Due</span>
+          </div>
+          <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+            <i class="icon-pie-chart text-white"></i></div>
+        </div>
+        </div>
+      </div>
+  </a>
+</div>
+
+<div class="col-12 col-lg-6 col-xl-3">
+    <a href="<?php echo base_url()?>customer-wise-report-payment">
+      <div class="card bg-pattern-primary">
+        <div class="card-body">
+          <div class="media">
+          <div class="media-body text-left">
+            <h4 class="text-white">
+                <?php
+                $finalDue = $this->db->query("SELECT SUM(((d.grandTotal - d.discount) - d.paid_amount)) AS finalDue FROM (SELECT a.customer_name, a.grandTotal, sum(b.discount) as discount, SUM(b.paid_amount) AS paid_amount FROM (SELECT i.customer_id, c.customer_name, sum(i.quantity * i.sale_price) as grandTotal FROM tbl_invoice i, tbl_customer c WHERE c.customer_id = i.customer_id AND NOT (i.delete_status <=> 'deleted') GROUP BY c.customer_name) a LEFT JOIN (SELECT i.paid_amount, i.voucher_id, i.customer_id, c.customer_name, i.discount FROM tbl_invoice i, tbl_customer c WHERE i.customer_id = c.customer_id GROUP BY i.voucher_id) b ON a.customer_id = b.customer_id GROUP BY a.customer_id) d")->row();
+                if (isset($finalDue)):
+                    echo $finalDue->finalDue;
+                endif;
+                ?>
+            </h4>
+            <span class="text-white">Customer Due</span>
+          </div>
+          <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+            <i class="icon-pie-chart text-white"></i></div>
+        </div>
+        </div>
+      </div>
+  </a>
+</div>
+
+<div class="col-12 col-lg-6 col-xl-3">
+    <a href="<?php echo base_url()?>datewise-profit">
+      <div class="card bg-pattern-success">
+        <div class="card-body">
+          <div class="media">
+          <div class="media-body text-left">
+            <h4 class="text-white">
+                <?php
+                $profit = $this->db->query("SELECT ROUND(NVL(SUM(prft.profit), 0), 2) AS profit FROM (SELECT p.product_name, ps.pack_size, i.invoice_date, i.product_id, sum(i.quantity * sale_price) as totalSalePrice, SUM(i.quantity) as totalSellQuantity, p.buy_price, (p.buy_price * SUM(i.quantity)) AS totalBuyPrice, ((sum(i.quantity * sale_price)) - (p.buy_price * SUM(i.quantity))) AS profit FROM tbl_invoice i JOIN tbl_product_info p ON(i.product_id = p.product_id) JOIN tbl_pack_size ps on(p.pack_size = ps.id) WHERE DATE(i.invoice_date) = CURDATE() GROUP BY i.product_id) prft")->row();
+                if (isset($profit)):
+                    echo $profit->profit;
+                endif;
+                ?>
+            </h4>
+            <span class="text-white">Today's Profit</span>
+          </div>
+          <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+            <i class="icon-pie-chart text-white"></i></div>
+        </div>
+        </div>
+      </div>
+  </a>
+</div>
+
+
 </div><!--End Row-->
 
 

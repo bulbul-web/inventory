@@ -608,6 +608,7 @@ class Products extends CI_Controller {
             $data['packet'] = $this->input->post('packet', true);
             $data['product_segment'] = $this->input->post('product_segment', true);
             $data['price'] = $this->input->post('price', true);
+            $data['buy_price'] = $this->input->post('buy_price', true);
             $data['entry_by'] = $this->session->userdata('user_name');
             $data['entry_date'] = date("Y-m-d");
             $data['image'] = '';
@@ -712,6 +713,7 @@ class Products extends CI_Controller {
                 $data['packet'] = $this->input->post('packet', true);
                 $data['product_segment'] = $this->input->post('product_segment', true);
                 $data['price'] = $this->input->post('price', true);
+                $data['buy_price'] = $this->input->post('buy_price', true);
                 $data['entry_by'] = $this->session->userdata('user_name');
                 $data['entry_date'] = date("Y-m-d");
                 $data['image'] = $img;
@@ -756,6 +758,7 @@ class Products extends CI_Controller {
                             $data['product_code'] = $this->input->post('product_code', true);
                             $data['pack_size'] = $this->input->post('pack_size', true);
                             $data['price'] = $this->input->post('price', true);
+                            $data['buy_price'] = $this->input->post('buy_price', true);
                             $data['entry_by'] = $this->session->userdata('user_name');
                             $data['entry_date'] = date("Y-m-d");
                             $data['image'] = $img;

@@ -196,6 +196,7 @@ $route['supplier-and-datewise-payment-history'] = 'reports/supplier_and_datewise
 $route['datewise-payment-history'] = 'reports/datewise_payment_history';
 $route['datewise-buy-product'] = 'reports/datewise_buy_product';
 $route['productwise-profit'] = 'reports/productwise_profit';
+$route['datewise-profit'] = 'reports/datewise_profit';
 
 $route['invoice-report-section'] = 'reports/invoice_report_section';
 $route['stock-report-section'] = 'reports/stock_report_section';

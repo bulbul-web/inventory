@@ -103,6 +103,14 @@
                                 )->result();
                     
                 ?>
+				<center>
+                    <?php
+                        $companyInfo = $this->db->query('SELECT * FROM tbl_company where id = 1')->row();
+                    ?>
+                    <img src="<?php echo base_url().$companyInfo->file;?>" class="logo-icon" alt="logo icon" style="width: 90px;">
+                    <h3 class="text-dark" style="padding: 0; margin: 0; line-height: 35px;"><?php echo $companyInfo->name;?></h3>
+                    <p style="margin: 0px; padding: 0px;"><?php echo $companyInfo->address;?></p></br>
+                </center>
                 <center style="color: green; font-size: 18px; font-weight: bold;">
                     Product Name: <?php echo $stock_out_result->product_name;?><br>
                     Pack Size: <?php echo $stock_out_result->pack_size;?><br>

@@ -108,11 +108,19 @@
                       <?php echo form_error('pack_size', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Buy Price</label>
+                  <div class="col-sm-9">
+                      <input type="text" placeholder="Product Buy Price" name="buy_price" value="<?php echo set_value('buy_price'); ?>"  class="form-control form-control-rounded">
+                      <?php echo form_error('price', '<div class="error">', '</div>'); ?>
+                  </div>
+                </div>
                 
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Price</label>
+                  <label class="col-sm-3 col-form-label">Sell Price </label>
                   <div class="col-sm-9">
-                      <input type="text" placeholder="Product price" name="price" value="<?php echo set_value('price'); ?>"  class="form-control form-control-rounded">
+                      <input type="text" placeholder="Product Sell Price" name="price" value="<?php echo set_value('price'); ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('price', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>

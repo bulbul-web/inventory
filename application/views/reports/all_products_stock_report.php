@@ -40,8 +40,7 @@
                     <button type="submit" name="submit" value="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> Report</button>
                 </form>
                 <?php
-                    if(isset($_POST['submit'])){   
-                        echo '<h5 style="text-align: center; text-decoration: underline;">Products Stock Report</h5><br/>';                     
+                    if(isset($_POST['submit'])){                     
                         $stock_out_result = $this->db->query
                                 (
                                     //"SELECT SUM(i.quantity) as stock_out, si.quantity_in, pi.product_name, si.challan_date, ps.pack_size FROM tbl_invoice i, tbl_stock_in si, tbl_product_info pi, tbl_pack_size ps WHERE i.product_id = si.product_id AND pi.product_id = si.product_id AND ps.id = pi.pack_size GROUP BY i.product_id"
@@ -62,6 +61,15 @@
                                 )->result();
                     
                 ?>
+				<center>
+                    <?php
+                        $companyInfo = $this->db->query('SELECT * FROM tbl_company where id = 1')->row();
+                    ?>
+                    <img src="<?php echo base_url().$companyInfo->file;?>" class="logo-icon" alt="logo icon" style="width: 90px;">
+                    <h3 class="text-dark" style="padding: 0; margin: 0; line-height: 35px;"><?php echo $companyInfo->name;?></h3>
+                    <p style="margin: 0px; padding: 0px;"><?php echo $companyInfo->address;?></p></br>
+                </center>
+				<h5 style="text-align: center; text-decoration: underline;">Products Stock Report</h5>
                     <div style="overflow-x:auto; width: 100%;">
 						<table width="100%" border="1" style="text-align: center;">
 							<thead>
