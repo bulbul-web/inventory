@@ -336,5 +336,7 @@ $route['update-visitor'] = 'Visit/update_visitor';
 
 $route['customer-report-all'] = 'Customers/customer_report_all';
 
+$route['product-report-trade-price-all'] = 'Products/product_report_trade_price_all';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

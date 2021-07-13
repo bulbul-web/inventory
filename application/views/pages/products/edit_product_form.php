@@ -115,7 +115,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Buy Price</label>
                   <div class="col-sm-9">
-                      <input type="text" placeholder="Product Buy Price" name="buy_price" value="<?php echo $singleProduct->buy_price; ?>"  class="form-control form-control-rounded">
+                      <input type="number" step=any placeholder="Product Buy Price" name="buy_price" value="<?php echo $singleProduct->buy_price; ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('price', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
@@ -123,11 +123,33 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Sell Price</label>
                   <div class="col-sm-9">
-                      <input type="text" placeholder="Product Sell Price" name="price" value="<?php echo $singleProduct->price; ?>"  class="form-control form-control-rounded">
+                      <input type="number" id="sellPrice" step=any placeholder="Product Sell Price" name="price" value="<?php echo $singleProduct->price; ?>"  class="form-control form-control-rounded">
                       <?php echo form_error('price', '<div class="error">', '</div>'); ?>
                   </div>
                 </div>
 
+
+                <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Trade price (percent) </label>
+                        <div class="col-sm-9">
+                            <input type="number" placeholder="Trade price (percent)" id="tradePricePrcnt" name="trade_price_prcnt" value="<?php echo $singleProduct->trade_price_prcnt; ?>"  class="form-control form-control-rounded">
+                            <?php echo form_error('price', '<div class="error">', '</div>'); ?>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <!-- <label class="col-sm-3 col-form-label">Trade Price </label> -->
+                        <div class="col-sm-9">
+                            <input type="number" step=any id="percAmount"  class="form-control form-control-rounded" disabled="" value="<?php echo $singleProduct->trade_price; ?>">
+                            <input type="hidden" step=any placeholder="Product Sell Price" name="trade_price" id="percAmountValue" value="<?php echo $singleProduct->trade_price; ?>" >
+                            <?php echo form_error('price', '<div class="error">', '</div>'); ?>
+                        </div>
+                      </div>
+                    </div>
+                </div>
 
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Packet</label>
@@ -192,6 +214,7 @@
    </div>
 </div>
 <script>
+    document.forms['update-products'].elements['productCatId'].value=<?php echo $singleProduct->product_category_id; ?>;
     document.forms['update-products'].elements['productTypeId'].value=<?php echo $singleProduct->product_type_id; ?>;
     document.forms['update-products'].elements['productStatus'].value=<?php echo $singleProduct->product_status; ?>;
     document.forms['update-products'].elements['packSize'].value=<?php echo $singleProduct->pack_size; ?>;
@@ -208,4 +231,30 @@
           }
     });
   }
+
+  $(function(){
+    
+    $('#sellPrice').on('input', function() {
+      calculate();
+    });
+    $('#tradePricePrcnt').on('input', function() {
+     calculate();
+    });
+
+    function calculate(){
+          var sellPrice = parseInt($('#sellPrice').val());
+          var tradePricePrcnt = parseInt($('#tradePricePrcnt').val());
+          var percAmount="";
+          if(isNaN(sellPrice) || isNaN(tradePricePrcnt)){
+              percAmount=" ";
+            }else{
+              percAmount = ((sellPrice * (tradePricePrcnt / 100)) + sellPrice ).toFixed(2);
+              // percAmount = parseInt(percAmount) + parseInt(sellPrice);
+            }
+          
+          $('#percAmount').val(percAmount);
+          $('#percAmountValue').val(percAmount);
+      }
+
+    });
 </script>

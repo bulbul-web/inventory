@@ -169,7 +169,10 @@
                                         </td>
                                         <td>
                                             <input type="number" step=any name="quantity[]" onkeyup="qntyPress(this)" id="quantity_<?=$i;?>" value="<?php echo $value->quantity;?>" class="form-control">
-                                            <p style="text-align: center; font-weight: bold; color: green"  id="avlableStock_1"></p>
+                                            <div style="display: inline-flex;">
+                                                <p style="text-align: center; font-weight: bold; color: green; font-size: 11px;"  id="avlableStock_1"></p> 
+                                                <p style="text-align: center; font-weight: bold; color: green; font-size: 11px;"  id="sellPrice_1"></p>
+                                            </div>
                                         </td>
                                         <td><input type="number" step=any name="sale_price[]" onkeyup="pricePress(this)" id="sale_price_<?=$i;?>" value="<?php echo $value->sale_price;?>" class="form-control"></td>
                                         <td><input type="number" step=any name="invc_ttl_price[]" id="invc_ttl_price_<?=$i;?>" value="<?php echo ($value->quantity * $value->sale_price);?>" class="form-control" disabled="disabled"></td>
@@ -346,7 +349,10 @@ $(document).ready(function() {
                             </td>';
                     html += '<td>\n\
                                 <input type="number" step=any  name="quantity[]" onkeyup="qntyPress(this)" id="quantity_'+rowCount+'" value="0" class="form-control">\n\
-                                <p style="text-align: center; font-weight: bold; color: green"  id="avlableStock_'+rowCount+'"></p>\n\
+                                <div style="display: inline-flex;">\n\
+                                    <p style="text-align: center; font-weight: bold; color: green; font-size: 11px;"  id="avlableStock_'+rowCount+'"></p>\n\
+                                    <p style="text-align: center; font-weight: bold; color: green; font-size: 11px;"  id="sellPrice_'+rowCount+'"></p>\n\
+                                </div>\n\
                             </td>';
                     html += '<td><input type="number" step=any  name="sale_price[]" onkeyup="pricePress(this)" id="sale_price_'+rowCount+'" value="0" class="form-control"></td>';
                     html += '<td><input type="number" step=any  name="invc_ttl_price[]" id="invc_ttl_price_'+rowCount+'" value="0" class="form-control" disabled="disabled"></td>';
@@ -432,12 +438,24 @@ function pricePress(args){
 
 }
 
+//--------------- Discount start --------------
+
 function setDiscount(discount){
     var grandTotal = $("#grandTotal").val();
     var FinalAmount = grandTotal - discount;
     $("#FinalAmount").attr("value",FinalAmount);
 
-}
+} //discount in minus amount
+
+//  function setDiscount(discount){
+//      var grandTotal = $("#grandTotal").val();
+//      var FinalAmount = grandTotal - (grandTotal * (discount / 100)) ;
+//      $("#FinalAmount").attr("value",FinalAmount);
+
+//  } //discount in percnetige
+
+ //--------------- Discount end --------------
+
     function calculteDue(paidAmount){
         $(".dueArea").show();
         var FinalAmount = $("#FinalAmount").val();
@@ -509,7 +527,8 @@ function setDiscount(discount){
                     $('#product_id_'+rowNo).val(data.product_id);
 //                    $('#quantity_'+rowNo).val(data.quantity);
                     $('#quantity_'+rowNo).val(1);
-                    $('#sale_price_'+rowNo).val(data.price); 
+                    // $('#sale_price_'+rowNo).val(data.price); //orginal sell price
+                    $('#sale_price_'+rowNo).val(data.trade_price); //parcent sell price
 
                     product_id = data.product_id;
                     $.ajax({
@@ -523,9 +542,11 @@ function setDiscount(discount){
                             console.log(response.available);
                             // $('#avlableStock_'+rowNo).val(response.challan_date);
                             $('#avlableStock_'+rowNo).text(response.available + ' ' + response.pack_size);
+                            $('#sellPrice_'+rowNo).text(response.price);
                         },
                         error: function (response) { 
                             $('#avlableStock_'+rowNo).text("Check stock");
+                            $('#sellPrice_'+rowNo).text(response.price);
                         }
                     });
 

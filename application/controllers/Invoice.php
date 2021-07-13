@@ -105,6 +105,8 @@ class Invoice extends CI_Controller {
         $stockin = $this->db->query("SELECT a.*, sum(a.quantity_in) as totalStockIn, c.pack_size FROM tbl_stock_in a, tbl_product_info b, tbl_pack_size c WHERE a.product_id = '$product_id' AND a.product_id = b.product_id AND b.pack_size = c.id")->row();
         $stockOut = $this->db->query("SELECT a.*, sum(a.quantity) as totalStockOut, c.pack_size FROM tbl_invoice a, tbl_product_info b, tbl_pack_size c WHERE a.product_id = '$product_id' AND a.product_id = b.product_id AND b.pack_size = c.id")->row();
         
+        $productInfo = $this->db->query("SELECT * FROM tbl_product_info where product_id = $product_id")->row();
+
         if(isset($stockin->totalStockIn)){
             $totalStockIn = $stockin->totalStockIn;
         }else {
@@ -131,6 +133,7 @@ class Invoice extends CI_Controller {
         $resultdata = array();
         $resultdata['available'] = $available;
         $resultdata['pack_size'] = $pack_size;
+        $resultdata['price'] = ' --- '.$productInfo->price.' Taka ';
         echo json_encode($resultdata);
     }
 

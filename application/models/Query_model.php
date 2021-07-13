@@ -733,6 +733,11 @@ class Query_model extends CI_Model {
         return $result;
     }
 
+    public function productReportAll(){
+        $result = $this->db->query("Select p.*, ps.pack_size from tbl_product_info p JOIN tbl_pack_size ps ON(ps.id = p.pack_size) where product_status = 1")->result();
+        return $result;
+    }
+
     public function purchase_info_supplier($bill_no){
         $result = $this->db->query("SELECT si.*, s.supplier_name, s.supplier_address, s.supplier_mobile, s.supplier_email FROM tbl_stock_in si, tbl_supplier s WHERE s.supplier_id = si.supplier_id and si.bill_no = '$bill_no'")->row();
         return $result;

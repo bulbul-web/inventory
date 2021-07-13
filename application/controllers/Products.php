@@ -608,7 +608,9 @@ class Products extends CI_Controller {
             $data['packet'] = $this->input->post('packet', true);
             $data['product_segment'] = $this->input->post('product_segment', true);
             $data['price'] = $this->input->post('price', true);
-            $data['buy_price'] = $this->input->post('buy_price', true);
+            $data['buy_price'] = $this->input->post('buy_price', true); //for profit calculation
+            $data['trade_price_prcnt'] = $this->input->post('trade_price_prcnt', true);
+            $data['trade_price'] = $this->input->post('trade_price', true);
             $data['entry_by'] = $this->session->userdata('user_name');
             $data['entry_date'] = date("Y-m-d");
             $data['image'] = '';
@@ -713,7 +715,9 @@ class Products extends CI_Controller {
                 $data['packet'] = $this->input->post('packet', true);
                 $data['product_segment'] = $this->input->post('product_segment', true);
                 $data['price'] = $this->input->post('price', true);
-                $data['buy_price'] = $this->input->post('buy_price', true);
+                $data['buy_price'] = $this->input->post('buy_price', true); //for profit calculation
+                $data['trade_price_prcnt'] = $this->input->post('trade_price_prcnt', true);
+                $data['trade_price'] = $this->input->post('trade_price', true);
                 $data['entry_by'] = $this->session->userdata('user_name');
                 $data['entry_date'] = date("Y-m-d");
                 $data['image'] = $img;
@@ -758,7 +762,9 @@ class Products extends CI_Controller {
                             $data['product_code'] = $this->input->post('product_code', true);
                             $data['pack_size'] = $this->input->post('pack_size', true);
                             $data['price'] = $this->input->post('price', true);
-                            $data['buy_price'] = $this->input->post('buy_price', true);
+                            $data['buy_price'] = $this->input->post('buy_price', true); //for profit calculation
+                            $data['trade_price_prcnt'] = $this->input->post('trade_price_prcnt', true);
+                            $data['trade_price'] = $this->input->post('trade_price', true);
                             $data['entry_by'] = $this->session->userdata('user_name');
                             $data['entry_date'] = date("Y-m-d");
                             $data['image'] = $img;
@@ -862,6 +868,23 @@ class Products extends CI_Controller {
         foreach ($productCat as $value) :
             echo "<option value='$value->product_type_id'>" . ucfirst($value->product_type_name) . "</option>";
         endforeach;
+    }
+
+
+    public function product_report_trade_price_all(){
+        $data = array();
+        $id = $this->session->userdata('user_id');
+        $data['userInfo'] = $this->users_model->user_info($id);
+        $data['productReportAll'] = $this->query_model->productReportAll();
+        
+        $data['title'] = 'Products Trade Report';
+        $data['css'] = $this->load->view('common/dataTableCss', '', true);
+        $data['scripts'] = $this->load->view('common/dataTableScripts', '', true);
+        $data['sideMenu'] = $this->load->view('common/sideMenu', $data, true);
+        $data['topBar'] = $this->load->view('common/topBar', $data, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
+        $data['content'] = $this->load->view('pages/products/product_report_trade_price_all', $data, true);
+        $this->load->view('index', $data);
     }
     
     

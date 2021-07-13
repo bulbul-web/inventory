@@ -30,7 +30,7 @@
 <div class="row">
 <div class="col-lg-12">
   <div class="card">
-      <div class="card-header">Customers Report</div>
+      <div class="card-header">Product Trade Price Report</div>
     <div class="card-body">
        
         <div id="print_content">
@@ -45,7 +45,7 @@
                         <p style="margin: 0px; padding: 0px;"><?php echo $companyInfo->address;?></p></br>
                     </center>
                     <center style="color: green; font-size: 18px; font-weight: bold;">
-                        <h5 style="text-align: center; text-decoration: underline;">Customer Report</h5>
+                        <h5 style="text-align: center; text-decoration: underline;">Products trade price report</h5>
                     </center>
                 </div>  
                 <div class="col-md-12">
@@ -54,32 +54,24 @@
                             <thead>
                                 <tr>
                                     <th>SL.</th>
-                                    <th>Catagory Name</th>
-                                    <th>Subcategory Name</th>
-                                    <th>Salesman name</th>
-                                    <th>Customer Name</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                    <th>Email</th>
+                                    <th>Product Name</th>
+                                    <th>Pack size</th>
+                                    <th>Trade Price</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                     $i = 0;
-                                    foreach($customerReportAll as $value):
+                                    foreach($productReportAll as $value):
                                         
                                         $i++;
                                 ?>
                                     <tr>
                                         
                                         <td><?php echo $i;?></td>
-                                        <td><?php echo $value->customerCategory;?></td>
-                                        <td><?php echo $value->customerSubcategory;?></td>
-                                        <td><?= $value->salesman ;?></td>
-                                        <td><?= $value->customer_name ;?></td>
-                                        <td><?= $value->customer_mobile ;?></td>
-                                        <td><?= $value->customer_address ;?></td>
-                                        <td><?= $value->customer_email ;?></td>
+                                        <td><?php echo $value->product_name;?></td>
+                                        <td><?php echo $value->pack_size;?></td>
+                                        <td><?= $value->trade_price ;?></td>
                                     </tr>
                                 <?php endforeach;?>
                                 
@@ -87,7 +79,8 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div>          
+                
             </div>
         </div>
         </div>
